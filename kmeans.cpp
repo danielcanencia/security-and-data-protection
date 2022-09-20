@@ -2,13 +2,11 @@
 #include <vector>
 #include <string>
 #include <memory>
-
-#include <algorithm>
-#include <iostream>
-
+#include <filesystem>
+#include <cstring>
 
 using namespace std;
-
+namespace fs = std::filesystem;
 
 class any_type
 {
@@ -20,16 +18,18 @@ public:
 template <class T>
 class concrete_type : public any_type
 {
+private:
+   T value_;
 public:
-   concrete_type(const T& value) : value_(value)
-   {}
+   concrete_type(const T& value)
+   {
+	value_ = value;
+   }
 
    virtual void print()
    {
       std::cout << value_ << '\n';
    }
-private:
-   T value_;
 };
 
 
@@ -45,18 +45,7 @@ public:
 
 	template <class T>
 	void push_back_value(concrete_type<T>* value) {
-		//value->print();	
-		//values[0].reset(value);
-		//values.push_back((unique_ptr<T>)value);
 		values.emplace_back(value);
-		//values.emplace(values.begin(), value);
-		//values.at(0)->print();
-
-		/*std::vector<unique_ptr<any_type>>::iterator itr = std::find(values.begin(), values.end(), value); 
-
-		if (itr != values.cend()) {
-			std::cout << "Element present at index " << std::distance(values.begin(), itr);
-		}*/
 	}
 
 	void print_values(int i) {
@@ -78,13 +67,9 @@ public:
 };
 
 
-int main() {
-	//vector<unique_ptr<any_type>> v(2);
-	Record x(2, "line");
+int main(int argc, char** argv) {
 
-	concrete_type<int>* con = new concrete_type<int>(70);
-	con->print();
-
+	/*Record x(2, "line");
    	x.push_back_value(new concrete_type<int>(99));
    	x.push_back_value(new concrete_type<string>("Bottles of Beer"));
 
@@ -93,9 +78,24 @@ int main() {
      		x.print_values(i);	
     	}
 
-	// Read CSV Input file
+	// Obtain current working dir
+	string path = "Current working path: " + fs::current_path().u8string() + "/inputs" + '\n';
+	cout << path;
+	*/
 
+	// Read CSV Input files
+	if (argc != 2) {
+		cout << "No file given. Use ./kmeans [filename]" << endl;
+		return -1;
+	}
+	string file = argv[0];
+	char *ptr = strtok(argv[1], ".");
+	cout << ptr << endl;
+	if (ptr != "csv") {
+		return -1;
+	}
 	// Parse CSV Input file
 	
+
 	return 0;
 }
