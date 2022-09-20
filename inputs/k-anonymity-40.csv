@@ -1,0 +1,41 @@
+id,age,city,zip_code,disease
+1,2,Tórshavn,32905,Flu
+2,42,Montreal,64827,Cancer
+3,82,San José,72061,Chlamydia
+4,54,Sydney,26255,AIDS
+5,19,Chihuahua,75272,Autism
+6,84,Anadyr (town),44158,Fever
+7,45,Pyongyang,63368,Autism
+8,48,Shenzhen,20514,Cancer
+9,64,Seattle,51235,Fever
+10,44,Freetown,58938,AIDS
+11,57,Pelotas,18796,Cancer
+12,22,Maseru,52415,Flu
+13,85,Pontianak,66610,Conjuntivitis
+14,85,Dili,33607,Chlamydia
+15,76,Jeddah,76404,Flu
+16,78,Fortaleza,17058,Otitis
+17,60,Lusaka,77839,AIDS
+18,10,Valdivia,69447,AIDS
+19,3,Fortaleza,59929,Cancer
+20,43,Maracaibo,30843,Otitis
+21,51,Leeds,79344,Conjuntivitis
+22,15,San Francisco,29576,Flu
+23,58,Bratsk,73081,Fever
+24,33,Mumbai,75903,Fever
+25,68,Majuro,55049,AIDS
+26,67,Asunción,43748,Fever
+27,61,Nice,20601,Fever
+28,8,Virginia Beach,32603,AIDS
+29,9,Thiès,63708,Flu
+30,28,Campo Grande,79803,Autism
+31,29,Bandar Seri Begawan,58379,Chlamydia
+32,39,Riyadh,67245,AIDS
+33,9,Pelotas,53918,Conjuntivitis
+34,32,Brussels,66347,Fever
+35,3,Ilhéus,44850,Cancer
+36,83,Cardiff,62145,Otitis
+37,31,Ndola,27832,Cancer
+38,81,Dar es Salaam,51336,AIDS
+39,23,Saskatoon,61312,AIDS
+40,16,Panama City,71990,Chlamydia

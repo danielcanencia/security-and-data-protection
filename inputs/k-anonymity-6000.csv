@@ -1,0 +1,6001 @@
+id,age,city,zip_code,disease
+1,39,Abuja,31228,Cancer
+2,11,Oslo,30286,Flu
+3,29,San Juan,42311,Conjuntivitis
+4,79,Liverpool,51613,Fever
+5,27,Bergen,67515,Otitis
+6,32,Thimphu,13229,Conjuntivitis
+7,3,Moroni,75484,Cancer
+8,43,Longyearbyen,13244,Otitis
+9,19,Tirana,57182,Flu
+10,23,Charlottetown,72770,Cancer
+11,27,Batticaloa,21538,Autism
+12,6,Andorra la Vella,15391,Autism
+13,72,Melekeok,15749,Cancer
+14,55,Bridgetown,60585,Chlamydia
+15,61,Nanning,10163,AIDS
+16,11,Kinshasa,47555,Flu
+17,6,Saint John,22637,Chlamydia
+18,34,Sukhumi,75644,Flu
+19,4,Nukuʻalofa,51400,Chlamydia
+20,17,Riyadh,49568,Conjuntivitis
+21,61,Columbus,66166,Autism
+22,62,Monterrey,26196,Cancer
+23,5,Bulawayo,14621,Flu
+24,42,Ciudad del Este,13901,Cancer
+25,82,Oranjestad,40530,Cancer
+26,22,Taichung,53071,Flu
+27,78,Cologne,18665,Conjuntivitis
+28,63,Maceió,54060,Autism
+29,74,Saint-Denis,68081,Otitis
+30,68,San Diego,18133,Autism
+31,17,Malé,20665,Autism
+32,26,Jerusalem,30617,Cancer
+33,61,Cologne,24014,Flu
+34,77,Zhengzhou,40941,Cancer
+35,13,Cairns,44547,Cancer
+36,36,Kota Bharu,24308,Conjuntivitis
+37,24,Brazzaville,20185,AIDS
+38,62,Surat,18836,Flu
+39,65,Padang,24802,Fever
+40,1,Naypyidaw,39982,Autism
+41,68,Luxembourg (city),72154,Conjuntivitis
+42,80,Ipoh,16288,Chlamydia
+43,83,Townsville,30206,Autism
+44,70,Belmopan,34705,Otitis
+45,70,Stepanakert,35448,Fever
+46,11,Cotonou,51011,Chlamydia
+47,21,Rio de Janeiro,67823,Flu
+48,1,Hamburg,13186,Otitis
+49,78,Medan,79939,Otitis
+50,83,Mérida,48950,Chlamydia
+51,34,Rawalpindi,46786,Fever
+52,71,Marseille,10038,Chlamydia
+53,51,Cleveland,66085,Otitis
+54,68,Rabi Island,76412,Conjuntivitis
+55,39,Tampa,14500,Conjuntivitis
+56,71,Cardiff,26558,Fever
+57,7,Kano,22540,Cancer
+58,38,Mamoudzou,32476,Autism
+59,77,Wollongong,41758,Cancer
+60,21,Copenhagen,14563,Fever
+61,76,Hiroshima,70215,Cancer
+62,26,London,53432,Fever
+63,83,Edinburgh,50764,Cancer
+64,22,Khartoum,64068,Chlamydia
+65,51,Yaoundé,58366,Cancer
+66,64,Ushuaia,33426,Flu
+67,1,Tabriz,70083,Cancer
+68,33,Cape Town,43682,Flu
+69,51,Dakar,29326,Conjuntivitis
+70,41,Townsville,49582,Cancer
+71,6,Suva,51410,Cancer
+72,74,Providence,49911,Conjuntivitis
+73,38,Quebec City,64624,Conjuntivitis
+74,1,Riyadh,79344,Conjuntivitis
+75,41,Funafuti,18117,Autism
+76,49,Munich,69685,Conjuntivitis
+77,6,Handan,26945,Flu
+78,22,Charlottetown,19914,AIDS
+79,58,Dibrugarh,79395,AIDS
+80,40,Tskhinvali,24954,Autism
+81,40,Ibadan,29022,AIDS
+82,66,Valencia,59839,Conjuntivitis
+83,6,Taichung,42619,Cancer
+84,26,Chuí,70515,Cancer
+85,62,Makassar,23115,AIDS
+86,52,Adak,46598,Conjuntivitis
+87,2,Xi'an,65889,Cancer
+88,75,Angra do Heroísmo,17657,Fever
+89,81,Francistown,59965,Cancer
+90,50,Pristina,36447,Conjuntivitis
+91,67,Guadalajara,16941,Flu
+92,29,Basse-Terre,57284,Cancer
+93,26,Helsinki,15768,Chlamydia
+94,49,Rio de Janeiro,51493,Otitis
+95,6,Samara,62778,Fever
+96,52,The Valley,39500,Chlamydia
+97,80,Ludhiana,63425,Cancer
+98,39,Havana,13527,Otitis
+99,51,Faisalabad,48081,Autism
+100,52,Boa Vista,29568,Flu
+101,10,Forked River,31988,Flu
+102,90,Hamilton,60363,Autism
+103,38,Whitehorse,41310,Cancer
+104,47,Newcastle,58677,Otitis
+105,25,Konya,78835,Flu
+106,46,Arequipa,79437,Cancer
+107,74,Bern,35534,Autism
+108,45,Nice,77114,Conjuntivitis
+109,84,Sarajevo,25859,Otitis
+110,82,Rabat,20707,Conjuntivitis
+111,62,City of Halifax,50521,Cancer
+112,30,Denver,34579,Fever
+113,27,Majuro,27071,Chlamydia
+114,39,Koror,23726,Cancer
+115,21,Algiers,47215,Fever
+116,60,Apia,52427,Autism
+117,56,Gaziantep,46295,Fever
+118,33,Timbuktu,33395,Autism
+119,9,Austin,70628,Cancer
+120,79,Abuja,63753,Conjuntivitis
+121,79,Dallas,32870,Autism
+122,13,Kuwait City,46836,Autism
+123,42,Tiraspol,75864,AIDS
+124,17,Livingstone,79539,Chlamydia
+125,62,Samara,69458,Autism
+126,21,Skopje,26531,Conjuntivitis
+127,39,Leeds,59827,Autism
+128,50,Macau,41444,Flu
+129,87,Geelong,66628,Autism
+130,53,Buenos Aires,20930,Autism
+131,30,Manila,77552,Fever
+132,62,Avarua,47168,Otitis
+133,43,Winnipeg,65240,Fever
+134,26,Ludhiana,74660,Conjuntivitis
+135,80,Timbuktu,36399,AIDS
+136,36,Antofagasta,10297,Cancer
+137,62,La Paz,23017,Autism
+138,82,Johor Bahru,43526,Autism
+139,7,Regina,62944,Otitis
+140,44,Stuttgart,22681,Conjuntivitis
+141,39,Bishkek,42522,Otitis
+142,44,Rawalpindi,47618,Fever
+143,1,Surat Thani,48622,Cancer
+144,43,Malabo,40007,Otitis
+145,89,Graz,42400,Flu
+146,87,Dammam,43886,AIDS
+147,7,La Serena,46972,Otitis
+148,14,Saskatoon,20413,Fever
+149,74,Apia,12918,AIDS
+150,36,Mexicali,11207,Flu
+151,44,Campo Grande,18201,Otitis
+152,3,Dongguan,79065,Otitis
+153,24,Bogor,56848,Autism
+154,31,Pontianak,26767,Conjuntivitis
+155,64,Hargeisa,56521,Chlamydia
+156,36,Mashhad,17435,Chlamydia
+157,3,Praia,62921,Fever
+158,80,Curitiba,45012,Otitis
+159,83,Split (city),29121,Fever
+160,73,Ponta Delgada,69285,Chlamydia
+161,27,St. Louis,64488,Conjuntivitis
+162,57,Horta (Azores),56437,Autism
+163,57,Lomé,16381,Flu
+164,12,Birkirkara,31560,Conjuntivitis
+165,57,Islamabad,35260,Cancer
+166,52,Belmopan,72693,Conjuntivitis
+167,40,Cusco,35788,Cancer
+168,57,Port-au-Prince,46214,Autism
+169,74,Labasa,17664,Chlamydia
+170,57,Frankfurt,68161,Autism
+171,77,Veracruz,63675,AIDS
+172,3,Dunedin,26402,Cancer
+173,35,Cape Town,77736,Autism
+174,38,Damascus,12518,Chlamydia
+175,32,Lusaka,69640,Chlamydia
+176,89,Indianapolis,32299,Otitis
+177,35,Milwaukee,10248,Chlamydia
+178,87,Jakarta,75687,AIDS
+179,22,Bishkek,45194,Autism
+180,8,Panama City,76769,Flu
+181,78,Maputo,65022,Autism
+182,32,Santiago de Cuba,21978,Flu
+183,90,Moscow,38221,Autism
+184,37,Riyadh,14164,Flu
+185,37,Norilsk,42850,Flu
+186,73,Seville,30913,AIDS
+187,47,Nicosia,19584,Autism
+188,32,Kuala Lumpur,20016,Conjuntivitis
+189,21,Kunming,14762,AIDS
+190,22,San José,13756,Flu
+191,64,Milan,74400,Otitis
+192,29,Blantyre,11059,Autism
+193,11,Moscow,68499,Flu
+194,34,Philadelphia,29103,Fever
+195,12,Nizhny Novgorod,72139,Flu
+196,50,Sitka,58678,Otitis
+197,89,Stockholm,65230,AIDS
+198,42,Rochester,16550,Flu
+199,51,Reykjavík,55904,Flu
+200,37,Tskhinvali,20868,Chlamydia
+201,72,Newcastle,47507,Otitis
+202,61,Buffalo,18269,Fever
+203,43,Semarang,67095,Autism
+204,38,Bangkok,13557,Conjuntivitis
+205,44,Raleigh,33774,Conjuntivitis
+206,18,Rome,75732,AIDS
+207,4,Turin,53932,Cancer
+208,32,Abu Dhabi,27542,Otitis
+209,51,Reykjavík,43557,Flu
+210,27,Abuja,66479,Conjuntivitis
+211,23,Luanda,57219,Flu
+212,11,Thimphu,69494,Chlamydia
+213,85,Cayenne,15080,Cancer
+214,45,Da Nang,34928,Chlamydia
+215,15,Oklahoma City,45900,Autism
+216,8,Cape Town,31547,Otitis
+217,33,Bogotá,10100,AIDS
+218,72,Campo Grande,44628,Conjuntivitis
+219,39,Calgary,62024,Chlamydia
+220,33,Malé,51948,Chlamydia
+221,2,Hanover,11835,Flu
+222,72,Addis Ababa,30915,Autism
+223,20,The Hague,23828,Cancer
+224,48,Seoul,13976,Otitis
+225,4,Fukuoka,25757,Flu
+226,52,The Valley,79691,Otitis
+227,45,Tunis,37737,Otitis
+228,57,Rabi Island,29740,Conjuntivitis
+229,28,Hat Yai,36796,Autism
+230,31,Porto Velho,70214,Autism
+231,17,Bratislava,17246,Chlamydia
+232,17,Belize City,43207,Flu
+233,25,Wonsan,41084,Autism
+234,19,Zürich,70574,AIDS
+235,85,Port Vila,52650,Flu
+236,33,Cologne,62731,Flu
+237,70,Detroit,56175,Fever
+238,8,Kaliningrad,51603,AIDS
+239,27,City of San Marino,34051,AIDS
+240,32,Nanjing,44241,Otitis
+241,5,Port Louis,32900,Flu
+242,78,Gdańsk,59349,AIDS
+243,23,Bratsk,12973,Conjuntivitis
+244,87,Vienna,13974,Flu
+245,39,Guadalajara,67670,Otitis
+246,85,Lima,67029,Flu
+247,32,Bern,25429,Conjuntivitis
+248,33,Ankara,19305,Chlamydia
+249,40,Qingdao,11000,Fever
+250,79,Padang,48255,Conjuntivitis
+251,62,Pyongyang,63795,Chlamydia
+252,52,Tamale,58990,Flu
+253,29,San Carlos de Bariloche,70421,Fever
+254,71,Livingstone,30525,Cancer
+255,44,Ciudad del Este,64316,Conjuntivitis
+256,3,Providence,50081,Otitis
+257,85,Louisville,65659,Fever
+258,85,Casablanca,38658,Autism
+259,17,Stockholm,18844,Fever
+260,67,Jamestown,69503,AIDS
+261,51,Nassau,39097,Fever
+262,63,Medellín,11232,AIDS
+263,17,Brisbane,40844,Fever
+264,79,Mandurah,53044,Flu
+265,76,Calama,36452,Flu
+266,43,Praia,76689,Cancer
+267,46,Beijing,17671,Conjuntivitis
+268,76,Banjul,28841,Fever
+269,57,Nukuʻalofa,29051,Cancer
+270,22,Forked River,27468,Fever
+271,34,Amman,38786,Flu
+272,31,Suva,72579,Autism
+273,32,Ndola,35201,Fever
+274,50,Auckland,11915,AIDS
+275,39,Moscow,53250,Autism
+276,25,South Tarawa,16062,Cancer
+277,24,Taiyuan,34559,Conjuntivitis
+278,50,Louisville,13798,Otitis
+279,47,Nanjing,63844,Cancer
+280,36,Conakry,30047,Chlamydia
+281,82,Quito,75323,Flu
+282,1,Malmö,79713,Autism
+283,69,Ibadan,28422,Fever
+284,16,Kaohsiung,42120,Cancer
+285,90,Avarua,62124,Conjuntivitis
+286,57,Siem Reap,36340,Conjuntivitis
+287,65,Port Moresby,54880,Cancer
+288,56,Kanpur,76761,Fever
+289,30,Yakutsk,53917,Otitis
+290,86,Phoenix,31966,Conjuntivitis
+291,2,Manchester,28535,Flu
+292,18,Rio de Janeiro,25169,Flu
+293,10,Pattaya,28184,Flu
+294,51,Koror,10743,Fever
+295,45,Chuí,23135,Otitis
+296,15,Khartoum,42388,Conjuntivitis
+297,19,Khartoum,11104,Cancer
+298,89,Tampere,57107,Fever
+299,10,Ciudad del Este,62154,Chlamydia
+300,31,Recife,77105,Otitis
+301,57,Buffalo,31539,Autism
+302,5,Kansas City,70808,Otitis
+303,84,Shenyang,19286,Conjuntivitis
+304,47,Xi'an,52181,Otitis
+305,69,Juneau,26031,Fever
+306,20,Nagoya,56016,Otitis
+307,56,Salzburg,48469,Autism
+308,54,Saint-Pierre,70062,Otitis
+309,45,Kuwait City,45288,Fever
+310,47,Banda Aceh,43301,Flu
+311,23,Ludhiana,48800,Fever
+312,80,Kaohsiung,44634,Conjuntivitis
+313,73,Tegucigalpa,16245,AIDS
+314,42,Miri,39922,Cancer
+315,32,Basse-Terre,64529,Chlamydia
+316,40,Singapore,15486,Fever
+317,70,Wollongong,77203,AIDS
+318,89,Assis,29654,Flu
+319,26,Chiang Mai,74198,Otitis
+320,22,Oranjestad,56564,AIDS
+321,40,Monaco,34538,Fever
+322,78,Ibiza,75045,Flu
+323,9,Kobe,28477,AIDS
+324,25,Quezon City,47003,Flu
+325,49,Minsk,30993,Autism
+326,65,Mecca,35021,Otitis
+327,73,Nouakchott,14619,Otitis
+328,34,Aarhus,29223,Otitis
+329,1,Luxor,23762,Chlamydia
+330,75,Gothenburg,57446,AIDS
+331,88,Kharkiv,73794,AIDS
+332,64,Wellington,32220,Otitis
+333,86,Wuhan,19398,Flu
+334,70,Pontianak,12853,Conjuntivitis
+335,45,Horta (Azores),10963,Conjuntivitis
+336,34,Brikama,55650,Fever
+337,50,City of Halifax,68103,Cancer
+338,56,Louisville,27014,Autism
+339,9,Tampere,59848,Flu
+340,33,Milan,31341,Conjuntivitis
+341,12,Fairbanks,33918,AIDS
+342,48,Kigali,14177,Chlamydia
+343,41,Iloilo City,49751,Chlamydia
+344,51,Denpasar,33599,Flu
+345,71,Buffalo,51162,Cancer
+346,45,Memphis,67036,Conjuntivitis
+347,41,Mwanza,47829,Chlamydia
+348,63,Roseau,34885,Otitis
+349,78,Lanzhou,28220,Cancer
+350,74,Kingston,79437,Chlamydia
+351,66,Conakry,34432,Autism
+352,90,Doha,58520,Fever
+353,21,Davao City,54852,Autism
+354,78,Bergen,50177,Autism
+355,61,Port-au-Prince,36414,Chlamydia
+356,43,St. John's,17631,Autism
+357,30,Freetown,40035,Chlamydia
+358,70,Medellín,75539,Flu
+359,13,Bangui,78162,Conjuntivitis
+360,18,Dibrugarh,31154,AIDS
+361,63,Banjul,17246,Conjuntivitis
+362,31,Lima,63896,Conjuntivitis
+363,30,Naypyidaw,60726,Cancer
+364,43,Serekunda,41279,Conjuntivitis
+365,8,Libreville,49462,AIDS
+366,52,Kota Bharu,36645,AIDS
+367,76,Douglas,32979,Autism
+368,54,Pretoria,44123,Flu
+369,76,Amman,26461,AIDS
+370,76,San Salvador,42806,Otitis
+371,78,Nizhny Novgorod,53585,AIDS
+372,61,Jaipur,78343,AIDS
+373,36,Banda Aceh,72821,Conjuntivitis
+374,26,Banjul,57749,AIDS
+375,82,Agartala,59501,Chlamydia
+376,25,Naples,31622,Cancer
+377,54,Road Town,64958,AIDS
+378,38,Bangalore,24979,Fever
+379,40,Amsterdam,33341,Chlamydia
+380,74,Kaohsiung,68369,Fever
+381,23,Pelotas,63465,Conjuntivitis
+382,57,Yamoussoukro,36365,Flu
+383,25,Bangkok,66538,Cancer
+384,4,Luanda,32634,AIDS
+385,58,Shijiazhuang,40679,Fever
+386,72,Adamstown,40623,Cancer
+387,66,Gibraltar,14406,Chlamydia
+388,10,Nuuk,69972,Cancer
+389,19,Medan,49973,Cancer
+390,90,Pyongyang,34409,Autism
+391,56,Andorra la Vella,26184,Conjuntivitis
+392,86,Ouagadougou,65057,Cancer
+393,67,Quetzaltenango,35137,Chlamydia
+394,71,Bujumbura,53737,Autism
+395,10,San Antonio,79573,Chlamydia
+396,84,Sacramento,28693,Flu
+397,15,Cannes,41766,Autism
+398,3,Quezon City,44103,Cancer
+399,82,Regina,75843,Chlamydia
+400,42,Praia,17101,Cancer
+401,72,Arequipa,51632,Chlamydia
+402,64,Alofi,33823,Flu
+403,54,Seoul,20817,Conjuntivitis
+404,8,Conakry,50213,Autism
+405,79,Bulawayo,25588,Otitis
+406,76,Ashgabat,64025,Conjuntivitis
+407,74,São Paulo,26879,Otitis
+408,39,Nanjing,76746,Fever
+409,32,Balikpapan,41588,Otitis
+410,21,St. Louis,79546,AIDS
+411,32,Perm,33742,AIDS
+412,24,Bamako,36057,Chlamydia
+413,1,Ibiza,11354,Cancer
+414,9,Wollongong,31880,Autism
+415,81,Bissau,13597,Chlamydia
+416,72,Manila,50964,Conjuntivitis
+417,40,Chennai,33035,Conjuntivitis
+418,8,Mexicali,67612,Autism
+419,77,Kigali,46700,Conjuntivitis
+420,87,Kunming,40040,Autism
+421,16,Philadelphia,50230,Autism
+422,51,Konya,69744,Flu
+423,66,Kinshasa,23558,Chlamydia
+424,79,Seattle,77651,Fever
+425,81,Ankara,50379,Fever
+426,39,Castries,74531,Flu
+427,48,Srinagar,41121,AIDS
+428,6,Harbin,51030,Conjuntivitis
+429,54,Sapporo,29360,Conjuntivitis
+430,59,Gothenburg,38714,Otitis
+431,36,Salzburg,69585,AIDS
+432,11,Durban,16912,Conjuntivitis
+433,1,Saint John,12652,Flu
+434,83,Whitehorse,44668,AIDS
+435,58,Jersey City,31020,Flu
+436,19,Surat Thani,68189,Autism
+437,37,Tokyo,14384,Fever
+438,81,Guwahati,78174,Flu
+439,88,Warsaw,44272,AIDS
+440,88,Surat Thani,62818,Fever
+441,57,Warsaw,14992,Otitis
+442,5,Patna,10239,Cancer
+443,48,Omdurman,27560,Fever
+444,5,Yangon,28500,Flu
+445,68,Brussels,13817,Conjuntivitis
+446,5,Zürich,29494,Fever
+447,32,Veracruz,27748,Flu
+448,38,Santiago de Cuba,27398,Conjuntivitis
+449,49,Timbuktu,24362,Chlamydia
+450,21,Rosario,61439,Autism
+451,17,Nakhon Ratchasima,53897,Conjuntivitis
+452,7,Samara,41038,Cancer
+453,2,Nagpur,33372,Fever
+454,61,Edinburgh,38895,Conjuntivitis
+455,4,Chennai,10892,Chlamydia
+456,77,Rosario,72177,Conjuntivitis
+457,34,Suez,12840,AIDS
+458,68,Dammam,12806,Otitis
+459,2,Cusco,17541,Cancer
+460,24,Tegucigalpa,46215,Flu
+461,55,Yakutsk,31200,Otitis
+462,49,Adelaide,65369,Fever
+463,17,Oslo,53579,Flu
+464,55,Hanga Roa,48193,AIDS
+465,79,Cockburn Town,63666,AIDS
+466,47,Dalian,47311,Otitis
+467,52,Luxembourg (city),42450,Cancer
+468,90,Yakutsk,30765,Chlamydia
+469,15,Mandurah,18333,Autism
+470,62,Nagoya,74183,Chlamydia
+471,5,Cusco,49515,Cancer
+472,27,Basra,74524,Otitis
+473,40,Luanda,52545,Flu
+474,28,Odessa,52726,Conjuntivitis
+475,14,Majuro,14231,Otitis
+476,57,Mandurah,32332,Otitis
+477,66,Alor Star,18554,Chlamydia
+478,20,Kingstown,27542,Flu
+479,59,Cape Town,52933,Flu
+480,64,Longyearbyen,73070,Conjuntivitis
+481,65,Daegu,25623,Chlamydia
+482,19,Macapá,77422,Autism
+483,29,Brussels,52594,Fever
+484,55,Brasília,54525,Cancer
+485,64,Yokohama,26434,AIDS
+486,70,Anadyr (town),33078,AIDS
+487,28,Pelotas,12116,Autism
+488,81,Adak,31194,Cancer
+489,19,Manzini,77318,Fever
+490,67,Innsbruck,50538,Chlamydia
+491,69,Bucharest,32927,Autism
+492,17,Cartagena,49728,Fever
+493,60,Kharkiv,78962,Otitis
+494,21,Papeete,79297,Autism
+495,1,Denver,30559,Cancer
+496,73,Konya,65692,Chlamydia
+497,72,Praia,19953,AIDS
+498,7,Las Palmas de Gran Canaria,43203,Flu
+499,29,Charlotte,64044,Otitis
+500,16,Singapore,33011,Otitis
+501,20,Riyadh,51963,AIDS
+502,49,Toulouse,24168,Flu
+503,56,Kaliningrad,10618,Otitis
+504,3,Arequipa,21491,Flu
+505,66,Tórshavn,38724,Flu
+506,70,Buenos Aires,45151,Cancer
+507,42,New Delhi,58779,Chlamydia
+508,22,Surat,70814,Cancer
+509,50,Antwerp,45356,Fever
+510,80,Nanjing,42835,Autism
+511,78,Rio Branco,42894,Autism
+512,67,Managua,12438,Chlamydia
+513,78,Tallinn,33141,Fever
+514,17,Batticaloa,74369,Chlamydia
+515,78,Peshawar,51224,Conjuntivitis
+516,79,Magadan,16002,Cancer
+517,75,Los Angeles,63812,Conjuntivitis
+518,26,Casablanca,49661,Chlamydia
+519,42,Kuwait City,19432,Conjuntivitis
+520,20,Cartagena,63319,Flu
+521,56,Karachi,55201,Fever
+522,47,Ciudad del Este,11244,Conjuntivitis
+523,61,Calgary,50761,Conjuntivitis
+524,13,Ilhéus,40320,AIDS
+525,70,Valencia,36898,Cancer
+526,85,Ahmedabad,36635,Conjuntivitis
+527,55,Malang,32973,Chlamydia
+528,44,Rochester,36851,Flu
+529,3,Helsinki,72708,Cancer
+530,67,Split (city),70895,AIDS
+531,86,Toronto,22924,Flu
+532,1,Stanley,13588,Chlamydia
+533,81,Moroni,13479,Otitis
+534,2,Surat,45802,Chlamydia
+535,22,Porto,49082,Autism
+536,20,Fukuoka,26200,Fever
+537,15,Turin,35327,Otitis
+538,69,Louisville,36152,Otitis
+539,74,Chennai,61833,Chlamydia
+540,5,São Tomé,26388,Chlamydia
+541,6,Islamabad,59079,AIDS
+542,77,Conakry,33213,Otitis
+543,79,City of San Marino,14175,Otitis
+544,28,La Paz,71211,AIDS
+545,1,Chişinău,33232,Chlamydia
+546,38,Bursa,28312,Cancer
+547,38,Moroni,67641,Chlamydia
+548,16,Liverpool,27808,Autism
+549,37,Freetown,11708,Cancer
+550,4,Multan,50642,Autism
+551,90,Nanjing,32942,Cancer
+552,29,Petropavlovsk-Kamchatsky,78840,Fever
+553,21,Brussels,32069,Cancer
+554,15,Quezon City,54520,Autism
+555,58,Koulikoro,70871,Fever
+556,18,Juneau,40749,Chlamydia
+557,22,Avarua,28454,Flu
+558,31,Santiago de Cuba,13765,Cancer
+559,41,Helsinki,44975,Autism
+560,18,Hiroshima,43190,Cancer
+561,4,Fukuoka,28050,Autism
+562,21,Dakar,49416,Conjuntivitis
+563,3,Lviv,37466,Fever
+564,79,Innsbruck,59272,Otitis
+565,30,Multan,14648,Cancer
+566,42,Luxor,49177,Autism
+567,55,Porto Alegre,15810,AIDS
+568,14,Kraków,70652,Conjuntivitis
+569,60,Antananarivo,16288,Chlamydia
+570,13,Christchurch,32490,Otitis
+571,11,Gothenburg,70869,Flu
+572,7,Cincinnati,76788,Chlamydia
+573,55,Enugu,56299,AIDS
+574,19,Douglas,14824,Otitis
+575,2,Ashgabat,30024,AIDS
+576,43,Curitiba,59824,Fever
+577,40,Gaziantep,33090,Fever
+578,60,Pristina,55519,Conjuntivitis
+579,79,Bern,72227,Conjuntivitis
+580,65,Incheon,61136,AIDS
+581,15,Arequipa,73908,Autism
+582,47,Daegu,44273,AIDS
+583,14,Batticaloa,37121,Cancer
+584,13,Honiara,52460,Fever
+585,24,Tallinn,57718,Autism
+586,65,Warsaw,32186,Otitis
+587,42,Taichung,65031,Flu
+588,44,Mumbai,24123,Otitis
+589,10,Nairobi,77422,Chlamydia
+590,81,Yakutsk,31298,Fever
+591,22,Quezon City,37175,Cancer
+592,37,Leeds,42033,Chlamydia
+593,7,Rabi Island,67895,Chlamydia
+594,64,Malacca Town,75624,Chlamydia
+595,72,Brikama,70815,Otitis
+596,40,Nicosia,32971,Chlamydia
+597,77,Manzini,19288,Cancer
+598,76,Ahmedabad,64868,Autism
+599,37,Boa Vista,67643,Chlamydia
+600,19,Mexicali,26487,Flu
+601,90,San José,29473,Fever
+602,56,Rio de Janeiro,23809,Chlamydia
+603,2,Regina,67432,Flu
+604,86,Chongqing,53070,Cancer
+605,1,Sucre,10173,Otitis
+606,65,Almaty,45702,Chlamydia
+607,2,Graz,69940,Fever
+608,45,Suva,52628,Flu
+609,84,Dibrugarh,33245,Autism
+610,20,Manila,25152,Fever
+611,31,Minsk,37655,Cancer
+612,65,Belém,31390,Fever
+613,23,Bishkek,47081,AIDS
+614,63,Asmara,55346,Conjuntivitis
+615,17,Adak,77098,Autism
+616,66,Kathmandu,21167,Flu
+617,13,Belém,12343,Conjuntivitis
+618,17,Yaren District,64254,Fever
+619,1,Cairns,34768,Otitis
+620,65,Djibouti (city),31702,AIDS
+621,79,Xi'an,70691,Flu
+622,85,Mandurah,25443,Cancer
+623,58,Palembang,38310,Chlamydia
+624,21,Seville,72423,Autism
+625,1,The Valley,36939,Cancer
+626,59,Makati City,28189,AIDS
+627,52,Amman,28472,Fever
+628,78,Moroni,33251,Flu
+629,57,Macau,69419,Cancer
+630,14,Changchun,13777,Conjuntivitis
+631,6,Belize City,46630,Autism
+632,86,Auckland,71720,Cancer
+633,38,Chişinău,19093,Fever
+634,86,Xining,29919,Chlamydia
+635,51,Baghdad,79579,Otitis
+636,44,Ho Chi Minh City,30564,Flu
+637,32,Chihuahua,35514,Otitis
+638,29,Ho Chi Minh City,68308,Chlamydia
+639,67,Lusaka,50227,Flu
+640,86,Taipei,79598,Conjuntivitis
+641,89,Abu Dhabi,64754,Cancer
+642,73,Newcastle,72874,Conjuntivitis
+643,85,Bangui,75251,Otitis
+644,83,Brasília,10881,AIDS
+645,22,Turin,17043,Autism
+646,26,Durban,57467,AIDS
+647,4,Virginia Beach,19510,Chlamydia
+648,81,Naypyidaw,23364,Chlamydia
+649,80,Timbuktu,78880,Flu
+650,24,Karachi,59861,AIDS
+651,57,Tijuana,38521,Conjuntivitis
+652,28,Gaborone,59840,Conjuntivitis
+653,23,Ho Chi Minh City,46127,Fever
+654,33,Punta Arenas,30590,Fever
+655,31,Helsinki,53875,Cancer
+656,24,Rawalpindi,52440,Conjuntivitis
+657,89,Maracaibo,66428,Autism
+658,31,Albuquerque,60961,AIDS
+659,68,Valletta,10137,Otitis
+660,2,Manama,60388,Flu
+661,62,Port Said,55778,Fever
+662,82,Bangkok,39340,Cancer
+663,60,Surat Thani,61152,Fever
+664,82,Quezon City,16856,Chlamydia
+665,10,Honiara,57602,Cancer
+666,67,Bergen,76600,AIDS
+667,49,Srinagar,43574,Cancer
+668,85,Konya,48733,Chlamydia
+669,50,Kathmandu,76653,AIDS
+670,40,Basra,49637,Autism
+671,77,Lyon,74822,AIDS
+672,79,Hong Kong,35715,Fever
+673,72,Barcelona,47067,Chlamydia
+674,33,São Tomé,34173,Flu
+675,83,Tórshavn,75943,Fever
+676,89,Baghdad,71667,Cancer
+677,83,Alexandria,70998,Flu
+678,73,Santa Cruz de Tenerife,24577,Autism
+679,63,Incheon,36916,Conjuntivitis
+680,52,Guadalajara,30079,Chlamydia
+681,42,Porto Velho,66449,Otitis
+682,69,Forked River,18558,Cancer
+683,81,Chuí,40951,Autism
+684,6,Geneva,59581,Cancer
+685,56,Calama,23757,Conjuntivitis
+686,5,Panama City,78470,Fever
+687,58,Monterrey,25879,Otitis
+688,74,Lilongwe,28584,Flu
+689,84,Bangkok,49099,Flu
+690,31,Geneva,44226,Flu
+691,67,Toronto,47362,Fever
+692,1,Helsinki,24119,AIDS
+693,20,Belmopan,30903,Otitis
+694,1,Lusaka,29201,AIDS
+695,45,Johannesburg,65615,Autism
+696,27,Balikpapan,65406,Flu
+697,52,Jinan,36453,Otitis
+698,22,Aberdeen,13312,AIDS
+699,46,Agartala,76198,AIDS
+700,33,Barcelona,73799,Cancer
+701,10,Bissau,32160,Autism
+702,84,Port-au-Prince,61480,AIDS
+703,8,Cairns,11752,Flu
+704,60,Warsaw,23256,Fever
+705,65,Shillong,57522,Cancer
+706,50,São José dos Campos,52810,AIDS
+707,11,Durban,15845,Otitis
+708,50,South Tarawa,78765,Autism
+709,69,Cairns,22078,Autism
+710,34,Brisbane,40557,Conjuntivitis
+711,80,Washington,45485,Fever
+712,71,Dodoma,70364,Conjuntivitis
+713,34,Miami,26179,Flu
+714,49,Marseille,13052,Conjuntivitis
+715,66,Buffalo,78695,Cancer
+716,51,New Delhi,61243,Otitis
+717,27,Buffalo,33079,Conjuntivitis
+718,78,Tehran,30511,Flu
+719,79,Bishkek,57372,Conjuntivitis
+720,65,Cuiabá,20690,Otitis
+721,7,Vaduz,17726,Flu
+722,48,Arequipa,69743,Conjuntivitis
+723,41,Dodoma,59490,Conjuntivitis
+724,88,Alexandria,79300,Conjuntivitis
+725,74,Semarang,21429,Otitis
+726,43,Bahía Blanca,57715,Otitis
+727,68,Athens,31300,Cancer
+728,9,San José,76678,Cancer
+729,63,Makassar,25240,AIDS
+730,43,Papeete,71882,Otitis
+731,55,Monrovia,11261,Fever
+732,13,Edinburgh,33621,Flu
+733,89,Anadyr (town),75543,Conjuntivitis
+734,84,Birmingham,75000,Chlamydia
+735,46,Darwin,40170,Fever
+736,39,Rabat,26338,AIDS
+737,48,Düsseldorf,45135,Flu
+738,13,Valdivia,11555,Autism
+739,5,Djibouti (city),48928,Flu
+740,76,Nuuk,42629,Conjuntivitis
+741,42,Tagbilaran,15617,Fever
+742,53,Lhasa,60500,Autism
+743,39,Manama,25281,Autism
+744,64,Portland,67312,Autism
+745,39,Islamabad,37119,Otitis
+746,72,Fort-de-France,54839,Flu
+747,32,Strasbourg,64151,Chlamydia
+748,16,Albuquerque,44783,Conjuntivitis
+749,10,Recife,21370,Flu
+750,63,Adelaide,61897,AIDS
+751,75,Madrid,17377,Conjuntivitis
+752,73,Panama City,11695,Flu
+753,29,Sofia,50040,Flu
+754,41,Bogotá,37674,Fever
+755,49,Cayenne,45110,Flu
+756,3,Hargeisa,24037,Chlamydia
+757,65,Iqaluit,56612,Fever
+758,17,Yamoussoukro,45260,Conjuntivitis
+759,29,Nakhon Ratchasima,56593,Flu
+760,88,Busan,35333,Conjuntivitis
+761,61,Porto Velho,53829,Otitis
+762,88,Dallas,69459,Otitis
+763,74,Dili,54783,Flu
+764,50,San José,23843,Flu
+765,29,Jerusalem,37656,Chlamydia
+766,12,Cuiabá,67214,Flu
+767,57,Minneapolis,33814,Fever
+768,84,Kuala Lumpur,11169,Otitis
+769,55,Panama City,36404,Chlamydia
+770,59,Bangalore,54521,Chlamydia
+771,58,Vladivostok,43202,Autism
+772,72,Ilhéus,52240,Conjuntivitis
+773,35,Bahía Blanca,38052,Conjuntivitis
+774,89,Anchorage,30155,Conjuntivitis
+775,28,Leeds,52121,Chlamydia
+776,76,Ipoh,10436,Otitis
+777,31,Cannes,19147,Autism
+778,14,Nagpur,67006,Chlamydia
+779,27,Conakry,53456,Cancer
+780,83,Auckland,55305,Fever
+781,19,São Tomé,61773,Conjuntivitis
+782,1,Los Angeles,37552,Otitis
+783,48,Abuja,16982,Flu
+784,12,Nukuʻalofa,59858,Chlamydia
+785,82,Baltimore,26929,Autism
+786,69,Auckland,58041,Flu
+787,28,Campinas,22122,AIDS
+788,59,Bloemfontein,42471,AIDS
+789,90,Charlotte,39631,Otitis
+790,77,Bogor,21042,AIDS
+791,11,Makassar,20709,Conjuntivitis
+792,47,Monterrey,46155,Otitis
+793,68,San José,59727,Conjuntivitis
+794,69,Douglas,40502,Autism
+795,57,Marrakech,54261,Otitis
+796,67,Oslo,63257,Fever
+797,46,Phnom Penh,58320,Chlamydia
+798,42,Libreville,27524,Chlamydia
+799,81,Rotterdam,48659,Flu
+800,39,Ibadan,41130,Otitis
+801,25,Cuiabá,75970,Autism
+802,24,Wichita,56595,Flu
+803,18,Dresden,69448,Conjuntivitis
+804,80,Busan,75709,Conjuntivitis
+805,13,Rockhampton,63009,Chlamydia
+806,80,Jersey City,71385,Otitis
+807,66,Tijuana,40956,Cancer
+808,58,Dibrugarh,72935,Fever
+809,20,Tucson,36203,Chlamydia
+810,42,Sofia,33867,Chlamydia
+811,13,Hyderabad,57267,Conjuntivitis
+812,58,Mersin,28873,Chlamydia
+813,74,Gothenburg,71239,Conjuntivitis
+814,64,Hanga Roa,53807,Cancer
+815,69,El Paso,58664,Conjuntivitis
+816,48,Hyderabad,32466,AIDS
+817,30,Omsk,15716,Cancer
+818,21,Raleigh,54900,Autism
+819,2,Paris,36394,Otitis
+820,58,Marrakech,44312,Cancer
+821,50,Jerusalem,71222,Fever
+822,77,Miri,39868,AIDS
+823,43,Norilsk,59731,AIDS
+824,72,Miami,71472,Autism
+825,66,Adelaide,32326,Autism
+826,30,Madrid,73687,Cancer
+827,23,Horta (Azores),24445,Fever
+828,90,Santo Domingo,61925,Cancer
+829,38,Jerusalem,21119,Chlamydia
+830,51,Port Moresby,64866,Chlamydia
+831,15,Jersey City,15340,Cancer
+832,80,Curitiba,63974,AIDS
+833,56,Rabat,64862,Flu
+834,72,Gold Coast,64538,Otitis
+835,83,Sri Jayawardenapura-Kotte,18764,Chlamydia
+836,66,Bern,13489,Autism
+837,66,Kano,55087,Otitis
+838,12,Valletta,32091,Conjuntivitis
+839,71,Hanoi,44739,Fever
+840,37,Cuiabá,68306,Fever
+841,18,Ashgabat,13944,Flu
+842,43,Road Town,48438,Conjuntivitis
+843,78,Pristina,49230,Chlamydia
+844,34,Tampere,66469,Chlamydia
+845,3,Cusco,50367,AIDS
+846,70,Fredericton,67339,Conjuntivitis
+847,86,Multan,38213,Conjuntivitis
+848,82,Athens,25010,Conjuntivitis
+849,90,Gaborone,62948,Flu
+850,63,Xining,36036,Flu
+851,12,Denver,38460,Autism
+852,50,Marrakech,30540,Flu
+853,62,Liverpool,43033,Conjuntivitis
+854,73,Raleigh,74641,Conjuntivitis
+855,31,City of Halifax,48374,AIDS
+856,79,Nice,67526,Otitis
+857,39,Amsterdam,16269,Flu
+858,86,Portland,42675,Flu
+859,84,Brikama,12763,Otitis
+860,82,Ahmedabad,41216,Otitis
+861,18,Port Moresby,76004,Autism
+862,39,Hanover,30459,Cancer
+863,29,Seville,31499,Autism
+864,32,Jeddah,30232,Flu
+865,75,Karachi,37370,Flu
+866,42,Christchurch,28899,AIDS
+867,7,Miri,22931,Autism
+868,55,Stockholm,67033,Otitis
+869,75,Shanghai,45314,Autism
+870,23,Vatican City,69510,Autism
+871,81,Asmara,72805,Fever
+872,80,Kandahar,52441,Conjuntivitis
+873,28,Turin,17070,Fever
+874,45,Astana,37752,Conjuntivitis
+875,78,Lhasa,11681,Flu
+876,56,Houston,40192,Otitis
+877,27,Cincinnati,20720,Autism
+878,66,Adelaide,42694,Conjuntivitis
+879,62,Damascus,57038,Chlamydia
+880,47,Abidjan,51648,Fever
+881,13,Tartu,55559,Cancer
+882,84,Antananarivo,19658,Conjuntivitis
+883,73,Yaoundé,40821,Conjuntivitis
+884,86,Leeds,24709,AIDS
+885,30,Aberdeen,59238,Otitis
+886,7,Guatemala City,40308,Autism
+887,33,Munich,19540,Autism
+888,52,Guayaquil,64286,Flu
+889,2,Melekeok,49371,Flu
+890,54,Rabat,19968,Chlamydia
+891,45,Belém,55776,Flu
+892,25,Rabi Island,50743,Conjuntivitis
+893,13,Kota Kinabalu,65754,Cancer
+894,28,Makati City,35877,Otitis
+895,89,Changchun,43434,Otitis
+896,66,Nairobi,13138,Fever
+897,80,Pattaya,11305,Otitis
+898,15,Aarhus,10937,Cancer
+899,52,Miri,17327,Cancer
+900,84,New Delhi,24979,Cancer
+901,12,Koulikoro,59858,Conjuntivitis
+902,64,St. Louis,77035,Flu
+903,5,Kanpur,45053,Autism
+904,72,Seville,27792,Cancer
+905,72,Kaesong,54220,AIDS
+906,75,Wuhan,77361,Flu
+907,5,Muscat,12110,Fever
+908,42,Peshawar,26770,Fever
+909,81,Manaus,54323,Conjuntivitis
+910,22,Providence,57875,Fever
+911,89,Minsk,61550,Cancer
+912,76,Hong Kong,45916,Fever
+913,14,Kinshasa,51755,Flu
+914,82,Dammam,52864,Autism
+915,70,Cannes,65702,Otitis
+916,56,Multan,26917,Otitis
+917,31,Jakarta,50554,Fever
+918,39,Dakar,52919,Autism
+919,44,Cannes,69882,Otitis
+920,15,Bilbao,30873,Otitis
+921,73,Siem Reap,72102,Flu
+922,48,Denver,50095,Cancer
+923,79,Panama City,41461,Cancer
+924,46,Vatican City,22276,Cancer
+925,13,Vancouver,50306,Chlamydia
+926,63,Murmansk,73949,Flu
+927,64,Tórshavn,37899,Chlamydia
+928,31,Gdańsk,18889,Otitis
+929,84,Conakry,46414,Conjuntivitis
+930,37,City of Halifax,12323,Conjuntivitis
+931,57,Qingdao,73532,AIDS
+932,39,Guayaquil,29077,Chlamydia
+933,62,City of Halifax,29370,Fever
+934,24,Havana,17072,Otitis
+935,51,Bursa,45433,Conjuntivitis
+936,76,Ushuaia,22242,Flu
+937,47,Ciudad del Este,27796,Fever
+938,51,Ottawa,49089,Autism
+939,48,La Serena,38939,Otitis
+940,43,Sukhumi,74391,Autism
+941,27,Omsk,20148,Autism
+942,1,Harare,52485,Flu
+943,27,Kota Kinabalu,46351,Conjuntivitis
+944,21,Quito,36949,Cancer
+945,37,Chaguanas,21068,Autism
+946,17,Damascus,32528,Chlamydia
+947,49,Manchester,45480,Fever
+948,1,Gold Coast,46979,Otitis
+949,33,Dallas,72053,AIDS
+950,53,Handan,71061,Chlamydia
+951,26,Ankara,26349,Flu
+952,37,Podgorica,65130,Otitis
+953,58,Rotterdam,78365,Chlamydia
+954,55,Yekaterinburg,41911,Flu
+955,5,Kathmandu,44217,Chlamydia
+956,79,Davao City,69176,Cancer
+957,20,Cincinnati,11769,Autism
+958,39,Whitehorse,10977,Conjuntivitis
+959,17,Nanjing,48134,Cancer
+960,49,Port Moresby,62912,Chlamydia
+961,28,City of San Marino,69971,Chlamydia
+962,7,Leipzig,17967,AIDS
+963,88,Hamilton,12691,Chlamydia
+964,46,Adelaide,26879,Flu
+965,11,Port Said,30183,Otitis
+966,13,Iqaluit,67053,AIDS
+967,87,Naples,31655,Autism
+968,74,Port of Spain,29264,Flu
+969,85,Ludhiana,58315,Conjuntivitis
+970,17,Quito,59852,Conjuntivitis
+971,88,Srinagar,46186,Chlamydia
+972,86,Guadalajara,11496,Otitis
+973,15,Lyon,55191,Autism
+974,35,Phoenix,15244,AIDS
+975,4,Bishkek,50906,Conjuntivitis
+976,38,Iloilo City,38097,Fever
+977,6,Calama,65178,Fever
+978,65,Sana'a,64205,AIDS
+979,84,Ndola,42830,Flu
+980,35,Basse-Terre,67581,Otitis
+981,85,Lusaka,22781,Otitis
+982,42,Paris,70589,Chlamydia
+983,33,Memphis,43294,Conjuntivitis
+984,66,Tampere,53074,Otitis
+985,82,Udon Thani,60864,Conjuntivitis
+986,89,Cairo,74405,Otitis
+987,53,Yaoundé,10497,Chlamydia
+988,71,Mumbai,75053,Autism
+989,55,Lisbon,25982,Flu
+990,16,Livingstone,16989,Flu
+991,78,Christchurch,54996,Fever
+992,47,Singapore,42795,Flu
+993,87,Conakry,64694,Chlamydia
+994,79,Stuttgart,58397,Conjuntivitis
+995,38,Shigatse,19682,Otitis
+996,19,Adana,77274,AIDS
+997,51,Malacca Town,23546,Cancer
+998,9,Cuiabá,24580,Conjuntivitis
+999,38,Malmö,35770,Flu
+1000,34,Dubai,27586,Autism
+1001,76,Pittsburgh,52061,Autism
+1002,13,Valparaíso,13146,Chlamydia
+1003,19,Amman,57971,Autism
+1004,53,Gangtok,14498,Fever
+1005,78,Bern,55990,Conjuntivitis
+1006,48,Abuja,26402,Chlamydia
+1007,89,Rio de Janeiro,66801,AIDS
+1008,17,Aberdeen,70568,Autism
+1009,75,Surat Thani,61714,Chlamydia
+1010,7,Xining,39649,Otitis
+1011,23,Weno,69813,Fever
+1012,61,Marseille,78464,Conjuntivitis
+1013,23,São Tomé,11320,Otitis
+1014,14,Greenwich,13300,Autism
+1015,81,Juneau,50404,AIDS
+1016,88,Makassar,74522,Autism
+1017,68,Enugu,21657,Flu
+1018,48,Antwerp,64145,Flu
+1019,25,Dallas,36155,Otitis
+1020,32,Malang,18718,Autism
+1021,68,Dubai,63590,Conjuntivitis
+1022,86,Assis,68705,Autism
+1023,77,Tirana,37613,Conjuntivitis
+1024,22,Agartala,68953,Conjuntivitis
+1025,47,Semarang,61740,Conjuntivitis
+1026,64,Palikir,79028,Otitis
+1027,2,Cape Town,72141,AIDS
+1028,32,Funafuti,20394,Autism
+1029,44,Douglas,36154,Flu
+1030,16,Padang,75009,Chlamydia
+1031,4,Tokyo,74290,AIDS
+1032,32,Shenyang,61205,Flu
+1033,18,Lviv,24205,AIDS
+1034,25,Sabha,75589,Otitis
+1035,33,Padang,75539,AIDS
+1036,89,Jeddah,54852,Otitis
+1037,33,Hobart,63369,Cancer
+1038,67,Singapore,39960,Otitis
+1039,26,Cockburn Town,53180,Flu
+1040,37,Wonsan,24870,Cancer
+1041,86,Hamilton,15821,Cancer
+1042,12,Reykjavík,30074,Conjuntivitis
+1043,88,Jinan,27865,Fever
+1044,56,Handan,50765,Autism
+1045,29,Minneapolis,37103,Flu
+1046,33,Mashhad,35894,Flu
+1047,48,Ahmedabad,33067,Chlamydia
+1048,90,Maseru,29393,Chlamydia
+1049,78,Vancouver,76265,AIDS
+1050,25,Nakhon Ratchasima,45832,Autism
+1051,77,Washington,75446,Fever
+1052,76,New York City,54651,AIDS
+1053,28,Mashhad,10393,Fever
+1054,13,Louisville,20234,Otitis
+1055,11,Papeete,68362,Otitis
+1056,59,Yangon,54106,Autism
+1057,44,Miri,42320,Flu
+1058,66,Phnom Penh,17703,Autism
+1059,68,Taipei,34513,Conjuntivitis
+1060,19,Istanbul,44420,Autism
+1061,25,Kingston,37708,AIDS
+1062,29,Lusaka,10058,Conjuntivitis
+1063,70,Espoo,19020,Fever
+1064,82,Dakar,33108,Conjuntivitis
+1065,23,Stuttgart,36981,Fever
+1066,13,Shenyang,61257,Fever
+1067,73,Makati City,35173,Conjuntivitis
+1068,23,Columbus,50660,Flu
+1069,53,Hiroshima,28486,Autism
+1070,5,Siem Reap,46795,Conjuntivitis
+1071,68,Oranjestad,56217,Chlamydia
+1072,13,San Francisco,34471,Chlamydia
+1073,73,Shijiazhuang,63614,Otitis
+1074,32,Amman,39156,Otitis
+1075,12,Cape Town,31829,Autism
+1076,81,Portland,11134,Chlamydia
+1077,79,Chihuahua,60323,Fever
+1078,56,Marrakech,46591,Cancer
+1079,2,Minsk,74581,Autism
+1080,38,Agartala,78575,Otitis
+1081,88,Kuching,26111,Fever
+1082,22,Santa Cruz de la Sierra,37386,Autism
+1083,69,Pontianak,65193,Flu
+1084,78,Cali,46424,Flu
+1085,22,Port Said,58341,Cancer
+1086,41,Atlanta,51432,Autism
+1087,60,Iloilo City,11191,Otitis
+1088,25,Fredericton,62031,Flu
+1089,64,Brazzaville,35269,Otitis
+1090,34,Yaren District,17490,Autism
+1091,39,Kingston,23212,Autism
+1092,87,Douglas,21286,Otitis
+1093,39,Yamoussoukro,77803,Fever
+1094,49,Murmansk,25357,Chlamydia
+1095,39,New Orleans,40636,Chlamydia
+1096,18,Hanover,12685,Flu
+1097,29,Murmansk,60368,Fever
+1098,65,Athens,67480,AIDS
+1099,34,Patna,67825,Fever
+1100,24,Riyadh,28383,Flu
+1101,54,Brisbane,25131,Chlamydia
+1102,18,Gold Coast,54124,Otitis
+1103,39,Denver,57636,Autism
+1104,18,Christchurch,44042,Autism
+1105,1,Chittagong,39197,Fever
+1106,35,Quezon City,30757,Cancer
+1107,53,Medan,42330,Cancer
+1108,66,Tokyo,18141,AIDS
+1109,77,Adana,62698,Conjuntivitis
+1110,18,Ottawa,77573,Otitis
+1111,50,Handan,27493,Chlamydia
+1112,84,San Juan,31253,Cancer
+1113,47,Lusaka,18775,Cancer
+1114,31,Los Angeles,77612,Conjuntivitis
+1115,76,Omdurman,74469,Fever
+1116,41,Makassar,29278,Autism
+1117,67,Curitiba,52253,Cancer
+1118,66,Kaesong,15462,Conjuntivitis
+1119,45,Bern,50649,AIDS
+1120,84,Antananarivo,42965,AIDS
+1121,32,Kolkata,25541,AIDS
+1122,83,Abidjan,17575,Otitis
+1123,37,Palembang,65623,Chlamydia
+1124,72,Montevideo,73467,Fever
+1125,38,San Carlos de Bariloche,15245,Conjuntivitis
+1126,14,Zagreb,59433,Conjuntivitis
+1127,56,Suez,29738,Otitis
+1128,30,Pekanbaru,35485,Cancer
+1129,11,Ahmedabad,48941,AIDS
+1130,1,Casablanca,48150,Autism
+1131,62,Luanda,40171,Chlamydia
+1132,33,Belmopan,29981,Otitis
+1133,28,Zürich,74057,Autism
+1134,54,Strasbourg,57097,Autism
+1135,22,Boston,77867,AIDS
+1136,49,Valletta,56148,Flu
+1137,16,Norilsk,42153,AIDS
+1138,38,Mamoudzou,64794,AIDS
+1139,20,Lanzhou,52088,Fever
+1140,39,Arequipa,13121,Fever
+1141,60,Palikir,65274,Flu
+1142,16,Ulan Bator,57129,Autism
+1143,39,Simferopol,21427,Otitis
+1144,64,Baku,61547,Flu
+1145,55,Austin,76192,Chlamydia
+1146,34,Paris,76989,Conjuntivitis
+1147,45,Brussels,49363,Conjuntivitis
+1148,68,Vancouver,78172,Otitis
+1149,29,Shenyang,68647,Otitis
+1150,6,Kolkata,51250,Flu
+1151,42,Shillong,33720,Fever
+1152,65,Las Vegas,74092,Otitis
+1153,83,Amritsar,39682,Otitis
+1154,2,Kingston,74148,Chlamydia
+1155,41,Yamoussoukro,23448,Cancer
+1156,82,Fukuoka,41724,Otitis
+1157,67,Charlottetown,27040,Autism
+1158,56,Barranquilla,39345,Autism
+1159,39,Newcastle,61315,Flu
+1160,13,Kabul,66195,Chlamydia
+1161,32,Shijiazhuang,43550,Fever
+1162,79,Warsaw,15713,Cancer
+1163,71,Kuala Lumpur,33836,Cancer
+1164,27,Toulouse,17033,Fever
+1165,81,Zagreb,74182,Flu
+1166,83,Adak,73059,Chlamydia
+1167,13,Marseille,40845,Fever
+1168,2,Brisbane,74099,Autism
+1169,88,Surabaya,35806,Conjuntivitis
+1170,9,Caracas,36912,Autism
+1171,30,Frankfurt,23845,Otitis
+1172,64,Nakhon Ratchasima,15858,Flu
+1173,80,Nukulaelae,13254,Conjuntivitis
+1174,34,Chongjin,51487,Fever
+1175,12,Townsville,30503,Conjuntivitis
+1176,28,Montreal,17987,Conjuntivitis
+1177,78,Vienna,39807,Autism
+1178,7,Simferopol,64462,Otitis
+1179,5,Manzini,69720,Otitis
+1180,31,Kinshasa,61346,Flu
+1181,61,Alofi,24885,Autism
+1182,61,Macapá,72153,Flu
+1183,83,Nukulaelae,69128,AIDS
+1184,33,Gaza,78697,Cancer
+1185,85,Johannesburg,37378,AIDS
+1186,86,Port Vila,69976,Autism
+1187,43,Lviv,13159,Fever
+1188,64,Kandy,45704,Fever
+1189,75,Palikir,68182,Otitis
+1190,39,Libreville,54781,Conjuntivitis
+1191,13,Jersey City,60888,Cancer
+1192,72,Nukus,22965,Autism
+1193,34,Vienna,53341,Otitis
+1194,89,Caracas,47502,Fever
+1195,1,Labasa,67827,Otitis
+1196,39,Bloemfontein,30932,Flu
+1197,86,Tampa,79522,AIDS
+1198,44,Moscow,15505,Otitis
+1199,9,Addis Ababa,11096,Conjuntivitis
+1200,23,Bandar Seri Begawan,63582,Flu
+1201,64,Manchester,28544,Autism
+1202,84,Tunis,19316,Otitis
+1203,60,Rockhampton,61957,Autism
+1204,27,Angra do Heroísmo,37975,Otitis
+1205,25,Port Louis,30507,Cancer
+1206,3,Medellín,58188,Conjuntivitis
+1207,69,Simferopol,10240,Fever
+1208,16,Ahmedabad,51711,Flu
+1209,84,Sucre,71036,Fever
+1210,10,Lviv,49228,Cancer
+1211,83,Recife,49764,Otitis
+1212,43,Ibadan,52822,Fever
+1213,8,Macau,27375,Flu
+1214,73,Port Hedland,24102,Otitis
+1215,63,Winnipeg,37759,Otitis
+1216,52,Dalian,69905,Autism
+1217,49,Strasbourg,54287,Otitis
+1218,61,Manila,38028,Fever
+1219,30,Nuuk,57458,AIDS
+1220,18,Tartu,62015,Chlamydia
+1221,74,Balikpapan,21419,Cancer
+1222,53,Malang,57772,Flu
+1223,88,The Valley,34319,Cancer
+1224,47,Mexicali,42997,Autism
+1225,28,Ljubljana,29534,Otitis
+1226,53,Warsaw,43711,AIDS
+1227,80,Pristina,76176,Flu
+1228,6,Gaza,14009,Conjuntivitis
+1229,3,Kyoto,68183,Flu
+1230,54,Invercargill,41074,Flu
+1231,54,Louisville,71951,Otitis
+1232,39,Houston,32844,Autism
+1233,9,Hai Phong,24476,AIDS
+1234,59,Ilhéus,18936,Chlamydia
+1235,53,Buffalo,16245,Conjuntivitis
+1236,27,Cork (city),49904,Otitis
+1237,1,Beijing,28390,Cancer
+1238,24,Harare,51749,Cancer
+1239,32,Davao City,52931,Chlamydia
+1240,8,Lhasa,49057,Cancer
+1241,67,Seoul,45547,Chlamydia
+1242,12,Las Vegas,29028,Conjuntivitis
+1243,83,Johannesburg,40262,Cancer
+1244,72,Bratsk,79991,Autism
+1245,22,Jeddah,13791,Fever
+1246,76,Manaus,55156,AIDS
+1247,32,Durango,55588,Conjuntivitis
+1248,26,Rio Branco,79693,Cancer
+1249,52,Chongqing,77993,AIDS
+1250,49,Kharkiv,78048,Cancer
+1251,84,Miami,11187,Cancer
+1252,84,Multan,23199,Autism
+1253,17,Ipoh,40662,Conjuntivitis
+1254,83,Stuttgart,37403,Fever
+1255,74,Riga,16868,Fever
+1256,13,Louisville,41324,Autism
+1257,22,Gothenburg,73246,Autism
+1258,5,Nantes,60711,Fever
+1259,53,Aberdeen,73048,AIDS
+1260,11,Panama City,18297,AIDS
+1261,74,Tskhinvali,75671,Cancer
+1262,60,Ürümqi,57428,Autism
+1263,53,Jamestown,14938,AIDS
+1264,65,Gibraltar,48547,AIDS
+1265,54,Linz,39934,Conjuntivitis
+1266,57,Yekaterinburg,20356,Otitis
+1267,42,Minsk,54196,Autism
+1268,90,Mbabane,56684,Flu
+1269,87,Chengdu,35289,Conjuntivitis
+1270,12,Mumbai,54731,Fever
+1271,87,Mexico City,20907,Cancer
+1272,60,Sapporo,37197,Autism
+1273,20,Chennai,22658,Cancer
+1274,76,Petropavlovsk-Kamchatsky,69532,Flu
+1275,31,Singapore,72080,Cancer
+1276,39,La Paz,62907,Flu
+1277,55,Concepción,71827,Autism
+1278,17,Ürümqi,56416,Autism
+1279,79,Castries,25459,Autism
+1280,24,Santa Cruz de la Sierra,57564,Flu
+1281,24,Detroit,28307,Chlamydia
+1282,22,Forked River,41842,Flu
+1283,87,Nukuʻalofa,37018,Flu
+1284,57,Lyon,42734,Flu
+1285,60,Darwin,24043,Flu
+1286,63,Vilnius,41362,Flu
+1287,44,Iquique,40199,Cancer
+1288,60,Berlin,31247,Otitis
+1289,82,Chicago,64169,Conjuntivitis
+1290,71,Aberdeen,49867,Autism
+1291,43,Santa Cruz de Tenerife,52745,Conjuntivitis
+1292,17,Gaziantep,48086,Flu
+1293,83,Geneva,14629,Otitis
+1294,66,Santiago,10084,Autism
+1295,4,Christchurch,22326,Otitis
+1296,11,Greenwich,46557,Conjuntivitis
+1297,45,Monrovia,15415,Cancer
+1298,40,Brasília,64022,Conjuntivitis
+1299,19,Berlin,12845,Flu
+1300,27,Chuí,36293,Autism
+1301,84,Yaoundé,13264,Chlamydia
+1302,86,Pyongyang,56452,Flu
+1303,24,Reykjavík,60896,Cancer
+1304,16,Nizhny Novgorod,27484,Flu
+1305,68,Mata-Utu,38206,Chlamydia
+1306,90,Padang,30766,Cancer
+1307,19,Manchester,19143,Flu
+1308,32,Christchurch,25349,Fever
+1309,53,Kharkiv,24148,Chlamydia
+1310,54,Port Elizabeth,38612,Chlamydia
+1311,22,Amritsar,10656,Otitis
+1312,42,Edinburgh,16847,Conjuntivitis
+1313,23,Cartagena,26921,Conjuntivitis
+1314,45,Port-au-Prince,38416,Cancer
+1315,51,Asmara,52888,AIDS
+1316,68,Chaguanas,28698,Flu
+1317,60,Vienna,14970,Fever
+1318,77,Lilongwe,36956,Conjuntivitis
+1319,84,Da Nang,33838,Cancer
+1320,25,Helsinki,29638,Cancer
+1321,38,Bandar Seri Begawan,77211,Conjuntivitis
+1322,86,Durban,53637,Fever
+1323,16,Kingston,49866,Autism
+1324,74,Hangzhou,21779,Chlamydia
+1325,38,Virginia Beach,74599,Otitis
+1326,66,Shillong,15335,Autism
+1327,12,Dededo,26600,Conjuntivitis
+1328,41,Guatemala City,51165,Autism
+1329,7,Washington,36381,Conjuntivitis
+1330,89,Surat Thani,23772,Chlamydia
+1331,75,Brisbane,49905,Autism
+1332,60,Guangzhou,17657,Conjuntivitis
+1333,89,Ushuaia,50694,Autism
+1334,18,George Town,20421,Otitis
+1335,11,Odessa,36314,Conjuntivitis
+1336,59,Invercargill,51272,Otitis
+1337,22,Linz,38247,AIDS
+1338,16,Rabat,54720,Autism
+1339,77,Tunis,41237,Cancer
+1340,84,Dakar,28717,Chlamydia
+1341,20,Yekaterinburg,44528,Otitis
+1342,26,Alor Star,43976,Fever
+1343,69,Longyearbyen,37843,Conjuntivitis
+1344,63,Pittsburgh,14449,Autism
+1345,75,Calama,35936,Autism
+1346,64,Porto-Novo,27544,Otitis
+1347,49,Vitória,62624,Cancer
+1348,24,Paris,30445,Flu
+1349,8,Odessa,28819,Autism
+1350,4,Seoul,23072,Autism
+1351,53,Kanpur,21729,Autism
+1352,50,Paris,42611,Conjuntivitis
+1353,90,Alor Star,61032,Chlamydia
+1354,62,Montreal,75122,Chlamydia
+1355,74,Mexicali,44337,Otitis
+1356,80,Monrovia,66061,Flu
+1357,26,Charlotte,66182,Otitis
+1358,40,Abidjan,28923,Conjuntivitis
+1359,18,Yakutsk,71120,Conjuntivitis
+1360,14,Manaus,22212,Cancer
+1361,37,Santo Domingo,79757,Otitis
+1362,43,Barcelona,40986,Cancer
+1363,57,Nanning,67434,Otitis
+1364,64,Málaga,69631,Chlamydia
+1365,19,Indianapolis,59743,Otitis
+1366,17,Lobamba,58175,Chlamydia
+1367,30,Baghdad,21766,Fever
+1368,18,Malacca Town,59042,Conjuntivitis
+1369,3,Bridgetown,53809,Conjuntivitis
+1370,30,Fortaleza,45569,Autism
+1371,64,Caracas,28643,Otitis
+1372,86,San Diego,23154,Flu
+1373,46,Nagoya,70134,Cancer
+1374,52,Amman,50044,Flu
+1375,53,Ashgabat,45081,Autism
+1376,50,Tampa,51852,Conjuntivitis
+1377,79,Tianjin,18615,Flu
+1378,41,Cincinnati,63124,Autism
+1379,71,Simferopol,55004,Fever
+1380,22,Manzini,32138,Autism
+1381,22,Jersey City,18718,Autism
+1382,35,Port Louis,59069,Fever
+1383,54,Kuwait City,78389,AIDS
+1384,90,Port Elizabeth,26146,AIDS
+1385,87,Batticaloa,34293,Autism
+1386,79,Handan,30762,AIDS
+1387,20,Port Moresby,52193,Chlamydia
+1388,38,Valdivia,56597,Flu
+1389,12,San Francisco,66169,Fever
+1390,68,Gaborone,57020,Fever
+1391,84,Oklahoma City,30671,Autism
+1392,83,Stanley,26598,Cancer
+1393,27,Wonsan,40672,Fever
+1394,79,Basse-Terre,36158,AIDS
+1395,67,Chişinău,57166,Fever
+1396,20,Guatemala City,54610,Chlamydia
+1397,57,Bilbao,55657,Cancer
+1398,36,Tagbilaran,17375,Autism
+1399,52,Liverpool,31608,Fever
+1400,44,Miri,49333,Fever
+1401,20,Bridgetown,64122,Fever
+1402,29,Iquique,71821,Cancer
+1403,13,Tianjin,72756,Otitis
+1404,44,Anchorage,10559,Chlamydia
+1405,65,Málaga,44540,Conjuntivitis
+1406,56,Riga,42873,AIDS
+1407,5,Forked River,73926,Chlamydia
+1408,30,Odessa,51734,Flu
+1409,12,Djibouti (city),49336,Cancer
+1410,15,Da Nang,19345,Chlamydia
+1411,36,Rotterdam,63568,Cancer
+1412,52,Bergen,65572,Flu
+1413,32,San Carlos de Bariloche,70524,Cancer
+1414,4,Birkirkara,11005,AIDS
+1415,19,Maceió,48654,Autism
+1416,84,Multan,74883,Flu
+1417,68,Maseru,45583,Fever
+1418,13,Tripoli,70372,Autism
+1419,21,Porto Alegre,16145,Otitis
+1420,26,Surat Thani,70204,Conjuntivitis
+1421,71,Chongqing,47909,Flu
+1422,88,Asunción,45928,AIDS
+1423,25,Ürümqi,49146,Autism
+1424,67,Ndola,40330,Conjuntivitis
+1425,69,Johor Bahru,58603,Fever
+1426,10,Valletta,15370,AIDS
+1427,70,Vancouver,58377,Flu
+1428,10,Amsterdam,69548,Chlamydia
+1429,7,Barranquilla,26938,Fever
+1430,38,Pelotas,72851,Fever
+1431,70,Longyearbyen,78798,Flu
+1432,82,Havana,26260,AIDS
+1433,9,Iloilo City,26901,Flu
+1434,58,Xining,10197,Otitis
+1435,38,Málaga,24201,Autism
+1436,19,Darwin,35796,Otitis
+1437,79,Pattaya,22369,Otitis
+1438,10,Vaduz,44466,Flu
+1439,64,Saint-Denis,56442,AIDS
+1440,56,Recife,19840,Cancer
+1441,9,Thiès,27103,Flu
+1442,8,Tagbilaran,18585,Chlamydia
+1443,17,Phuket (city),42746,Cancer
+1444,15,Miami,55232,Chlamydia
+1445,13,Quetzaltenango,79203,AIDS
+1446,7,Punta Arenas,69431,Cancer
+1447,33,Karachi,31845,Conjuntivitis
+1448,3,Aberdeen,77549,Otitis
+1449,62,Lubumbashi,65703,Chlamydia
+1450,61,Palembang,52565,Flu
+1451,54,Edmonton,64562,Otitis
+1452,50,Wonsan,37051,AIDS
+1453,86,Abu Dhabi,70488,Flu
+1454,17,Manaus,53737,Cancer
+1455,40,Valdivia,76073,Autism
+1456,81,Kansas City,51848,Conjuntivitis
+1457,32,Bissau,43543,Otitis
+1458,83,Dubai,12252,Cancer
+1459,74,Sofia,46463,Fever
+1460,29,Fukuoka,71596,Flu
+1461,73,Murmansk,11638,Fever
+1462,33,Kraków,43793,Cancer
+1463,11,Padang,54950,Conjuntivitis
+1464,47,Yaoundé,45089,Otitis
+1465,15,Marseille,43967,Otitis
+1466,86,Vitória,17038,Fever
+1467,70,Serekunda,43361,Conjuntivitis
+1468,14,Louisville,20385,Otitis
+1469,18,Vitória,45566,Otitis
+1470,76,Tartu,69381,Autism
+1471,31,Port Hedland,66309,Conjuntivitis
+1472,22,Brussels,56290,Autism
+1473,14,Dili,16842,Otitis
+1474,32,Gaziantep,46412,Otitis
+1475,19,Bilbao,25491,Flu
+1476,47,Alexandria,22061,Flu
+1477,34,Ipoh,33610,Cancer
+1478,12,Melekeok,44454,Flu
+1479,8,Port Hedland,79302,AIDS
+1480,19,Kunming,32090,Flu
+1481,79,Suva,55054,Flu
+1482,57,Zanzibar City,61439,Flu
+1483,58,Medina,45691,Cancer
+1484,51,Malé,77415,Autism
+1485,75,Mersin,55069,Fever
+1486,59,Ipoh,42286,Conjuntivitis
+1487,61,Stuttgart,77112,Conjuntivitis
+1488,60,The Hague,59696,AIDS
+1489,16,Port Vila,55362,Conjuntivitis
+1490,58,Albuquerque,32218,Conjuntivitis
+1491,4,Kuching,28658,Fever
+1492,24,Denver,20838,Cancer
+1493,45,Chennai,79465,Cancer
+1494,36,Berlin,19031,AIDS
+1495,11,Zapopan,52861,Flu
+1496,60,Koror,57215,Cancer
+1497,69,Bangkok,71913,AIDS
+1498,66,Moroni,26072,Chlamydia
+1499,37,Kabul,57453,Flu
+1500,90,Lyon,75464,Flu
+1501,50,Frankfurt,51287,Chlamydia
+1502,45,Hargeisa,66548,Cancer
+1503,2,Marseille,68774,Autism
+1504,11,Cannes,65236,Conjuntivitis
+1505,75,Tabriz,38072,Flu
+1506,61,Medellín,45792,Fever
+1507,2,San Fernando,46416,AIDS
+1508,88,Strasbourg,69686,Conjuntivitis
+1509,53,Wonsan,26875,Otitis
+1510,82,Regina,55929,Otitis
+1511,65,Chengdu,42068,Otitis
+1512,29,Suez,35194,Fever
+1513,57,Qingdao,49101,Autism
+1514,22,Kota Bharu,35261,Conjuntivitis
+1515,13,Lima,10079,Otitis
+1516,90,Saint-Pierre,47772,Chlamydia
+1517,15,Colombo,74047,Flu
+1518,49,Port Said,33614,Fever
+1519,80,Shanghai,67407,Fever
+1520,58,Minneapolis,13955,Otitis
+1521,53,Fukuoka,59864,Flu
+1522,70,Panama City,49025,Autism
+1523,14,Providence,44251,Conjuntivitis
+1524,21,Pago Pago,73321,Fever
+1525,4,Maracaibo,62629,Autism
+1526,74,Zagreb,47325,Chlamydia
+1527,83,Rochester,74559,Chlamydia
+1528,10,Bilbao,51430,Flu
+1529,17,Port Said,58768,Conjuntivitis
+1530,71,Yakutsk,15694,Conjuntivitis
+1531,18,Yakutsk,31022,Cancer
+1532,83,Salzburg,65690,Chlamydia
+1533,12,Colombo,16214,Otitis
+1534,17,Saint-Pierre,79168,Otitis
+1535,52,Gibraltar,26806,Chlamydia
+1536,44,Kharkiv,57611,AIDS
+1537,71,Taipei,21519,Fever
+1538,5,Lusaka,49440,AIDS
+1539,66,Belém,27209,Chlamydia
+1540,75,Qingdao,57073,AIDS
+1541,88,Manchester,52947,AIDS
+1542,81,Stepanakert,42365,Autism
+1543,52,Hat Yai,71692,Conjuntivitis
+1544,20,Tel Aviv,32497,Flu
+1545,58,Busan,22406,Fever
+1546,79,Shenyang,55270,Chlamydia
+1547,58,The Valley,57861,AIDS
+1548,69,Yangon,33815,Cancer
+1549,5,Guangzhou,45248,Otitis
+1550,44,Ilhéus,57643,Flu
+1551,31,Lima,34695,Otitis
+1552,20,Bilbao,39703,Autism
+1553,63,Chongjin,68977,Chlamydia
+1554,55,Bangalore,41769,Otitis
+1555,77,Kolkata,12867,Chlamydia
+1556,38,Nizhny Novgorod,49342,Autism
+1557,50,Yaren District,23523,Cancer
+1558,5,Petropavlovsk-Kamchatsky,27376,Otitis
+1559,41,Davao City,40915,Otitis
+1560,6,Marrakech,43241,Otitis
+1561,58,Pekanbaru,60070,AIDS
+1562,87,Shigatse,68206,Flu
+1563,43,Leeds,65364,Conjuntivitis
+1564,90,Monrovia,64824,Flu
+1565,61,Cleveland,45820,Conjuntivitis
+1566,47,Tiraspol,75912,Cancer
+1567,77,Innsbruck,17838,Conjuntivitis
+1568,2,Apia,27942,Conjuntivitis
+1569,32,Guayaquil,69963,Chlamydia
+1570,55,Shenzhen,57994,Conjuntivitis
+1571,31,Yaoundé,17846,Conjuntivitis
+1572,15,Nouakchott,29601,Cancer
+1573,28,Sitka,21987,Otitis
+1574,57,Tashkent,22832,Flu
+1575,41,Pekanbaru,38319,Fever
+1576,55,Kaesong,18545,Conjuntivitis
+1577,51,Quetzaltenango,68731,Otitis
+1578,20,Oslo,47283,Cancer
+1579,45,Tokyo,62767,Otitis
+1580,71,Paramaribo,55846,AIDS
+1581,39,Panama City,44946,Flu
+1582,47,Omsk,70459,AIDS
+1583,29,Charlotte Amalie,28055,Fever
+1584,28,Kunming,22152,Flu
+1585,35,Dakar,32764,Autism
+1586,9,Simferopol,56065,Flu
+1587,81,Managua,67468,Flu
+1588,56,Tartu,69012,Flu
+1589,5,Ibadan,10323,Autism
+1590,1,Liverpool,59490,AIDS
+1591,31,Tskhinvali,60710,Chlamydia
+1592,40,Düsseldorf,76262,Autism
+1593,63,Dunedin,35068,AIDS
+1594,29,Bogotá,42557,Otitis
+1595,28,Rochester,14082,Chlamydia
+1596,67,Avarua,19058,Conjuntivitis
+1597,49,Tianjin,15087,Autism
+1598,66,Wonsan,53330,AIDS
+1599,52,Ibiza,72456,Conjuntivitis
+1600,71,Graz,32948,AIDS
+1601,11,Labasa,34691,Fever
+1602,42,Suez,26874,Autism
+1603,35,Los Angeles,40893,Cancer
+1604,16,St. John's,74763,Otitis
+1605,50,Mendoza,28916,Chlamydia
+1606,61,Port Said,77957,Cancer
+1607,20,Xi'an,75631,Cancer
+1608,86,Serekunda,67716,Autism
+1609,51,Vaduz,55116,Otitis
+1610,57,Karachi,43749,Otitis
+1611,20,Port-au-Prince,54624,Conjuntivitis
+1612,73,Nagoya,69892,Autism
+1613,7,Nagpur,64489,Autism
+1614,73,Gaborone,48983,Fever
+1615,76,Singapore,30131,Conjuntivitis
+1616,17,Beirut,24854,Conjuntivitis
+1617,86,Monrovia,69996,Chlamydia
+1618,68,City of San Marino,52405,Fever
+1619,53,Makassar,21363,Chlamydia
+1620,22,Kaesong,28937,Cancer
+1621,84,Gothenburg,77244,Chlamydia
+1622,14,Dibrugarh,23988,Fever
+1623,4,Gangtok,66653,Otitis
+1624,59,Tamale,24809,AIDS
+1625,79,Cayenne,76611,Otitis
+1626,1,Mecca,18688,Flu
+1627,34,Baltimore,20293,Otitis
+1628,1,Hyderabad,26125,Chlamydia
+1629,8,Ouagadougou,59738,AIDS
+1630,33,Nicosia,68799,Cancer
+1631,13,Guayaquil,23230,Flu
+1632,5,Nashville,12134,Chlamydia
+1633,50,Saint-Denis,45703,AIDS
+1634,42,Kansas City,49766,Fever
+1635,1,Jamestown,37706,AIDS
+1636,6,Bissau,21018,Cancer
+1637,15,Charlottetown,33763,Otitis
+1638,38,Düsseldorf,43735,Fever
+1639,72,Shijiazhuang,57776,AIDS
+1640,52,Greenwich,36674,Conjuntivitis
+1641,7,Edmonton,32637,Cancer
+1642,61,Brisbane,67194,AIDS
+1643,26,Bogor,58077,Chlamydia
+1644,30,Kolkata,47972,Flu
+1645,90,Amman,34444,Flu
+1646,82,Yogyakarta (city),70563,Fever
+1647,9,Fairbanks,45722,Conjuntivitis
+1648,90,Sydney,31640,Otitis
+1649,37,Pattaya,58271,Otitis
+1650,26,Willemstad,41902,Cancer
+1651,63,Oranjestad,55982,Otitis
+1652,23,Saint-Denis,38255,Fever
+1653,22,Saint Petersburg,12319,Flu
+1654,37,Zapopan,12597,Cancer
+1655,24,Sri Jayawardenapura-Kotte,24727,Chlamydia
+1656,88,Split (city),61520,Cancer
+1657,69,Dhaka,54997,Fever
+1658,42,Seoul,43697,Otitis
+1659,59,Memphis,31618,Chlamydia
+1660,18,Alofi,56475,Otitis
+1661,72,Charlottetown,54450,AIDS
+1662,40,Bilbao,15735,Chlamydia
+1663,45,Siem Reap,62030,Chlamydia
+1664,3,Dubai,35213,Fever
+1665,25,Sri Jayawardenapura-Kotte,25164,Cancer
+1666,38,Taichung,43091,Cancer
+1667,63,Dongguan,68304,Fever
+1668,50,Labasa,52253,Flu
+1669,89,Algiers,60355,Autism
+1670,61,Kaohsiung,11553,Autism
+1671,24,Palembang,69700,Conjuntivitis
+1672,19,Lusaka,16266,Cancer
+1673,66,Durango,75337,Otitis
+1674,33,Düsseldorf,31125,Autism
+1675,76,Mandurah,75285,Fever
+1676,67,Fredericton,18918,Otitis
+1677,8,Shenzhen,65283,Autism
+1678,65,Batticaloa,66319,Flu
+1679,53,Tabriz,74222,Chlamydia
+1680,81,Las Palmas de Gran Canaria,16335,Cancer
+1681,38,Belize City,66107,Chlamydia
+1682,73,Louisville,29149,Chlamydia
+1683,33,Valdivia,72038,Conjuntivitis
+1684,19,Tamale,23048,Conjuntivitis
+1685,7,Columbus,14339,Flu
+1686,27,Quezon City,69879,AIDS
+1687,55,Shenzhen,70940,AIDS
+1688,64,Stockholm,41585,Chlamydia
+1689,24,Suez,68563,Flu
+1690,24,Quito,23465,Otitis
+1691,82,Kandahar,48088,Otitis
+1692,33,Kathmandu,55116,Autism
+1693,32,Jersey City,69804,Conjuntivitis
+1694,70,Porto-Novo,52666,Autism
+1695,78,La Serena,66514,Chlamydia
+1696,36,Dili,64714,Flu
+1697,15,Vitória,59521,Otitis
+1698,9,Hai Phong,52120,Cancer
+1699,65,Ho Chi Minh City,16342,Cancer
+1700,38,Saskatoon,13068,Autism
+1701,36,Niamey,77110,Flu
+1702,14,Strasbourg,28094,Fever
+1703,42,Ljubljana,73139,Fever
+1704,79,Manaus,22155,Chlamydia
+1705,14,Ciudad del Este,41938,Fever
+1706,56,South Tarawa,73079,Cancer
+1707,85,Avarua,57871,Otitis
+1708,16,Macapá,47724,Chlamydia
+1709,4,Vaduz,43695,Autism
+1710,24,Rio Branco,63105,Otitis
+1711,40,Port Vila,30432,Fever
+1712,57,San Carlos de Bariloche,72968,Fever
+1713,53,Lhasa,77184,Cancer
+1714,35,Cork (city),12402,Otitis
+1715,90,Livingstone,15528,Fever
+1716,3,Colombo,71085,Autism
+1717,12,Sacramento,62937,Conjuntivitis
+1718,5,Chongqing,56389,Chlamydia
+1719,81,San Salvador,50496,Conjuntivitis
+1720,21,Christchurch,20672,AIDS
+1721,10,Surabaya,22716,Conjuntivitis
+1722,57,Córdoba,56785,Fever
+1723,19,Stanley,12671,Fever
+1724,23,Moscow,41762,AIDS
+1725,53,Nanjing,60204,Autism
+1726,60,Mecca,11621,Fever
+1727,82,Pune,30982,Flu
+1728,51,Malang,59095,Chlamydia
+1729,55,Gaza,24404,Chlamydia
+1730,49,Moscow,58825,AIDS
+1731,23,Pittsburgh,16707,Chlamydia
+1732,60,Nuuk,18197,Chlamydia
+1733,54,Chaguanas,73198,Chlamydia
+1734,86,Canberra,24634,Chlamydia
+1735,15,Leipzig,18013,Chlamydia
+1736,10,Mecca,62367,Cancer
+1737,2,Nakhon Ratchasima,34244,Autism
+1738,28,Charlottetown,66397,Chlamydia
+1739,57,Bridgetown,14754,Flu
+1740,84,Quito,48324,Conjuntivitis
+1741,21,Hiroshima,14529,AIDS
+1742,88,Port Moresby,36139,Chlamydia
+1743,87,Ipoh,43428,Chlamydia
+1744,72,Rotterdam,53982,Conjuntivitis
+1745,66,Pittsburgh,34473,Flu
+1746,62,Dammam,42351,Autism
+1747,48,Astana,53225,Chlamydia
+1748,33,Baghdad,66512,Conjuntivitis
+1749,85,Luxor,72984,Cancer
+1750,4,Denpasar,11406,Chlamydia
+1751,90,Salt Lake City,59403,Conjuntivitis
+1752,31,Gothenburg,72142,Conjuntivitis
+1753,89,Austin,68364,Flu
+1754,28,Kobe,69810,AIDS
+1755,90,San Antonio,61047,Flu
+1756,25,Jaipur,13339,Flu
+1757,46,Gold Coast,14398,Fever
+1758,16,Tegucigalpa,27286,Cancer
+1759,41,Minneapolis,15849,Otitis
+1760,24,Port Vila,29474,AIDS
+1761,82,Ouagadougou,22292,AIDS
+1762,88,Fortaleza,38451,Otitis
+1763,43,Magadan,77748,Chlamydia
+1764,80,Adelaide,16215,AIDS
+1765,69,Malang,23367,AIDS
+1766,6,Marrakech,68003,Chlamydia
+1767,47,Lusaka,73597,Flu
+1768,37,Manaus,28353,Autism
+1769,42,Vatican City,65952,Flu
+1770,47,Chaguanas,61494,Flu
+1771,66,Naypyidaw,74643,Autism
+1772,15,Rabi Island,44618,Fever
+1773,5,Campo Grande,36490,Flu
+1774,86,Bridgetown,72200,Conjuntivitis
+1775,33,Austin,26032,Chlamydia
+1776,80,Antwerp,45934,Autism
+1777,34,Chaguanas,57198,Autism
+1778,44,Lima,36434,Conjuntivitis
+1779,82,Dalian,33789,Chlamydia
+1780,10,Juneau,15628,Fever
+1781,18,Nakhon Ratchasima,38685,Conjuntivitis
+1782,44,Santo Domingo,18429,AIDS
+1783,71,Beijing,26192,Conjuntivitis
+1784,88,Bratsk,61237,Otitis
+1785,19,Damascus,13401,AIDS
+1786,9,Wollongong,10989,Conjuntivitis
+1787,25,Tashkent,53401,Fever
+1788,12,Yekaterinburg,67104,Flu
+1789,51,Serekunda,65913,Conjuntivitis
+1790,77,Maceió,20214,Otitis
+1791,49,Dongguan,75457,Chlamydia
+1792,66,Kobe,39339,Chlamydia
+1793,14,Minsk,52210,AIDS
+1794,46,George Town,46725,Conjuntivitis
+1795,79,Muscat,41839,Flu
+1796,16,Tirana,79613,Flu
+1797,39,Beijing,21145,Chlamydia
+1798,18,Valparaíso,29902,Chlamydia
+1799,78,São Paulo,57280,Cancer
+1800,58,Dongguan,40264,AIDS
+1801,55,San Fernando,21590,Flu
+1802,85,The Hague,49219,Autism
+1803,31,Rotterdam,44079,Autism
+1804,19,Yokohama,50877,Fever
+1805,11,Tucson,65710,AIDS
+1806,9,Nakhon Ratchasima,78799,Chlamydia
+1807,64,Puebla,36561,Autism
+1808,67,Minneapolis,52156,Chlamydia
+1809,69,Magadan,59357,Otitis
+1810,25,Mecca,45940,Otitis
+1811,11,Chongqing,63309,Chlamydia
+1812,73,Hiroshima,32781,Fever
+1813,69,El Aaiún,62937,Fever
+1814,13,Yokohama,35197,Otitis
+1815,10,Kota Bharu,38167,Conjuntivitis
+1816,6,Cairns,71987,Autism
+1817,27,Birkirkara,23476,Cancer
+1818,17,Guwahati,70737,Conjuntivitis
+1819,28,Perth,67389,AIDS
+1820,16,Rockhampton,26122,Chlamydia
+1821,20,Port Louis,36095,Fever
+1822,15,Lubumbashi,67727,Fever
+1823,33,Buffalo,32908,Flu
+1824,64,Ho Chi Minh City,16017,Conjuntivitis
+1825,44,Kigali,71184,Autism
+1826,21,Chişinău,71157,Cancer
+1827,70,Córdoba,57141,Cancer
+1828,39,Nicosia,30256,Fever
+1829,53,Santa Cruz de la Sierra,58998,Conjuntivitis
+1830,15,Sydney,58679,Cancer
+1831,90,Hilo,27934,Cancer
+1832,9,Las Palmas de Gran Canaria,66323,Fever
+1833,82,Medina,62062,Flu
+1834,26,Managua,42260,Chlamydia
+1835,36,Bissau,73636,Chlamydia
+1836,61,Omsk,50247,Fever
+1837,23,Baku,56380,Otitis
+1838,12,Anadyr (town),44408,Otitis
+1839,10,Prague,47093,Flu
+1840,67,Changchun,22285,AIDS
+1841,90,Kota Kinabalu,19560,Conjuntivitis
+1842,86,Budapest,63970,Conjuntivitis
+1843,8,Omdurman,55405,Conjuntivitis
+1844,69,Asunción,64022,Chlamydia
+1845,10,Bujumbura,14855,Fever
+1846,68,Faisalabad,79831,Chlamydia
+1847,33,Almaty,43389,AIDS
+1848,23,Makassar,22055,Otitis
+1849,3,Malang,18802,Flu
+1850,48,Linz,17454,Chlamydia
+1851,39,Jersey City,27912,AIDS
+1852,75,Budapest,10501,Conjuntivitis
+1853,69,Hanga Roa,24677,Autism
+1854,11,Mashhad,69691,Flu
+1855,45,Seattle,46345,Autism
+1856,45,Seattle,52103,Flu
+1857,11,Wellington,44358,Autism
+1858,11,Port Vila,22903,Flu
+1859,66,Zürich,11571,Flu
+1860,21,Leipzig,13841,Conjuntivitis
+1861,39,Ulan Bator,59400,Otitis
+1862,51,Indianapolis,30425,Flu
+1863,35,Bangalore,45426,Flu
+1864,47,Kandahar,55239,Fever
+1865,61,Dushanbe,10389,Fever
+1866,54,Andorra la Vella,68150,Flu
+1867,58,Fredericton,54375,Cancer
+1868,32,São Tomé,14620,Flu
+1869,80,Thessaloniki,22546,Flu
+1870,16,Calgary,30434,Autism
+1871,21,Skopje,48606,Otitis
+1872,66,Saint-Pierre,71276,Conjuntivitis
+1873,63,Bandar Seri Begawan,57250,Flu
+1874,83,Ipoh,28830,Flu
+1875,70,Dakar,23716,Flu
+1876,37,St. John's,14905,Conjuntivitis
+1877,3,Dededo,52502,Fever
+1878,74,Fort-de-France,16137,Otitis
+1879,64,Zürich,15202,Otitis
+1880,51,Santo Domingo,41745,AIDS
+1881,42,Yellowknife,72966,AIDS
+1882,47,Sacramento,41145,Autism
+1883,37,Port Elizabeth,33836,Flu
+1884,62,Mashhad,19184,Chlamydia
+1885,88,Mata-Utu,20912,Otitis
+1886,85,Tórshavn,58005,Conjuntivitis
+1887,38,Jakarta,51218,Cancer
+1888,34,Belgrade,14135,Flu
+1889,50,Nuuk,53520,Conjuntivitis
+1890,26,San Francisco,61482,Autism
+1891,41,Chicago,33785,AIDS
+1892,76,El Paso,31853,Flu
+1893,66,Changchun,66534,Conjuntivitis
+1894,76,Havana,34534,Chlamydia
+1895,27,Maseru,36421,Otitis
+1896,51,Naypyidaw,11073,Chlamydia
+1897,2,Quebec City,49759,Autism
+1898,59,Milan,13467,Cancer
+1899,11,Kansas City,12856,AIDS
+1900,46,Salzburg,67765,Autism
+1901,13,New Delhi,32974,Flu
+1902,16,Iquique,51750,AIDS
+1903,80,Tartu,20933,AIDS
+1904,34,Chicago,39599,Chlamydia
+1905,85,Asmara,15633,AIDS
+1906,1,Avarua,71720,Cancer
+1907,4,Strasbourg,13354,Autism
+1908,89,Xining,19084,Chlamydia
+1909,33,Yangon,47772,Otitis
+1910,38,Greenwich,35112,Otitis
+1911,65,Apia,20301,Flu
+1912,60,Omsk,27520,Otitis
+1913,50,Maceió,28782,Flu
+1914,48,The Hague,52800,Conjuntivitis
+1915,11,Alor Star,70145,Flu
+1916,88,Marrakech,68723,AIDS
+1917,88,Ciudad del Este,59592,AIDS
+1918,27,Budapest,38221,AIDS
+1919,76,St. John's,33542,Flu
+1920,77,Kuala Lumpur,72574,Otitis
+1921,69,Chennai,19827,Flu
+1922,84,Fairbanks,12053,Flu
+1923,55,Melbourne,49504,Otitis
+1924,2,Jeddah,79383,AIDS
+1925,58,Johannesburg,17460,Flu
+1926,85,Madrid,13029,AIDS
+1927,31,Chittagong,29546,Chlamydia
+1928,61,Manila,77577,Otitis
+1929,59,Hangzhou,64238,Flu
+1930,83,Kandahar,23566,Fever
+1931,64,Chengdu,14576,Cancer
+1932,86,Astana,21782,Chlamydia
+1933,63,Pune,20850,Flu
+1934,10,Rabat,38876,Cancer
+1935,65,Monterrey,65082,Chlamydia
+1936,69,Saint-Pierre,17574,Autism
+1937,81,Hanga Roa,26637,Otitis
+1938,50,Rotterdam,37766,AIDS
+1939,11,Busan,31988,Fever
+1940,56,Amsterdam,74463,Conjuntivitis
+1941,63,New York City,77984,Conjuntivitis
+1942,4,Santiago,61566,Chlamydia
+1943,55,Cannes,74653,Flu
+1944,68,Wellington,28169,Chlamydia
+1945,8,Fort-de-France,56376,AIDS
+1946,26,San Carlos de Bariloche,57753,Autism
+1947,79,Brussels,20662,Flu
+1948,44,Brikama,13337,Conjuntivitis
+1949,3,Chengdu,48714,Autism
+1950,6,Banjul,51984,AIDS
+1951,27,Jerusalem,25929,Fever
+1952,63,Samara,14673,Cancer
+1953,45,Mamoudzou,55812,Fever
+1954,74,Belize City,11672,Conjuntivitis
+1955,32,Iquitos,63323,AIDS
+1956,64,Suva,60187,Cancer
+1957,58,Iqaluit,51942,Fever
+1958,74,Bishkek,30619,Fever
+1959,50,Siem Reap,69034,Otitis
+1960,33,Amritsar,61280,Otitis
+1961,75,Brasília,44104,Otitis
+1962,7,Bulawayo,79556,Conjuntivitis
+1963,50,Sydney,73746,Chlamydia
+1964,49,Campinas,40690,Flu
+1965,19,Adana,58310,Otitis
+1966,77,Lusaka,61579,Flu
+1967,76,Libreville,59937,Otitis
+1968,19,Ludhiana,49251,Cancer
+1969,87,Ürümqi,23137,Autism
+1970,57,Qingdao,65563,Conjuntivitis
+1971,61,Belmopan,30961,Conjuntivitis
+1972,64,Nagpur,65532,AIDS
+1973,21,Anchorage,40275,Flu
+1974,50,Koror,30119,AIDS
+1975,79,Glasgow,28217,Conjuntivitis
+1976,46,Memphis,41611,Conjuntivitis
+1977,70,Dalian,56771,AIDS
+1978,28,Fredericton,23757,Conjuntivitis
+1979,9,Yekaterinburg,57660,Fever
+1980,78,Kaesong,67042,AIDS
+1981,9,Samara,40234,Autism
+1982,41,Surat Thani,75269,Autism
+1983,49,Nicosia,43235,Otitis
+1984,32,Manama,74311,Cancer
+1985,48,Samara,45604,Otitis
+1986,36,Hat Yai,34296,Chlamydia
+1987,31,Okinawa,24458,AIDS
+1988,77,Rabat,59406,Cancer
+1989,15,Istanbul,39748,Conjuntivitis
+1990,32,Turin,20383,Flu
+1991,10,Aarhus,78356,Flu
+1992,17,Pago Pago,72179,Autism
+1993,15,Luanda,14168,AIDS
+1994,40,Port Hedland,23602,Conjuntivitis
+1995,21,Leipzig,77625,Otitis
+1996,44,Kolkata,19690,Chlamydia
+1997,85,Pristina,11793,Autism
+1998,77,Boston,51240,Conjuntivitis
+1999,66,Mexicali,31105,Otitis
+2000,43,Vilnius,54226,Autism
+2001,70,Puerto Williams,33018,Autism
+2002,18,Miri,47122,Autism
+2003,27,Rawalpindi,36697,Fever
+2004,42,Padang,44610,Chlamydia
+2005,40,Porto Alegre,43760,Cancer
+2006,52,Melbourne,59198,Chlamydia
+2007,49,Nukus,78953,Fever
+2008,77,Simferopol,58895,Flu
+2009,80,Stuttgart,59583,Autism
+2010,58,Ilhéus,51959,Cancer
+2011,48,Kharkiv,28724,AIDS
+2012,48,San Carlos de Bariloche,52351,Conjuntivitis
+2013,90,Medina,10197,Fever
+2014,11,Rawalpindi,14467,Otitis
+2015,3,Yangon,76506,Chlamydia
+2016,89,Baghdad,56216,Flu
+2017,3,Nairobi,56406,AIDS
+2018,3,Tamale,47944,Otitis
+2019,61,Sitka,64910,Chlamydia
+2020,24,Surabaya,61796,Otitis
+2021,90,Almaty,67602,Autism
+2022,54,Nukuʻalofa,56306,Cancer
+2023,23,Zamboanga City,34528,Conjuntivitis
+2024,71,Harare,78331,Fever
+2025,71,Multan,47609,Fever
+2026,72,Nagpur,64862,Flu
+2027,18,Stockholm,42092,Conjuntivitis
+2028,72,Suez,31788,Fever
+2029,71,Cincinnati,36336,Cancer
+2030,52,Nantes,75621,Otitis
+2031,81,Surabaya,45537,Cancer
+2032,79,Belize City,56127,Fever
+2033,43,Port Vila,39189,Flu
+2034,26,Kabul,19182,Autism
+2035,37,Bujumbura,52257,AIDS
+2036,15,Louisville,35103,Flu
+2037,47,Hanover,52306,Autism
+2038,28,Baghdad,11465,Flu
+2039,14,Philadelphia,12214,Cancer
+2040,76,Luxor,38215,Fever
+2041,25,Moscow,47842,Fever
+2042,59,San Antonio,20174,Otitis
+2043,35,Shigatse,56482,Cancer
+2044,56,Manila,21284,AIDS
+2045,7,Blantyre,66545,Chlamydia
+2046,53,Zapopan,39392,AIDS
+2047,24,Frankfurt,72721,Otitis
+2048,75,Chennai,37835,Otitis
+2049,47,Da Nang,10616,Chlamydia
+2050,37,Lhasa,45370,AIDS
+2051,18,Charlottetown,70000,Autism
+2052,75,Minneapolis,53371,Flu
+2053,28,Livingstone,52725,Cancer
+2054,38,Amritsar,79545,Flu
+2055,84,Leeds,46689,Flu
+2056,14,Saipan,74351,Otitis
+2057,42,Tegucigalpa,70397,Flu
+2058,43,Bulawayo,76928,Flu
+2059,61,Gaborone,71914,Cancer
+2060,74,Dakar,21930,AIDS
+2061,40,Ho Chi Minh City,35957,Conjuntivitis
+2062,12,Kano,36293,Chlamydia
+2063,23,Whitehorse,21847,Autism
+2064,40,Asunción,71977,Fever
+2065,90,Rochester,74726,Autism
+2066,32,Bangui,54850,Fever
+2067,66,Bissau,36147,Fever
+2068,25,Lanzhou,64023,Autism
+2069,47,Mérida,37551,Chlamydia
+2070,22,Douglas,17648,Otitis
+2071,6,Antananarivo,31991,Cancer
+2072,86,Yogyakarta (city),12263,AIDS
+2073,88,Houston,59396,Flu
+2074,76,Tashkent,62778,Cancer
+2075,77,Cardiff,36036,AIDS
+2076,13,Colombo,40817,Conjuntivitis
+2077,56,Charlotte Amalie,52115,Conjuntivitis
+2078,20,Hiroshima,28214,Autism
+2079,42,Vientiane,73405,Fever
+2080,34,Rio de Janeiro,46883,Flu
+2081,64,Maracaibo,47270,Otitis
+2082,81,Seoul,60866,Otitis
+2083,1,São Paulo,42666,Chlamydia
+2084,83,Invercargill,69558,Autism
+2085,21,Ottawa,51234,Flu
+2086,2,Arequipa,74716,Fever
+2087,29,Brikama,14282,Flu
+2088,52,Dakar,29642,Autism
+2089,50,Canberra,53303,Cancer
+2090,64,Cologne,31882,Autism
+2091,24,Dalian,63569,Otitis
+2092,52,Tskhinvali,78978,Chlamydia
+2093,84,Reykjavík,37506,Cancer
+2094,57,Valparaíso,16519,AIDS
+2095,67,Kuala Lumpur,15140,AIDS
+2096,4,Nuuk,22464,Conjuntivitis
+2097,27,Honiara,57447,Autism
+2098,84,St. John's,74047,Conjuntivitis
+2099,35,Detroit,72871,Conjuntivitis
+2100,65,Ashgabat,77776,Chlamydia
+2101,77,Alexandria,38780,Chlamydia
+2102,26,Adelaide,18402,Chlamydia
+2103,57,Ankara,58696,Chlamydia
+2104,49,Nagoya,32993,Autism
+2105,50,Valletta,35212,Cancer
+2106,21,Mamoudzou,14377,Chlamydia
+2107,80,Luxor,32884,Flu
+2108,40,Nassau,26491,Autism
+2109,81,Banjul,76212,Chlamydia
+2110,17,Taipei,32667,Autism
+2111,43,Bergen,58163,Chlamydia
+2112,33,Libreville,14533,Fever
+2113,64,Dededo,27190,Fever
+2114,35,Bern,79984,Otitis
+2115,6,Naypyidaw,79904,Conjuntivitis
+2116,17,Anadyr (town),19746,AIDS
+2117,32,Namangan,22603,Conjuntivitis
+2118,29,Islamabad,49469,Chlamydia
+2119,83,New Orleans,19792,Chlamydia
+2120,34,Pago Pago,35350,Conjuntivitis
+2121,55,Cotonou,68770,Autism
+2122,6,Kandahar,23084,Fever
+2123,75,Munich,46885,Flu
+2124,42,Kuala Lumpur,35800,Cancer
+2125,75,Glasgow,43572,Conjuntivitis
+2126,29,Quezon City,17943,Chlamydia
+2127,47,Xi'an,49238,Autism
+2128,87,Thiès,70644,Autism
+2129,43,Bratislava,20477,Fever
+2130,72,Padang,17437,Fever
+2131,54,Saint-Pierre,55807,Autism
+2132,50,Hyderabad,76538,Cancer
+2133,30,Mandurah,62894,Otitis
+2134,88,Palikir,32508,Conjuntivitis
+2135,76,Bratislava,75178,Flu
+2136,43,Thiès,26598,Autism
+2137,80,Papeete,78770,Chlamydia
+2138,13,Manchester,27644,Cancer
+2139,30,Johor Bahru,75160,Autism
+2140,81,Kinshasa,10396,Flu
+2141,10,Gaziantep,79631,AIDS
+2142,58,Kuching,34306,Chlamydia
+2143,3,Daegu,37238,Chlamydia
+2144,89,Chengdu,52977,Conjuntivitis
+2145,66,Port Elizabeth,40848,Autism
+2146,56,Skopje,27175,Autism
+2147,7,Koror,61293,Chlamydia
+2148,67,Makati City,19191,AIDS
+2149,14,Birkirkara,34179,Cancer
+2150,73,Virginia Beach,57060,Flu
+2151,17,Guwahati,70282,Flu
+2152,65,Edinburgh,25571,Cancer
+2153,84,South Tarawa,27995,Autism
+2154,2,Handan,28577,Flu
+2155,65,Edmonton,65543,Chlamydia
+2156,50,Lobamba,34968,Autism
+2157,89,Maseru,44032,Flu
+2158,5,Dibrugarh,46846,Conjuntivitis
+2159,67,Yerevan,35689,Conjuntivitis
+2160,31,Jerusalem,29825,Flu
+2161,67,Amritsar,44911,AIDS
+2162,77,Hobart,50254,Otitis
+2163,82,Dodoma,79416,Conjuntivitis
+2164,14,Banda Aceh,62346,Chlamydia
+2165,56,Wichita,65124,Chlamydia
+2166,5,Philadelphia,43824,Flu
+2167,6,Islamabad,34986,Fever
+2168,72,Hargeisa,64899,Chlamydia
+2169,77,Guangzhou,58941,Autism
+2170,50,Bern,52415,Chlamydia
+2171,40,Tianjin,69590,Conjuntivitis
+2172,88,Riyadh,51940,Fever
+2173,45,Algiers,71908,Conjuntivitis
+2174,59,Kingstown,36974,Cancer
+2175,50,Porto-Novo,30989,Cancer
+2176,57,Guangzhou,43805,Chlamydia
+2177,59,Tartu,40486,Flu
+2178,9,Norilsk,18161,AIDS
+2179,41,Guadalajara,52671,Chlamydia
+2180,69,Durban,69242,Chlamydia
+2181,36,Podgorica,79790,Flu
+2182,28,Stockholm,47635,Autism
+2183,18,Chennai,24739,Cancer
+2184,50,Manchester,60429,Flu
+2185,56,Amsterdam,61283,AIDS
+2186,49,Buenos Aires,52033,Otitis
+2187,51,Saint John,18724,Otitis
+2188,30,Melbourne,75158,Otitis
+2189,26,Labasa,70467,Otitis
+2190,69,Majuro,60551,Chlamydia
+2191,30,Castries,38333,Flu
+2192,1,Bratsk,36386,Autism
+2193,53,Mersin,35868,Cancer
+2194,55,Kaliningrad,61699,Otitis
+2195,46,Barcelona,78109,Otitis
+2196,41,Lilongwe,73180,Otitis
+2197,66,Tucson,52082,Conjuntivitis
+2198,15,Sarajevo,10970,Cancer
+2199,24,Road Town,59963,Fever
+2200,60,Porto-Novo,12967,Flu
+2201,55,Wollongong,39165,Otitis
+2202,56,Baghdad,44722,Cancer
+2203,69,Paris,31028,AIDS
+2204,66,Cairns,78092,Conjuntivitis
+2205,36,Kathmandu,36700,Flu
+2206,27,Durango,20749,AIDS
+2207,37,Brisbane,61411,Conjuntivitis
+2208,50,Kota Kinabalu,33138,AIDS
+2209,58,Guwahati,15211,Chlamydia
+2210,63,Espoo,63576,Fever
+2211,31,Kathmandu,67719,Flu
+2212,29,Kandy,42168,Cancer
+2213,52,Peshawar,60157,AIDS
+2214,4,Kyoto,16085,Chlamydia
+2215,30,Addis Ababa,12426,Otitis
+2216,38,Seattle,77635,Cancer
+2217,2,Thiès,19779,Fever
+2218,36,Pristina,20302,Autism
+2219,41,Cannes,13886,Autism
+2220,27,Nanjing,19487,Chlamydia
+2221,6,Balikpapan,44849,Cancer
+2222,56,Kanpur,44717,Conjuntivitis
+2223,65,Kiev,34139,Conjuntivitis
+2224,37,Townsville,70149,Flu
+2225,23,Santiago de Cuba,31707,Otitis
+2226,37,Astana,62215,Cancer
+2227,47,Palikir,32095,Chlamydia
+2228,53,Cockburn Town,75667,Autism
+2229,68,Dalian,52937,Fever
+2230,47,Curitiba,61023,Flu
+2231,55,Sri Jayawardenapura-Kotte,68962,Autism
+2232,25,Muscat,57834,Autism
+2233,5,Jacksonville,50953,Conjuntivitis
+2234,69,Belize City,40719,Autism
+2235,86,Banjul,42730,Cancer
+2236,73,Marrakech,32219,Fever
+2237,14,Málaga,17361,Chlamydia
+2238,4,Cayenne,57655,Otitis
+2239,32,Tamale,54811,Chlamydia
+2240,31,St. George's,24843,Chlamydia
+2241,58,Busan,73355,Chlamydia
+2242,57,Changchun,26022,Cancer
+2243,76,Ottawa,69218,Conjuntivitis
+2244,63,Edinburgh,65976,Otitis
+2245,85,Chennai,41394,Autism
+2246,14,Udon Thani,44782,Cancer
+2247,44,Rome,21248,Flu
+2248,37,Zhengzhou,66669,Flu
+2249,37,Belgrade,20321,Otitis
+2250,9,Washington,76565,AIDS
+2251,68,Townsville,73053,Otitis
+2252,83,Warsaw,42176,Otitis
+2253,46,Marseille,36042,Fever
+2254,43,Bandar Seri Begawan,14996,AIDS
+2255,77,New Orleans,23880,Conjuntivitis
+2256,3,Valencia,41090,Otitis
+2257,4,Palikir,74142,Flu
+2258,64,Naples,33886,Conjuntivitis
+2259,38,Havana,77721,Chlamydia
+2260,78,Port of Spain,33398,Otitis
+2261,30,Brussels,55691,Flu
+2262,62,Memphis,58879,AIDS
+2263,56,Dededo,28445,Otitis
+2264,82,Oslo,34649,Conjuntivitis
+2265,63,Adamstown,35334,Autism
+2266,41,Graz,37640,Autism
+2267,68,New Orleans,32786,Cancer
+2268,40,Hanover,10232,AIDS
+2269,19,Tagbilaran,45399,AIDS
+2270,51,Freetown,75036,Cancer
+2271,44,Medan,68039,Autism
+2272,9,Birkirkara,17489,AIDS
+2273,80,Philadelphia,69519,Cancer
+2274,65,Beirut,24955,Conjuntivitis
+2275,48,Nuuk,66234,Cancer
+2276,64,Edmonton,44134,Otitis
+2277,21,Edinburgh,49258,Conjuntivitis
+2278,45,Maracaibo,15819,Otitis
+2279,82,Nizhny Novgorod,56401,Cancer
+2280,39,Rabi Island,10568,AIDS
+2281,78,Angra do Heroísmo,43872,Flu
+2282,12,Ipoh,36158,Fever
+2283,15,Calama,70147,Conjuntivitis
+2284,52,San José,21120,AIDS
+2285,29,Zanzibar City,53716,Chlamydia
+2286,70,Phoenix,28898,Chlamydia
+2287,89,La Serena,35289,Cancer
+2288,76,Patna,67706,Autism
+2289,13,Kansas City,59455,Otitis
+2290,58,Palikir,51161,Fever
+2291,12,Denver,16507,Flu
+2292,40,Pago Pago,75945,Autism
+2293,73,Mecca,71967,Chlamydia
+2294,42,Forked River,50212,Cancer
+2295,4,Mexicali,41522,Cancer
+2296,13,Changchun,46405,Otitis
+2297,72,Prague,61976,Autism
+2298,65,Melekeok,21470,Flu
+2299,67,Townsville,76676,AIDS
+2300,39,Oslo,12016,Cancer
+2301,44,Damascus,34338,Conjuntivitis
+2302,30,Whitehorse,62257,Fever
+2303,67,Busan,24318,Otitis
+2304,63,Boa Vista,49299,Fever
+2305,15,Manama,42047,Fever
+2306,40,Simferopol,58043,Autism
+2307,70,Louisville,50535,Cancer
+2308,22,Lisbon,46942,AIDS
+2309,8,Murmansk,39713,Conjuntivitis
+2310,32,Lima,46976,Flu
+2311,22,Ipoh,28884,Autism
+2312,33,Barranquilla,55837,Flu
+2313,17,Andorra la Vella,35875,Conjuntivitis
+2314,43,Rabi Island,57511,Otitis
+2315,63,Kathmandu,40139,Cancer
+2316,69,Dodoma,46239,Autism
+2317,46,Rio Branco,79686,Flu
+2318,88,Sukhumi,75821,Conjuntivitis
+2319,27,Horta (Azores),61566,Fever
+2320,39,Port Vila,48582,Flu
+2321,74,Townsville,77324,Cancer
+2322,37,Luxor,54976,Otitis
+2323,69,Phoenix,62310,Chlamydia
+2324,88,Buffalo,16126,Chlamydia
+2325,38,Santiago,54002,AIDS
+2326,65,Abuja,34545,AIDS
+2327,7,George Town,77259,Conjuntivitis
+2328,29,Horta (Azores),56021,Otitis
+2329,11,Batticaloa,11706,Autism
+2330,29,Enugu,38056,Fever
+2331,49,Iquique,44810,Cancer
+2332,11,Ljubljana,55680,Cancer
+2333,17,Bergen,16284,Fever
+2334,49,Lubumbashi,71277,AIDS
+2335,4,Addis Ababa,72339,Conjuntivitis
+2336,22,Montreal,78914,Otitis
+2337,11,Prague,62871,AIDS
+2338,21,Ushuaia,12716,AIDS
+2339,25,Lisbon,32062,Otitis
+2340,55,Osaka,28147,Autism
+2341,55,Qingdao,44318,Chlamydia
+2342,34,Vienna,69875,Otitis
+2343,24,Yakutsk,36941,Otitis
+2344,62,Tripoli,63460,Conjuntivitis
+2345,44,Agartala,78295,Fever
+2346,89,Zanzibar City,48510,Chlamydia
+2347,55,Jersey City,70327,Flu
+2348,2,Iloilo City,51188,Fever
+2349,33,Fort-de-France,33921,Otitis
+2350,33,Apia,24173,Autism
+2351,20,Libreville,47208,Conjuntivitis
+2352,52,Cardiff,33959,Cancer
+2353,76,Dili,64643,AIDS
+2354,69,Louisville,49240,Fever
+2355,47,Lima,61136,AIDS
+2356,23,Buffalo,36531,Autism
+2357,88,Kandy,68971,Cancer
+2358,37,Pekanbaru,77878,Cancer
+2359,88,Davao City,20200,Fever
+2360,53,Honiara,63636,AIDS
+2361,73,Louisville,72317,AIDS
+2362,72,Caracas,15504,Fever
+2363,51,Kunming,72733,Chlamydia
+2364,57,Copenhagen,65783,Fever
+2365,40,Las Vegas,14932,AIDS
+2366,76,Phnom Penh,39116,Conjuntivitis
+2367,87,Nagoya,41919,Cancer
+2368,72,Kuwait City,39091,Cancer
+2369,33,La Paz,51776,Fever
+2370,57,Linz,72245,Autism
+2371,75,Sana'a,44851,Fever
+2372,83,Anadyr (town),50981,Conjuntivitis
+2373,76,Bern,53596,Flu
+2374,49,Ankara,46287,Chlamydia
+2375,66,Porto Alegre,39158,Cancer
+2376,59,Dodoma,64535,Fever
+2377,82,Gibraltar,46757,Flu
+2378,67,Tabriz,50481,Flu
+2379,43,Koulikoro,56853,AIDS
+2380,49,Vitória,59972,AIDS
+2381,44,Magadan,57743,Conjuntivitis
+2382,14,Tashkent,62808,Chlamydia
+2383,43,Kigali,18370,Conjuntivitis
+2384,76,Columbus,40569,Fever
+2385,56,Valdivia,60401,Flu
+2386,15,Belmopan,51706,AIDS
+2387,71,Seville,47555,Flu
+2388,54,Yellowknife,18147,Otitis
+2389,64,Hargeisa,38622,Otitis
+2390,44,Kansas City,14846,Chlamydia
+2391,36,Kingstown,62578,Cancer
+2392,11,Shijiazhuang,22693,Otitis
+2393,11,Taiyuan,65664,Conjuntivitis
+2394,38,Gaziantep,48691,Fever
+2395,45,Chaguanas,58512,Cancer
+2396,45,Cardiff,68639,Fever
+2397,20,Tunis,63536,Chlamydia
+2398,89,Palembang,27455,Autism
+2399,86,Porto Alegre,46183,Flu
+2400,18,Mogadishu,72841,Fever
+2401,12,Nukulaelae,10072,Flu
+2402,29,Espoo,58442,Conjuntivitis
+2403,57,Panama City,22647,Cancer
+2404,37,Invercargill,68852,Cancer
+2405,16,Moscow,11925,Chlamydia
+2406,16,San Fernando,29274,Conjuntivitis
+2407,6,Kabul,58813,Cancer
+2408,8,Nicosia,53464,Cancer
+2409,16,Vatican City,11194,Cancer
+2410,43,Buenos Aires,27193,AIDS
+2411,60,Suva,51641,Flu
+2412,62,Porto Velho,58271,Autism
+2413,43,Pretoria,29490,AIDS
+2414,57,Lima,79406,Cancer
+2415,87,Kaohsiung,78618,Otitis
+2416,58,Tampa,27532,AIDS
+2417,84,Chennai,19405,Cancer
+2418,15,Ponta Delgada,28758,Conjuntivitis
+2419,59,Port Said,55256,Otitis
+2420,25,Hanover,31316,Otitis
+2421,35,Jamestown,23116,Otitis
+2422,36,Barranquilla,20000,Otitis
+2423,85,Jersey City,56917,AIDS
+2424,61,Quebec City,24896,Fever
+2425,74,Rawalpindi,61152,Conjuntivitis
+2426,88,Bangalore,50069,Conjuntivitis
+2427,85,Mandurah,17395,Conjuntivitis
+2428,90,Chiang Mai,36650,Autism
+2429,29,Buffalo,17688,Cancer
+2430,23,Suez,45283,Fever
+2431,81,Livingstone,48229,Chlamydia
+2432,60,Antananarivo,79820,Cancer
+2433,53,Novosibirsk,24107,Autism
+2434,5,Barcelona,64048,Otitis
+2435,51,Wuhan,68580,Chlamydia
+2436,24,Ilhéus,39703,Autism
+2437,89,Edmonton,50085,Fever
+2438,41,Thiès,75890,Fever
+2439,60,Magadan,18274,Chlamydia
+2440,39,Koulikoro,56567,Cancer
+2441,73,Denver,78781,Cancer
+2442,24,Amman,78762,Conjuntivitis
+2443,31,Beijing,75141,Otitis
+2444,31,Antwerp,54185,Conjuntivitis
+2445,11,Albuquerque,39149,Otitis
+2446,29,Douala,54031,Conjuntivitis
+2447,47,Podgorica,69001,Flu
+2448,84,Porto-Novo,64916,Autism
+2449,83,London,74428,Chlamydia
+2450,46,Nuuk,54712,Fever
+2451,30,Managua,54894,AIDS
+2452,1,Iloilo City,14460,Otitis
+2453,82,Buenos Aires,12149,Fever
+2454,10,Vladivostok,49908,Fever
+2455,74,Porto-Novo,59906,Chlamydia
+2456,35,Dunedin,52326,Autism
+2457,47,Hobart,10544,Chlamydia
+2458,52,San José,15239,Autism
+2459,11,Ahmedabad,71060,Chlamydia
+2460,32,Nanning,15685,Chlamydia
+2461,9,Lisbon,32917,Otitis
+2462,27,Bridgetown,62897,Flu
+2463,19,Dammam,13283,Chlamydia
+2464,8,Kobe,23637,AIDS
+2465,43,Calgary,43404,AIDS
+2466,29,Chongjin,72701,Flu
+2467,46,Mogadishu,30145,Fever
+2468,85,Macau,12943,Otitis
+2469,68,Manaus,45734,Otitis
+2470,55,Petropavlovsk-Kamchatsky,21567,Cancer
+2471,6,San José,15676,Flu
+2472,58,Kabul,47556,Flu
+2473,62,Belmopan,75118,Conjuntivitis
+2474,34,South Tarawa,64322,Fever
+2475,38,Oranjestad,36957,Otitis
+2476,47,Oklahoma City,47581,Conjuntivitis
+2477,69,Antananarivo,50316,Flu
+2478,88,Lanzhou,12720,Conjuntivitis
+2479,47,Newcastle,43139,Chlamydia
+2480,67,Gdańsk,59929,Cancer
+2481,47,Taichung,37724,AIDS
+2482,53,Tunis,65269,Cancer
+2483,58,Chicago,46779,Flu
+2484,25,Taipei,63363,Autism
+2485,45,Zagreb,42532,Autism
+2486,68,Labasa,64199,Cancer
+2487,33,Port Elizabeth,61500,Cancer
+2488,89,Kota Kinabalu,54484,Flu
+2489,25,Nanjing,11353,Conjuntivitis
+2490,63,Cuiabá,48260,Fever
+2491,25,Düsseldorf,70302,AIDS
+2492,58,Bishkek,42657,Otitis
+2493,11,Kinshasa,78057,Autism
+2494,89,Taiyuan,74363,Otitis
+2495,26,Fairbanks,18552,Fever
+2496,21,Port of Spain,60138,Conjuntivitis
+2497,49,Belgrade,24644,Autism
+2498,76,Aarhus,72871,Conjuntivitis
+2499,70,Montreal,66920,Autism
+2500,90,Buenos Aires,76059,Flu
+2501,34,Bamako,20176,Flu
+2502,60,Tel Aviv,69207,Autism
+2503,59,St. George's,43700,Otitis
+2504,54,Medan,29405,Autism
+2505,14,New Delhi,64781,Autism
+2506,35,Tartu,25721,Autism
+2507,44,Valdivia,64372,Flu
+2508,22,Hilo,48004,Cancer
+2509,83,Casablanca,26914,Chlamydia
+2510,23,Casablanca,36219,Conjuntivitis
+2511,30,Qingdao,14901,Cancer
+2512,62,Hobart,70102,Autism
+2513,56,Campo Grande,72526,Otitis
+2514,45,San Antonio,67615,Conjuntivitis
+2515,85,Split (city),50439,Chlamydia
+2516,76,Jeddah,61714,Cancer
+2517,83,Dededo,14524,Conjuntivitis
+2518,64,Kaesong,75412,Autism
+2519,89,Virginia Beach,52820,Chlamydia
+2520,33,Buffalo,46304,Chlamydia
+2521,52,Antofagasta,65203,Conjuntivitis
+2522,5,Aberdeen,74295,Conjuntivitis
+2523,6,Harbin,59100,Cancer
+2524,29,Miri,67308,Conjuntivitis
+2525,26,Basra,45565,Autism
+2526,88,City of Halifax,42227,Cancer
+2527,69,Chennai,18412,Chlamydia
+2528,88,Malabo,71000,Otitis
+2529,54,Seville,40516,Cancer
+2530,31,St. John's,41386,Flu
+2531,49,Kuching,75106,Cancer
+2532,51,Handan,42540,AIDS
+2533,65,Tegucigalpa,50794,Chlamydia
+2534,85,Omdurman,70227,Flu
+2535,19,Birmingham,20460,AIDS
+2536,65,Chiang Mai,55490,Cancer
+2537,46,Hyderabad,70776,Cancer
+2538,47,Singapore,45905,Autism
+2539,20,South Tarawa,67822,AIDS
+2540,84,Ankara,32049,Cancer
+2541,48,Roseau,15045,Conjuntivitis
+2542,13,Hanover,51755,Cancer
+2543,45,Strasbourg,13312,Autism
+2544,43,Assis,25873,Cancer
+2545,52,Tiraspol,73771,Conjuntivitis
+2546,34,Recife,17871,AIDS
+2547,43,Papeete,74321,Flu
+2548,4,Managua,72973,Flu
+2549,73,Asunción,50358,AIDS
+2550,75,Vitória,31984,Chlamydia
+2551,65,Valparaíso,59408,Otitis
+2552,14,Patna,71925,Fever
+2553,56,Barcelona,76712,Chlamydia
+2554,81,Dar es Salaam,11228,Flu
+2555,36,Nuuk,18596,Cancer
+2556,27,Winnipeg,70111,Otitis
+2557,83,Balikpapan,28147,Otitis
+2558,44,Tunis,30608,Cancer
+2559,57,Oranjestad,68430,AIDS
+2560,6,Bissau,22118,Conjuntivitis
+2561,38,Yerevan,43621,Fever
+2562,43,Saipan,61006,Conjuntivitis
+2563,47,Ibiza,75250,Chlamydia
+2564,39,Chicago,67968,Cancer
+2565,56,Dallas,43720,Autism
+2566,20,Mbabane,79523,Autism
+2567,10,Tashkent,21547,Flu
+2568,12,Tskhinvali,60954,Cancer
+2569,59,Sucre,27766,Flu
+2570,74,Maceió,28795,Otitis
+2571,26,Leipzig,35111,Autism
+2572,25,Koror,40654,Fever
+2573,50,Seoul,65288,Otitis
+2574,10,Harare,22013,Fever
+2575,13,Kandy,14562,Flu
+2576,80,Nouakchott,67239,Otitis
+2577,33,Cartagena,75885,Cancer
+2578,20,Macau,12342,Autism
+2579,36,Bogor,19758,Fever
+2580,6,Apia,41126,Flu
+2581,73,Apia,71055,Conjuntivitis
+2582,69,Moscow,21142,Autism
+2583,25,Casablanca,13789,Flu
+2584,51,Oklahoma City,43907,Chlamydia
+2585,32,Düsseldorf,23142,AIDS
+2586,85,Kaesong,10431,Fever
+2587,56,Arequipa,43149,Fever
+2588,69,Handan,18113,Chlamydia
+2589,29,Douglas,41137,AIDS
+2590,34,Oslo,59943,Conjuntivitis
+2591,15,Düsseldorf,10132,Autism
+2592,72,Phoenix,75106,Flu
+2593,47,Ürümqi,45685,Cancer
+2594,31,Chengdu,26214,Fever
+2595,61,Ashgabat,65667,Conjuntivitis
+2596,58,Koulikoro,36819,Otitis
+2597,27,Yakutsk,33383,Conjuntivitis
+2598,57,Tbilisi,19662,Flu
+2599,12,San Fernando,71725,Flu
+2600,1,Taichung,60813,AIDS
+2601,75,Saint-Denis,10746,Flu
+2602,25,Roseau,56512,Chlamydia
+2603,54,Philadelphia,46231,Flu
+2604,61,Buffalo,24757,Flu
+2605,28,Nairobi,49584,Conjuntivitis
+2606,84,Cleveland,13028,Fever
+2607,44,Guadalajara,63097,Cancer
+2608,45,Nukulaelae,67486,Conjuntivitis
+2609,24,Las Vegas,55150,Chlamydia
+2610,61,Sydney,72836,Fever
+2611,89,N'Djamena,39359,Autism
+2612,88,Berlin,56976,Chlamydia
+2613,47,Jersey City,44619,AIDS
+2614,80,Hiroshima,38541,Fever
+2615,29,Townsville,10830,Autism
+2616,13,São José dos Campos,65191,AIDS
+2617,5,Udon Thani,29070,Otitis
+2618,22,Samara,61418,Conjuntivitis
+2619,22,Tamale,32538,AIDS
+2620,68,Tunis,28593,AIDS
+2621,22,Simferopol,38645,AIDS
+2622,9,Adana,26429,Chlamydia
+2623,84,Providence,13894,Chlamydia
+2624,41,Taiyuan,61202,Cancer
+2625,75,Panama City,60997,Flu
+2626,76,Winnipeg,50488,Cancer
+2627,6,Nassau,76922,Cancer
+2628,6,Bishkek,15022,AIDS
+2629,5,Bishkek,77214,Cancer
+2630,24,Cockburn Town,14458,AIDS
+2631,51,Faisalabad,14070,Chlamydia
+2632,62,Thimphu,37723,Chlamydia
+2633,82,Port Elizabeth,64512,Flu
+2634,10,Ilhéus,79835,Otitis
+2635,71,Port Moresby,77595,Autism
+2636,83,Chengdu,36414,AIDS
+2637,56,Munich,79749,Fever
+2638,23,Shanghai,79550,AIDS
+2639,18,Astana,26046,Otitis
+2640,13,Kingstown,25949,Cancer
+2641,85,Veracruz,45428,Flu
+2642,8,London,47429,Otitis
+2643,5,New Orleans,22704,Chlamydia
+2644,69,Lilongwe,50994,AIDS
+2645,38,Belize City,56915,Chlamydia
+2646,19,Bursa,46565,Otitis
+2647,89,Riverside,12599,Fever
+2648,11,Manchester,67183,Autism
+2649,75,Tel Aviv,40263,Conjuntivitis
+2650,65,Adana,51317,Conjuntivitis
+2651,58,Reykjavík,15617,AIDS
+2652,81,Vancouver,59853,Autism
+2653,19,San Fernando,13288,AIDS
+2654,12,Belfast,23325,Autism
+2655,69,Juneau,60523,AIDS
+2656,2,Perm,35369,Chlamydia
+2657,40,Yogyakarta (city),25897,Fever
+2658,88,Shanghai,64605,Otitis
+2659,41,Seoul,46783,Conjuntivitis
+2660,78,Phuket (city),32832,Conjuntivitis
+2661,44,Siem Reap,74707,Fever
+2662,37,Port Vila,70773,Chlamydia
+2663,78,Saint John,41384,AIDS
+2664,53,Yaren District,59802,Fever
+2665,42,Ouagadougou,54030,Otitis
+2666,88,Peshawar,22034,Cancer
+2667,25,Canberra,56153,Otitis
+2668,74,Kharkiv,68890,AIDS
+2669,25,Tunis,43176,Chlamydia
+2670,86,Nairobi,10929,Conjuntivitis
+2671,74,Nairobi,11193,AIDS
+2672,16,Yekaterinburg,42669,Cancer
+2673,65,Wichita,34441,Chlamydia
+2674,26,Luxembourg (city),58135,Flu
+2675,6,Yakutsk,28079,Flu
+2676,9,Mbabane,20982,Conjuntivitis
+2677,23,Phuket (city),78611,Cancer
+2678,29,The Hague,50114,Chlamydia
+2679,52,Multan,38353,Fever
+2680,26,Kabul,23393,Autism
+2681,1,Cork (city),78435,Otitis
+2682,37,Vatican City,48328,Chlamydia
+2683,16,Townsville,56024,Autism
+2684,71,Dresden,15571,Flu
+2685,76,Nuuk,44892,Cancer
+2686,79,Maceió,61689,Otitis
+2687,43,Alexandria,22663,Autism
+2688,15,Kaohsiung,74801,AIDS
+2689,68,Podgorica,29003,Fever
+2690,31,Shigatse,10412,Conjuntivitis
+2691,76,Naples,66473,Cancer
+2692,33,Christchurch,20986,Otitis
+2693,56,Montevideo,53713,Cancer
+2694,1,Hiroshima,37999,Fever
+2695,33,Yogyakarta (city),58572,Otitis
+2696,41,Ahmedabad,58281,Otitis
+2697,46,Santiago de Cuba,56292,Fever
+2698,37,Nashville,69238,Fever
+2699,63,Adelaide,55046,Flu
+2700,64,Tallinn,75950,Fever
+2701,40,Basse-Terre,56356,Fever
+2702,26,Karachi,21896,Conjuntivitis
+2703,23,Adana,29423,Conjuntivitis
+2704,85,Medellín,57231,Chlamydia
+2705,59,Willemstad,70211,Autism
+2706,9,Francistown,54976,Chlamydia
+2707,19,Osaka,10471,Fever
+2708,70,Douala,12745,AIDS
+2709,13,Antananarivo,28713,Chlamydia
+2710,1,Malé,13521,AIDS
+2711,56,Palma,14361,Flu
+2712,3,Forked River,21074,Fever
+2713,10,Brisbane,56451,Conjuntivitis
+2714,81,Port Said,73793,Otitis
+2715,52,Arbil,45450,Chlamydia
+2716,1,Multan,18686,Cancer
+2717,15,Monaco,59942,AIDS
+2718,27,Iquique,53907,Otitis
+2719,88,N'Djamena,18185,Flu
+2720,31,Frankfurt,25877,Conjuntivitis
+2721,85,Livingstone,31425,Flu
+2722,83,Calgary,21856,Otitis
+2723,6,N'Djamena,40812,Chlamydia
+2724,59,Riga,48573,AIDS
+2725,27,St. George's,44421,Cancer
+2726,78,Udon Thani,62255,Otitis
+2727,25,New York City,21198,Fever
+2728,38,Kuwait City,51964,Otitis
+2729,84,Monterrey,36933,AIDS
+2730,68,Manaus,65666,Fever
+2731,6,Sitka,62249,Fever
+2732,8,Brikama,19572,Conjuntivitis
+2733,45,Dibrugarh,11240,Chlamydia
+2734,56,Norilsk,28901,Flu
+2735,88,Paramaribo,41068,Fever
+2736,1,Kyoto,35003,Cancer
+2737,16,Kharkiv,59686,Chlamydia
+2738,65,Panama City,47522,Autism
+2739,61,Singapore,76389,Chlamydia
+2740,34,Yellowknife,43157,AIDS
+2741,43,Munich,39220,AIDS
+2742,47,Saint-Denis,50466,Autism
+2743,35,Pune,65588,Cancer
+2744,7,Santiago de Cuba,28815,Otitis
+2745,22,Adamstown,61136,Otitis
+2746,72,Gaza,76575,Flu
+2747,4,Iqaluit,55503,Otitis
+2748,74,Lisbon,49487,Chlamydia
+2749,3,Lucknow,63278,Conjuntivitis
+2750,64,Recife,77402,Flu
+2751,87,Córdoba,48490,Conjuntivitis
+2752,6,Gdańsk,75052,Otitis
+2753,23,Kaesong,24192,Cancer
+2754,31,Suva,79978,AIDS
+2755,9,Wichita,14395,Otitis
+2756,84,Taichung,66036,Fever
+2757,83,Thessaloniki,39980,Flu
+2758,56,Sana'a,57501,Chlamydia
+2759,74,Chicago,43670,AIDS
+2760,1,Dubai,64194,Autism
+2761,51,Vladivostok,70827,Otitis
+2762,2,Alofi,52561,Conjuntivitis
+2763,21,Angra do Heroísmo,61001,Conjuntivitis
+2764,75,Singapore,70711,Conjuntivitis
+2765,29,Tallinn,29663,Conjuntivitis
+2766,65,Stockholm,28286,Flu
+2767,5,Batticaloa,59612,Fever
+2768,56,Jaipur,46545,Autism
+2769,75,Valparaíso,57764,Otitis
+2770,11,Riverside,32020,Fever
+2771,13,Darwin,44214,AIDS
+2772,88,Guadalajara,20191,Autism
+2773,76,Funafuti,12972,AIDS
+2774,32,Havana,35746,Chlamydia
+2775,47,Huế,60555,Cancer
+2776,68,Rabat,56900,Fever
+2777,43,Pristina,35559,Chlamydia
+2778,4,Osaka,60732,Autism
+2779,18,Birmingham,33486,Cancer
+2780,27,Omsk,47050,Cancer
+2781,3,Toulouse,48504,AIDS
+2782,11,Lima,79641,Autism
+2783,68,Brasília,11808,Flu
+2784,41,Baku,73705,AIDS
+2785,47,Montreal,36652,AIDS
+2786,22,Panama City,68522,Fever
+2787,55,Sitka,42252,Flu
+2788,11,Durban,77127,Otitis
+2789,47,Denver,17733,Fever
+2790,82,Padang,56720,Chlamydia
+2791,39,Phnom Penh,42848,Conjuntivitis
+2792,75,Christchurch,68064,Conjuntivitis
+2793,52,Austin,78534,Flu
+2794,12,Tiraspol,49497,AIDS
+2795,16,Lyon,73365,Otitis
+2796,68,Montevideo,61836,Otitis
+2797,20,Perth,29224,Chlamydia
+2798,4,Caracas,75978,Flu
+2799,74,Ahmedabad,72685,Autism
+2800,11,Nouméa,42045,Autism
+2801,68,Rawalpindi,50014,Otitis
+2802,4,Sri Jayawardenapura-Kotte,30495,Otitis
+2803,28,Oranjestad,38582,Otitis
+2804,62,Zagreb,52618,AIDS
+2805,4,Mecca,22704,AIDS
+2806,19,Luxor,46109,Autism
+2807,78,Seoul,45737,Chlamydia
+2808,3,Porto-Novo,50319,Autism
+2809,88,Lagos,66387,AIDS
+2810,59,Tagbilaran,60324,Fever
+2811,89,San Carlos de Bariloche,34263,Otitis
+2812,30,Chişinău,75693,Otitis
+2813,40,Tskhinvali,74414,AIDS
+2814,77,Taiyuan,23114,AIDS
+2815,21,Accra,16745,Fever
+2816,81,Tskhinvali,63497,Flu
+2817,42,Changchun,21847,Fever
+2818,11,Chişinău,58777,AIDS
+2819,33,Vilnius,17876,Chlamydia
+2820,86,Istanbul,18218,AIDS
+2821,41,Yangon,69115,Otitis
+2822,12,Detroit,12776,AIDS
+2823,24,Dammam,22931,Cancer
+2824,7,Basra,70511,Fever
+2825,5,City of Halifax,77380,Otitis
+2826,29,Yekaterinburg,48777,Conjuntivitis
+2827,33,Dublin,42834,Otitis
+2828,2,Malacca Town,31985,Flu
+2829,48,Shanghai,38645,AIDS
+2830,30,Copenhagen,73973,Fever
+2831,46,Hong Kong,58650,Conjuntivitis
+2832,77,Dhaka,53957,Cancer
+2833,66,İzmir,25039,Flu
+2834,50,Nuuk,14089,Fever
+2835,46,Libreville,58440,Flu
+2836,62,Belgrade,68077,Autism
+2837,54,Honiara,76931,Chlamydia
+2838,16,Buenos Aires,31751,Flu
+2839,30,Pelotas,69020,Autism
+2840,19,Luxor,72577,Flu
+2841,39,Cairo,18677,Autism
+2842,8,Tianjin,13657,Chlamydia
+2843,77,Ambon,69353,Otitis
+2844,11,Moscow,45482,Chlamydia
+2845,48,Columbus,41334,Chlamydia
+2846,84,Porto,11667,Chlamydia
+2847,87,Freetown,24733,Autism
+2848,6,Fredericton,15163,Autism
+2849,3,Norilsk,21891,Cancer
+2850,72,Sitka,40319,Cancer
+2851,54,Dresden,66182,Fever
+2852,5,Bulawayo,64731,Chlamydia
+2853,6,Raleigh,77047,AIDS
+2854,11,Recife,38660,AIDS
+2855,74,Edmonton,65374,Autism
+2856,59,Port Blair,28432,Conjuntivitis
+2857,73,Avarua,37854,Otitis
+2858,81,Lucknow,74602,Flu
+2859,24,Kuwait City,58617,Cancer
+2860,15,Moscow,38573,Chlamydia
+2861,54,Riga,73369,Fever
+2862,82,Manchester,70084,Flu
+2863,61,Funafuti,19246,Autism
+2864,35,Basra,77931,Otitis
+2865,77,Kraków,55027,Fever
+2866,74,Fairbanks,59560,Flu
+2867,40,Perm,66480,Flu
+2868,1,Medan,53506,Conjuntivitis
+2869,56,Alor Star,72249,Otitis
+2870,77,Christchurch,37615,Autism
+2871,70,Rosario,50067,Cancer
+2872,3,Zanzibar City,57095,Conjuntivitis
+2873,57,Frankfurt,65176,AIDS
+2874,64,Berlin,27259,Conjuntivitis
+2875,76,Jakarta,12047,Chlamydia
+2876,34,Port-au-Prince,69694,AIDS
+2877,56,Yellowknife,47399,Autism
+2878,17,Cincinnati,76247,AIDS
+2879,4,Davao City,20140,Cancer
+2880,42,Madrid,55903,Otitis
+2881,44,Porto-Novo,52032,Chlamydia
+2882,27,Cuiabá,36084,Autism
+2883,51,Hyderabad,56343,Fever
+2884,10,Abidjan,13687,Conjuntivitis
+2885,49,Horta (Azores),47850,Otitis
+2886,29,Balikpapan,32114,AIDS
+2887,56,Calama,64371,Cancer
+2888,60,Johor Bahru,35453,Cancer
+2889,36,Blantyre,63927,Autism
+2890,61,Monterrey,42010,AIDS
+2891,48,Lubumbashi,22776,Otitis
+2892,43,Saipan,75096,Cancer
+2893,69,Stuttgart,73088,Cancer
+2894,89,Naypyidaw,59769,Chlamydia
+2895,88,Córdoba,78759,Conjuntivitis
+2896,38,Mumbai,59461,Chlamydia
+2897,21,Toulouse,33731,Flu
+2898,64,Tucson,39588,Otitis
+2899,71,Samara,38699,Autism
+2900,25,Accra,12571,Chlamydia
+2901,62,Pelotas,26253,Fever
+2902,72,Abu Dhabi,55721,Cancer
+2903,21,Boa Vista,62687,Autism
+2904,60,Kano,49108,Autism
+2905,20,Tehran,68737,Cancer
+2906,32,Nouméa,47901,Fever
+2907,19,Dodoma,73454,AIDS
+2908,61,Basse-Terre,17921,Conjuntivitis
+2909,1,Surat Thani,46526,Fever
+2910,62,Santiago,76579,AIDS
+2911,19,Dammam,30919,Flu
+2912,6,Berlin,15598,Cancer
+2913,76,Bogor,61650,Chlamydia
+2914,14,Columbus,71480,Autism
+2915,15,Tucson,36050,Chlamydia
+2916,88,Yaoundé,49409,Cancer
+2917,51,Mata-Utu,61980,AIDS
+2918,4,Las Palmas de Gran Canaria,68968,Otitis
+2919,70,San Antonio,63145,Fever
+2920,9,Ipoh,74267,AIDS
+2921,44,Pittsburgh,66130,AIDS
+2922,6,Port Blair,62548,AIDS
+2923,50,Denver,10849,Autism
+2924,13,Namangan,65427,Flu
+2925,80,Riverside,74905,Fever
+2926,18,Indianapolis,24450,Chlamydia
+2927,81,Semarang,61026,Otitis
+2928,51,Nantes,56218,Fever
+2929,83,Dar es Salaam,55855,Cancer
+2930,43,Wuhan,55683,AIDS
+2931,62,Valencia,19678,AIDS
+2932,34,Tórshavn,44951,Otitis
+2933,34,San Antonio,41875,Autism
+2934,89,Palma,56382,AIDS
+2935,72,La Paz,76260,Otitis
+2936,56,Jacksonville,65105,Chlamydia
+2937,41,Aarhus,33921,Autism
+2938,85,Kyoto,45478,Autism
+2939,15,Sacramento,51914,Chlamydia
+2940,25,London,18943,Fever
+2941,53,Omdurman,52030,Conjuntivitis
+2942,16,Rabat,66290,Otitis
+2943,85,Karachi,67616,Fever
+2944,68,Espoo,45672,Cancer
+2945,51,Helsinki,63515,Autism
+2946,58,Rabat,53057,Autism
+2947,87,Bishkek,43492,Fever
+2948,51,Marseille,67988,Chlamydia
+2949,51,Adak,66105,AIDS
+2950,20,Amritsar,20698,Otitis
+2951,13,Hat Yai,13356,Chlamydia
+2952,10,Osaka,22834,Otitis
+2953,71,Gibraltar,29072,Fever
+2954,16,Saint-Pierre,67112,Chlamydia
+2955,66,Manama,57956,Cancer
+2956,79,Anadyr (town),33803,Conjuntivitis
+2957,83,Pekanbaru,75361,Otitis
+2958,7,Guadalajara,19912,Cancer
+2959,54,Libreville,67032,Chlamydia
+2960,68,Dededo,76954,Cancer
+2961,17,Geelong,60679,Conjuntivitis
+2962,49,Naypyidaw,53527,Cancer
+2963,9,Shenyang,24104,Cancer
+2964,1,Mwanza,44350,Chlamydia
+2965,64,Jacksonville,72186,Otitis
+2966,28,Turin,76770,Otitis
+2967,74,Yakutsk,76201,Conjuntivitis
+2968,42,Pittsburgh,27571,Cancer
+2969,15,Okinawa,44696,Autism
+2970,70,Rabat,57739,AIDS
+2971,4,Regina,18572,Flu
+2972,25,Adana,73237,Cancer
+2973,43,Gdańsk,39857,AIDS
+2974,31,Cleveland,10130,Otitis
+2975,82,Douala,15276,Chlamydia
+2976,19,Cologne,48336,Otitis
+2977,43,Accra,16428,Flu
+2978,22,Hiroshima,58977,Otitis
+2979,50,Brasília,78670,Autism
+2980,62,Tirana,27657,Fever
+2981,41,George Town,57379,Otitis
+2982,28,Louisville,41134,Autism
+2983,75,Kanpur,75170,Conjuntivitis
+2984,34,Durban,63173,Flu
+2985,82,Xi'an,62458,Cancer
+2986,66,Panama City,47727,AIDS
+2987,41,Dodoma,11152,Conjuntivitis
+2988,88,Douala,38684,Flu
+2989,39,Peshawar,52734,Chlamydia
+2990,55,Huế,68727,AIDS
+2991,2,Nukuʻalofa,33242,Flu
+2992,21,Houston,58056,Fever
+2993,6,Amritsar,32752,Cancer
+2994,36,Quebec City,72932,Autism
+2995,4,Perth,21197,Cancer
+2996,6,Chişinău,61569,Cancer
+2997,46,The Hague,44192,Conjuntivitis
+2998,56,Nantes,24052,AIDS
+2999,1,Dresden,44375,Chlamydia
+3000,25,Lucknow,63067,AIDS
+3001,82,Hamilton,33221,Chlamydia
+3002,22,Stanley,61785,Cancer
+3003,37,Cleveland,13724,Flu
+3004,45,Charlotte,43101,Fever
+3005,14,Bloemfontein,27944,AIDS
+3006,14,Cork (city),29287,AIDS
+3007,33,Guatemala City,75106,AIDS
+3008,22,Jersey City,50143,Fever
+3009,71,Mata-Utu,53323,Chlamydia
+3010,58,Marrakech,63167,Otitis
+3011,24,Port Blair,38053,Autism
+3012,36,Huế,68858,AIDS
+3013,89,Omdurman,12851,Cancer
+3014,35,Providence,55472,Conjuntivitis
+3015,67,Chittagong,54543,Flu
+3016,49,Algiers,21037,AIDS
+3017,88,Forked River,16223,Chlamydia
+3018,46,Mumbai,57135,Chlamydia
+3019,66,Malé,43247,AIDS
+3020,68,Doha,69562,Cancer
+3021,33,Miami,19159,Autism
+3022,3,Málaga,79778,Autism
+3023,57,Raleigh,28625,Fever
+3024,59,Aberdeen,42859,Otitis
+3025,65,Vientiane,22307,Fever
+3026,87,Omsk,71071,Flu
+3027,64,Ibiza,76100,Cancer
+3028,17,Shenyang,54620,Otitis
+3029,50,Nassau,64940,Otitis
+3030,49,Bursa,61892,Fever
+3031,27,Christchurch,65807,Flu
+3032,89,Malmö,16414,Flu
+3033,5,Málaga,56832,AIDS
+3034,41,Shenyang,35756,Fever
+3035,8,Luxor,64359,AIDS
+3036,62,La Paz,47261,Conjuntivitis
+3037,75,Prague,74893,Autism
+3038,21,Bursa,36299,Chlamydia
+3039,40,Cuiabá,63822,Cancer
+3040,38,Zapopan,65988,Otitis
+3041,42,Srinagar,56364,Flu
+3042,60,St. John's,58753,Otitis
+3043,55,Stuttgart,41021,Chlamydia
+3044,18,São Paulo,46256,Otitis
+3045,53,Phuket (city),48319,AIDS
+3046,22,Ibadan,42873,Cancer
+3047,8,Tskhinvali,63224,AIDS
+3048,33,Juneau,27420,Flu
+3049,56,Hobart,57512,Chlamydia
+3050,56,Ahmedabad,27085,Conjuntivitis
+3051,34,Virginia Beach,44083,Flu
+3052,4,Medellín,31557,Chlamydia
+3053,74,Vladivostok,72314,Chlamydia
+3054,32,Alor Star,16830,Autism
+3055,13,Kaesong,59746,Conjuntivitis
+3056,70,Seville,57293,Conjuntivitis
+3057,87,Ljubljana,53503,Chlamydia
+3058,64,St. John's,76186,Fever
+3059,73,Thimphu,77799,Otitis
+3060,58,Invercargill,14439,AIDS
+3061,52,Kuala Lumpur,16526,Autism
+3062,36,Pune,29510,Conjuntivitis
+3063,84,Majuro,42053,Fever
+3064,54,Milwaukee,15285,Flu
+3065,25,Valletta,77613,Fever
+3066,51,Anchorage,69006,Flu
+3067,74,Sukhumi,59034,Chlamydia
+3068,34,Semarang,60765,Otitis
+3069,59,Zamboanga City,31928,AIDS
+3070,53,Innsbruck,25614,Conjuntivitis
+3071,60,Dammam,74622,Fever
+3072,16,Frankfurt,68852,Fever
+3073,90,Rabi Island,26328,AIDS
+3074,34,Gold Coast,30697,AIDS
+3075,23,Malabo,16972,Cancer
+3076,43,Geneva,75377,Cancer
+3077,27,Nagoya,11732,Flu
+3078,56,Boa Vista,48715,Conjuntivitis
+3079,82,Nanning,58146,Autism
+3080,41,Raleigh,67719,Otitis
+3081,27,Boa Vista,79912,Conjuntivitis
+3082,26,San Fernando,74268,Flu
+3083,83,Tegucigalpa,28893,Cancer
+3084,61,Nukuʻalofa,55583,Conjuntivitis
+3085,9,Arbil,50412,Otitis
+3086,69,Multan,71692,Conjuntivitis
+3087,20,Kharkiv,38987,Chlamydia
+3088,73,Las Palmas de Gran Canaria,78074,Conjuntivitis
+3089,12,Niamey,52183,Otitis
+3090,71,Budapest,15760,Flu
+3091,60,Liverpool,35095,Flu
+3092,62,Leeds,36341,Conjuntivitis
+3093,50,Tunis,14495,Conjuntivitis
+3094,9,Bahía Blanca,38633,Fever
+3095,16,Surabaya,41166,Conjuntivitis
+3096,43,Budapest,27864,Conjuntivitis
+3097,69,Rotterdam,28253,Otitis
+3098,78,Nagpur,62328,Chlamydia
+3099,67,Boston,30122,Chlamydia
+3100,61,Luanda,66382,Fever
+3101,88,Zapopan,64142,Autism
+3102,44,Mexicali,41806,Chlamydia
+3103,10,Saint-Pierre,77416,Otitis
+3104,70,Dhaka,28602,Fever
+3105,85,Alofi,56414,AIDS
+3106,4,Rio Branco,17744,Otitis
+3107,37,Tirana,18356,Fever
+3108,81,Greenwich,71763,Fever
+3109,88,Saint-Pierre,41818,Autism
+3110,26,Maseru,27616,Autism
+3111,63,Cebu City,34119,AIDS
+3112,34,Xining,55520,Conjuntivitis
+3113,69,Campinas,59314,AIDS
+3114,1,Mogadishu,45119,AIDS
+3115,37,Adana,24255,Cancer
+3116,12,Cardiff,34798,Chlamydia
+3117,59,Málaga,34094,Otitis
+3118,19,Cayenne,54101,Autism
+3119,77,Porto-Novo,66435,Cancer
+3120,28,Cayenne,24816,Autism
+3121,36,Longyearbyen,71754,Cancer
+3122,4,Anadyr (town),77510,Chlamydia
+3123,40,Magadan,40390,Chlamydia
+3124,7,Kansas City,55629,Conjuntivitis
+3125,83,Pune,39705,Fever
+3126,66,Charlotte Amalie,22660,Fever
+3127,52,Nouakchott,56682,Fever
+3128,83,Murmansk,59498,Otitis
+3129,19,Campinas,19962,Chlamydia
+3130,67,Montevideo,30880,Cancer
+3131,42,Thiès,40046,Cancer
+3132,58,Iloilo City,73151,Flu
+3133,58,Castries,38439,Otitis
+3134,3,Arbil,17229,Cancer
+3135,53,Tampa,54841,AIDS
+3136,25,Oklahoma City,21289,Otitis
+3137,88,Maracaibo,70148,Chlamydia
+3138,16,Shijiazhuang,75633,Cancer
+3139,32,Assis,32286,Otitis
+3140,5,Willemstad,75726,Chlamydia
+3141,49,Dibrugarh,27058,Autism
+3142,15,Cotonou,58775,Cancer
+3143,50,Nagoya,15276,Fever
+3144,7,La Serena,77107,Cancer
+3145,25,Dushanbe,61925,Flu
+3146,26,Bandar Seri Begawan,31705,Chlamydia
+3147,87,Douala,71033,Conjuntivitis
+3148,66,Xining,61734,Flu
+3149,14,San Francisco,35668,Conjuntivitis
+3150,25,Porto,14108,Conjuntivitis
+3151,33,Bandung,64310,AIDS
+3152,10,Damascus,71716,Conjuntivitis
+3153,7,Mendoza,31735,Cancer
+3154,11,Vladivostok,39352,Chlamydia
+3155,86,Macau,68687,Fever
+3156,65,Tabriz,69688,Autism
+3157,53,Majuro,39496,Flu
+3158,62,Dakar,49220,Conjuntivitis
+3159,41,New Orleans,17628,Otitis
+3160,49,Chicago,74351,Cancer
+3161,47,Bandar Seri Begawan,59644,Conjuntivitis
+3162,55,Tskhinvali,54906,Flu
+3163,89,Qingdao,47909,Conjuntivitis
+3164,3,Port Elizabeth,38273,Chlamydia
+3165,32,Petropavlovsk-Kamchatsky,56390,Chlamydia
+3166,73,Tehran,24593,Flu
+3167,49,San Salvador,40135,Fever
+3168,75,Kigali,77016,Autism
+3169,18,Murmansk,22801,Cancer
+3170,83,Maputo,69340,Autism
+3171,71,Wuhan,59819,Autism
+3172,10,Namangan,36779,Chlamydia
+3173,48,La Paz,21703,Conjuntivitis
+3174,2,Shenyang,15921,Flu
+3175,46,Düsseldorf,45603,Fever
+3176,39,Belém,30577,Autism
+3177,1,London,47553,Otitis
+3178,4,Cincinnati,46590,Conjuntivitis
+3179,20,Yangon,12809,Autism
+3180,50,Kinshasa,77272,Fever
+3181,49,Yaren District,20286,Autism
+3182,78,Lubumbashi,48619,Flu
+3183,57,Chongqing,33172,Flu
+3184,19,Francistown,49241,Cancer
+3185,65,Pekanbaru,67766,Conjuntivitis
+3186,46,Tel Aviv,72870,Fever
+3187,74,Tallinn,66699,Conjuntivitis
+3188,83,Surabaya,16156,Otitis
+3189,66,Las Palmas de Gran Canaria,16352,Flu
+3190,81,Faisalabad,25553,Fever
+3191,14,Melekeok,33545,Conjuntivitis
+3192,74,Munich,53261,Chlamydia
+3193,12,Las Palmas de Gran Canaria,43724,Conjuntivitis
+3194,77,Mandurah,18179,Fever
+3195,73,Kingstown,65116,Flu
+3196,8,Maputo,11002,Fever
+3197,84,Agartala,69568,Flu
+3198,63,Columbus,70097,Flu
+3199,30,Concepción,47473,AIDS
+3200,23,Weno,71480,Chlamydia
+3201,14,Dibrugarh,47284,Conjuntivitis
+3202,83,Semarang,70224,Autism
+3203,55,Maceió,73317,Cancer
+3204,10,Baghdad,32288,Fever
+3205,2,Omsk,41705,Autism
+3206,41,Cebu City,29944,Otitis
+3207,59,Skopje,60319,Autism
+3208,21,Riga,76234,AIDS
+3209,37,Alofi,74851,Chlamydia
+3210,71,Cincinnati,16448,Flu
+3211,3,Hong Kong,74602,AIDS
+3212,89,Nouméa,34012,AIDS
+3213,20,Oranjestad,42514,AIDS
+3214,67,Tirana,70704,Cancer
+3215,56,Baghdad,23919,Flu
+3216,27,Chongqing,50693,Autism
+3217,27,Asunción,77911,Conjuntivitis
+3218,12,Boa Vista,12017,Flu
+3219,81,Gdańsk,74841,Flu
+3220,86,Warsaw,56268,Conjuntivitis
+3221,74,Funafuti,18120,AIDS
+3222,82,Edmonton,67725,Chlamydia
+3223,88,Taipei,22101,Autism
+3224,84,Iquitos,27820,Fever
+3225,54,Abu Dhabi,24379,Otitis
+3226,59,Assis,48694,Otitis
+3227,63,Manchester,62109,Flu
+3228,55,St. George's,21426,Chlamydia
+3229,68,Ashgabat,22660,Conjuntivitis
+3230,84,Cockburn Town,28996,Flu
+3231,89,Lucknow,29262,Otitis
+3232,42,Cairo,29749,Otitis
+3233,50,Beirut,76881,Flu
+3234,24,Balikpapan,63944,Flu
+3235,74,Dhaka,42537,Fever
+3236,65,Bujumbura,68817,Fever
+3237,54,Santo Domingo,15837,Cancer
+3238,22,Los Angeles,24383,AIDS
+3239,39,Assis,16156,Chlamydia
+3240,45,Milwaukee,77185,Cancer
+3241,44,Vitória,35929,Autism
+3242,8,Chittagong,53009,Otitis
+3243,39,Belém,22737,Otitis
+3244,37,San José,59617,Otitis
+3245,81,Petropavlovsk-Kamchatsky,22147,Flu
+3246,48,Chennai,46057,Chlamydia
+3247,50,Serekunda,12493,Chlamydia
+3248,67,Nukuʻalofa,46070,Conjuntivitis
+3249,40,Mata-Utu,42871,Conjuntivitis
+3250,85,Rawalpindi,22277,Conjuntivitis
+3251,79,Miami,54899,Autism
+3252,31,Castries,73999,Cancer
+3253,15,Santiago de Cuba,30042,Flu
+3254,36,Andorra la Vella,12451,Fever
+3255,73,Zanzibar City,44303,Autism
+3256,20,Leeds,10633,Chlamydia
+3257,52,Livingstone,30937,Otitis
+3258,60,Samara,77019,Autism
+3259,37,Campo Grande,49818,Autism
+3260,30,Tbilisi,54198,Cancer
+3261,5,Lisbon,55144,AIDS
+3262,87,Minneapolis,75243,Cancer
+3263,87,Assis,20062,Cancer
+3264,34,Stanley,43979,AIDS
+3265,57,Tartu,38264,Cancer
+3266,18,Riverside,34648,Flu
+3267,55,Campo Grande,15592,AIDS
+3268,82,Chihuahua,45711,Conjuntivitis
+3269,56,Sacramento,23447,Fever
+3270,24,Kiev,74399,Flu
+3271,73,Davao City,73957,Flu
+3272,73,Puebla,35142,Cancer
+3273,13,Davao City,18002,Fever
+3274,78,Mata-Utu,42405,Cancer
+3275,10,Xining,49010,AIDS
+3276,65,Lubumbashi,57564,Fever
+3277,48,Srinagar,64361,Fever
+3278,65,Castries,60194,Cancer
+3279,61,Punta Arenas,46201,Otitis
+3280,33,Minneapolis,27976,Otitis
+3281,71,Iquitos,51297,AIDS
+3282,87,Belgrade,38373,Otitis
+3283,62,Suez,75507,Autism
+3284,18,Juneau,56446,Chlamydia
+3285,60,Petropavlovsk-Kamchatsky,76666,Flu
+3286,45,Frankfurt,72414,Flu
+3287,80,Ashgabat,58961,Otitis
+3288,46,Surat,56458,Conjuntivitis
+3289,58,Medan,39867,AIDS
+3290,35,Santiago,68312,Fever
+3291,45,Mata-Utu,47781,Fever
+3292,87,Almaty,41817,Conjuntivitis
+3293,36,Townsville,40469,Cancer
+3294,12,Johannesburg,33793,Flu
+3295,53,Mexico City,64367,Autism
+3296,46,Harare,75981,Flu
+3297,89,Enugu,61483,Fever
+3298,60,Dresden,51960,Chlamydia
+3299,83,Johor Bahru,42780,Otitis
+3300,13,Okinawa,40485,Otitis
+3301,19,Harare,24200,Chlamydia
+3302,47,Vaduz,15773,Flu
+3303,58,Nantes,40471,Otitis
+3304,2,Darwin,12048,Fever
+3305,90,Fort-de-France,58761,Fever
+3306,38,Rotterdam,65941,Conjuntivitis
+3307,43,Rockhampton,50148,AIDS
+3308,43,Pyongyang,28913,Otitis
+3309,42,Boston,53615,Flu
+3310,53,Adak,66729,Otitis
+3311,39,City of Halifax,55221,Chlamydia
+3312,8,Adamstown,17341,Chlamydia
+3313,1,Osaka,23828,Otitis
+3314,85,Bangalore,11587,Fever
+3315,5,Guadalajara,79004,Autism
+3316,67,Charlotte,14913,AIDS
+3317,45,Calama,26642,Fever
+3318,65,Kuching,24170,Cancer
+3319,70,Port Said,76089,Conjuntivitis
+3320,51,Yakutsk,28599,AIDS
+3321,12,Changchun,46925,Flu
+3322,85,Bangui,62690,Otitis
+3323,69,Port of Spain,30903,Conjuntivitis
+3324,90,Bishkek,75045,Cancer
+3325,12,Namangan,78973,Autism
+3326,67,Bucharest,56445,Chlamydia
+3327,43,Regina,45456,Chlamydia
+3328,38,Dhaka,37665,Cancer
+3329,26,Chennai,37615,Chlamydia
+3330,83,Graz,31531,Otitis
+3331,21,Mumbai,28428,Chlamydia
+3332,32,Madrid,21500,AIDS
+3333,55,Glasgow,48615,Fever
+3334,28,Mexicali,58677,Flu
+3335,88,Avarua,51920,Otitis
+3336,30,Tskhinvali,79110,Flu
+3337,79,Bulawayo,50469,Otitis
+3338,37,Kota Kinabalu,12597,Otitis
+3339,59,Hanoi,19499,Fever
+3340,8,Tehran,13982,Conjuntivitis
+3341,26,Amsterdam,63234,Otitis
+3342,32,Adana,75652,Chlamydia
+3343,87,Arbil,76885,Chlamydia
+3344,44,Mersin,19982,Cancer
+3345,67,Roseau,32480,Flu
+3346,7,Chihuahua,13186,AIDS
+3347,36,Antananarivo,60367,Flu
+3348,66,Yerevan,40326,Flu
+3349,42,Suez,42442,Autism
+3350,66,Chaguanas,43906,Fever
+3351,80,Pago Pago,22402,Cancer
+3352,56,Málaga,55816,Cancer
+3353,8,Banda Aceh,14878,Autism
+3354,49,Barcelona,37303,Chlamydia
+3355,75,Cuiabá,62782,Otitis
+3356,71,Valdivia,56318,Autism
+3357,45,Malmö,38191,Chlamydia
+3358,67,Sucre,16546,AIDS
+3359,78,Guwahati,61489,Autism
+3360,75,Dongguan,61693,Otitis
+3361,2,Saint Petersburg,64812,Otitis
+3362,45,Manchester,59522,Cancer
+3363,20,Kathmandu,76072,Flu
+3364,50,Agartala,43690,Chlamydia
+3365,16,Dili,48015,AIDS
+3366,23,Oslo,71418,Flu
+3367,49,Hamburg,25872,Autism
+3368,39,Qingdao,40979,Fever
+3369,33,Thimphu,30293,Autism
+3370,28,Cayenne,72515,Cancer
+3371,21,Tabriz,11341,AIDS
+3372,15,Tokyo,49898,Fever
+3373,42,Saint John,16069,Conjuntivitis
+3374,14,Anadyr (town),74926,Autism
+3375,24,Mata-Utu,43232,Conjuntivitis
+3376,89,Porto,29866,Autism
+3377,72,Pittsburgh,54676,Conjuntivitis
+3378,22,El Paso,49208,Autism
+3379,89,Taichung,14170,Otitis
+3380,1,Norilsk,70668,Flu
+3381,50,Ouagadougou,58402,Cancer
+3382,46,Yakutsk,61084,Chlamydia
+3383,69,St. Louis,46264,Flu
+3384,64,Osaka,63601,Cancer
+3385,89,Jamestown,68282,Conjuntivitis
+3386,88,Jacksonville,61557,Cancer
+3387,76,Caracas,33788,Flu
+3388,21,Lviv,59146,Fever
+3389,11,Adak,55764,Fever
+3390,84,Luxor,35030,AIDS
+3391,9,Arbil,34477,Chlamydia
+3392,64,Koulikoro,59204,Cancer
+3393,81,Gaziantep,64350,Flu
+3394,12,Iloilo City,11482,Cancer
+3395,60,Washington,24136,Fever
+3396,71,Hai Phong,76155,Flu
+3397,11,Innsbruck,37549,Conjuntivitis
+3398,32,Singapore,40235,Cancer
+3399,62,Nice,45269,Cancer
+3400,68,Bogotá,18337,Conjuntivitis
+3401,66,St. Louis,13248,Chlamydia
+3402,80,Mbabane,50182,Autism
+3403,55,Phoenix,78120,Autism
+3404,20,Nice,45065,Chlamydia
+3405,6,Zapopan,25601,Chlamydia
+3406,35,Hat Yai,29015,Autism
+3407,72,Valencia,27162,Fever
+3408,90,Luanda,36443,Fever
+3409,11,Charlottetown,72708,Conjuntivitis
+3410,12,Gaziantep,62024,AIDS
+3411,46,Bratsk,58149,AIDS
+3412,72,Rochester,43699,Otitis
+3413,44,Taipei,49955,Conjuntivitis
+3414,9,Bishkek,57869,Flu
+3415,35,Vienna,31743,Autism
+3416,38,Assis,72342,AIDS
+3417,66,Assis,60876,Autism
+3418,22,Bujumbura,17297,Fever
+3419,82,Graz,21255,Cancer
+3420,45,Minsk,17808,Cancer
+3421,9,Multan,64108,Fever
+3422,28,Virginia Beach,27652,Chlamydia
+3423,3,Canberra,66264,Cancer
+3424,33,Fredericton,31458,Conjuntivitis
+3425,36,Shigatse,71072,Otitis
+3426,75,St. Louis,36151,Otitis
+3427,54,Aberdeen,20741,Otitis
+3428,48,Malang,66606,Fever
+3429,76,St. Louis,45588,Flu
+3430,24,Canberra,74061,Cancer
+3431,49,Pattaya,65076,Otitis
+3432,74,Kharkiv,22775,Flu
+3433,88,Nukus,63131,AIDS
+3434,49,Shigatse,56413,AIDS
+3435,56,Algiers,29432,Autism
+3436,22,Regina,10155,Cancer
+3437,54,Malé,17290,Conjuntivitis
+3438,17,Bangkok,36446,Cancer
+3439,65,Porto Velho,61043,Cancer
+3440,5,Alofi,48236,Fever
+3441,42,Cannes,51171,Cancer
+3442,2,Dunedin,44643,Cancer
+3443,26,Bissau,67973,Fever
+3444,35,Stepanakert,42319,Conjuntivitis
+3445,81,Ciudad del Este,42706,Flu
+3446,74,São Paulo,24054,AIDS
+3447,38,Frankfurt,22083,Otitis
+3448,57,Buenos Aires,69446,Flu
+3449,67,Novosibirsk,37143,Conjuntivitis
+3450,7,Miri,26807,AIDS
+3451,48,Bloemfontein,24502,Cancer
+3452,35,Yokohama,68568,Flu
+3453,39,San Francisco,32838,Chlamydia
+3454,68,Cayenne,54291,Cancer
+3455,30,Providence,67200,Chlamydia
+3456,65,Cairns,30268,Otitis
+3457,44,Toronto,62449,Flu
+3458,26,São Paulo,16481,Chlamydia
+3459,16,Yekaterinburg,35430,Conjuntivitis
+3460,9,Hiroshima,76893,Cancer
+3461,53,Brazzaville,40889,Chlamydia
+3462,9,Lisbon,31672,Flu
+3463,82,London,48113,Autism
+3464,68,Miami,68471,Conjuntivitis
+3465,3,Albuquerque,16441,Autism
+3466,32,Yokohama,50874,Autism
+3467,33,Port of Spain,72808,Chlamydia
+3468,11,Dededo,68415,Conjuntivitis
+3469,73,Mérida,76692,Autism
+3470,70,Austin,38112,Cancer
+3471,44,Campinas,32189,Autism
+3472,45,Jakarta,30433,Conjuntivitis
+3473,30,Providence,10293,Flu
+3474,66,Adana,19993,Flu
+3475,65,Tokyo,51132,AIDS
+3476,84,Damascus,41723,Cancer
+3477,88,Fredericton,29183,AIDS
+3478,13,Gaza,60239,Otitis
+3479,29,Buenos Aires,51573,Fever
+3480,55,Seville,18811,Fever
+3481,84,Kingstown,15640,AIDS
+3482,14,Guayaquil,72583,Fever
+3483,6,Norilsk,29113,Conjuntivitis
+3484,57,Paramaribo,14077,Flu
+3485,88,Vitória,66500,Fever
+3486,44,Ndola,17145,Flu
+3487,51,City of Halifax,28523,Autism
+3488,73,Shenzhen,53321,Fever
+3489,70,Toulouse,34960,Flu
+3490,65,Ho Chi Minh City,20186,Flu
+3491,7,Roseau,72415,Autism
+3492,18,Cleveland,26670,Chlamydia
+3493,19,El Aaiún,56483,Chlamydia
+3494,1,Gaza,69146,Otitis
+3495,87,Balikpapan,79581,Otitis
+3496,83,Avarua,36941,Autism
+3497,41,Prague,46120,Chlamydia
+3498,51,Melbourne,48201,AIDS
+3499,85,Adana,16946,Conjuntivitis
+3500,21,Rawalpindi,34980,Flu
+3501,24,Madrid,29287,Flu
+3502,26,Jakarta,43796,Autism
+3503,71,Portland,69386,Cancer
+3504,44,Adamstown,67653,Conjuntivitis
+3505,21,Road Town,39309,Autism
+3506,45,Saskatoon,35459,Autism
+3507,30,Riga,19508,Cancer
+3508,81,Taipei,14466,Autism
+3509,8,Denpasar,22149,Conjuntivitis
+3510,17,Wellington,37137,Otitis
+3511,75,San Francisco,33690,Flu
+3512,75,Beirut,49192,Flu
+3513,43,Cayenne,22450,Flu
+3514,62,Ankara,34155,Autism
+3515,76,Cali,57698,Conjuntivitis
+3516,34,Córdoba,76034,Otitis
+3517,53,Saint John,68646,Flu
+3518,59,Tijuana,76768,Autism
+3519,32,Mumbai,42302,Cancer
+3520,85,Willemstad,77099,Conjuntivitis
+3521,17,Houston,17860,Autism
+3522,18,Dar es Salaam,42343,Autism
+3523,90,Winnipeg,39261,Fever
+3524,79,Ludhiana,76365,Conjuntivitis
+3525,64,Nantes,47635,Flu
+3526,27,Casablanca,29562,Otitis
+3527,40,Raleigh,60510,Otitis
+3528,31,Timbuktu,64328,Cancer
+3529,27,Macapá,78803,Autism
+3530,46,Hai Phong,79132,Chlamydia
+3531,52,Yellowknife,21408,Conjuntivitis
+3532,37,Maceió,70436,AIDS
+3533,23,Minsk,37402,Otitis
+3534,33,Semarang,39383,AIDS
+3535,61,Tashkent,71563,Chlamydia
+3536,50,Papeete,21780,Chlamydia
+3537,52,Nice,65866,Flu
+3538,1,São José dos Campos,68332,Cancer
+3539,69,Rawalpindi,18749,Fever
+3540,75,Sarajevo,61851,Cancer
+3541,58,Paris,23964,Chlamydia
+3542,70,Bissau,43497,Cancer
+3543,27,Luxor,42295,Conjuntivitis
+3544,79,Bahía Blanca,13079,AIDS
+3545,16,New Orleans,13489,Conjuntivitis
+3546,74,Luanda,34366,Chlamydia
+3547,2,Port Vila,62401,Autism
+3548,12,Columbus,36106,Chlamydia
+3549,59,Manama,63271,Flu
+3550,34,Valparaíso,66147,Chlamydia
+3551,72,Tampere,63765,Otitis
+3552,74,Vitória,56609,AIDS
+3553,73,Espoo,39255,Autism
+3554,49,Ilhéus,47224,Flu
+3555,26,Forked River,42875,Otitis
+3556,81,Portland,31816,Fever
+3557,26,Oklahoma City,66346,Cancer
+3558,68,Lubumbashi,78993,AIDS
+3559,6,Leipzig,40070,Conjuntivitis
+3560,3,Moroni,32381,Otitis
+3561,40,Medan,72060,AIDS
+3562,67,Quito,10656,Conjuntivitis
+3563,40,New York City,43441,Flu
+3564,77,Liverpool,61804,Conjuntivitis
+3565,20,Budapest,30570,Cancer
+3566,87,Mata-Utu,55824,Fever
+3567,15,Dunedin,71716,AIDS
+3568,46,Belém,10830,Conjuntivitis
+3569,72,Kansas City,36887,Chlamydia
+3570,8,Longyearbyen,51713,Autism
+3571,23,Perth,22229,Conjuntivitis
+3572,49,Kansas City,68569,Cancer
+3573,37,Zapopan,53224,Fever
+3574,66,Gothenburg,45118,Chlamydia
+3575,19,Bratislava,51629,Conjuntivitis
+3576,9,Port of Spain,19453,AIDS
+3577,63,Hanga Roa,71162,Flu
+3578,41,Doha,25879,Fever
+3579,45,Zamboanga City,75416,Chlamydia
+3580,11,Rawalpindi,40551,Fever
+3581,5,Ushuaia,50871,Conjuntivitis
+3582,28,South Tarawa,29932,Fever
+3583,67,Valparaíso,45645,Otitis
+3584,63,Jacksonville,19604,Flu
+3585,43,Nagoya,69146,Flu
+3586,20,Marrakech,64382,Fever
+3587,1,Shijiazhuang,19975,Cancer
+3588,32,Abuja,17634,Conjuntivitis
+3589,31,New Delhi,52863,AIDS
+3590,89,Doha,66892,Cancer
+3591,28,Ipoh,12644,Cancer
+3592,7,Fort-de-France,12615,Flu
+3593,47,Tskhinvali,34755,Otitis
+3594,47,Nagpur,64483,Cancer
+3595,76,Angra do Heroísmo,62225,Conjuntivitis
+3596,87,Banjul,53201,AIDS
+3597,85,Port Vila,41293,Chlamydia
+3598,50,Sacramento,29319,Fever
+3599,7,Jinan,60722,Chlamydia
+3600,25,Novosibirsk,62463,Fever
+3601,17,Weno,11266,Flu
+3602,69,Cincinnati,44345,AIDS
+3603,19,N'Djamena,39793,Chlamydia
+3604,33,Puerto Williams,76186,Conjuntivitis
+3605,90,Porto-Novo,61123,Conjuntivitis
+3606,88,Honiara,57123,AIDS
+3607,45,Winnipeg,49973,Autism
+3608,14,Semarang,37224,AIDS
+3609,81,Oslo,10651,Fever
+3610,78,Balikpapan,78755,Otitis
+3611,70,Gold Coast,23657,Otitis
+3612,19,Bandung,51287,Fever
+3613,39,Portland,40658,Autism
+3614,67,Buffalo,21329,Otitis
+3615,90,Serekunda,65512,Autism
+3616,18,Bogotá,29372,Autism
+3617,33,Nakhon Ratchasima,58775,Otitis
+3618,51,Kansas City,57936,Otitis
+3619,80,San Juan,49949,Cancer
+3620,89,Iquique,76267,Flu
+3621,3,Port Blair,29088,Flu
+3622,82,Jerusalem,70028,Conjuntivitis
+3623,42,Jeddah,35983,Autism
+3624,15,Cleveland,61858,Cancer
+3625,9,Libreville,30584,AIDS
+3626,29,Vancouver,33878,Otitis
+3627,56,Nouakchott,64017,Chlamydia
+3628,64,Frankfurt,78328,Conjuntivitis
+3629,43,Kinshasa,70513,Flu
+3630,37,Melbourne,75316,Flu
+3631,63,Los Angeles,33828,Fever
+3632,18,Makati City,68552,Chlamydia
+3633,64,Reykjavík,20497,Fever
+3634,47,Zapopan,64600,AIDS
+3635,82,Kiev,66341,Flu
+3636,26,Lobamba,17906,Chlamydia
+3637,24,Brikama,59639,Chlamydia
+3638,84,Kathmandu,68608,Fever
+3639,68,Campinas,59135,Conjuntivitis
+3640,1,George Town,47946,Cancer
+3641,2,Harare,13762,Fever
+3642,35,Iquitos,77755,Fever
+3643,37,Amsterdam,77542,Flu
+3644,67,Honiara,55897,Cancer
+3645,82,Busan,10977,Autism
+3646,57,Kota Kinabalu,73822,Conjuntivitis
+3647,22,Shillong,37493,Autism
+3648,58,Lahore,75036,Chlamydia
+3649,18,Arequipa,37913,Fever
+3650,68,Berlin,19699,Cancer
+3651,84,Dongguan,34937,AIDS
+3652,44,Charlotte,65026,Flu
+3653,31,Oslo,14218,Flu
+3654,31,Brisbane,10679,AIDS
+3655,24,Timbuktu,55977,Flu
+3656,15,Naples,42310,Otitis
+3657,61,Seville,77743,Autism
+3658,57,Assis,51469,Autism
+3659,64,Kathmandu,57340,Flu
+3660,1,Miri,70139,Fever
+3661,42,Buffalo,12424,Chlamydia
+3662,24,Addis Ababa,64223,Chlamydia
+3663,32,Bandung,51691,Cancer
+3664,62,Birkirkara,15250,Autism
+3665,14,Tskhinvali,70951,Autism
+3666,26,Bergen,48015,Autism
+3667,77,Vladivostok,70286,Chlamydia
+3668,28,Nashville,10501,Chlamydia
+3669,47,Tashkent,58299,Chlamydia
+3670,60,Ahmedabad,27220,Cancer
+3671,17,Funafuti,37839,Chlamydia
+3672,17,Saipan,63263,Flu
+3673,74,Tunis,38009,AIDS
+3674,18,Cannes,40781,Cancer
+3675,19,Nagpur,62918,Otitis
+3676,38,Mbabane,43295,Autism
+3677,11,Perth,34947,Fever
+3678,8,Asmara,49876,AIDS
+3679,14,Belgrade,54888,Autism
+3680,24,Khartoum,15746,Autism
+3681,68,Düsseldorf,54208,Fever
+3682,65,Port-au-Prince,68992,Fever
+3683,26,Ahmedabad,12136,Conjuntivitis
+3684,42,Suez,57125,Autism
+3685,80,Rome,30170,Flu
+3686,28,Caracas,20890,Otitis
+3687,45,Graz,14977,Flu
+3688,52,Minneapolis,48542,Chlamydia
+3689,61,Skopje,49768,Fever
+3690,83,Paris,73454,AIDS
+3691,9,Adamstown,74179,Chlamydia
+3692,38,Málaga,70169,Conjuntivitis
+3693,6,Makassar,35116,Otitis
+3694,27,Paris,31448,Flu
+3695,20,Almaty,77481,Otitis
+3696,47,Rawalpindi,58564,Flu
+3697,12,Austin,68851,Chlamydia
+3698,43,Wuhan,57917,Chlamydia
+3699,13,Mecca,22127,Flu
+3700,88,Amman,32738,Conjuntivitis
+3701,17,Assis,47044,AIDS
+3702,32,Santiago de Cuba,61986,Chlamydia
+3703,79,Sacramento,10891,Fever
+3704,15,Magadan,24864,Otitis
+3705,67,Amritsar,37861,Autism
+3706,28,Bangui,52725,Autism
+3707,8,Da Nang,29230,Fever
+3708,62,Juneau,27739,Chlamydia
+3709,67,Nukulaelae,17997,Chlamydia
+3710,31,Taichung,67340,AIDS
+3711,68,Tiraspol,68970,Otitis
+3712,9,Mbabane,54862,Fever
+3713,14,Longyearbyen,62736,Chlamydia
+3714,74,Espoo,52214,Otitis
+3715,36,Jerusalem,63686,Fever
+3716,11,Hanoi,70575,Chlamydia
+3717,83,Puebla,47832,Fever
+3718,35,Nouméa,73822,Cancer
+3719,28,Hargeisa,29943,Flu
+3720,68,Geelong,42148,Conjuntivitis
+3721,34,Berlin,70632,Fever
+3722,49,Málaga,63705,Flu
+3723,90,Gangtok,43125,Cancer
+3724,60,Qingdao,11807,Flu
+3725,37,Bahía Blanca,76675,Autism
+3726,55,Leipzig,66765,Fever
+3727,35,Melbourne,17728,Fever
+3728,13,San Francisco,35489,Fever
+3729,11,Cardiff,68792,Conjuntivitis
+3730,70,Dunedin,26796,Flu
+3731,80,Nice,43147,Fever
+3732,60,Ahmedabad,40101,Chlamydia
+3733,51,Skopje,74824,Cancer
+3734,42,Lucknow,38461,AIDS
+3735,20,Wuhan,21364,Flu
+3736,53,Hanga Roa,46335,Fever
+3737,46,Bangkok,63397,Flu
+3738,15,Santiago de Cuba,42121,Otitis
+3739,58,Málaga,59953,Otitis
+3740,36,Kolkata,32726,Conjuntivitis
+3741,70,Omdurman,28602,Conjuntivitis
+3742,41,Brisbane,29263,Conjuntivitis
+3743,3,Manila,17557,Conjuntivitis
+3744,6,Riyadh,65235,AIDS
+3745,13,Tampa,31637,Cancer
+3746,50,Santiago,79231,Fever
+3747,40,Melekeok,66393,Cancer
+3748,23,Bloemfontein,30630,AIDS
+3749,76,Shigatse,69315,Autism
+3750,13,Antananarivo,11548,Flu
+3751,26,Indianapolis,35849,Conjuntivitis
+3752,7,Jerusalem,69648,AIDS
+3753,50,Basra,12765,Conjuntivitis
+3754,66,Udon Thani,28939,Flu
+3755,64,Praia,40561,Cancer
+3756,24,Arequipa,64638,AIDS
+3757,14,Assis,79667,Cancer
+3758,21,Stanley,54719,Flu
+3759,50,Changchun,60930,Flu
+3760,56,Beijing,66668,AIDS
+3761,77,Budapest,23742,Fever
+3762,60,Algiers,57699,Cancer
+3763,26,Tianjin,30536,Conjuntivitis
+3764,7,Tampa,46738,Conjuntivitis
+3765,25,Maceió,24121,Autism
+3766,20,Willemstad,26405,AIDS
+3767,20,Srinagar,57726,Fever
+3768,61,Handan,21261,Cancer
+3769,19,Colombo,23864,Fever
+3770,50,Rotterdam,68463,Chlamydia
+3771,73,Gold Coast,75309,AIDS
+3772,75,Reykjavík,40807,Fever
+3773,48,Macau,24485,Flu
+3774,49,Palma,73583,Chlamydia
+3775,87,Kota Bharu,64487,Autism
+3776,77,Denpasar,49554,Fever
+3777,47,Riga,62024,Cancer
+3778,33,Chuí,67142,Autism
+3779,84,Marseille,15046,Conjuntivitis
+3780,20,Chongqing,12358,Chlamydia
+3781,48,Juneau,34762,Otitis
+3782,57,Kathmandu,34016,Otitis
+3783,87,Sana'a,32537,Flu
+3784,51,Manaus,55935,Conjuntivitis
+3785,24,Sacramento,58926,Flu
+3786,17,Kota Kinabalu,77625,Chlamydia
+3787,74,Mbabane,52984,Conjuntivitis
+3788,1,Santiago,11185,Otitis
+3789,12,Quebec City,69324,AIDS
+3790,78,Darwin,33734,Flu
+3791,76,Aberdeen,48098,Fever
+3792,31,Istanbul,24266,Fever
+3793,87,Astana,79149,Conjuntivitis
+3794,37,Kandy,49972,AIDS
+3795,11,Pago Pago,46676,Chlamydia
+3796,70,Macau,45873,Flu
+3797,40,Bangkok,66875,Otitis
+3798,20,Dunedin,34024,Flu
+3799,32,Cuiabá,67057,Otitis
+3800,11,Nagoya,27729,Otitis
+3801,25,Bamako,61737,AIDS
+3802,64,Mexicali,58576,Autism
+3803,75,Udon Thani,62942,Flu
+3804,48,Sarajevo,67348,Cancer
+3805,85,Havana,76836,Cancer
+3806,12,Palembang,77637,Fever
+3807,7,Concepción,40695,Flu
+3808,29,Paris,64543,Cancer
+3809,30,Riverside,72410,Otitis
+3810,74,Hat Yai,29372,Otitis
+3811,59,Cuiabá,62434,Fever
+3812,87,Jakarta,32394,Flu
+3813,88,Ürümqi,36084,Flu
+3814,41,Port Moresby,69905,Chlamydia
+3815,51,Ciudad del Este,21092,Fever
+3816,65,Tunis,54449,Cancer
+3817,80,Vitória,28256,Conjuntivitis
+3818,20,Omdurman,54709,Conjuntivitis
+3819,65,Chicago,13222,Autism
+3820,16,Antofagasta,70762,Chlamydia
+3821,4,Puerto Williams,35325,Conjuntivitis
+3822,59,Ouagadougou,35494,Conjuntivitis
+3823,72,Port-au-Prince,55975,Cancer
+3824,13,Manzini,10193,Otitis
+3825,30,Campo Grande,71030,Chlamydia
+3826,30,Pekanbaru,55993,Flu
+3827,16,Surabaya,70338,Cancer
+3828,67,Philadelphia,60015,Chlamydia
+3829,57,Pekanbaru,28096,Cancer
+3830,10,Udon Thani,35658,Chlamydia
+3831,4,Stockholm,15556,Fever
+3832,49,Sofia,54621,Conjuntivitis
+3833,86,Montreal,67158,Cancer
+3834,66,Perth,18108,Cancer
+3835,35,Fredericton,65982,AIDS
+3836,43,Bishkek,10129,Otitis
+3837,62,Praia,53796,Autism
+3838,19,Iquique,70123,Flu
+3839,77,Charlotte Amalie,28026,Otitis
+3840,27,Abu Dhabi,75427,Otitis
+3841,37,Bursa,64880,Flu
+3842,74,Santa Cruz de la Sierra,49076,Fever
+3843,82,Sana'a,74934,AIDS
+3844,58,Yekaterinburg,24783,Flu
+3845,57,Nairobi,72740,Chlamydia
+3846,69,Bahía Blanca,36790,Conjuntivitis
+3847,35,Chongjin,16819,Conjuntivitis
+3848,87,Naples,77382,Autism
+3849,59,Cockburn Town,49677,Conjuntivitis
+3850,56,Berlin,61439,Cancer
+3851,84,San Juan,30853,Fever
+3852,17,Marseille,13728,Otitis
+3853,19,Daegu,24345,Autism
+3854,88,Lomé,21538,Otitis
+3855,45,Rabi Island,59009,Flu
+3856,27,Stanley,76215,Chlamydia
+3857,35,Santiago,27740,Otitis
+3858,85,Nuuk,57282,Fever
+3859,88,Yamoussoukro,58603,AIDS
+3860,86,Jacksonville,33101,AIDS
+3861,58,Bissau,47830,AIDS
+3862,65,Port of Spain,28005,Conjuntivitis
+3863,40,Gothenburg,30901,Conjuntivitis
+3864,18,Hobart,45893,Autism
+3865,21,Porto,46444,Flu
+3866,41,Birmingham,15656,Otitis
+3867,80,Adamstown,47157,Chlamydia
+3868,69,Yekaterinburg,61207,Fever
+3869,6,Shillong,13026,Fever
+3870,28,Geelong,24843,Conjuntivitis
+3871,15,La Paz,23583,AIDS
+3872,20,Montreal,12325,Conjuntivitis
+3873,13,Canberra,68195,AIDS
+3874,3,Jayapura,17007,AIDS
+3875,35,Funafuti,23312,Fever
+3876,29,Tskhinvali,79853,Cancer
+3877,62,Moscow,66143,AIDS
+3878,77,Bern,27125,Cancer
+3879,37,Cuiabá,24920,Flu
+3880,41,Moscow,19781,Autism
+3881,21,Bulawayo,12049,Otitis
+3882,87,Niamey,31525,Otitis
+3883,51,Indianapolis,60651,Autism
+3884,49,Lagos,75451,Conjuntivitis
+3885,69,Pelotas,61261,Fever
+3886,49,Jeddah,44604,AIDS
+3887,74,Jayapura,68504,Conjuntivitis
+3888,83,Vitória,45585,Chlamydia
+3889,62,Vientiane,72951,Autism
+3890,78,Greenwich,37505,Conjuntivitis
+3891,25,Davao City,50995,AIDS
+3892,60,Adak,54635,Cancer
+3893,11,Moroni,31763,Chlamydia
+3894,57,Cork (city),17461,Fever
+3895,6,Iloilo City,45381,AIDS
+3896,2,El Paso,54483,Cancer
+3897,44,Davao City,59699,Flu
+3898,85,Enugu,12168,Cancer
+3899,77,Melekeok,18934,Otitis
+3900,78,Faisalabad,43638,Conjuntivitis
+3901,61,Skopje,43427,Conjuntivitis
+3902,64,Lahore,16994,Otitis
+3903,74,Nashville,74478,Autism
+3904,84,Sri Jayawardenapura-Kotte,35286,Fever
+3905,50,Tamale,36382,Conjuntivitis
+3906,88,Podgorica,23643,Chlamydia
+3907,63,Guangzhou,46942,Flu
+3908,24,Nairobi,69286,AIDS
+3909,32,Valdivia,56989,Flu
+3910,10,Kraków,61960,Otitis
+3911,64,Santiago de Cuba,18236,Flu
+3912,87,Chihuahua,60652,Autism
+3913,90,Ottawa,62375,Flu
+3914,25,Mendoza,24283,Autism
+3915,86,Taichung,27603,Otitis
+3916,26,Veracruz,74662,Chlamydia
+3917,32,Pontianak,40111,Flu
+3918,71,Guangzhou,47272,Cancer
+3919,48,Detroit,66044,Autism
+3920,88,Handan,53964,Cancer
+3921,89,Birkirkara,60545,AIDS
+3922,42,Padang,35536,Otitis
+3923,13,Geelong,73061,Conjuntivitis
+3924,71,Luanda,22480,Autism
+3925,6,Dalian,63976,AIDS
+3926,56,Valparaíso,66417,Cancer
+3927,28,Iquique,56863,Conjuntivitis
+3928,4,Ouagadougou,71875,Chlamydia
+3929,19,Pristina,51132,AIDS
+3930,7,Udon Thani,15967,AIDS
+3931,13,Cairns,59171,AIDS
+3932,43,Alexandria,42636,Autism
+3933,41,Cincinnati,17713,Otitis
+3934,63,Skopje,27490,Conjuntivitis
+3935,80,Vitória,77020,Fever
+3936,57,Iquique,79050,Cancer
+3937,87,Yamoussoukro,55163,Conjuntivitis
+3938,40,Douglas,29911,Otitis
+3939,49,Gaborone,39997,Cancer
+3940,84,Tampa,27623,Autism
+3941,78,Gaza,37359,Flu
+3942,66,Stanley,26940,Conjuntivitis
+3943,64,Shillong,24812,AIDS
+3944,12,Harare,35284,Otitis
+3945,86,Chaguanas,52689,Chlamydia
+3946,63,Niamey,77408,Fever
+3947,6,Horta (Azores),18716,AIDS
+3948,46,Belfast,36831,Flu
+3949,4,Conakry,55595,AIDS
+3950,15,Tucson,27131,Flu
+3951,13,Jerusalem,70745,AIDS
+3952,14,Denpasar,42093,Autism
+3953,88,Stockholm,59673,AIDS
+3954,59,Naypyidaw,37445,Chlamydia
+3955,81,Sucre,24806,Fever
+3956,71,Pattaya,64604,AIDS
+3957,11,Zanzibar City,24652,Otitis
+3958,58,Podgorica,28948,Autism
+3959,71,Campinas,63545,Fever
+3960,28,Buffalo,67308,Conjuntivitis
+3961,2,Beirut,35758,AIDS
+3962,22,Bratsk,65873,Fever
+3963,14,Tabriz,23709,Cancer
+3964,32,Bangkok,55778,Flu
+3965,12,Toulouse,32968,AIDS
+3966,61,Minneapolis,75448,Fever
+3967,86,Podgorica,13186,AIDS
+3968,55,Curitiba,59192,Fever
+3969,29,Virginia Beach,78989,Conjuntivitis
+3970,59,Dubai,20111,Flu
+3971,10,Oslo,64867,Autism
+3972,1,Davao City,79902,Autism
+3973,26,Salt Lake City,16544,Conjuntivitis
+3974,46,Geelong,24169,Flu
+3975,1,London,43598,Chlamydia
+3976,21,Riverside,39716,Otitis
+3977,85,Cuiabá,59214,Otitis
+3978,89,Beijing,50930,Chlamydia
+3979,69,Mata-Utu,79104,Otitis
+3980,87,Montevideo,38903,Cancer
+3981,38,Nakhon Ratchasima,19887,Conjuntivitis
+3982,63,Whitehorse,38788,Autism
+3983,11,Edinburgh,78481,Flu
+3984,27,Ndola,73302,Fever
+3985,14,Addis Ababa,19210,Chlamydia
+3986,40,Austin,32034,Chlamydia
+3987,46,San José,59647,Chlamydia
+3988,28,Suez,27346,Fever
+3989,35,Singapore,79206,AIDS
+3990,64,Oranjestad,27206,Chlamydia
+3991,14,Calgary,33905,Autism
+3992,82,Antofagasta,45635,Chlamydia
+3993,32,Majuro,40528,Autism
+3994,86,Dakar,42244,Cancer
+3995,61,Minsk,56678,Conjuntivitis
+3996,71,Rochester,27643,Chlamydia
+3997,58,Tagbilaran,50334,Conjuntivitis
+3998,82,Petropavlovsk-Kamchatsky,25154,Autism
+3999,29,Adelaide,27614,Cancer
+4000,12,Surat Thani,79843,Conjuntivitis
+4001,68,Khartoum,44093,AIDS
+4002,1,Recife,31482,Conjuntivitis
+4003,65,Lyon,32697,Flu
+4004,79,Montevideo,69538,Flu
+4005,5,Birmingham,30879,Fever
+4006,77,Durango,70058,Cancer
+4007,7,Oranjestad,11384,Fever
+4008,8,Funafuti,53683,Otitis
+4009,34,Dushanbe,55576,Otitis
+4010,74,Berlin,48939,Flu
+4011,87,Wonsan,43391,Conjuntivitis
+4012,19,Liverpool,56228,Cancer
+4013,26,Ibadan,27091,Autism
+4014,58,Tirana,58625,Flu
+4015,28,Arequipa,76819,AIDS
+4016,71,George Town,72350,Fever
+4017,90,Houston,52731,Conjuntivitis
+4018,70,Yokohama,42268,Flu
+4019,11,Damascus,50164,Otitis
+4020,47,Sydney,52501,Cancer
+4021,26,Jeddah,55564,Chlamydia
+4022,76,Reykjavík,63539,Conjuntivitis
+4023,20,Taipei,19490,Autism
+4024,33,Malmö,35203,AIDS
+4025,64,Mandurah,44627,Otitis
+4026,83,Amsterdam,12828,Fever
+4027,5,Makassar,16726,Chlamydia
+4028,21,Amritsar,51432,Conjuntivitis
+4029,27,Gaziantep,56894,AIDS
+4030,50,Indianapolis,71709,Cancer
+4031,50,Asunción,40910,Conjuntivitis
+4032,17,Medina,71474,Fever
+4033,21,Cuiabá,11084,Cancer
+4034,75,Jaipur,66986,Cancer
+4035,89,La Serena,42000,Fever
+4036,19,Tbilisi,21348,Flu
+4037,78,Port Said,27969,Conjuntivitis
+4038,25,Mérida,23196,Conjuntivitis
+4039,21,Bamako,79489,Autism
+4040,34,Manchester,71637,Otitis
+4041,84,Vatican City,36497,Fever
+4042,24,Bangalore,51626,Fever
+4043,77,Pontianak,59076,Chlamydia
+4044,69,Udon Thani,68892,AIDS
+4045,87,Longyearbyen,54742,Cancer
+4046,11,Cairo,22160,Cancer
+4047,6,Charlottetown,13981,AIDS
+4048,54,Saipan,16605,Cancer
+4049,77,Durban,27065,Cancer
+4050,29,Curitiba,46375,Otitis
+4051,51,Chittagong,70511,Cancer
+4052,49,Harbin,36285,Otitis
+4053,76,Rabat,25293,Chlamydia
+4054,7,Sydney,41124,Autism
+4055,76,Kanpur,61183,Chlamydia
+4056,88,Cebu City,58086,Chlamydia
+4057,16,La Serena,21055,Otitis
+4058,72,Rabat,41173,Fever
+4059,82,Rockhampton,60342,Conjuntivitis
+4060,35,Djibouti (city),67619,Autism
+4061,22,Sabha,65344,Autism
+4062,56,Gaziantep,65323,Otitis
+4063,2,Hobart,11061,Conjuntivitis
+4064,23,Montreal,29770,Autism
+4065,58,Tianjin,72357,AIDS
+4066,35,Koulikoro,72870,AIDS
+4067,68,Kota Kinabalu,60764,Flu
+4068,79,Glasgow,63884,Chlamydia
+4069,84,Bratsk,58103,Cancer
+4070,86,Islamabad,66705,Cancer
+4071,74,Cleveland,17882,Cancer
+4072,89,Mandurah,16041,Chlamydia
+4073,37,Cotonou,67975,Conjuntivitis
+4074,28,Guayaquil,77953,Chlamydia
+4075,89,Philadelphia,49191,Conjuntivitis
+4076,15,Samara,72014,Autism
+4077,40,Ibadan,72504,Cancer
+4078,80,Shijiazhuang,53064,Cancer
+4079,57,Ankara,55478,Otitis
+4080,48,Amsterdam,69965,Conjuntivitis
+4081,25,Chicago,79397,Flu
+4082,57,Bulawayo,26366,Otitis
+4083,10,Zagreb,38136,Chlamydia
+4084,74,Basse-Terre,60493,Flu
+4085,23,Jamestown,28619,Chlamydia
+4086,31,Antananarivo,32803,Cancer
+4087,79,Tartu,16930,Autism
+4088,28,Juneau,50536,Flu
+4089,33,Nairobi,64177,Flu
+4090,57,Geelong,40057,Otitis
+4091,44,Vilnius,68748,Otitis
+4092,90,Valdivia,39141,Autism
+4093,86,Luxembourg (city),57895,Otitis
+4094,14,Campo Grande,51510,Flu
+4095,38,Taichung,18912,Otitis
+4096,29,Toronto,47358,Cancer
+4097,56,Balikpapan,77128,Cancer
+4098,7,Birkirkara,20532,Chlamydia
+4099,85,Cotonou,20717,Otitis
+4100,46,Cairo,13110,Otitis
+4101,35,Nanjing,20210,Fever
+4102,13,Forked River,46363,Chlamydia
+4103,72,Cayenne,19121,Cancer
+4104,77,Punta Arenas,28653,Otitis
+4105,11,Arbil,37897,Autism
+4106,83,Rockhampton,76431,Conjuntivitis
+4107,72,São Tomé,63763,Fever
+4108,48,Conakry,60978,Conjuntivitis
+4109,56,Montreal,34471,Otitis
+4110,66,Xining,65870,Conjuntivitis
+4111,61,Naples,59701,Flu
+4112,79,Bahía Blanca,78119,Conjuntivitis
+4113,31,Agartala,14278,Flu
+4114,9,Baltimore,43046,Chlamydia
+4115,41,Surat,62540,AIDS
+4116,18,Tehran,48605,AIDS
+4117,68,Minsk,64639,Chlamydia
+4118,5,Puerto Williams,49289,Conjuntivitis
+4119,10,Bilbao,14159,Flu
+4120,79,Suez,56934,Conjuntivitis
+4121,23,San José,59454,Fever
+4122,7,Labasa,44356,Chlamydia
+4123,17,Skopje,68806,AIDS
+4124,30,Busan,50142,Cancer
+4125,40,Cape Town,10336,Otitis
+4126,52,Mexicali,12123,Otitis
+4127,63,Colombo,41957,Flu
+4128,46,Campinas,65931,Flu
+4129,63,Jeddah,36372,Otitis
+4130,29,Pattaya,62873,Autism
+4131,51,Alor Star,40526,Chlamydia
+4132,64,Maseru,18175,AIDS
+4133,34,Boa Vista,61116,AIDS
+4134,37,Shenzhen,66521,Flu
+4135,67,Avarua,14930,AIDS
+4136,89,São José dos Campos,20687,AIDS
+4137,20,Palembang,78643,Conjuntivitis
+4138,38,Malmö,40073,AIDS
+4139,12,Macapá,45795,Otitis
+4140,32,Yokohama,75426,AIDS
+4141,64,Dushanbe,52779,AIDS
+4142,82,Ulan Bator,52976,Chlamydia
+4143,56,Budapest,57187,Cancer
+4144,62,Saint-Pierre,72620,Conjuntivitis
+4145,36,Nicosia,14860,Otitis
+4146,63,Nakhon Ratchasima,67664,Cancer
+4147,56,Baltimore,69587,Fever
+4148,4,Maracaibo,16348,AIDS
+4149,57,Manama,39545,Autism
+4150,15,Makassar,37696,Flu
+4151,21,Makati City,58341,Conjuntivitis
+4152,9,Barcelona,69042,Cancer
+4153,23,Weno,49968,AIDS
+4154,38,Saint Petersburg,18644,Chlamydia
+4155,36,Leipzig,62834,Flu
+4156,57,Doha,47790,Autism
+4157,48,Nashville,34619,Chlamydia
+4158,81,Malang,66801,Cancer
+4159,63,Santa Cruz de Tenerife,69755,Autism
+4160,79,Charlottetown,69402,AIDS
+4161,56,Linz,61422,Otitis
+4162,25,Baku,46992,Chlamydia
+4163,55,Dubai,54563,Flu
+4164,10,Tirana,76881,Chlamydia
+4165,82,Vancouver,60081,Conjuntivitis
+4166,45,Mexico City,35541,Autism
+4167,84,Alor Star,63983,AIDS
+4168,60,Aarhus,55859,Conjuntivitis
+4169,11,Strasbourg,38417,AIDS
+4170,69,Baltimore,70168,Conjuntivitis
+4171,7,Mumbai,72647,Autism
+4172,15,Townsville,20121,Fever
+4173,89,Dresden,66845,Chlamydia
+4174,63,Guangzhou,73322,Flu
+4175,55,The Hague,46895,Autism
+4176,73,Monrovia,48291,Fever
+4177,88,Dhaka,64765,Chlamydia
+4178,54,Kuching,43421,Cancer
+4179,38,Newcastle,19329,Otitis
+4180,80,Medellín,47767,Chlamydia
+4181,87,Tokyo,65639,Fever
+4182,11,Memphis,71554,Autism
+4183,89,Antofagasta,71898,Conjuntivitis
+4184,39,Tegucigalpa,38031,Conjuntivitis
+4185,20,Iquitos,60315,Cancer
+4186,16,Philadelphia,75833,Flu
+4187,34,Charlotte,14057,Flu
+4188,60,Cairns,76300,Fever
+4189,71,Shijiazhuang,53914,Chlamydia
+4190,85,Cockburn Town,77438,Conjuntivitis
+4191,67,Pattaya,41781,Conjuntivitis
+4192,1,Gaza,10499,Autism
+4193,14,City of San Marino,36038,Cancer
+4194,65,El Aaiún,54854,Fever
+4195,42,Guadalajara,54920,AIDS
+4196,78,Mérida,34718,Autism
+4197,76,Whitehorse,44558,Fever
+4198,13,Guangzhou,51427,Otitis
+4199,34,Tskhinvali,54047,Conjuntivitis
+4200,26,Nanjing,20644,Otitis
+4201,46,Manzini,78999,Autism
+4202,1,Amritsar,16792,Fever
+4203,46,Istanbul,39777,Chlamydia
+4204,6,San Salvador,38355,Autism
+4205,31,İzmir,11851,Fever
+4206,39,Los Angeles,58677,Autism
+4207,46,Port Elizabeth,28380,Chlamydia
+4208,12,Chuí,55572,Chlamydia
+4209,12,Malmö,24894,Conjuntivitis
+4210,50,Iqaluit,35919,Fever
+4211,12,Shillong,31007,Chlamydia
+4212,46,Konya,62690,Cancer
+4213,72,Santiago de Cuba,30715,Chlamydia
+4214,53,Mexicali,53801,Chlamydia
+4215,26,Harbin,58657,AIDS
+4216,46,Lomé,28222,Fever
+4217,63,Weno,27335,Fever
+4218,21,Thimphu,49920,Cancer
+4219,48,Bratsk,72826,Conjuntivitis
+4220,76,Maceió,61774,Chlamydia
+4221,44,Cartagena,60844,Chlamydia
+4222,64,Bissau,55840,Otitis
+4223,18,Shenzhen,38791,Flu
+4224,71,Jersey City,63603,AIDS
+4225,43,Oranjestad,76731,AIDS
+4226,7,Luxor,14267,Fever
+4227,48,São Paulo,20012,Cancer
+4228,20,Kingston,68201,Otitis
+4229,14,Macau,16583,Fever
+4230,69,Darwin,11342,Otitis
+4231,32,Philadelphia,68000,Conjuntivitis
+4232,16,Virginia Beach,72430,Chlamydia
+4233,3,Zanzibar City,67799,Autism
+4234,46,Christchurch,49133,Conjuntivitis
+4235,25,Adelaide,62556,Cancer
+4236,62,Ibiza,79349,Conjuntivitis
+4237,15,Edinburgh,65670,Cancer
+4238,15,Zhengzhou,36815,Chlamydia
+4239,87,Nakhon Ratchasima,63474,Autism
+4240,24,Harare,57493,Conjuntivitis
+4241,42,Rotterdam,41432,Otitis
+4242,50,Libreville,64236,Flu
+4243,6,Daegu,19202,AIDS
+4244,25,Jerusalem,24518,Fever
+4245,66,Wuhan,63642,Fever
+4246,11,Islamabad,27044,AIDS
+4247,16,Semarang,78777,Otitis
+4248,59,Whitehorse,37294,Conjuntivitis
+4249,82,Seville,32655,Chlamydia
+4250,22,Malang,13678,Fever
+4251,61,Moroni,37024,Cancer
+4252,48,Busan,41226,Fever
+4253,72,Amsterdam,68454,Chlamydia
+4254,86,Rochester,26585,Chlamydia
+4255,29,San Juan,13471,Otitis
+4256,63,New York City,67968,Conjuntivitis
+4257,80,Port Blair,57801,Flu
+4258,81,Saipan,50476,Cancer
+4259,22,Makassar,59131,AIDS
+4260,4,Douala,37460,Autism
+4261,55,Luxor,54822,Fever
+4262,48,Ürümqi,23974,Chlamydia
+4263,46,Mogadishu,50875,AIDS
+4264,45,Asmara,14703,Otitis
+4265,46,Boa Vista,23316,Conjuntivitis
+4266,23,Lubumbashi,21565,Conjuntivitis
+4267,54,Bogor,64816,Conjuntivitis
+4268,41,Avarua,11477,Chlamydia
+4269,70,Montreal,59269,Flu
+4270,30,City of San Marino,43881,Cancer
+4271,1,Thessaloniki,48429,Chlamydia
+4272,36,Guangzhou,12424,Flu
+4273,69,Kaesong,38142,AIDS
+4274,29,Campinas,51559,Flu
+4275,28,Manzini,14061,Conjuntivitis
+4276,88,Las Vegas,68048,Autism
+4277,34,Los Angeles,74818,AIDS
+4278,16,Kawasaki,15970,Flu
+4279,15,Manchester,60598,Flu
+4280,53,Charlotte Amalie,27210,Otitis
+4281,34,Dushanbe,61075,Conjuntivitis
+4282,42,Geelong,55530,Autism
+4283,79,Phnom Penh,57434,Fever
+4284,25,Buenos Aires,73395,Conjuntivitis
+4285,19,Bissau,26986,Fever
+4286,10,Kaohsiung,75164,Conjuntivitis
+4287,10,Iquique,36596,Autism
+4288,18,Cali,52873,Otitis
+4289,59,Shijiazhuang,40831,Fever
+4290,59,Gold Coast,12249,Otitis
+4291,23,Antwerp,45055,Otitis
+4292,6,Kansas City,65043,Otitis
+4293,2,Amman,65873,Conjuntivitis
+4294,85,Kandy,11341,Otitis
+4295,25,San Salvador,20797,Otitis
+4296,12,Timbuktu,13673,Fever
+4297,87,Bissau,37863,AIDS
+4298,60,Mersin,20359,Fever
+4299,8,Edinburgh,38762,Chlamydia
+4300,21,Taiyuan,42315,Conjuntivitis
+4301,46,Jaipur,38900,Chlamydia
+4302,50,Porto-Novo,59938,Cancer
+4303,37,Lomé,50398,Conjuntivitis
+4304,62,Accra,72786,Autism
+4305,36,Montevideo,27722,AIDS
+4306,76,Fredericton,40332,Autism
+4307,62,George Town,59988,Cancer
+4308,59,Oslo,63230,Fever
+4309,57,Xi'an,60069,Flu
+4310,64,Belém,66814,Autism
+4311,27,Nuuk,73674,Flu
+4312,12,Taipei,42715,Chlamydia
+4313,8,Belize City,16080,Conjuntivitis
+4314,44,Malabo,59267,Cancer
+4315,3,Vitória,20086,Otitis
+4316,16,Ashgabat,20032,Cancer
+4317,88,Ibiza,68562,Chlamydia
+4318,87,Yokohama,18313,Autism
+4319,42,Rotterdam,39446,Chlamydia
+4320,20,Seoul,32318,Autism
+4321,4,Calama,42357,Fever
+4322,74,Valletta,16982,Cancer
+4323,51,Kiev,23342,Fever
+4324,50,Shenzhen,31898,Autism
+4325,82,Xi'an,36137,AIDS
+4326,15,Turin,19820,Cancer
+4327,57,Cologne,64382,AIDS
+4328,77,Bangalore,53874,Fever
+4329,76,Ho Chi Minh City,76515,Cancer
+4330,32,Luxor,64477,Fever
+4331,71,Cebu City,68012,Cancer
+4332,48,Koror,28239,Conjuntivitis
+4333,13,Surat Thani,73783,Flu
+4334,8,Mersin,72758,Otitis
+4335,54,Monaco,79327,Flu
+4336,51,Kansas City,64897,AIDS
+4337,22,Blantyre,29231,Autism
+4338,81,Barcelona,28453,Fever
+4339,50,Zhengzhou,45036,Flu
+4340,29,Chongjin,18325,AIDS
+4341,72,Edinburgh,75495,Cancer
+4342,34,Kiev,62501,Flu
+4343,89,Moroni,48139,Conjuntivitis
+4344,40,Columbus,56132,Flu
+4345,32,Doha,66798,Cancer
+4346,74,Mamoudzou,52731,AIDS
+4347,66,Kanpur,67963,Flu
+4348,15,Ambon,49515,Flu
+4349,9,Roseau,70444,Autism
+4350,90,Campinas,57531,Fever
+4351,45,Macau,57570,Otitis
+4352,52,Manila,70959,Cancer
+4353,11,Anchorage,63422,Chlamydia
+4354,11,Liverpool,64823,Flu
+4355,31,Assis,38582,Flu
+4356,61,Tbilisi,66337,Otitis
+4357,52,Vienna,48776,AIDS
+4358,69,Nairobi,15405,Conjuntivitis
+4359,50,Mérida,58534,AIDS
+4360,58,Bilbao,31476,Otitis
+4361,86,Jerusalem,73702,Otitis
+4362,14,Okinawa,15532,AIDS
+4363,21,Phuket (city),67595,Fever
+4364,73,Providence,35870,AIDS
+4365,88,Guatemala City,53347,Autism
+4366,53,Nairobi,45627,Chlamydia
+4367,65,Gothenburg,51705,Cancer
+4368,34,Quebec City,55802,Chlamydia
+4369,9,Iqaluit,55974,Fever
+4370,12,Albuquerque,48141,Conjuntivitis
+4371,75,Greenwich,24582,AIDS
+4372,26,Quebec City,79544,AIDS
+4373,33,Santa Cruz de la Sierra,57600,Autism
+4374,36,Hanga Roa,38809,Conjuntivitis
+4375,70,Christchurch,54610,AIDS
+4376,52,Honolulu,50018,AIDS
+4377,45,The Valley,78057,Otitis
+4378,33,Montevideo,39485,AIDS
+4379,75,Albuquerque,62122,Flu
+4380,84,Puebla,43464,Flu
+4381,11,Quito,32785,Cancer
+4382,34,Bridgetown,30999,Cancer
+4383,47,Amman,12198,Conjuntivitis
+4384,4,Yangon,37736,AIDS
+4385,48,Indianapolis,20748,Cancer
+4386,77,Kota Bharu,73484,Otitis
+4387,14,Chittagong,66865,Autism
+4388,73,Mendoza,74917,Conjuntivitis
+4389,37,Lubumbashi,45131,Cancer
+4390,66,Helsinki,38993,Otitis
+4391,75,Auckland,29345,Chlamydia
+4392,8,Charlottetown,69319,AIDS
+4393,78,Banjul,18942,Autism
+4394,11,Saipan,79865,Otitis
+4395,32,Yaoundé,36657,AIDS
+4396,63,Tartu,41585,Flu
+4397,89,Banjul,73964,Autism
+4398,60,Manaus,52905,Flu
+4399,58,Faisalabad,24002,Conjuntivitis
+4400,4,Chittagong,69191,Flu
+4401,35,Kuwait City,26515,Flu
+4402,40,Christchurch,15972,Otitis
+4403,79,Belfast,77785,AIDS
+4404,87,Hargeisa,15360,Cancer
+4405,84,Rabat,31360,Chlamydia
+4406,90,London,41031,AIDS
+4407,7,Bissau,30692,Cancer
+4408,78,Mexicali,37305,Autism
+4409,88,Whitehorse,15819,Chlamydia
+4410,68,Turin,78664,Autism
+4411,80,Cusco,47032,Otitis
+4412,6,Vientiane,41750,Chlamydia
+4413,50,Porto-Novo,48482,Otitis
+4414,6,Jamestown,33463,Fever
+4415,43,Punta Arenas,21788,Chlamydia
+4416,10,Quebec City,56414,Flu
+4417,41,Dunedin,27486,Conjuntivitis
+4418,12,San Francisco,77596,Flu
+4419,83,Assis,60978,Otitis
+4420,3,Graz,38010,Chlamydia
+4421,66,Bandung,40111,Flu
+4422,81,Zamboanga City,27790,Cancer
+4423,24,Santo Domingo,45885,Conjuntivitis
+4424,50,Kanpur,58793,AIDS
+4425,87,Bogotá,63243,Otitis
+4426,34,Raleigh,19946,Fever
+4427,66,Madrid,70917,Cancer
+4428,28,Lagos,53772,Chlamydia
+4429,81,Surat Thani,57179,Fever
+4430,12,Chiang Mai,31317,Flu
+4431,15,Cape Town,34160,AIDS
+4432,68,Skopje,13563,Autism
+4433,70,Chongjin,48500,Autism
+4434,8,Maracaibo,70755,Flu
+4435,26,N'Djamena,68036,Otitis
+4436,39,Antananarivo,72581,Conjuntivitis
+4437,42,Beijing,20924,Fever
+4438,75,Horta (Azores),73023,Otitis
+4439,36,Castries,63609,Chlamydia
+4440,21,Ludhiana,66204,Autism
+4441,86,Basse-Terre,56622,Chlamydia
+4442,68,Tampere,36524,AIDS
+4443,12,Ürümqi,39158,Conjuntivitis
+4444,77,Dakar,61262,AIDS
+4445,21,Jakarta,34942,AIDS
+4446,30,Moroni,29179,Conjuntivitis
+4447,88,Honiara,62858,AIDS
+4448,52,Philadelphia,50950,Conjuntivitis
+4449,87,Porto,42289,Conjuntivitis
+4450,62,Oslo,23772,Chlamydia
+4451,67,Shigatse,25198,Cancer
+4452,85,Dresden,39303,Flu
+4453,17,Brussels,77790,Conjuntivitis
+4454,76,Durango,45036,Conjuntivitis
+4455,56,Brussels,74583,Cancer
+4456,71,Davao City,25828,Chlamydia
+4457,39,Brazzaville,48532,Flu
+4458,41,Lagos,35795,AIDS
+4459,75,El Paso,79652,Autism
+4460,87,Basse-Terre,19744,Otitis
+4461,73,Tamale,12461,Chlamydia
+4462,64,Ipoh,68123,Otitis
+4463,4,Dededo,28731,Autism
+4464,64,Palembang,48105,AIDS
+4465,9,Yangon,20278,Otitis
+4466,81,Manaus,30664,Otitis
+4467,62,Bandar Seri Begawan,42072,AIDS
+4468,64,Kharkiv,32358,AIDS
+4469,1,Ibadan,77022,Fever
+4470,33,Hargeisa,56808,AIDS
+4471,10,Bilbao,17822,Conjuntivitis
+4472,30,Banda Aceh,30449,Otitis
+4473,11,Yaoundé,16096,Autism
+4474,15,Doha,17951,Otitis
+4475,65,Cali,29050,Autism
+4476,29,Praia,46626,Autism
+4477,15,Dongguan,17879,Otitis
+4478,37,Honiara,75903,Otitis
+4479,25,Taichung,51437,Autism
+4480,77,Oslo,27890,AIDS
+4481,83,Dhaka,50725,Fever
+4482,58,Jaipur,30879,AIDS
+4483,4,Ottawa,79052,Autism
+4484,11,Dar es Salaam,23981,Conjuntivitis
+4485,48,Chişinău,44848,Cancer
+4486,80,Hagåtña,35001,Autism
+4487,61,New York City,56141,Otitis
+4488,25,Guangzhou,41136,Flu
+4489,7,Maracaibo,15765,Chlamydia
+4490,75,Riyadh,37564,Otitis
+4491,41,Saint-Denis,48647,Cancer
+4492,6,Tórshavn,31647,Flu
+4493,36,Hai Phong,70764,Otitis
+4494,74,Linz,39260,Otitis
+4495,75,Accra,16437,Autism
+4496,23,San Carlos de Bariloche,65066,Conjuntivitis
+4497,54,Quebec City,36271,Chlamydia
+4498,65,Gaziantep,47282,AIDS
+4499,60,Vancouver,34739,Autism
+4500,21,The Hague,41152,Fever
+4501,53,Balikpapan,32561,Conjuntivitis
+4502,71,Port Louis,63361,Conjuntivitis
+4503,85,Jamestown,66486,Cancer
+4504,42,Dushanbe,50914,Fever
+4505,87,Hong Kong,12779,Chlamydia
+4506,46,Las Palmas de Gran Canaria,77238,Fever
+4507,28,Kanpur,71151,Cancer
+4508,48,Belém,24185,Fever
+4509,18,Port Blair,77022,Fever
+4510,62,Chennai,16589,Otitis
+4511,42,Suez,71399,Flu
+4512,3,Kaliningrad,15893,Fever
+4513,18,Manila,45322,Autism
+4514,60,Concepción,65575,Fever
+4515,47,Guayaquil,26404,AIDS
+4516,59,Lomé,13316,AIDS
+4517,62,Mumbai,75409,Otitis
+4518,33,Tirana,48232,Conjuntivitis
+4519,41,Guatemala City,30636,Flu
+4520,58,Portland,16603,Cancer
+4521,58,Pittsburgh,29136,Chlamydia
+4522,4,Singapore,58618,Otitis
+4523,62,Caracas,29863,Chlamydia
+4524,46,Nukus,51199,Otitis
+4525,53,Naples,56111,Fever
+4526,58,Algiers,36908,AIDS
+4527,44,Longyearbyen,29687,Fever
+4528,29,Mumbai,54847,Flu
+4529,84,Panama City,55643,Cancer
+4530,7,Cebu City,62153,Cancer
+4531,28,Yaoundé,40119,Autism
+4532,12,Bangui,29335,Otitis
+4533,87,Algiers,15840,AIDS
+4534,85,Phoenix,38388,Autism
+4535,14,Incheon,42686,AIDS
+4536,19,Hai Phong,13140,Autism
+4537,17,Greenwich,10097,Conjuntivitis
+4538,35,Palikir,16560,Conjuntivitis
+4539,29,Hamilton,73032,AIDS
+4540,2,Phuket (city),50037,Flu
+4541,45,Ouagadougou,15929,Conjuntivitis
+4542,43,Bahía Blanca,65738,Cancer
+4543,78,New Delhi,34654,AIDS
+4544,26,Sapporo,69879,AIDS
+4545,23,Udon Thani,72104,Otitis
+4546,31,Tirana,57344,Cancer
+4547,29,Managua,27008,Autism
+4548,23,Francistown,74636,Fever
+4549,69,Agartala,49993,Fever
+4550,62,Manchester,24226,Chlamydia
+4551,28,Riverside,42560,Otitis
+4552,33,Da Nang,43950,Fever
+4553,80,Honolulu,12920,Fever
+4554,79,Stepanakert,65385,Otitis
+4555,62,Durango,16741,Otitis
+4556,16,Pretoria,75615,Fever
+4557,72,Hagåtña,43070,Autism
+4558,67,Winnipeg,60097,Fever
+4559,48,Khartoum,26563,Conjuntivitis
+4560,81,Townsville,65451,Otitis
+4561,11,Nakhon Ratchasima,53105,AIDS
+4562,62,Mendoza,60596,Chlamydia
+4563,19,Francistown,73489,Conjuntivitis
+4564,16,Tallinn,72727,Cancer
+4565,27,Buffalo,13604,Chlamydia
+4566,59,Batticaloa,10986,AIDS
+4567,25,Douala,14022,Chlamydia
+4568,58,El Paso,47497,Cancer
+4569,48,Alor Star,19710,Chlamydia
+4570,14,Puebla,36275,Chlamydia
+4571,57,Kaesong,43037,Otitis
+4572,74,Phuket (city),56334,Autism
+4573,30,Cuiabá,26040,Fever
+4574,53,Ambon,65757,Fever
+4575,56,Dubai,57709,Conjuntivitis
+4576,21,Manaus,37097,Fever
+4577,9,Winnipeg,67643,Otitis
+4578,72,Porto Alegre,55103,Flu
+4579,49,Wonsan,24181,Otitis
+4580,76,Buffalo,25363,Conjuntivitis
+4581,38,Warsaw,77669,Cancer
+4582,77,Vaduz,11375,Conjuntivitis
+4583,45,Sapporo,32014,Chlamydia
+4584,73,Jersey City,18775,Fever
+4585,21,London,40474,Otitis
+4586,72,Las Palmas de Gran Canaria,60511,Otitis
+4587,35,Zamboanga City,72685,Otitis
+4588,87,Taiyuan,32690,Flu
+4589,83,Managua,62910,Autism
+4590,3,Bursa,19088,Conjuntivitis
+4591,64,Tucson,23189,Conjuntivitis
+4592,7,Malmö,59456,Fever
+4593,40,Caracas,52617,Cancer
+4594,43,Niamey,51757,Otitis
+4595,52,Arequipa,17390,Cancer
+4596,61,Bilbao,21284,Fever
+4597,37,Nassau,38715,Chlamydia
+4598,6,Ndola,41251,Flu
+4599,44,Regina,22858,Conjuntivitis
+4600,90,Indianapolis,77149,Cancer
+4601,23,Ponta Delgada,21885,AIDS
+4602,81,Atlanta,43457,Flu
+4603,67,Pelotas,19756,Cancer
+4604,78,Montevideo,43680,AIDS
+4605,30,Andorra la Vella,73089,Cancer
+4606,5,Tiraspol,19453,Flu
+4607,83,Maceió,56765,AIDS
+4608,58,Adana,38044,Conjuntivitis
+4609,64,Linz,50867,Flu
+4610,45,Sydney,49259,Conjuntivitis
+4611,3,Hong Kong,45456,Flu
+4612,63,Kathmandu,37940,Autism
+4613,13,Macau,71795,Fever
+4614,40,Xining,30775,Cancer
+4615,15,Columbus,69202,Conjuntivitis
+4616,6,Libreville,26056,Cancer
+4617,71,Caracas,27970,Otitis
+4618,7,Vienna,48494,Cancer
+4619,76,Mata-Utu,58691,AIDS
+4620,2,Abuja,19206,Fever
+4621,29,Ottawa,71816,Fever
+4622,10,Cleveland,54553,Chlamydia
+4623,40,Guadalajara,36991,Conjuntivitis
+4624,19,Alofi,49252,Cancer
+4625,22,Basse-Terre,10677,Otitis
+4626,65,Agartala,25324,Conjuntivitis
+4627,76,Honolulu,18850,Fever
+4628,41,Kansas City,67901,Conjuntivitis
+4629,6,Yellowknife,41135,Conjuntivitis
+4630,87,Singapore,21489,Autism
+4631,24,Naples,29936,Chlamydia
+4632,85,Yellowknife,47438,Flu
+4633,47,Tampa,22305,Conjuntivitis
+4634,21,Miri,40832,Autism
+4635,40,Puebla,56766,Fever
+4636,53,Surat,12313,Otitis
+4637,30,San Carlos de Bariloche,10190,Autism
+4638,66,Port Louis,59642,Fever
+4639,35,Sacramento,17897,Chlamydia
+4640,51,St. Louis,49415,Cancer
+4641,37,Alexandria,43578,Conjuntivitis
+4642,30,Amsterdam,79508,Fever
+4643,16,Djibouti (city),53742,Cancer
+4644,38,San José,46900,Flu
+4645,39,Reykjavík,72720,Autism
+4646,40,Rabat,25711,Conjuntivitis
+4647,68,Luanda,79459,Conjuntivitis
+4648,49,Beirut,35968,AIDS
+4649,20,Dhaka,27999,Conjuntivitis
+4650,18,Lviv,54174,Fever
+4651,11,Canberra,73294,Fever
+4652,74,Leipzig,12158,Conjuntivitis
+4653,70,Kiev,79079,Flu
+4654,8,Adak,66151,Autism
+4655,48,Rockhampton,31785,Flu
+4656,66,Maracaibo,25590,Otitis
+4657,32,Malabo,66240,AIDS
+4658,44,Espoo,15204,Chlamydia
+4659,33,Vilnius,45478,Flu
+4660,38,Santa Cruz de Tenerife,64222,Otitis
+4661,43,Chiang Mai,55937,Autism
+4662,42,Patna,40063,Flu
+4663,29,Puebla,22105,AIDS
+4664,69,Riyadh,57526,Chlamydia
+4665,71,Strasbourg,37937,AIDS
+4666,61,Bursa,60967,Flu
+4667,33,San Fernando,15951,Fever
+4668,28,Kaohsiung,61080,AIDS
+4669,74,Papeete,58733,Cancer
+4670,18,Porto Alegre,50903,Chlamydia
+4671,22,Khartoum,67221,Chlamydia
+4672,37,Houston,22139,AIDS
+4673,45,Porto Velho,70078,Flu
+4674,60,Riga,21995,Flu
+4675,56,Taiyuan,48391,Otitis
+4676,67,Kaohsiung,70856,Chlamydia
+4677,77,Nuuk,77184,Chlamydia
+4678,86,Nairobi,46754,Flu
+4679,53,Yaren District,45963,Cancer
+4680,58,Brisbane,27634,Otitis
+4681,63,Fukuoka,55833,Conjuntivitis
+4682,19,Kaohsiung,40201,AIDS
+4683,72,Djibouti (city),26391,Conjuntivitis
+4684,37,Mashhad,28686,Cancer
+4685,48,Tunis,26494,AIDS
+4686,82,Makati City,15585,Fever
+4687,39,Singapore,21403,Autism
+4688,47,Jayapura,65318,Cancer
+4689,2,El Aaiún,64293,Flu
+4690,62,Tabriz,45658,Chlamydia
+4691,53,Mexicali,15696,Fever
+4692,32,Padang,35344,Autism
+4693,74,Tabriz,44670,Cancer
+4694,77,Petropavlovsk-Kamchatsky,32040,Autism
+4695,32,Cairns,28703,Cancer
+4696,58,Dongguan,10258,Cancer
+4697,62,Pittsburgh,64458,Flu
+4698,33,Zamboanga City,72165,Chlamydia
+4699,30,Bahía Blanca,52982,Autism
+4700,29,Bogor,59746,Chlamydia
+4701,9,Cotonou,10891,Fever
+4702,58,Port of Spain,33624,AIDS
+4703,17,Ibadan,62601,Fever
+4704,46,Yakutsk,68155,AIDS
+4705,64,Petropavlovsk-Kamchatsky,12442,Autism
+4706,21,Colombo,51347,Autism
+4707,40,Padang,68894,Chlamydia
+4708,21,Saint Petersburg,29882,Cancer
+4709,67,Geneva,63992,Conjuntivitis
+4710,15,Bern,39707,AIDS
+4711,3,Malmö,72245,Cancer
+4712,72,Denver,27728,Fever
+4713,23,Dublin,10390,AIDS
+4714,51,Kingston,36475,Autism
+4715,47,Thiès,39276,Fever
+4716,37,Guadalajara,73378,Otitis
+4717,47,Mwanza,29551,Chlamydia
+4718,45,Toulouse,33354,AIDS
+4719,2,Montreal,15905,Flu
+4720,15,Quebec City,76997,Fever
+4721,51,Tijuana,17441,AIDS
+4722,59,Djibouti (city),63973,AIDS
+4723,25,Jamestown,23404,Autism
+4724,35,Bangui,10186,Conjuntivitis
+4725,48,Serekunda,70730,Chlamydia
+4726,88,Nairobi,50051,Otitis
+4727,46,San Juan,23119,Flu
+4728,33,Bogor,49793,Cancer
+4729,63,Djibouti (city),21854,Chlamydia
+4730,61,Pune,28414,Otitis
+4731,16,Newcastle,54395,Autism
+4732,44,Zhengzhou,78933,Otitis
+4733,57,Pelotas,35385,Flu
+4734,90,Muscat,57297,Flu
+4735,41,Ludhiana,64515,Otitis
+4736,57,Tabriz,62540,Flu
+4737,13,Maracaibo,30357,Otitis
+4738,46,Vaduz,36889,Chlamydia
+4739,71,Lhasa,62639,Cancer
+4740,72,Rabat,23333,Conjuntivitis
+4741,44,Xi'an,23803,Chlamydia
+4742,9,Conakry,34301,Chlamydia
+4743,36,Vaduz,15513,Otitis
+4744,40,Amman,79057,Autism
+4745,75,Cusco,15038,AIDS
+4746,37,Harare,45660,Cancer
+4747,29,Panama City,76306,Autism
+4748,52,Hai Phong,46155,Otitis
+4749,8,Iqaluit,62549,Chlamydia
+4750,36,Maputo,13200,AIDS
+4751,18,Gibraltar,39054,Fever
+4752,38,Luanda,48444,Conjuntivitis
+4753,69,São José dos Campos,33547,AIDS
+4754,33,Cali,19009,Cancer
+4755,30,Stuttgart,30502,AIDS
+4756,88,Vancouver,58580,Otitis
+4757,14,Maceió,11120,Fever
+4758,28,Lima,13808,Chlamydia
+4759,62,Dresden,52576,AIDS
+4760,77,Cairns,73654,AIDS
+4761,78,Lucknow,10593,Cancer
+4762,42,Athens,55877,Otitis
+4763,59,Warsaw,60381,Chlamydia
+4764,23,Guwahati,69929,AIDS
+4765,44,Houston,19084,Fever
+4766,46,Addis Ababa,22704,Fever
+4767,32,Guangzhou,23449,Conjuntivitis
+4768,14,Seville,20991,Autism
+4769,23,Weno,34275,Fever
+4770,48,Padang,22442,Autism
+4771,34,Nassau,21257,Otitis
+4772,84,Charlottetown,65669,Flu
+4773,73,Sucre,55378,Autism
+4774,79,Miri,70830,AIDS
+4775,23,Malmö,17045,Flu
+4776,53,Dunedin,21907,Flu
+4777,45,Prague,33038,Chlamydia
+4778,21,Austin,73962,Fever
+4779,17,Palikir,61136,Chlamydia
+4780,67,Las Palmas de Gran Canaria,50894,Otitis
+4781,19,Gibraltar,76077,Flu
+4782,34,Wellington,16257,Cancer
+4783,39,Port Elizabeth,69161,Conjuntivitis
+4784,36,Miri,35253,Cancer
+4785,18,Darwin,14136,AIDS
+4786,71,Gangtok,50332,Autism
+4787,2,Montevideo,36813,Fever
+4788,36,Nice,14614,Autism
+4789,70,Rio de Janeiro,78067,Chlamydia
+4790,63,Luanda,53355,Fever
+4791,53,Kingston,65805,Otitis
+4792,71,Funafuti,23409,Cancer
+4793,50,Iqaluit,26557,Autism
+4794,43,Bucharest,32486,Chlamydia
+4795,42,Huế,32302,Cancer
+4796,19,Rio Branco,14302,Conjuntivitis
+4797,12,Tianjin,78107,Autism
+4798,46,Taiyuan,39653,Cancer
+4799,63,Phuket (city),49535,Cancer
+4800,8,Shenyang,69742,AIDS
+4801,48,Qingdao,58013,Flu
+4802,19,Tbilisi,46910,AIDS
+4803,35,Shijiazhuang,30243,Otitis
+4804,82,Chongqing,68660,Cancer
+4805,80,Tagbilaran,56086,Fever
+4806,52,Koulikoro,31456,Chlamydia
+4807,61,Magadan,22372,Fever
+4808,79,Sukhumi,78701,Fever
+4809,11,Basse-Terre,44378,Conjuntivitis
+4810,16,Bridgetown,16017,AIDS
+4811,58,Surat,55685,AIDS
+4812,28,Boston,13063,Otitis
+4813,40,Thimphu,67685,Cancer
+4814,1,Linz,24821,Conjuntivitis
+4815,26,Rome,66862,Fever
+4816,58,Bishkek,56352,Fever
+4817,26,Ankara,47382,Autism
+4818,61,Caracas,16028,Fever
+4819,34,El Paso,76047,Autism
+4820,78,Winnipeg,34513,Autism
+4821,84,Darwin,77095,Flu
+4822,57,Port-au-Prince,22901,Chlamydia
+4823,16,Calgary,62473,Fever
+4824,9,Bangalore,63136,Conjuntivitis
+4825,30,Detroit,45120,Chlamydia
+4826,21,Pretoria,50817,Otitis
+4827,32,Khartoum,20595,Cancer
+4828,66,Handan,71176,Cancer
+4829,63,Porto Velho,72035,Otitis
+4830,18,Ilhéus,70016,Fever
+4831,6,Invercargill,32637,Conjuntivitis
+4832,49,New York City,21848,Flu
+4833,38,Sacramento,50316,Fever
+4834,60,Tskhinvali,61658,Flu
+4835,49,Xi'an,53094,Chlamydia
+4836,60,Raleigh,36882,AIDS
+4837,88,Tabriz,75591,Cancer
+4838,71,Monaco,45219,Autism
+4839,24,Luxor,59541,Otitis
+4840,79,Valdivia,34034,Fever
+4841,58,Buffalo,36624,Flu
+4842,33,Koulikoro,11009,AIDS
+4843,19,Dushanbe,71782,Autism
+4844,24,Toronto,65322,Chlamydia
+4845,57,Bogotá,50655,Fever
+4846,70,San Diego,72170,AIDS
+4847,55,Batticaloa,33983,Flu
+4848,90,Davao City,47605,Flu
+4849,14,Labasa,21155,Chlamydia
+4850,88,Zürich,76035,Fever
+4851,36,Pelotas,32982,Otitis
+4852,86,Harbin,20089,Fever
+4853,50,Nantes,62797,Otitis
+4854,14,Jayapura,34074,Fever
+4855,62,Chuí,19051,Flu
+4856,27,Tamale,35399,Conjuntivitis
+4857,29,Funafuti,53761,Flu
+4858,11,Roseau,72577,Flu
+4859,31,Nanjing,78765,Conjuntivitis
+4860,35,Baghdad,30686,Conjuntivitis
+4861,38,Havana,15645,Chlamydia
+4862,63,Sri Jayawardenapura-Kotte,19608,Chlamydia
+4863,9,Punta Arenas,38397,Flu
+4864,62,Ottawa,16625,Flu
+4865,69,Istanbul,49724,Autism
+4866,24,Yamoussoukro,77583,Fever
+4867,76,Rochester,49376,Autism
+4868,69,Maseru,21197,Flu
+4869,2,Chişinău,33378,Cancer
+4870,27,Kuching,73833,Chlamydia
+4871,78,Christchurch,32367,Fever
+4872,27,Hamburg,73745,Otitis
+4873,12,Gaza,66287,Autism
+4874,86,Seville,59368,Autism
+4875,46,Osaka,40087,Otitis
+4876,67,Faisalabad,31033,Otitis
+4877,39,Udon Thani,72054,AIDS
+4878,62,Zhengzhou,63225,AIDS
+4879,9,Lahore,33582,Autism
+4880,69,Patna,69386,Autism
+4881,15,Kabul,54617,AIDS
+4882,29,Beirut,11704,Chlamydia
+4883,78,Charlotte Amalie,32354,Autism
+4884,2,Tabriz,35945,Otitis
+4885,13,Zhengzhou,36754,Autism
+4886,9,Dalian,25569,Autism
+4887,71,Hanga Roa,43937,Chlamydia
+4888,87,Osaka,45484,Autism
+4889,12,Mexico City,76649,Fever
+4890,44,Lanzhou,10475,Autism
+4891,82,Simferopol,46054,Cancer
+4892,33,Saint-Pierre,32041,Flu
+4893,66,Dongguan,69015,Chlamydia
+4894,6,Invercargill,52352,Autism
+4895,15,Zürich,27699,Chlamydia
+4896,16,Kinshasa,29732,Autism
+4897,4,Bratsk,45780,AIDS
+4898,22,Wollongong,78498,Fever
+4899,70,Kyoto,71522,Flu
+4900,56,Bogor,14916,Autism
+4901,38,Shigatse,13086,Fever
+4902,69,Castries,32855,Otitis
+4903,35,Caracas,76702,Cancer
+4904,43,Edmonton,72195,Flu
+4905,82,Kaliningrad,43857,Fever
+4906,81,Ilhéus,21999,Conjuntivitis
+4907,72,Managua,20753,Chlamydia
+4908,56,Pattaya,78906,Chlamydia
+4909,80,Nashville,79735,AIDS
+4910,6,Jakarta,32562,Otitis
+4911,61,Hong Kong,15013,Cancer
+4912,10,Madrid,36134,Cancer
+4913,23,Jinan,15816,Fever
+4914,83,Thimphu,16067,Chlamydia
+4915,80,Douala,60198,Chlamydia
+4916,87,Marseille,43262,Otitis
+4917,87,San Salvador,21304,Chlamydia
+4918,73,Ouagadougou,16076,Flu
+4919,21,Konya,15510,Fever
+4920,79,Ljubljana,42554,Autism
+4921,52,Labasa,62584,Otitis
+4922,67,Adamstown,64223,Fever
+4923,87,Hamburg,50612,Chlamydia
+4924,46,Bissau,48608,Fever
+4925,30,Prague,49845,Otitis
+4926,34,Phnom Penh,13566,Otitis
+4927,2,Vientiane,38179,Cancer
+4928,22,Barcelona,29596,Cancer
+4929,7,Detroit,49503,Conjuntivitis
+4930,79,Charlotte Amalie,37300,Cancer
+4931,85,Detroit,26212,Flu
+4932,63,Tamale,79738,Flu
+4933,19,Memphis,74840,Cancer
+4934,40,Seville,39008,Chlamydia
+4935,37,Srinagar,76878,Conjuntivitis
+4936,79,Bangalore,51774,Chlamydia
+4937,66,Portland,42593,Otitis
+4938,81,Abuja,50008,Autism
+4939,82,Mandurah,71626,Fever
+4940,22,Copenhagen,35796,Conjuntivitis
+4941,66,Pattaya,53358,Cancer
+4942,67,Asmara,31624,Autism
+4943,46,Gaza,53172,Conjuntivitis
+4944,49,Handan,63845,Conjuntivitis
+4945,39,Saint-Pierre,23606,Cancer
+4946,63,Cork (city),11089,Conjuntivitis
+4947,65,Pelotas,62173,Cancer
+4948,16,Gold Coast,77066,Fever
+4949,50,Yamoussoukro,37898,Autism
+4950,41,Warsaw,35873,Fever
+4951,38,Shenzhen,35328,Otitis
+4952,2,Saint Petersburg,56453,Flu
+4953,66,Busan,73504,AIDS
+4954,18,Taiyuan,56117,Fever
+4955,85,Pittsburgh,76061,Otitis
+4956,14,Charlotte,20177,Cancer
+4957,62,Port Said,11305,Cancer
+4958,24,Semarang,25585,Chlamydia
+4959,50,Stanley,16199,Autism
+4960,24,Rockhampton,44878,Chlamydia
+4961,63,Weno,17733,Flu
+4962,54,Geelong,78281,Autism
+4963,7,Guadalajara,68637,Flu
+4964,31,Qingdao,30144,Otitis
+4965,68,Salzburg,74980,Conjuntivitis
+4966,32,Yekaterinburg,67099,Autism
+4967,65,Kabul,32911,Conjuntivitis
+4968,29,Batticaloa,76658,Conjuntivitis
+4969,17,Changchun,59182,Autism
+4970,62,Freetown,44989,Cancer
+4971,89,Bishkek,36022,Fever
+4972,64,Baghdad,29631,AIDS
+4973,71,Abidjan,69588,Autism
+4974,24,Melbourne,56767,Cancer
+4975,47,Barranquilla,53736,Cancer
+4976,23,Ilhéus,55773,Autism
+4977,14,Bridgetown,45420,Chlamydia
+4978,83,Puebla,55013,Cancer
+4979,20,Kuala Lumpur,46198,Cancer
+4980,69,Bern,48382,Fever
+4981,40,Chongqing,10123,Conjuntivitis
+4982,60,Gothenburg,79766,Chlamydia
+4983,87,Toulouse,13007,Otitis
+4984,9,Vientiane,65107,Fever
+4985,70,Taiyuan,50006,Otitis
+4986,32,Kaohsiung,73582,Otitis
+4987,75,Saint-Denis,22851,Fever
+4988,61,Riverside,74424,Chlamydia
+4989,17,Huế,71014,Flu
+4990,90,Blantyre,68517,Autism
+4991,75,Basra,25936,Chlamydia
+4992,25,Saint-Denis,68442,Otitis
+4993,15,New Orleans,53976,Cancer
+4994,30,Port of Spain,77575,Chlamydia
+4995,73,Ludhiana,44707,Otitis
+4996,86,Pittsburgh,73705,Conjuntivitis
+4997,5,Pune,21790,Flu
+4998,62,Barcelona,26993,Chlamydia
+4999,44,Perth,18935,Flu
+5000,67,Timbuktu,24161,Otitis
+5001,50,Nagoya,53503,Otitis
+5002,7,Shillong,35256,Conjuntivitis
+5003,23,Shenyang,37844,Otitis
+5004,34,Port Said,51231,Conjuntivitis
+5005,79,Vancouver,41545,Autism
+5006,10,Bergen,75129,Otitis
+5007,20,Ilhéus,12990,Fever
+5008,14,Charlotte Amalie,52162,Otitis
+5009,12,Nashville,55564,Cancer
+5010,29,Alexandria,18902,Chlamydia
+5011,88,Tucson,49473,AIDS
+5012,55,Stepanakert,78672,AIDS
+5013,19,Suva,50149,Chlamydia
+5014,1,Toulouse,62732,Otitis
+5015,33,Maracaibo,47539,Autism
+5016,63,Makati City,67255,Flu
+5017,50,Valencia,26112,Fever
+5018,29,Murmansk,19108,Cancer
+5019,65,Iquitos,35782,AIDS
+5020,37,Abidjan,67039,Flu
+5021,24,Paris,75660,Autism
+5022,28,Lima,43314,AIDS
+5023,30,Anadyr (town),17154,Conjuntivitis
+5024,11,Jerusalem,59934,Fever
+5025,5,Daegu,61616,AIDS
+5026,37,Guatemala City,26634,AIDS
+5027,25,Port Elizabeth,74925,Flu
+5028,56,Freetown,25865,Otitis
+5029,16,Vaduz,68541,Fever
+5030,5,Chaguanas,42401,Cancer
+5031,37,Alor Star,30815,Flu
+5032,48,São Paulo,19696,AIDS
+5033,78,Naypyidaw,17782,AIDS
+5034,31,Bulawayo,43682,Otitis
+5035,42,Zürich,19184,Conjuntivitis
+5036,60,Udon Thani,71044,Conjuntivitis
+5037,13,Ljubljana,14021,Cancer
+5038,86,Islamabad,19786,Otitis
+5039,73,Lobamba,13205,Fever
+5040,22,Arequipa,51839,Otitis
+5041,65,Vancouver,76089,Fever
+5042,24,Lanzhou,45934,AIDS
+5043,10,Jeddah,35150,Conjuntivitis
+5044,62,Cebu City,67885,Cancer
+5045,62,Perth,63259,Fever
+5046,39,Ludhiana,70658,Chlamydia
+5047,44,Antwerp,67744,Conjuntivitis
+5048,76,Abuja,35911,Autism
+5049,38,Geelong,41316,Conjuntivitis
+5050,76,Nice,65583,Fever
+5051,21,Udon Thani,64230,Flu
+5052,65,Edmonton,55587,Otitis
+5053,11,Karachi,40360,Chlamydia
+5054,53,Brasília,49317,Otitis
+5055,5,Praia,54642,AIDS
+5056,8,Birkirkara,38874,Otitis
+5057,72,Luanda,18548,Otitis
+5058,29,La Paz,78944,Cancer
+5059,60,Charlotte Amalie,17776,Flu
+5060,28,Bahía Blanca,55701,Chlamydia
+5061,31,Vladivostok,76881,Chlamydia
+5062,89,Cork (city),28738,Fever
+5063,86,Louisville,70600,Autism
+5064,71,Fortaleza,68240,Conjuntivitis
+5065,70,Valencia,61402,Flu
+5066,53,Lomé,33012,AIDS
+5067,35,Djibouti (city),20439,Flu
+5068,67,Christchurch,58841,Chlamydia
+5069,65,Surabaya,47589,Cancer
+5070,5,Bamako,67152,Flu
+5071,76,Nakhon Ratchasima,53322,Autism
+5072,73,Karachi,12305,Flu
+5073,47,Phuket (city),21765,Fever
+5074,67,Port Moresby,23933,Autism
+5075,72,Tallinn,29936,Otitis
+5076,60,Philadelphia,63308,Autism
+5077,16,Wonsan,55353,Fever
+5078,23,Fredericton,16829,AIDS
+5079,34,Nukuʻalofa,52648,Fever
+5080,72,Alor Star,64758,Fever
+5081,51,Philadelphia,78371,Flu
+5082,77,New York City,55587,Flu
+5083,5,Madrid,60744,Chlamydia
+5084,31,Semarang,50690,AIDS
+5085,69,Ilhéus,26517,Chlamydia
+5086,75,Abu Dhabi,27213,Autism
+5087,47,Lilongwe,71199,Fever
+5088,84,Hiroshima,19039,Chlamydia
+5089,10,Melekeok,62404,Autism
+5090,58,Kuching,59557,Chlamydia
+5091,1,Tunis,57691,AIDS
+5092,34,Ndola,15064,Chlamydia
+5093,24,Maputo,79895,Conjuntivitis
+5094,32,Dhaka,78065,Cancer
+5095,39,Handan,39716,Autism
+5096,31,Zapopan,54073,Cancer
+5097,71,Rio Branco,17789,AIDS
+5098,41,Brisbane,43986,Flu
+5099,75,Porto,15079,Otitis
+5100,46,Pune,22984,Cancer
+5101,36,Kano,59880,Autism
+5102,35,Roseau,40111,AIDS
+5103,21,Freetown,13584,Fever
+5104,42,Apia,25569,Flu
+5105,73,Providence,32770,Otitis
+5106,39,Sapporo,13649,Conjuntivitis
+5107,11,South Tarawa,60092,Otitis
+5108,24,Split (city),65682,Chlamydia
+5109,77,Havana,12983,Cancer
+5110,84,Jersey City,74994,Conjuntivitis
+5111,66,Medan,65116,Otitis
+5112,3,Chaguanas,36057,Otitis
+5113,81,Yerevan,78628,Chlamydia
+5114,83,Albuquerque,24244,Otitis
+5115,48,Chittagong,44111,Otitis
+5116,67,Maputo,45441,Otitis
+5117,61,Johannesburg,34104,Conjuntivitis
+5118,33,Semarang,35408,Flu
+5119,52,Phnom Penh,31343,Flu
+5120,55,Iquique,70000,Cancer
+5121,19,Tianjin,48710,Otitis
+5122,17,Kingston,47246,Conjuntivitis
+5123,13,City of San Marino,46714,Otitis
+5124,12,Cali,59095,AIDS
+5125,47,Malé,24298,Fever
+5126,13,São Paulo,35777,Chlamydia
+5127,53,Greenwich,68467,Cancer
+5128,87,Athens,32680,Conjuntivitis
+5129,52,Mata-Utu,27358,Conjuntivitis
+5130,10,Taipei,24147,Cancer
+5131,6,Bulawayo,46774,Autism
+5132,32,Toulouse,74032,Flu
+5133,25,Lima,39605,Conjuntivitis
+5134,62,Nantes,32576,Chlamydia
+5135,22,Shigatse,58324,AIDS
+5136,68,Stuttgart,68026,Otitis
+5137,43,Tirana,62254,Cancer
+5138,33,Graz,19420,Cancer
+5139,33,Hamburg,15843,AIDS
+5140,89,Aarhus,54983,Autism
+5141,10,Reykjavík,76281,Fever
+5142,45,Guangzhou,28442,Autism
+5143,66,Port Louis,46335,AIDS
+5144,44,Caracas,39404,Otitis
+5145,75,Dubai,29251,Cancer
+5146,25,Budapest,47807,Fever
+5147,49,Chicago,75681,Chlamydia
+5148,16,Kanpur,50377,Fever
+5149,53,Saint Petersburg,34365,Flu
+5150,66,Quito,29409,Otitis
+5151,14,Bogotá,33613,Cancer
+5152,72,Arequipa,12518,AIDS
+5153,87,Port Vila,46961,Flu
+5154,45,Graz,34624,AIDS
+5155,84,Lahore,50623,Flu
+5156,17,Greenwich,25736,Fever
+5157,25,Abidjan,38020,Conjuntivitis
+5158,18,Omdurman,22715,Cancer
+5159,64,Makassar,37234,Chlamydia
+5160,45,Melekeok,35850,Conjuntivitis
+5161,56,Shenzhen,33837,Chlamydia
+5162,14,Harbin,34650,Otitis
+5163,13,Dongguan,57989,Chlamydia
+5164,53,Kuala Lumpur,23646,Cancer
+5165,63,Daegu,54179,AIDS
+5166,2,Nakhon Ratchasima,67090,Autism
+5167,67,Colombo,53634,Chlamydia
+5168,5,Denpasar,56793,AIDS
+5169,12,Brisbane,53661,Autism
+5170,89,Udon Thani,21775,Chlamydia
+5171,87,N'Djamena,19810,Autism
+5172,11,Da Nang,52138,Conjuntivitis
+5173,10,San Salvador,73348,Conjuntivitis
+5174,60,Strasbourg,58321,Flu
+5175,6,Linz,35409,Chlamydia
+5176,21,Dammam,10045,Flu
+5177,43,Khartoum,36367,AIDS
+5178,17,Pelotas,13000,Cancer
+5179,34,Winnipeg,51520,Otitis
+5180,5,Harare,47920,Fever
+5181,43,South Tarawa,54718,Fever
+5182,60,Andorra la Vella,48716,Cancer
+5183,70,Petropavlovsk-Kamchatsky,42285,Autism
+5184,63,Andorra la Vella,26771,Conjuntivitis
+5185,76,Rio Branco,73976,AIDS
+5186,75,Saint-Pierre,69262,Chlamydia
+5187,46,Antananarivo,79430,Autism
+5188,45,Kingston,15480,Conjuntivitis
+5189,82,Maputo,31618,Chlamydia
+5190,15,Yellowknife,41416,Otitis
+5191,70,Düsseldorf,19370,Cancer
+5192,26,Timbuktu,54013,Cancer
+5193,43,Lanzhou,23188,Chlamydia
+5194,51,Moscow,28991,Otitis
+5195,79,Bangui,11121,Cancer
+5196,83,Amsterdam,70457,Flu
+5197,79,Brasília,67856,Fever
+5198,69,Stanley,30539,Otitis
+5199,72,Iqaluit,11428,AIDS
+5200,61,Lusaka,30880,Chlamydia
+5201,1,Semarang,12119,Fever
+5202,76,Sana'a,51485,Chlamydia
+5203,57,Ambon,35199,AIDS
+5204,69,Virginia Beach,59620,Otitis
+5205,4,Santa Cruz de Tenerife,63907,Conjuntivitis
+5206,12,Magadan,47464,Autism
+5207,81,Shigatse,24567,Fever
+5208,31,Kano,24938,Conjuntivitis
+5209,77,Nukulaelae,25576,Fever
+5210,84,Portland,31496,Chlamydia
+5211,16,Port-au-Prince,13220,Cancer
+5212,47,Gdańsk,32362,Cancer
+5213,41,Mumbai,13130,Flu
+5214,35,Jeddah,77814,Autism
+5215,59,Omsk,73233,Flu
+5216,83,Hanover,26305,Autism
+5217,27,Addis Ababa,58008,Conjuntivitis
+5218,23,Bilbao,33205,Flu
+5219,89,Bridgetown,36214,Chlamydia
+5220,86,Hamburg,70641,Autism
+5221,52,Pekanbaru,40131,Chlamydia
+5222,77,Cork (city),70795,Conjuntivitis
+5223,58,Amman,79481,Flu
+5224,53,Petropavlovsk-Kamchatsky,50540,AIDS
+5225,29,Lima,16109,AIDS
+5226,23,Islamabad,51004,Cancer
+5227,81,Gothenburg,41907,Chlamydia
+5228,85,Balikpapan,47387,Flu
+5229,52,Chicago,47520,Conjuntivitis
+5230,31,Dushanbe,76205,Flu
+5231,33,Kiev,48531,Autism
+5232,65,Port of Spain,63087,Conjuntivitis
+5233,75,Zagreb,66557,Cancer
+5234,36,Tbilisi,52616,Cancer
+5235,73,Havana,18697,Chlamydia
+5236,52,Riga,73446,Otitis
+5237,6,Wichita,32118,Conjuntivitis
+5238,54,Pekanbaru,77413,Conjuntivitis
+5239,77,Lhasa,13386,Chlamydia
+5240,46,Almaty,47123,Cancer
+5241,71,Beijing,57702,Flu
+5242,34,Conakry,70455,Otitis
+5243,38,Yaren District,20044,Otitis
+5244,84,Durban,73144,Flu
+5245,54,Freetown,20043,Autism
+5246,71,Chengdu,19318,Chlamydia
+5247,34,Mersin,30531,AIDS
+5248,75,Kuala Lumpur,67123,Autism
+5249,76,Yellowknife,24644,Cancer
+5250,29,Ciudad del Este,73592,Flu
+5251,38,Belgrade,30812,Fever
+5252,22,Geneva,67002,Chlamydia
+5253,40,Bangui,18926,AIDS
+5254,22,Bogotá,78139,AIDS
+5255,87,Pekanbaru,55658,Flu
+5256,46,Antofagasta,62244,Autism
+5257,48,Tórshavn,43236,Flu
+5258,71,Rotterdam,38790,Autism
+5259,69,Cairo,21394,Flu
+5260,58,Bogotá,35628,AIDS
+5261,4,Pattaya,25201,Conjuntivitis
+5262,42,Jaipur,35786,Autism
+5263,68,Edinburgh,60901,AIDS
+5264,49,Innsbruck,33087,Chlamydia
+5265,62,Lima,34385,Flu
+5266,68,Cebu City,69990,Fever
+5267,81,Austin,55587,Chlamydia
+5268,37,Nagoya,60392,Otitis
+5269,13,N'Djamena,72170,Otitis
+5270,77,Chişinău,18544,Fever
+5271,66,Belfast,29306,Chlamydia
+5272,13,Pattaya,16128,Conjuntivitis
+5273,2,Vientiane,30683,Conjuntivitis
+5274,75,Kolkata,73971,Chlamydia
+5275,18,Wichita,70454,Autism
+5276,88,Ankara,23190,Autism
+5277,56,Dunedin,54469,Cancer
+5278,10,Townsville,40324,Otitis
+5279,67,Kanpur,66584,Conjuntivitis
+5280,79,Riga,73238,AIDS
+5281,90,Santiago,52815,Otitis
+5282,44,Shijiazhuang,47566,Chlamydia
+5283,76,Lisbon,66161,Autism
+5284,8,Sana'a,73402,Otitis
+5285,79,Christchurch,68708,Otitis
+5286,32,Kaohsiung,16133,Flu
+5287,42,Chişinău,76728,Flu
+5288,62,Calama,29573,Cancer
+5289,24,Palma,71457,Flu
+5290,84,Baku,13577,Conjuntivitis
+5291,17,Santo Domingo,79087,Autism
+5292,31,St. John's,12165,Autism
+5293,35,Mashhad,19162,Flu
+5294,81,Port of Spain,74359,Fever
+5295,71,Dili,27648,Chlamydia
+5296,27,Sofia,60340,Chlamydia
+5297,38,Cockburn Town,59668,Cancer
+5298,25,San Francisco,33908,AIDS
+5299,31,Angra do Heroísmo,50963,Chlamydia
+5300,53,Ho Chi Minh City,40131,Conjuntivitis
+5301,20,Darwin,26767,Flu
+5302,57,Arbil,20890,Chlamydia
+5303,80,Caracas,75820,Chlamydia
+5304,46,Porto,30083,Flu
+5305,41,Banjul,68264,AIDS
+5306,41,Medina,73634,Conjuntivitis
+5307,14,Antofagasta,29050,AIDS
+5308,73,Tórshavn,78160,Otitis
+5309,10,Valencia,73425,Chlamydia
+5310,30,Recife,75559,Otitis
+5311,31,Rochester,38770,Cancer
+5312,88,Veracruz,25675,Fever
+5313,13,Kobe,43143,Otitis
+5314,81,Cardiff,38265,Flu
+5315,86,Amritsar,23568,Flu
+5316,50,Batticaloa,56398,Flu
+5317,11,Manzini,74730,Chlamydia
+5318,6,Funafuti,61334,Chlamydia
+5319,32,Seville,56057,Autism
+5320,17,Beirut,33675,Cancer
+5321,8,City of Halifax,30622,Autism
+5322,54,Manila,37990,AIDS
+5323,40,Chiang Mai,66406,Autism
+5324,15,Caracas,19518,Otitis
+5325,40,Hat Yai,17690,Otitis
+5326,56,Ho Chi Minh City,15292,Autism
+5327,37,Addis Ababa,60947,Flu
+5328,49,Greenwich,47901,Cancer
+5329,63,Nantes,34154,Flu
+5330,62,Blantyre,54166,Autism
+5331,54,Praia,40554,Conjuntivitis
+5332,24,Cairns,22964,Conjuntivitis
+5333,63,Jeddah,68884,Flu
+5334,8,El Aaiún,39240,Otitis
+5335,19,Ludhiana,65575,Cancer
+5336,31,Melbourne,28756,Autism
+5337,80,St. George's,21163,Autism
+5338,16,Yaoundé,44701,Flu
+5339,7,Monrovia,48419,Conjuntivitis
+5340,47,Dublin,28298,AIDS
+5341,32,Mersin,41035,Fever
+5342,24,Bursa,34193,Conjuntivitis
+5343,48,Longyearbyen,15044,Conjuntivitis
+5344,57,Cape Town,76066,Autism
+5345,56,Dar es Salaam,13466,Conjuntivitis
+5346,76,Sitka,52141,Flu
+5347,74,Addis Ababa,10142,Conjuntivitis
+5348,83,Tabriz,55382,Conjuntivitis
+5349,11,Mamoudzou,31229,Otitis
+5350,49,Algiers,78642,AIDS
+5351,51,Bursa,60335,Autism
+5352,10,Manaus,22352,Fever
+5353,61,Ushuaia,52460,Flu
+5354,43,Boa Vista,55649,Cancer
+5355,88,Faisalabad,19778,Autism
+5356,20,Vilnius,72433,Chlamydia
+5357,3,Belize City,16700,Chlamydia
+5358,45,Douglas,40880,Chlamydia
+5359,68,Mashhad,25649,Autism
+5360,3,Belize City,31058,Otitis
+5361,28,Assis,54921,Conjuntivitis
+5362,45,Linz,61272,AIDS
+5363,12,Washington,30782,Chlamydia
+5364,21,Boa Vista,28748,Autism
+5365,59,Tashkent,75421,Cancer
+5366,13,Zapopan,43071,Cancer
+5367,25,Incheon,41881,Fever
+5368,12,Reykjavík,28121,Flu
+5369,32,Bogor,66338,AIDS
+5370,32,Lusaka,23863,Chlamydia
+5371,76,Dongguan,56972,Fever
+5372,6,Port Hedland,32785,Chlamydia
+5373,57,Pelotas,67516,AIDS
+5374,51,Seoul,79844,AIDS
+5375,81,Tashkent,25533,Chlamydia
+5376,79,Aberdeen,22164,Otitis
+5377,11,San Juan,17610,Cancer
+5378,29,İzmir,55787,Flu
+5379,36,Hilo,68275,Cancer
+5380,50,Sana'a,30954,Otitis
+5381,40,Lubumbashi,20036,Cancer
+5382,21,Cotonou,72027,AIDS
+5383,57,Belmopan,34763,Fever
+5384,1,Bogotá,63431,Chlamydia
+5385,57,Cairns,54675,Autism
+5386,45,Saipan,71181,Cancer
+5387,7,Baku,23872,Conjuntivitis
+5388,90,Sacramento,59442,Flu
+5389,81,Lucknow,10767,Cancer
+5390,38,Bucharest,68745,Otitis
+5391,47,Minsk,12478,Cancer
+5392,68,Caracas,10874,Flu
+5393,60,Padang,45440,AIDS
+5394,67,Sydney,44674,Cancer
+5395,51,Cuiabá,38399,Otitis
+5396,4,Medan,72997,Cancer
+5397,57,Cincinnati,33484,AIDS
+5398,89,Cleveland,31519,Chlamydia
+5399,63,Glasgow,15435,Otitis
+5400,55,Yogyakarta (city),19253,AIDS
+5401,6,San Salvador,29091,Cancer
+5402,45,Santiago,72097,Otitis
+5403,32,Freetown,12337,Flu
+5404,38,Mumbai,55946,Autism
+5405,64,Durango,15793,Conjuntivitis
+5406,79,Batticaloa,70684,Conjuntivitis
+5407,21,New Orleans,21922,Conjuntivitis
+5408,49,Sofia,33236,Flu
+5409,6,Toronto,60100,Flu
+5410,35,Khartoum,37923,Cancer
+5411,77,Saint Petersburg,43646,Chlamydia
+5412,52,Libreville,14750,Flu
+5413,87,Mumbai,51285,Chlamydia
+5414,10,Beirut,40508,Autism
+5415,62,Tórshavn,23407,Cancer
+5416,79,Gold Coast,44202,Chlamydia
+5417,3,Lanzhou,60437,Flu
+5418,33,Alexandria,21211,Otitis
+5419,86,Frankfurt,64298,Fever
+5420,71,Chittagong,15847,Fever
+5421,18,Sydney,64275,Autism
+5422,15,Port Elizabeth,71754,Autism
+5423,47,San Juan,69133,Cancer
+5424,34,Phoenix,11987,Otitis
+5425,25,Rotterdam,58282,Conjuntivitis
+5426,62,Houston,62738,Autism
+5427,86,Nassau,17475,Conjuntivitis
+5428,89,Nukus,45560,Flu
+5429,77,St. John's,42988,Cancer
+5430,13,Oranjestad,34197,Conjuntivitis
+5431,75,Yokohama,58578,Conjuntivitis
+5432,49,Nicosia,62877,AIDS
+5433,4,San Antonio,78684,Fever
+5434,80,Patna,11095,Fever
+5435,1,Tianjin,61430,Otitis
+5436,34,Bamako,63177,Fever
+5437,85,Seoul,43336,Autism
+5438,21,Santo Domingo,65066,Cancer
+5439,43,Gaziantep,21445,AIDS
+5440,47,Invercargill,58014,Fever
+5441,13,Valencia,25345,Conjuntivitis
+5442,25,Pristina,23362,Otitis
+5443,19,Bangalore,39926,Flu
+5444,53,Frankfurt,50611,Chlamydia
+5445,52,Cannes,61890,Otitis
+5446,9,Taichung,15426,Otitis
+5447,23,Muscat,50214,AIDS
+5448,11,Porto-Novo,79130,Conjuntivitis
+5449,81,Amsterdam,50993,Chlamydia
+5450,37,Strasbourg,45200,Conjuntivitis
+5451,28,Nukus,46887,Cancer
+5452,66,Abuja,38063,Chlamydia
+5453,87,São José dos Campos,17785,Cancer
+5454,61,Miami,71145,Cancer
+5455,9,Ankara,10104,Conjuntivitis
+5456,35,Recife,58852,Otitis
+5457,22,Sabha,56231,Otitis
+5458,23,Dhaka,10105,Otitis
+5459,7,Naypyidaw,48891,Autism
+5460,4,Wuhan,45680,Conjuntivitis
+5461,26,Port Elizabeth,74415,Fever
+5462,78,Kinshasa,11916,Otitis
+5463,52,Kansas City,42962,Chlamydia
+5464,53,Brussels,56452,Otitis
+5465,48,Port Louis,16260,AIDS
+5466,60,Istanbul,53370,Conjuntivitis
+5467,5,Roseau,26227,Fever
+5468,13,Bandar Seri Begawan,20165,Chlamydia
+5469,34,Düsseldorf,52572,Cancer
+5470,61,Jerusalem,57467,Otitis
+5471,50,Dammam,24250,Autism
+5472,29,Malang,35461,Flu
+5473,17,Patna,25677,Fever
+5474,14,Raleigh,46805,AIDS
+5475,60,Port-au-Prince,52150,Autism
+5476,88,Manila,64584,AIDS
+5477,38,Xi'an,73469,Autism
+5478,65,Ludhiana,52051,AIDS
+5479,65,Liverpool,32608,Fever
+5480,45,Sitka,46312,Conjuntivitis
+5481,35,Zhengzhou,44379,Chlamydia
+5482,17,Rabi Island,50769,Cancer
+5483,7,Cannes,36123,Autism
+5484,15,Kharkiv,24427,Otitis
+5485,50,Tunis,48711,Flu
+5486,69,Shijiazhuang,61106,Autism
+5487,23,Lahore,34540,Autism
+5488,21,Hanga Roa,46541,Cancer
+5489,7,Semarang,14396,Conjuntivitis
+5490,25,Hai Phong,20154,AIDS
+5491,9,Belmopan,49468,Fever
+5492,70,Vilnius,56425,Autism
+5493,11,Vitória,65864,AIDS
+5494,17,Belfast,77949,Flu
+5495,18,Dili,30818,Conjuntivitis
+5496,56,Cincinnati,34382,Fever
+5497,68,Tripoli,17769,Otitis
+5498,25,Blantyre,40644,Chlamydia
+5499,8,Providence,11661,Autism
+5500,80,Surat Thani,19316,Otitis
+5501,58,Bridgetown,52500,Fever
+5502,1,Ahmedabad,31584,Flu
+5503,18,Amman,28640,AIDS
+5504,50,Taichung,69329,Cancer
+5505,55,Serekunda,22306,Otitis
+5506,79,Kigali,11030,Flu
+5507,14,Blantyre,13300,Cancer
+5508,7,Edinburgh,57039,AIDS
+5509,16,Pelotas,75404,Otitis
+5510,27,Mérida,25803,Cancer
+5511,5,La Paz,29735,Conjuntivitis
+5512,4,Gaziantep,73378,Otitis
+5513,58,Curitiba,44186,Autism
+5514,42,Damascus,57749,Flu
+5515,26,Qingdao,55703,AIDS
+5516,73,Tiraspol,43312,Otitis
+5517,77,Yangon,29720,Chlamydia
+5518,65,Kaesong,76834,Autism
+5519,65,Ulan Bator,57912,Fever
+5520,61,Roseau,19075,Otitis
+5521,56,Horta (Azores),69946,Chlamydia
+5522,4,Ottawa,44428,Conjuntivitis
+5523,77,Huế,73279,Otitis
+5524,39,Xining,29228,Autism
+5525,53,Dili,30230,Conjuntivitis
+5526,41,Quezon City,41328,Chlamydia
+5527,36,Doha,32101,Flu
+5528,21,Split (city),73973,Cancer
+5529,30,Mbabane,58052,Flu
+5530,66,San Carlos de Bariloche,32089,Autism
+5531,21,Chiang Mai,39488,Autism
+5532,49,Manzini,37538,Autism
+5533,38,Mashhad,39713,Otitis
+5534,67,Perm,60833,Cancer
+5535,6,Miami,12130,Fever
+5536,69,Concepción,37388,Autism
+5537,57,Lviv,20259,Otitis
+5538,38,Busan,62795,Otitis
+5539,58,Douglas,46080,Flu
+5540,22,Cuiabá,54300,Conjuntivitis
+5541,30,Córdoba,76724,Conjuntivitis
+5542,53,Cairo,42688,Otitis
+5543,70,Hagåtña,61701,Autism
+5544,38,Vatican City,12889,Cancer
+5545,82,Kinshasa,51445,Chlamydia
+5546,76,Montevideo,71183,Chlamydia
+5547,30,Sarajevo,62437,Otitis
+5548,14,Longyearbyen,29361,Cancer
+5549,45,Lisbon,59412,Fever
+5550,51,Belém,77096,Otitis
+5551,58,Bishkek,59860,Chlamydia
+5552,48,Dodoma,67706,AIDS
+5553,10,Nizhny Novgorod,72876,AIDS
+5554,54,Porto Alegre,38993,Autism
+5555,8,Lanzhou,32545,Fever
+5556,73,Ljubljana,63298,Fever
+5557,50,Kharkiv,39638,Chlamydia
+5558,49,Assis,40707,AIDS
+5559,63,Jacksonville,21478,Conjuntivitis
+5560,76,Yokohama,15243,Otitis
+5561,27,Guangzhou,24992,Flu
+5562,55,Phuket (city),44374,Chlamydia
+5563,41,Novosibirsk,58165,Flu
+5564,64,Ürümqi,37712,Cancer
+5565,43,Las Palmas de Gran Canaria,39783,Chlamydia
+5566,8,Koulikoro,63622,Otitis
+5567,61,Murmansk,47908,Flu
+5568,22,Chihuahua,59549,Chlamydia
+5569,82,Tirana,52880,Cancer
+5570,42,Budapest,63109,Chlamydia
+5571,79,Campinas,42983,Flu
+5572,5,Padang,48524,Otitis
+5573,67,The Valley,51861,Autism
+5574,80,Forked River,64926,Flu
+5575,87,Chongqing,21914,Cancer
+5576,47,İzmir,23315,Otitis
+5577,39,Labasa,60615,Otitis
+5578,2,Nicosia,77415,Chlamydia
+5579,77,Mexico City,41726,Cancer
+5580,85,Luxembourg (city),43670,Chlamydia
+5581,50,Sarajevo,44649,Flu
+5582,54,Arequipa,47731,Autism
+5583,42,Koror,29564,Cancer
+5584,32,Portland,10548,Fever
+5585,62,Washington,56341,Chlamydia
+5586,83,Cartagena,12682,Autism
+5587,33,Moscow,19627,AIDS
+5588,23,El Paso,53591,Flu
+5589,38,Luanda,39674,Autism
+5590,21,Ponta Delgada,53800,Fever
+5591,43,Yakutsk,34626,Autism
+5592,28,Nice,14443,AIDS
+5593,4,Adana,50347,Flu
+5594,57,Houston,36028,Otitis
+5595,54,Atlanta,15840,Otitis
+5596,36,Washington,33055,AIDS
+5597,75,Bangkok,78418,Chlamydia
+5598,86,Udon Thani,29310,Fever
+5599,90,Virginia Beach,56465,Flu
+5600,19,Atlanta,19372,Autism
+5601,2,Taiyuan,42358,Conjuntivitis
+5602,80,Magadan,72099,Chlamydia
+5603,49,Riyadh,37932,Otitis
+5604,6,Manila,23037,Chlamydia
+5605,85,Port Blair,69681,Flu
+5606,54,Nagpur,13568,Otitis
+5607,60,Johannesburg,55849,Chlamydia
+5608,1,Kingstown,69829,Cancer
+5609,69,Chennai,66046,Fever
+5610,25,Yogyakarta (city),55090,Flu
+5611,46,Brazzaville,41413,Cancer
+5612,50,Omdurman,47240,Autism
+5613,7,Santiago de Cuba,33849,Fever
+5614,30,Philadelphia,30902,Fever
+5615,48,Melekeok,74135,Autism
+5616,83,Minneapolis,41266,Otitis
+5617,72,Chiang Mai,23357,Chlamydia
+5618,40,Da Nang,75849,Chlamydia
+5619,83,Iqaluit,34392,Otitis
+5620,59,Winnipeg,45355,Fever
+5621,52,Sri Jayawardenapura-Kotte,45179,AIDS
+5622,27,Sitka,12093,Otitis
+5623,21,Basra,31434,Cancer
+5624,72,Boa Vista,17484,Fever
+5625,60,Namangan,57604,Fever
+5626,89,Berlin,36808,Flu
+5627,83,Rochester,42103,Cancer
+5628,61,Tampa,41573,Cancer
+5629,25,Oklahoma City,22988,Conjuntivitis
+5630,85,Port Said,41000,Otitis
+5631,15,Lima,23581,Fever
+5632,48,Belgrade,74678,Conjuntivitis
+5633,82,Saipan,24002,Cancer
+5634,72,Lahore,32024,AIDS
+5635,58,Niamey,76733,Flu
+5636,84,Moscow,69077,Cancer
+5637,24,Managua,69240,Otitis
+5638,86,Bursa,27918,AIDS
+5639,26,Oslo,40478,Autism
+5640,80,Luanda,65975,Autism
+5641,59,Prague,41926,Cancer
+5642,11,Dresden,23657,AIDS
+5643,19,New Delhi,43463,AIDS
+5644,88,Chongqing,19649,Flu
+5645,79,Santiago,73036,Flu
+5646,69,Accra,42809,Chlamydia
+5647,5,Yaren District,42694,Chlamydia
+5648,23,Rockhampton,60987,Flu
+5649,5,Moroni,57573,Otitis
+5650,48,Zanzibar City,18657,AIDS
+5651,51,San Antonio,59459,AIDS
+5652,39,Nanning,79894,AIDS
+5653,21,Faisalabad,31727,AIDS
+5654,50,Enugu,29686,Chlamydia
+5655,36,Regina,49666,Cancer
+5656,80,Brisbane,49743,Autism
+5657,76,Kunming,66677,Cancer
+5658,36,Nanjing,51551,Chlamydia
+5659,80,Padang,70601,Fever
+5660,50,Brazzaville,59472,Chlamydia
+5661,27,Chihuahua,50390,AIDS
+5662,1,Geneva,22496,Fever
+5663,83,Kawasaki,44791,Otitis
+5664,67,Kuching,73177,Cancer
+5665,62,Port Moresby,54696,AIDS
+5666,86,Douala,46522,AIDS
+5667,54,Pristina,38178,Conjuntivitis
+5668,77,Kraków,17741,Chlamydia
+5669,44,Cali,78025,Fever
+5670,84,Malé,77802,Chlamydia
+5671,37,Valencia,66276,Autism
+5672,14,Kathmandu,65728,Chlamydia
+5673,47,Alofi,24331,Otitis
+5674,61,Havana,23608,Otitis
+5675,71,Beijing,47214,Otitis
+5676,5,Oslo,72880,Conjuntivitis
+5677,79,Hangzhou,42925,Cancer
+5678,84,Turin,32669,Fever
+5679,70,İzmir,48229,Flu
+5680,3,New Orleans,23552,AIDS
+5681,43,Saint Petersburg,27829,Otitis
+5682,50,Saint Petersburg,10156,Conjuntivitis
+5683,46,Concepción,78302,Otitis
+5684,20,Vitória,46570,Otitis
+5685,80,Manama,34875,Flu
+5686,6,Wonsan,25168,Flu
+5687,20,Surat,34874,Fever
+5688,69,Batticaloa,64288,Cancer
+5689,70,Minsk,13999,Chlamydia
+5690,90,Shanghai,30351,Chlamydia
+5691,7,Kota Bharu,61559,Cancer
+5692,56,Rio Branco,39772,Cancer
+5693,12,Salzburg,54811,Conjuntivitis
+5694,53,Johannesburg,74627,Flu
+5695,49,Buffalo,38361,Fever
+5696,31,Anadyr (town),66171,Fever
+5697,65,Paris,49206,Conjuntivitis
+5698,85,Gold Coast,26264,Autism
+5699,24,Amman,69676,Flu
+5700,30,Vladivostok,64261,Cancer
+5701,72,İzmir,25286,Autism
+5702,62,Cannes,59387,Fever
+5703,52,Ottawa,33097,AIDS
+5704,36,Ankara,58865,Cancer
+5705,36,Campo Grande,40647,Flu
+5706,9,Doha,76676,Flu
+5707,86,New Orleans,15893,Flu
+5708,29,Houston,19754,Flu
+5709,18,Tokyo,69520,Conjuntivitis
+5710,20,Chaguanas,22299,AIDS
+5711,48,London,53541,Fever
+5712,57,Basra,25476,Conjuntivitis
+5713,12,Simferopol,38267,Cancer
+5714,77,Bandar Seri Begawan,64000,Fever
+5715,75,Suva,50942,AIDS
+5716,39,Valparaíso,61382,Chlamydia
+5717,51,San Francisco,32275,AIDS
+5718,86,Brasília,37251,Flu
+5719,20,Kuala Lumpur,15403,Autism
+5720,24,Pittsburgh,27300,Fever
+5721,70,Rotterdam,43110,AIDS
+5722,50,Porto-Novo,22089,Conjuntivitis
+5723,8,Angra do Heroísmo,61989,AIDS
+5724,89,Davao City,62830,Autism
+5725,27,Miri,67153,AIDS
+5726,52,Casablanca,69257,Chlamydia
+5727,85,Iquique,77122,Conjuntivitis
+5728,61,Thimphu,64704,Chlamydia
+5729,49,New Delhi,44285,AIDS
+5730,51,Iquique,14359,Flu
+5731,57,Medina,56880,Cancer
+5732,41,Lusaka,69685,Autism
+5733,53,Udon Thani,16177,Cancer
+5734,45,Oranjestad,35610,Autism
+5735,30,Port Hedland,20893,AIDS
+5736,58,Puerto Williams,69821,Cancer
+5737,19,Hangzhou,28327,Cancer
+5738,25,Saint John,17131,Fever
+5739,22,Daegu,27100,Fever
+5740,81,Rio Branco,69539,Chlamydia
+5741,79,Lusaka,77383,Flu
+5742,74,Cape Town,49883,Otitis
+5743,82,Alexandria,23079,Chlamydia
+5744,2,New York City,63006,Flu
+5745,24,Palikir,61435,AIDS
+5746,72,Tianjin,77211,Chlamydia
+5747,8,San José,35526,Chlamydia
+5748,1,Asmara,56329,Otitis
+5749,81,Denpasar,77394,Chlamydia
+5750,26,Tegucigalpa,72580,Otitis
+5751,15,Philadelphia,47018,Autism
+5752,63,Hai Phong,79591,Fever
+5753,77,Shanghai,14964,AIDS
+5754,6,Sucre,38435,Autism
+5755,4,Vitória,37659,Chlamydia
+5756,14,Suva,47607,Flu
+5757,1,Yamoussoukro,17832,Conjuntivitis
+5758,28,Puerto Williams,24778,AIDS
+5759,57,Xi'an,11321,Autism
+5760,51,Blantyre,32526,Cancer
+5761,28,Wellington,34853,Cancer
+5762,24,Virginia Beach,22703,Chlamydia
+5763,2,Newcastle,54873,Cancer
+5764,81,The Valley,46143,Cancer
+5765,48,Apia,48569,Flu
+5766,49,Leeds,29085,Conjuntivitis
+5767,63,Tel Aviv,23146,AIDS
+5768,57,Honiara,51454,Chlamydia
+5769,33,Louisville,75822,Otitis
+5770,53,Mamoudzou,49019,Chlamydia
+5771,86,Sydney,32368,Cancer
+5772,71,Siem Reap,26345,Autism
+5773,37,Lomé,31874,Otitis
+5774,6,Whitehorse,55445,Otitis
+5775,35,Darwin,43439,Otitis
+5776,79,Manaus,14662,Fever
+5777,33,Bandung,44989,Autism
+5778,78,San Francisco,64817,Conjuntivitis
+5779,34,Kota Bharu,60808,Conjuntivitis
+5780,66,Cincinnati,39121,Cancer
+5781,77,Málaga,33548,Otitis
+5782,39,Stuttgart,12666,Cancer
+5783,52,Providence,55243,Autism
+5784,6,Sitka,71901,Otitis
+5785,47,Sabha,13591,Flu
+5786,56,Shanghai,55122,Otitis
+5787,46,Moroni,73584,Conjuntivitis
+5788,52,Taipei,58059,Fever
+5789,61,Yogyakarta (city),51795,Chlamydia
+5790,62,Mexico City,41884,Chlamydia
+5791,76,Liverpool,20243,Cancer
+5792,87,Bern,40964,Autism
+5793,58,Maceió,55498,Flu
+5794,15,Hamilton,78712,Flu
+5795,31,Pattaya,19595,Flu
+5796,64,Rawalpindi,29853,Cancer
+5797,11,Brikama,29734,Fever
+5798,23,Mersin,33454,Fever
+5799,5,Antwerp,53699,Autism
+5800,76,Asunción,17912,AIDS
+5801,85,Hai Phong,35284,Cancer
+5802,46,Port Vila,18553,Fever
+5803,19,Tehran,16623,Conjuntivitis
+5804,61,Horta (Azores),40293,Chlamydia
+5805,11,Tunis,44758,Otitis
+5806,14,Aarhus,42779,Cancer
+5807,43,Nakhon Ratchasima,13066,Fever
+5808,42,Da Nang,28781,Chlamydia
+5809,75,Omdurman,46238,Conjuntivitis
+5810,48,Tampere,38269,Flu
+5811,71,Cape Town,33162,Fever
+5812,3,Mamoudzou,10831,AIDS
+5813,86,Belém,51965,Fever
+5814,37,Aarhus,57877,Otitis
+5815,90,Karachi,24770,Conjuntivitis
+5816,54,Ahmedabad,12564,Cancer
+5817,23,Stepanakert,43480,Cancer
+5818,42,Lima,43163,Flu
+5819,54,Nanjing,27809,Flu
+5820,38,Port-au-Prince,18843,AIDS
+5821,68,Salt Lake City,47148,Conjuntivitis
+5822,62,Mwanza,43394,Fever
+5823,74,Charlottetown,43443,Cancer
+5824,12,Leipzig,12437,Conjuntivitis
+5825,48,Pittsburgh,27347,Chlamydia
+5826,40,Dodoma,27414,Conjuntivitis
+5827,61,Zagreb,24865,Fever
+5828,52,Chongjin,54444,Fever
+5829,40,Santa Cruz de la Sierra,42645,Flu
+5830,12,Iquique,40237,Cancer
+5831,78,Damascus,62409,Cancer
+5832,60,Muscat,60994,AIDS
+5833,42,Prague,67476,Cancer
+5834,3,Istanbul,15389,Autism
+5835,9,Porto Velho,20717,Flu
+5836,44,Udon Thani,15551,Otitis
+5837,26,Shijiazhuang,70285,Cancer
+5838,63,Medina,12860,Cancer
+5839,10,Tijuana,46927,Conjuntivitis
+5840,76,Batticaloa,79318,AIDS
+5841,31,New Delhi,18890,Flu
+5842,44,Kota Bharu,77584,Fever
+5843,4,Guadalajara,19806,Autism
+5844,24,Hanga Roa,57281,Cancer
+5845,71,Riverside,34428,Autism
+5846,57,Willemstad,44647,Flu
+5847,79,Nakhon Ratchasima,66488,Chlamydia
+5848,86,Phuket (city),74409,Fever
+5849,69,Tamale,64222,Autism
+5850,64,Jerusalem,30869,Conjuntivitis
+5851,88,Tashkent,18811,Autism
+5852,5,Quetzaltenango,70104,AIDS
+5853,63,Las Vegas,30346,Conjuntivitis
+5854,54,Winnipeg,46500,Autism
+5855,84,Antofagasta,69234,Otitis
+5856,49,Concepción,71760,Chlamydia
+5857,58,Rosario,30015,Flu
+5858,20,Houston,74742,AIDS
+5859,37,Singapore,53204,Flu
+5860,20,Naypyidaw,44799,Otitis
+5861,45,Kinshasa,46462,Cancer
+5862,53,Riverside,45613,Chlamydia
+5863,15,Belmopan,47670,Otitis
+5864,12,Thessaloniki,34818,Chlamydia
+5865,52,Manaus,54114,Fever
+5866,49,Chengdu,57491,Fever
+5867,31,Sydney,69990,Chlamydia
+5868,49,Belfast,70824,Conjuntivitis
+5869,80,Tijuana,10983,Autism
+5870,47,Dubai,64300,Flu
+5871,9,Nuuk,34883,AIDS
+5872,25,Taipei,59471,Autism
+5873,67,Bandar Seri Begawan,34642,Cancer
+5874,69,Sri Jayawardenapura-Kotte,59235,Conjuntivitis
+5875,2,Maputo,25798,AIDS
+5876,82,Macau,50684,Otitis
+5877,42,Fort-de-France,29937,Fever
+5878,8,Guatemala City,76083,Cancer
+5879,86,Pontianak,19900,Otitis
+5880,69,Havana,38168,Fever
+5881,57,Brazzaville,75064,Cancer
+5882,65,Graz,41500,AIDS
+5883,43,Tashkent,22654,Conjuntivitis
+5884,79,Karachi,63010,Fever
+5885,36,Split (city),59927,Chlamydia
+5886,12,Muscat,50093,Conjuntivitis
+5887,79,Bulawayo,14486,Chlamydia
+5888,75,Zanzibar City,34546,Chlamydia
+5889,70,Tashkent,75900,Flu
+5890,31,Longyearbyen,26387,Cancer
+5891,69,Townsville,53109,Autism
+5892,15,Cardiff,79501,Otitis
+5893,50,Thimphu,19653,Autism
+5894,35,Sitka,21299,Autism
+5895,15,Iloilo City,71128,Chlamydia
+5896,50,Cairns,19433,Fever
+5897,87,Vienna,52592,Autism
+5898,13,Adana,39882,Chlamydia
+5899,57,Ljubljana,22801,AIDS
+5900,58,Antofagasta,16055,Fever
+5901,71,Mérida,75621,AIDS
+5902,33,Hai Phong,23315,Otitis
+5903,1,Campinas,27641,Cancer
+5904,56,Da Nang,47313,Autism
+5905,29,Fort-de-France,75559,Cancer
+5906,58,Tskhinvali,66518,AIDS
+5907,20,Ibiza,19952,Flu
+5908,34,San Carlos de Bariloche,59165,Chlamydia
+5909,75,Milan,51805,Chlamydia
+5910,32,Freetown,41404,Autism
+5911,18,Strasbourg,56289,Otitis
+5912,30,Detroit,70838,AIDS
+5913,70,Odessa,55900,Flu
+5914,59,George Town,47250,Autism
+5915,29,Geelong,19307,AIDS
+5916,76,Kobe,34164,Chlamydia
+5917,3,Funafuti,42738,Otitis
+5918,20,Jamestown,67458,Chlamydia
+5919,78,Kingstown,39569,Fever
+5920,40,Nassau,15446,Flu
+5921,1,Oslo,26572,Conjuntivitis
+5922,62,Koror,68468,Conjuntivitis
+5923,81,Cartagena,71677,Conjuntivitis
+5924,79,Reykjavík,50185,Conjuntivitis
+5925,28,Francistown,77268,Autism
+5926,79,Buffalo,60072,Conjuntivitis
+5927,44,Santa Cruz de la Sierra,73051,Conjuntivitis
+5928,11,Weno,16509,Conjuntivitis
+5929,68,Bogor,47531,Flu
+5930,63,Zürich,49555,Autism
+5931,8,San Salvador,75686,Autism
+5932,43,Shijiazhuang,14051,Flu
+5933,9,Ahmedabad,72961,AIDS
+5934,28,Portland,51446,Chlamydia
+5935,31,Timbuktu,31394,Autism
+5936,75,Hai Phong,34492,AIDS
+5937,43,Sucre,36942,Otitis
+5938,84,Asunción,42276,AIDS
+5939,82,Lucknow,13395,Flu
+5940,82,Ibiza,41597,Fever
+5941,38,Pittsburgh,42842,Cancer
+5942,76,Cockburn Town,52870,Autism
+5943,37,Marrakech,47684,Autism
+5944,18,Memphis,14117,Conjuntivitis
+5945,66,São José dos Campos,37583,Cancer
+5946,40,Ushuaia,24287,Flu
+5947,46,Malmö,57866,Cancer
+5948,73,Vaduz,59304,Autism
+5949,43,Thimphu,60111,Conjuntivitis
+5950,55,Houston,20453,Autism
+5951,89,Funafuti,45577,Otitis
+5952,79,Guayaquil,50382,Autism
+5953,12,Dresden,60161,AIDS
+5954,20,Barcelona,36224,Flu
+5955,50,Ouagadougou,74513,Flu
+5956,54,Alofi,71970,Flu
+5957,75,Saint John,57093,Chlamydia
+5958,79,Huế,69659,AIDS
+5959,20,Suva,44129,AIDS
+5960,33,San Fernando,63766,Flu
+5961,67,Kaohsiung,72052,Flu
+5962,31,Jayapura,65004,Autism
+5963,52,Road Town,69941,Conjuntivitis
+5964,5,Kandahar,48177,Cancer
+5965,74,Conakry,43809,Autism
+5966,22,Memphis,76031,Cancer
+5967,28,Siem Reap,55637,Otitis
+5968,56,Kobe,47486,AIDS
+5969,62,Karachi,30551,AIDS
+5970,40,Miri,20343,Flu
+5971,32,Tirana,55469,Conjuntivitis
+5972,68,Cologne,69508,Otitis
+5973,90,Koulikoro,55372,Otitis
+5974,35,Hargeisa,56663,Fever
+5975,18,Gaborone,18319,Cancer
+5976,6,Abuja,44404,Fever
+5977,39,Kingstown,60062,Flu
+5978,58,Cuiabá,71201,Conjuntivitis
+5979,29,Tórshavn,63957,Autism
+5980,31,Libreville,34841,Chlamydia
+5981,17,Jamestown,53015,Otitis
+5982,46,Vitória,45330,Conjuntivitis
+5983,46,Horta (Azores),67039,Chlamydia
+5984,83,Pago Pago,24793,Flu
+5985,34,Brikama,53438,Autism
+5986,78,Birmingham,79647,Chlamydia
+5987,10,Denpasar,41480,Flu
+5988,72,Gold Coast,43667,Flu
+5989,40,Linz,22495,Fever
+5990,45,Wollongong,60712,Cancer
+5991,74,Antananarivo,52197,Fever
+5992,63,Manchester,15056,Chlamydia
+5993,54,İzmir,28686,Chlamydia
+5994,55,Abidjan,44164,Conjuntivitis
+5995,75,Taichung,44907,Cancer
+5996,40,Porto Alegre,56656,AIDS
+5997,33,Pristina,61322,AIDS
+5998,22,Osaka,66917,Fever
+5999,10,Namangan,57513,Conjuntivitis
+6000,81,Durango,57392,Autism

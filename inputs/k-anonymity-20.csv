@@ -1,0 +1,21 @@
+id,age,city,zip_code,disease
+1,18,Santiago,78362,Cancer
+2,46,Mandurah,35243,Autism
+3,25,Longyearbyen,23994,Conjuntivitis
+4,31,Tianjin,40974,Chlamydia
+5,50,Pune,56191,AIDS
+6,66,Sana'a,68149,Chlamydia
+7,1,Durango,36382,AIDS
+8,84,Douglas,30331,Cancer
+9,32,Zagreb,37354,Conjuntivitis
+10,64,Dunedin,46285,Otitis
+11,14,Jacksonville,67225,Cancer
+12,51,Port-au-Prince,53805,AIDS
+13,33,Panama City,10958,Fever
+14,71,Vientiane,19028,Otitis
+15,89,Novosibirsk,67628,AIDS
+16,4,Cebu City,11902,Otitis
+17,49,Paris,50575,Fever
+18,89,Guwahati,76999,Otitis
+19,90,Panama City,19473,Chlamydia
+20,52,Medan,36823,Otitis
