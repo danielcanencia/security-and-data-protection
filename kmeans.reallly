@@ -32,12 +32,10 @@ public:
 	int size() { return values.size(); }
 	double at(int idx) const { return values[idx]; }
 	//vector<double> getValues() const { return values; }
-	double euclidean_distance(const Record& record) const {
+	double euclidean_distance(Record record) const {
 		vector<double> tuple = record.values;
 		int sum = 0;
-		//record.print_values();
-		//cout << values.size() << endl;	
-		for (int i=0; i < min(tuple.size(), values.size()); i++)
+		for (int i=0; i < max(tuple.size(), values.size()); i++)
 			sum += pow((double)(values[i]) - (double)(tuple[i]), 2);
 		return sqrt(sum);
 	}
@@ -49,9 +47,8 @@ public:
 	}
 	void print_values() const {
 		for(const double& val : values) {
-			cout << to_string(val) + ", ";
+			cout << val << endl;
 		}
-		cout << '\n';
 	}
 };
 
@@ -104,19 +101,15 @@ private:
 		//vector<Record> centroids;
 		vector<Group> groups;
 		vector<int> aux;
-		for(int i=0; i <= K; i++) {
-			while (1) {
-				int random = rand() % records.size();
-				// Check if random value is repeated
-				if (find(aux.begin(), aux.end(), random) == aux.end()) {
-					records.at(random).print_values();
-					// Inicialize centroids and assign them a cluster
-			 		aux.emplace_back(random);
-					records.at(random).setGroup(i);
-					Group group(i, records.at(random));
-					groups.emplace_back(group);
-					break;
-				}
+		for(int i=0; i < K; i++) {
+			int random = rand() % records.size();
+			// Check if random value is repeated
+			if (find(aux.begin(), aux.end(), random) != aux.end()) {
+				// Inicialize centroids and assign them a cluster
+			 	aux.emplace_back(random);
+				records.at(random).setGroup(i);
+				Group group(i, records.at(random));
+				groups.emplace_back(group);
 			}
 		}
 		//return centroids;
@@ -131,23 +124,14 @@ private:
 		for (const Group& group : groups) {
 			centroids.emplace_back(group.getCentroid());
 		}
-		
-		cout << "CENTROIDS" << endl;
-		for (const Record& rec : centroids) {
-			rec.print_values();
-		}
-		cout << "------------------------" << endl;
-	
 		// Calculate euclidian distance between records and all centroids
 		for(const Record& record : records) {
 			/*t1 = record;*/
 			min = record.euclidean_distance(centroids[0]);
-			//cout << "Eu Dis: " + to_string(min) << endl;
 			gindex = centroids[0].getGindex();
 
 			for(int i=1; i < centroids.size(); i++) {
 				ed = record.euclidean_distance(centroids[i]);
-				//cout << ed << endl;
 				if (ed < min) {
 					min = ed;
 					gindex = centroids[i].getGindex();
@@ -197,13 +181,8 @@ public:
 
 		// 1. Inicialize centroids
 		vector<Group> groups = inicialize_centroids(records);
-		cout << "Paso 1" << endl;
-		for(Group& group : groups) {
-			group.getCentroid().print_values();
-		}
 		// 2. Euclidean Distance And Goup Classification
 		vector<vector<double>> values = centroids_distances(groups, records);
-		cout << "Paso 2" << endl;
 		for (const vector<double>& x : values) {
 			for (const double& y : x) {
 				cout << y << endl;
@@ -228,34 +207,30 @@ vector<Record> preprocessing(string file) {
 		throw "Error reading file";
 		//return vector<vector<string>>();
 	}
-
 	// Parse CSV Input file
 	vector<Record> values;
 	int index = 0;
-	
-	try {
-		string line;
-		getline(input, line);
-		for(line; getline(input, line);) {
-			//Record record = Record(index);
-			Record record = Record();
-			istringstream strm(move(line));
+	for(string line; getline(input, line);) {
+		//Record record = Record(index);
+		Record record = Record();
+		istringstream strm(move(line));
 
-			for(string val; getline(strm, val, ',');) {
-				//cout << stod(val) << endl;
-				record.push_back_value(stod(val));
-			}
-			values.push_back(move(record));
-			index++;
+		for(string val; getline(strm, val, ',');) {
+			record.push_back_value(stod(val));
+			//record.push_back_value(val);
 		}
-	}
-	catch (exception e) {
-		// It throws an expetion because of stod(val), conversion to double
-		return values;
+		values.push_back(move(record));
+		index++;
 	}
 
+  	// Print out our table
+ 	values[4].setGroup(1);
+	Group cluster(1, values[4]);
+	// Recorrer cluster
+	for (const Record& record : cluster) {
+		record.print_value(0);
+	}
 	return values;
-
 }
 
 
@@ -295,12 +270,11 @@ int main(int argc, char** argv) {
 	// Data Preprocessing
 	try {
 		/*vector<vector<string>> values = preprocessing(file);*/
-		vector<Record> records = preprocessing(file);
+		vector<Record> values = preprocessing(file);
 		file.insert(file.length()-4, "_out");
-		//cout << file << endl;	
-
+		cout << file << endl;	
 		Kmeans kmeans(k, file);
-		kmeans.compute_all(records);
+		kmeans.compute_all(values);	
 	}
 	catch(exception& e) {
 		cout << "Error reading file" << endl;
