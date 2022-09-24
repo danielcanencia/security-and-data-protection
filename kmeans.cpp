@@ -29,10 +29,8 @@ public:
 		values.emplace_back(value);
 	}
 
-	void setGroup(int gidx) { gindex = gidx; }
-	int getGindex() const { return gindex; }
-	int getIndex() { return rindex; }
-	bool compareIdx(Record record) { return rindex == record.rindex; }
+	void set_group(int gidx) { gindex = gidx; }
+	int get_gindex() const { return gindex; }
 
 	int size() { return values.size(); }
 	double at(int idx) const { return values[idx]; }
@@ -44,16 +42,13 @@ public:
 	}
 	vector<double> getValues() { return values; }
 
-	void writeToFile(ofstream& file) const {
+	void write_to_file(ofstream& file) const {
 		for (auto it = begin(values); it != end(values)-1; it++) {
 			file << to_string(*it) + ",";
 		}
 		file << to_string(values.back()) << endl;
 	}
 
-	void print_value(int i) const {
-		cout << values.at(i) << endl;
-	}
 	void print_values() const {
 		for(const double& val : values) {
 			cout << to_string(val) + ", ";
@@ -70,37 +65,24 @@ private:
 	vector<Record> records;
 public:
 	Group(int gidx, Record& _centroid) : gindex(gidx) {
-		this->insertCentroid(_centroid);
+		this->insert_centroid(_centroid);
 	}
 
- 	using iterator = vector<Record>::iterator;
-    	using const_iterator = vector<Record>::const_iterator;
-
- 	iterator begin() { return records.begin(); }	
- 	iterator end() { return records.end(); } 
-	const_iterator begin() const {
-		return records.begin(); 
-	}
-	const_iterator end() const {
-		return records.end();
-	}
-
-
-	int getIndex() { return gindex; }
-	vector<double> getCentroid() const { return centroid; }
-	void insertCentroid(Record& centroid) {
+	int get_index() { return gindex; }
+	vector<double> get_centroid() const { return centroid; }
+	void insert_centroid(Record& centroid) {
 		this->centroid = centroid.getValues();
-		centroid.setGroup(gindex);
+		centroid.set_group(gindex);
 		records.emplace_back(centroid);
 	}
-	void addRecord(Record& record) {
+	void add_record(Record& record) {
 		records.emplace_back(record);
 	}
-	void removeRecord(Record& record) {
+	void remove_record(Record& record) {
 		records.erase(records.begin() + 1);
 	}
 
-	void recalculateCentroid() {
+	void recalculate_centroid() {
 		int atts = this->records[0].size();
 		vector<double> centroid(atts, 0.0);
 		for(Record& record : this->records) {
@@ -114,11 +96,11 @@ public:
 		this->centroid = centroid;
 	}
 
-	void writeToFile(ofstream& file) const {
+	void write_to_file(ofstream& file) const {
 		for (const Record& record : records) {
 			file << "Cluster: " + to_string(gindex);
 			file << ", Atts.Values: ";
-			record.writeToFile(file);
+			record.write_to_file(file);
 		}
 
 	}
@@ -146,7 +128,7 @@ private:
 				if (find(aux.begin(), aux.end(), random) == aux.end()) {
 					// Inicialize centroids and assign them a cluster
 			 		aux.emplace_back(random);
-					records.at(random).setGroup(i);
+					records.at(random).set_group(i);
 					Group group(i, records.at(random));
 					groups.emplace_back(group);
 					break;
@@ -163,7 +145,7 @@ private:
 		double min, ed;
 		vector<vector<double>> centroids;
 		for (const Group& group : groups) {
-			centroids.emplace_back(group.getCentroid());
+			centroids.emplace_back(group.get_centroid());
 		}
 	
 		// Calculate euclidian distance between records and all centroids
@@ -186,20 +168,20 @@ private:
 		return res;
 	}
 
-	bool updateGroups (vector<Group>& groups,
+	bool update_groups (vector<Group>& groups,
 	 	           const vector<double>& newGroups,
 	     	           vector<Record>& curRecords) {
 		bool end = 1;
 		int newGroup, curGroup;
 		for (int i=0; i < newGroups.size(); i++) {
 			newGroup = newGroups[i];
-			curGroup = curRecords[i].getGindex();
+			curGroup = curRecords[i].get_gindex();
 			if (newGroup != curGroup) {
 				if (curGroup != -1) {
-					groups[curGroup].removeRecord(curRecords[i]);
+					groups[curGroup].remove_record(curRecords[i]);
 				}
-				curRecords[i].setGroup(newGroup);
-				groups[newGroup].addRecord(curRecords[i]);
+				curRecords[i].set_group(newGroup);
+				groups[newGroup].add_record(curRecords[i]);
 				end = 0;
 			}
 		}	
@@ -211,7 +193,7 @@ public:
 	Kmeans(int K) {
 		this->K = K;
 	}
-	vector<Group> computeAll(vector<Record> &records) {
+	vector<Group> compute_all(vector<Record> &records) {
 
 		// 1. Inicialize centroids
 		vector<Group> groups = inicialize_centroids(records);
@@ -221,18 +203,18 @@ public:
 			// 2. Euclidean Distance And Group Classification
 			vector<double> newGroups = centroids_distances(groups, records);
 			// 3. Update all record's group
-			bool end = updateGroups(groups, newGroups, records);
+			bool end = update_groups(groups, newGroups, records);
 			if (end) break;
 
 			// 4. Recalculate the centroid for each group/cluster
 			for(Group& group : groups) {
-				group.recalculateCentroid();
+				group.recalculate_centroid();
 			}
 			/*for(Group& group : groups) {
 				cout << "////////////////" << endl;
-				cout << "GIndex: " + to_string(group.getIndex()) << endl;
+				cout << "GIndex: " + to_string(group.get_index()) << endl;
 				cout << "---------------" << endl;
-				for(double& x: group.getCentroid()) {
+				for(double& x: group.get_centroid()) {
 					cout << to_string(x) << endl;
 				}
 				cout << "----- Vals-----" << endl;
@@ -242,7 +224,7 @@ public:
 		return groups;
 	}
 
-	void writeOutput(vector<Group> groups, string filename, string headers) {
+	void write_output(vector<Group> groups, string filename, string headers) {
 		ofstream file;
 		file.open(filename, ios::trunc);
 
@@ -250,7 +232,7 @@ public:
   		{
    			file << headers << endl;
 			for (const Group& group : groups) {
-				group.writeToFile(file);
+				group.write_to_file(file);
 			}
    	 		file.close();
   		}
@@ -338,15 +320,15 @@ int main(int argc, char** argv) {
 	// Especify the number of clusters/groups to use
 	Kmeans kmeans(k);
 	// Run the algorithm
-	vector<Group> groups = kmeans.computeAll(records);
+	vector<Group> groups = kmeans.compute_all(records);
 	cout << "* K-Means algorithm finished. A csv file will be generated...." << endl;
 
 	// Write resulting groups to file
 	filename = filename.substr(filename.find("/")+1, filename.size());
-	filename.insert(filename.length()-4, "_out");
+	filename.insert(filename.length()-4, string("_") + "k" + to_string(k) + "_out");
 	filename.insert(0, "ouputs/");
 	fs::create_directory("ouputs");
-	kmeans.writeOutput(groups, filename, headers);
+	kmeans.write_output(groups, filename, headers);
 	cout << "* Filename: " + filename << endl;
 
 	return 0;
