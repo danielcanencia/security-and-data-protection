@@ -64,7 +64,7 @@ private:
 public:
 	Group(int gidx, Record _centroid) : gindex(gidx) {
 		this->insertRecord(_centroid);
-		Record centroid(_centroid);
+		this->centroid = _centroid;
 	}
 
  	using iterator = vector<Record>::iterator;
@@ -104,7 +104,7 @@ private:
 		//vector<Record> centroids;
 		vector<Group> groups;
 		vector<int> aux;
-		for(int i=0; i <= K; i++) {
+		for(int i=0; i < K; i++) {
 			while (1) {
 				int random = rand() % records.size();
 				// Check if random value is repeated
@@ -123,10 +123,11 @@ private:
 		return groups;
 	}
 	
-	vector<vector<double>> centroids_distances(const vector<Group>& groups,
+	vector<double> centroids_distances(const vector<Group>& groups,
 					  	   const vector<Record>& records) {
-		vector<vector<double>> res;
-		int ed, min, gindex;
+		vector<double> res;
+		int gindex;
+		double min, ed;
 		vector<Record> centroids;
 		for (const Group& group : groups) {
 			centroids.emplace_back(group.getCentroid());
@@ -141,10 +142,17 @@ private:
 		// Calculate euclidian distance between records and all centroids
 		for(const Record& record : records) {
 			/*t1 = record;*/
+			cout << "Record => " ;
+			record.print_values();
+			cout << "& ";
+			centroids[0].print_values();
+			cout << "Distance => ";
+
+
 			min = record.euclidean_distance(centroids[0]);
-			//cout << "Eu Dis: " + to_string(min) << endl;
 			gindex = centroids[0].getGindex();
 
+			cout << min << endl;
 			for(int i=1; i < centroids.size(); i++) {
 				ed = record.euclidean_distance(centroids[i]);
 				//cout << ed << endl;
@@ -153,6 +161,10 @@ private:
 					gindex = centroids[i].getGindex();
 				}
 			}
+			cout << "Final: ";
+			cout << min << endl;
+			cout << "GID: " + to_string(gindex) << endl;
+			cout << endl;
 			// Array Representing Records & its Clusters
 			res.emplace_back(gindex);
 			
@@ -202,13 +214,19 @@ public:
 			group.getCentroid().print_values();
 		}
 		// 2. Euclidean Distance And Goup Classification
-		vector<vector<double>> values = centroids_distances(groups, records);
+		vector<double> newGroups = centroids_distances(groups, records);
 		cout << "Paso 2" << endl;
-		for (const vector<double>& x : values) {
-			for (const double& y : x) {
-				cout << y << endl;
-			}
+		for (const double& x : newGroups) {
+			cout << x << endl;
 		}
+		// 3. (de 4 records) Cur Cluster: records[newGroup index].gindex
+		//                   NeW Cluster = newGroupS[newGroup index] 
+		//                   Si son distintos, actualizar gindex al nuevo (records), setGroup(valor newgroup)
+		// 		     y seguir iterando. end=0; Si son iguales todos los gindex id de todos los record
+		//                   hemos terminado. Yay.
+		cout << "Paso 3" << endl;
+
+
 		/*for(const auto& tuple : values) {
 			cout << get<0>(tuple) << endl;
 		}*/
