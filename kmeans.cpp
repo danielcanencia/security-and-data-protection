@@ -8,7 +8,7 @@
 #include <cstring>
 #include <algorithm>
 #include <cmath>
-
+#include<numeric>
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -48,8 +48,8 @@ public:
 
 	int size() { return values.size(); }
 	double at(int idx) const { return values[idx]; }
-	double euclidean_distance(const Record& record) const {
-		vector<double> tuple = record.values;
+	double euclidean_distance(const vector<double> tuple) const {
+		//vector<double> tuple = record.values;
 		int sum = 0;
 		//record.print_values();
 		//cout << values.size() << endl;	
@@ -58,7 +58,16 @@ public:
 		return sqrt(sum);
 	}
 	vector<double> getValues() { return values; }
-	
+	double valueAvg() const {
+		return reduce(values.begin(), values.end(), 0.0) / values.size();
+	}
+
+	void writeToFile(ofstream& file) const {
+		for (auto it = begin(values); it != end(values)-1; it++) {
+			file << to_string(*it) + ",";
+		}
+		file << to_string(values.back()) << endl;
+	}
 
 	void print_value(int i) const {
 		cout << values.at(i) << endl;
@@ -75,11 +84,11 @@ public:
 class Group {
 private:
 	const int gindex;
-	Record& centroid;
+	vector<double> centroid;
 	vector<Record> records;
 public:
-	Group(int gidx, Record& _centroid) : gindex(gidx), centroid(_centroid) {
-		this->insertRecord(_centroid);
+	Group(int gidx, Record& _centroid) : gindex(gidx) {
+		this->insertCentroid(_centroid);
 		//this->centroid = _centroid;
 	}
 
@@ -96,22 +105,22 @@ public:
 	}
 
 
-	Record getCentroid() const { return centroid; }
-	void insertRecord(Record& record) {
-		record.setGroup(gindex);
-		//Record rec = record;
-		//records.emplace_back(rec);
-		records.emplace_back(record);
+	vector<double> getCentroid() const { return centroid; }
+	void insertCentroid(Record& centroid) {
+		this->centroid = centroid.getValues();
+		centroid.setGroup(gindex);
+		records.emplace_back(centroid);
 	}
 	void addRecord(Record& record) {
-		if (!record.compareIdx(centroid)) {
+		records.emplace_back(record);
+		/*if (!record.compareIdx(centroid)) {
 			//Record rec = record;
 			//records.emplace_back(rec);
 			records.emplace_back(record);
 		}
 		else {
 			cout << "Its the centroid" << endl;
-		}
+		}*/
 	}
 	void removeRecord(Record record) {
 		//iterator it = records.begin();
@@ -121,6 +130,22 @@ public:
 		}*/
 		records.erase(records.begin() + 1);
 	}
+
+	void recalculateCentroid() {
+		vector<double> centroid;
+		for (const Record& record : records) {
+			centroid.emplace_back(record.valueAvg());
+		}
+		this->centroid = centroid;
+	}
+
+	void writeToFile(ofstream& file) const {
+		for (const Record& record : records) {
+			record.writeToFile(file);
+		}
+
+	}
+
 	void print_records() {
 		for(const Record& record : records) {
 			record.print_values();
@@ -133,7 +158,6 @@ public:
 class Kmeans {
 private:
 	int K;
-	string output_file;
 
  	vector<Group> inicialize_centroids(vector<Record>& records) {
 		//vector<Record> centroids;
@@ -144,7 +168,7 @@ private:
 				int random = rand() % records.size();
 				// Check if random value is repeated
 				if (find(aux.begin(), aux.end(), random) == aux.end()) {
-					records.at(random).print_values();
+					//records.at(random).print_values();
 					// Inicialize centroids and assign them a cluster
 			 		aux.emplace_back(random);
 					records.at(random).setGroup(i);
@@ -163,43 +187,38 @@ private:
 		vector<double> res;
 		int gindex;
 		double min, ed;
-		vector<Record> centroids;
+		vector<vector<double>> centroids;
 		for (const Group& group : groups) {
+			/*for (const double& y : group.getCentroid()) {
+				cout << to_string(y) + "," << endl;
+			}*/
 			centroids.emplace_back(group.getCentroid());
 		}
-		
+		/*	
 		cout << "CENTROIDS" << endl;
-		for (const Record& rec : centroids) {
-			rec.print_values();
+		for (const vector<double>& rec : centroids) {
+			for (const double& y : rec) {
+				cout << to_string(y) + "," << endl;
+			}
 		}
-		cout << "------------------------" << endl;
+		cout << "------------------------" << endl;*/
 	
 		// Calculate euclidian distance between records and all centroids
 		for(const Record& record : records) {
-			/*t1 = record;*/
-			cout << "Record => " ;
-			record.print_values();
-			cout << "& ";
-			centroids[0].print_values();
-			cout << "Distance => ";
-
-
 			min = record.euclidean_distance(centroids[0]);
-			gindex = centroids[0].getGindex();
+			gindex = 0;
 
-			cout << min << endl;
 			for(int i=1; i < centroids.size(); i++) {
 				ed = record.euclidean_distance(centroids[i]);
-				//cout << ed << endl;
 				if (ed < min) {
 					min = ed;
-					gindex = centroids[i].getGindex();
+					gindex = i;
 				}
 			}
-			cout << "Final: ";
+			/*cout << "Final: ";
 			cout << min << endl;
 			cout << "GID: " + to_string(gindex) << endl;
-			cout << endl;
+			cout << endl;*/
 			// Array Representing Records & its Clusters
 			res.emplace_back(gindex);
 			
@@ -210,90 +229,108 @@ private:
 
 	bool updateGroups (vector<Group>& groups,
 	 	           const vector<double>& newGroups,
-	     	           vector<Record> curRecords) {
+	     	           vector<Record>& curRecords) {
 		bool end = 1;
 		int newGroup, curGroup;
 		for (int i=0; i < newGroups.size(); i++) {
 			newGroup = newGroups[i];
-			cout << newGroup << endl;
 			curGroup = curRecords[i].getGindex();
+			//cout << to_string(newGroup) + "==" + to_string(curGroup) << endl;
 			if (newGroup != curGroup) {
-				//cout << "Adding / Removing" << endl;
-				groups[newGroup].addRecord(curRecords[i]);
-				//curRecords[i].print_values();
-				//cout << curGroup << endl;
 				if (curGroup != -1) {
 					groups[curGroup].removeRecord(curRecords[i]);
-					groups[curGroup].print_records();
 				}
 				curRecords[i].setGroup(newGroup);
-				groups[newGroup].print_records();
+				groups[newGroup].addRecord(curRecords[i]);
+				//groups[newGroup].print_records();
 				end = 0;
 			}
 		}	
 		/*for(Group& group : groups) {
 			cout << "---------------" << endl;
-			cout << "GIndex: " + to_string(group.getCentroid().getGindex()) << endl;
+			//cout << "GIndex: " + to_string(group.getCentroid().getGindex()) << endl;
 			group.print_records();
 		}*/
 		return end;
 
 	}
 
+
 public:
-	Kmeans(int K, string output_file) {
+	Kmeans(int K) {
 		this->K = K;
-		this->output_file = output_file;
 	}
-	void compute_all(vector<Record> &records) {
-		//cout << output_file << endl;
-		//cout << euclidean_distance(make_tuple(4, 3), make_tuple(1, 1)) << endl;
+	vector<Group> computeAll(vector<Record> &records) {
 
 		// 1. Inicialize centroids
 		vector<Group> groups = inicialize_centroids(records);
-		cout << "Paso 1" << endl;
-		for(Group& group : groups) {
-			group.getCentroid().print_values();
+		//cout << "Paso 1" << endl;
+		/*for(Group& group : groups) {
+			for (double& val : group.getCentroid())
+				cout << to_string(val) + ", " << endl;
 			group.print_records();
 		}
 		for (Record& record : records) {
 			cout << record.getGindex() << endl;
-		}
-	
-		// 2. Euclidean Distance And Group Classification
-		vector<double> newGroups = centroids_distances(groups, records);
-		cout << "Paso 2" << endl;
-		for (const double& x : newGroups) {
-			cout << x << endl;
-		}
-		// 3. (de 4 records) Cur Cluster: records[newGroup index].gindex
-		//                   NeW Cluster = newGroupS[newGroup index] 
-		//                   Si son distintos, actualizar gindex al nuevo (records), setGroup(valor newgroup)
-		// 		     y seguir iterando. end=0; Si son iguales todos los gindex id de todos los record
-		//                   hemos terminado. Yay.
-		cout << "Paso 3" << endl;
-		bool end = updateGroups(groups, newGroups, records);
-
-		// 4. Recalculate the centroid for each group/cluster
-		for(Group& group : groups) {
-			cout << "---------------" << endl;
-			cout << "GIndex: " + to_string(group.getCentroid().getGindex()) << endl;
-			group.print_records();
-		}
-		//recalculateCentroids(groups);
-
-		/*for(const auto& tuple : values) {
-			cout << get<0>(tuple) << endl;
 		}*/
+
+		int i=0;
+		while (1) {	
+			// 2. Euclidean Distance And Group Classification
+			vector<double> newGroups = centroids_distances(groups, records);
+			//cout << "Paso 2" << endl;
+			for (const double& x : newGroups) {
+				cout << x << endl;
+			}
+			// 3. (de 4 records) Cur Cluster: records[newGroup index].gindex
+			//                   NeW Cluster = newGroupS[newGroup index] 
+			//                   Si son distintos, actualizar gindex al nuevo (records), setGroup(valor newgroup)
+			// 		     y seguir iterando. end=0; Si son iguales todos los gindex id de todos los record
+			//                   hemos terminado. Yay.
+			//cout << "Paso 3" << endl;
+			bool end = updateGroups(groups, newGroups, records);
+			cout << "END? =>" + to_string(end) << endl;
+			if (end) break;
+
+			// 4. Recalculate the centroid for each group/cluster
+			for(Group& group : groups) {
+				group.recalculateCentroid();
+			}
+			for(Group& group : groups) {
+				cout << "---------------" << endl;
+				for (double& cen : group.getCentroid()) {
+					cout << to_string(cen) + ", " << endl;	
+				}
+				cout << "records =>  " << endl;
+				group.print_records();
+			}
+			i++;
+			//if (i==5) break;
+		}
+		return groups;
 	}
 
+	void writeOutput(vector<Group> groups, string filename, string headers) {
+		ofstream file;
+		file.open(filename, ios::trunc);
+
+  		if (file.is_open())
+  		{
+   			file << headers << endl;
+			for (const Group& group : groups) {
+				group.writeToFile(file);
+			}
+   	 		file.close();
+  		}
+  		else cout << "Unable to open file" << endl;
+	}
 };
 
 
 
 
 
-vector<Record> preprocessing(string file) {
+vector<Record> preprocessing(string file, string &headers) {
 
 	// Read CSV Input files
 	ifstream input{file};
@@ -305,10 +342,9 @@ vector<Record> preprocessing(string file) {
 	// Parse CSV Input file
 	vector<Record> values;
 	int index = 0;
-	
+	string line;	
 	try {
-		string line;
-		getline(input, line);
+		getline(input, headers);
 		for(line; getline(input, line);) {
 			Record record = Record(index);
 			//Record record = Record();
@@ -323,10 +359,11 @@ vector<Record> preprocessing(string file) {
 		}
 	}
 	catch (exception e) {
+		input.close();
 		// It throws an expetion because of stod(val), conversion to double
 		return values;
 	}
-
+	input.close();
 	return values;
 
 }
@@ -350,7 +387,7 @@ int main(int argc, char** argv) {
 		return -1;
 	}
 	// Input Filename
-	string file{argv[1]};
+	string filename{argv[1]};
 	// File format
 	strtok(argv[1], ".");
 	string ptr = strtok(NULL, ".");
@@ -365,20 +402,28 @@ int main(int argc, char** argv) {
 	int k = atoi(argv[2]);
 
 
+	vector<Record> records;
+	string headers;
 	// Data Preprocessing
 	try {
-		/*vector<vector<string>> values = preprocessing(file);*/
-		vector<Record> records = preprocessing(file);
-		file.insert(file.length()-4, "_out");
-		//cout << file << endl;	
-
-		Kmeans kmeans(k, file);
-		kmeans.compute_all(records);
+		records = preprocessing(filename, headers);
 	}
 	catch(exception& e) {
 		cout << "Error reading file" << endl;
 		return -1;
 	}
+	
+	cout << "* K-Means algorithm is being run...";
+	// Especify the number of clusters/groups to use
+	Kmeans kmeans(k);
+	// Run the algorithm
+	vector<Group> groups = kmeans.computeAll(records);
+	cout << "* K-Means algorithm finished. A csv file will be generated...." << endl;
+
+	// Write resulting groups to file
+	filename.insert(filename.length()-4, "_out");
+	kmeans.writeOutput(groups, filename, headers);
+	cout << "* Filename: " + filename << endl;
 
 	return 0;
 }
