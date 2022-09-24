@@ -43,9 +43,6 @@ public:
 		return sqrt(sum);
 	}
 	vector<double> getValues() { return values; }
-	double valueAvg() const {
-		return reduce(values.begin(), values.end(), 0.0) / values.size();
-	}
 
 	void writeToFile(ofstream& file) const {
 		for (auto it = begin(values); it != end(values)-1; it++) {
@@ -89,6 +86,7 @@ public:
 	}
 
 
+	int getIndex() { return gindex; }
 	vector<double> getCentroid() const { return centroid; }
 	void insertCentroid(Record& centroid) {
 		this->centroid = centroid.getValues();
@@ -98,20 +96,28 @@ public:
 	void addRecord(Record& record) {
 		records.emplace_back(record);
 	}
-	void removeRecord(Record record) {
+	void removeRecord(Record& record) {
 		records.erase(records.begin() + 1);
 	}
 
 	void recalculateCentroid() {
-		vector<double> centroid;
-		for (const Record& record : records) {
-			centroid.emplace_back(record.valueAvg());
+		int atts = this->records[0].size();
+		vector<double> centroid(atts, 0.0);
+		for(Record& record : this->records) {
+			for (int j=0; j < atts; j++) {
+				centroid[j] += record.at(j);
+			}
 		}
+		for(int j=0; j < atts; j++)
+			centroid[j] /= records.size();
+
 		this->centroid = centroid;
 	}
 
 	void writeToFile(ofstream& file) const {
 		for (const Record& record : records) {
+			file << "Cluster: " + to_string(gindex);
+			file << ", Atts.Values: ";
 			record.writeToFile(file);
 		}
 
@@ -210,6 +216,7 @@ public:
 		// 1. Inicialize centroids
 		vector<Group> groups = inicialize_centroids(records);
 
+		// Loop
 		while (1) {	
 			// 2. Euclidean Distance And Group Classification
 			vector<double> newGroups = centroids_distances(groups, records);
@@ -221,6 +228,16 @@ public:
 			for(Group& group : groups) {
 				group.recalculateCentroid();
 			}
+			/*for(Group& group : groups) {
+				cout << "////////////////" << endl;
+				cout << "GIndex: " + to_string(group.getIndex()) << endl;
+				cout << "---------------" << endl;
+				for(double& x: group.getCentroid()) {
+					cout << to_string(x) << endl;
+				}
+				cout << "----- Vals-----" << endl;
+				group.print_records();
+			}*/
 		}
 		return groups;
 	}
@@ -288,16 +305,14 @@ int main(int argc, char** argv) {
 
   	// Arguments	
 	if (argc != 3) {
-		cout << "Invalid arguments. Use ./kmeans [filename] [output_filename] [k]" << endl;
+		cout << "Invalid arguments. Use ./kmeans [filename] [k]" << endl;
 		return -1;
 	}
 	// Input Filename
 	string filename{argv[1]};
-	// File format
-	strtok(argv[1], ".");
-	string ptr = strtok(NULL, ".");
-	if (ptr != "csv") {
-		cout << "Use a csv input file" << endl;
+	// Check File format
+	if (filename.substr(filename.size()-4, filename.size()) != ".csv") {
+		cout << "Please, use a csv input file" << endl;
 		return -1;
 	}
 	// Output Filename
@@ -327,7 +342,10 @@ int main(int argc, char** argv) {
 	cout << "* K-Means algorithm finished. A csv file will be generated...." << endl;
 
 	// Write resulting groups to file
+	filename = filename.substr(filename.find("/")+1, filename.size());
 	filename.insert(filename.length()-4, "_out");
+	filename.insert(0, "ouputs/");
+	fs::create_directory("ouputs");
 	kmeans.writeOutput(groups, filename, headers);
 	cout << "* Filename: " + filename << endl;
 
