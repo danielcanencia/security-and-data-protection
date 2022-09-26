@@ -326,8 +326,8 @@ int main(int argc, char** argv) {
 	// Write resulting groups to file
 	filename = filename.substr(filename.find("/")+1, filename.size());
 	filename.insert(filename.length()-4, string("_") + "k" + to_string(k) + "_out");
-	filename.insert(0, "ouputs/");
-	fs::create_directory("ouputs");
+	filename.insert(0, "outputs/");
+	fs::create_directory("outputs");
 	kmeans.write_output(groups, filename, headers);
 	cout << "* Filename: " + filename << endl;
 
