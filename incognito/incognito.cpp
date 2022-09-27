@@ -74,7 +74,8 @@ int main(int argc, char** argv) {
 
 	if (argc != 2) {
 		cout << "Inentryid arguments. "
-			"Use ./incognito [data directory] [k]";
+			"Use ./incognito [data directory] [k]"
+		<< endl;
 		return -1;
 	}
 

@@ -262,7 +262,7 @@ vector<Record> preprocessing(string file, string &headers) {
 			Record record = Record(index);
 			istringstream strm(move(line));
 
-			for(string val; getline(strm, val, ',');) {
+			for(string val; getline(strm, val, ';');) {
 				//cout << stod(val) << endl;
 				record.push_back_value(stod(val));
 			}
