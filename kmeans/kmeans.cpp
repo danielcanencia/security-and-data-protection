@@ -8,7 +8,8 @@
 #include <cstring>
 #include <algorithm>
 #include <cmath>
-#include<numeric>
+#include <numeric>
+#include <ctime>
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -121,9 +122,13 @@ private:
  	vector<Group> inicialize_centroids(vector<Record>& records) {
 		vector<Group> groups;
 		vector<int> aux;
+
+		srand(time(NULL));
+
 		for(int i=0; i < K; i++) {
 			while (1) {
 				int random = rand() % records.size();
+				cout << random << endl;
 				// Check if random value is repeated
 				if (find(aux.begin(), aux.end(), random) == aux.end()) {
 					// Inicialize centroids and assign them a cluster
