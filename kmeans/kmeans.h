@@ -1,3 +1,6 @@
+#ifndef _KMEANS_H
+#define _KMEANS_H
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -68,3 +71,4 @@ public:
 
 vector<Record> preprocessing(string file, string &headers);
 
+#endif

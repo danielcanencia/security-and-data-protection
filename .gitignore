@@ -2,4 +2,6 @@
 !*.*
 !*/
 !makefile
+*.out
+*.o
 kmeans/outputs/*
