@@ -10,10 +10,10 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-vector<vector<string>> read_directory(fs::path const &directory,
-				      vector<vector<string>>& dataset,
-				      vector<vector<string>>& hierarchies_set,
-			              string &headers);
+vector<string**> read_directory(fs::path const &directory,
+				vector<vector<string>>& dataset,
+		    	 	string &headers);
+vector<string**> transposeAndFormat(const vector<vector<vector<string>>>& hierarchies);
 
 #endif
 
