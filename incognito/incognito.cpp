@@ -23,9 +23,12 @@ int main(int argc, char** argv) {
 
 	// Read csv data file
 	string headers;
+	vector<int> qids;
 	vector<vector<string>> dataset;
 	vector<string**> hierarchies_set;
-	hierarchies_set = read_directory(fs::path(argv[1]), dataset, headers);
+	hierarchies_set = read_directory(fs::path(argv[1]), dataset, qids, headers);
+
+	// Catch throws !!!!!!
 
 
 	// Construct Ci and Ei (nodes and edges)
