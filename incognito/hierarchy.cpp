@@ -35,6 +35,10 @@ vector<vector<vector<string>>> read_directory(fs::path const &directory,
 	string line;
 	getline(input1, headers);
 	for(; getline(input1, line);) {
+		// Dont read empty lines
+		if (line.length() == 0)
+			continue;
+
 		istringstream strm(move(line));
 		vector<string> row;
 		for(string val; getline(strm, val, ';');) {
@@ -61,6 +65,9 @@ vector<vector<vector<string>>> read_directory(fs::path const &directory,
 		// Read hierarchy values
 		vector<vector<string>> hierarchy;
 		for(; getline(input2, line);) {
+			// Dont read empty lines
+			if (line.length() == 0)
+				continue;
 			istringstream strm(move(line));
 			vector<string> row;
 			for (string val; getline(strm, val, ';');) {
@@ -101,13 +108,15 @@ vector<vector<vector<string>>> read_directory(fs::path const &directory,
 					  itr));
 	}
 	
+
+
 	// Return tansposed hierchies
 	return transposeAndFormat(res);
 }
 
 
 vector<vector<string>> transpose(const vector<vector<string>>& matrix) {
-
+	/*
 	int rows=matrix.size() + 1;
 	int cols=matrix[0].size() + 1;
 	string** array = new string*[rows];
@@ -136,7 +145,19 @@ vector<vector<string>> transpose(const vector<vector<string>>& matrix) {
    		}
 		res.emplace_back(aux);
 	}
+	*/
+	int rows=matrix.size();
+	int cols=matrix[0].size();
 
+	// Convert array to vector
+	vector<vector<string>> res;
+	for (int i=0; i < rows; i++) {
+   		vector<string> aux;
+   		for (int j=0; j < cols; j++) {
+      			aux.emplace_back(matrix[i][j]);
+   		}
+		res.emplace_back(aux);
+	}
 
 	return res;
 }

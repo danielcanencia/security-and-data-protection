@@ -1,26 +1,43 @@
 #include "tree.h"
 
-Tree::Tree(vector<vector<vector<string>>> hierarchies) {
-	/*this->edges = ;
-	this->nodes = ;*/
-	constructNodesAndEdges(hierarchies);
+Tree::Tree(vector<int> nodeMax) {
+	this->nodeMax = nodeMax;
 }
 
-void Tree::constructNodesAndEdges(vector<vector<vector<string>>> hierarchies) {
-	// [0] => zip_codes, [1] => education, [2] => age
+vector<vector<int>> Tree::getPermutations(int r) {
 
-	/*cout << "++++++++++++++++++" << endl;
-	for (const vector<string>& entry : hierarchies[0]) {
-		for (const string& val : entry) {
-			cout << val + ",";
-		}
-		cout << endl;
+	int nsize = this->nodeMax.size();
+
+	//Permutamos, obteniendo los valores de los nodos del grafo
+	vector<vector<int>> permutations;
+        permute(this->nodeMax, permutations, nsize, r);
+	return permutations;
+}
+
+
+void Tree::permute(const vector<int> data,
+		   vector<vector<int>>& permutations,
+	           int n, int r, int rept, int idx, int aux[]) {
+	if (aux==NULL) {
+		aux = new int[r];
 	}
-	cout << "*****************" << endl;*/
-
-	/*for (const vector<string>& entry : hierchies[2]) {
-		
-	}*/
 
 
+	if (idx==r) {
+		vector<int> entry;
+		for(int i=0; i < r; i++) {
+			//cout << data[aux[i]];
+			entry.emplace_back(data[aux[i]]);
+			
+		}
+		permutations.emplace_back(entry);
+		//cout << endl;
+		return ;
+	}
+
+	for (int i=rept; i < n; i++) {
+		aux[idx] = i;
+		permute(data, permutations, n, r, i, idx+1, aux);
+	}
 }
+

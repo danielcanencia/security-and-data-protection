@@ -34,29 +34,43 @@ int main(int argc, char** argv) {
 		// [i][x] => Bi
 		// ...
 
-		for (const auto& hierarchy : hierarchies_set) {
-			for (const auto& entry : hierarchy) {
-				cout << "Qid's index: ";
-				for (const auto& val : entry) { 
-					cout << val + ". ";
-				}
-				cout << "|" << endl;
-			}
-			cout << endl;
-		}
-		for (const auto& entry : qids) {
-			cout << entry << endl;
-		}
-		cout << endl;	
 	} catch (char* e) {
 		cout << e << endl; 
 		return -1;
 	}
 
-	/*for (const int& entry : qids) {
-		cout << entry << endl;
+	// Sort qid set
+	sort(qids.begin(), qids.end());
+	
+	// Levels per hierchary. Useful to construct node
+	// tables
+	vector<int> nodeMax;
+	for (const auto& entry : hierarchies_set) {
+		nodeMax.emplace_back(entry.size() - 1);
+	}
+	Tree tree(vector<int> { 1,2 });
+	//Tree tree(nodeMax);	
+
+
+	// Main Algorithm
+	//  - Construct Ci and Ei (nodes and edges)
+	vector<vector<int>> C;
+	C = tree.getPermutations(1);
+
+	for (const auto& entry : C) {
+		for (const auto& val : entry) {
+			cout << to_string(val) + ",";
+		}
+		cout << endl;
+	}
+
+	/*
+	for (int i=1; i < (int)qids.size(); i++) {
+		// Algorithm	
+		C[i-1] = tree.getPermutations(i);
 	}*/
-	// Construct Ci and Ei (nodes and edges)
-	//Tree tree(hierarchies_set);
+
+
 	return 0;
 }
+
