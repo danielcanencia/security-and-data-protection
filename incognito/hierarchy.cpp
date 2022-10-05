@@ -116,36 +116,6 @@ vector<vector<vector<string>>> read_directory(fs::path const &directory,
 
 
 vector<vector<string>> transpose(const vector<vector<string>>& matrix) {
-	/*
-	int rows=matrix.size() + 1;
-	int cols=matrix[0].size() + 1;
-	string** array = new string*[rows];
-	for(int i=0;i < rows;i++) {
-    		array[i] = new string[cols];
-	}
-
-	// Transpose matrix using an array structure
-	int i=0;
-	int j;
-	for (const vector<string>& entry : matrix) {
-		j = 0;
-		for (const string& val : entry) {
-		 	array[j][i] = val;
-			j++;
-		}
-		i++;
-	}
-
-	// Convert array to vector
-	vector<vector<string>> res;
-	for (int i=0; i < rows; i++) {
-   		vector<string> aux;
-   		for (int j=0; j < cols; j++) {
-      			aux.emplace_back(array[i][j]);
-   		}
-		res.emplace_back(aux);
-	}
-	*/
 	int rows=matrix.size();
 	int cols=matrix[0].size();
 
@@ -172,4 +142,38 @@ vector<vector<vector<string>>> transposeAndFormat(
 
 	return res;
 }
+
+
+vector<vector<int>> getPermutations(int r, vector<int> nodeMax) {
+
+        //Permutamos, obteniendo los valores de los nodos del grafo
+        vector<vector<int>> permutations;
+        permute(nodeMax, permutations, nodeMax.size(), r);
+        return permutations;
+}
+
+
+void permute(const vector<int> data,
+                   vector<vector<int>>& permutations,
+                   int n, int r, int rept, int idx, int aux[]) {
+        if (aux==NULL) {
+                aux = new int[r];
+        }
+
+        if (idx==r) {
+                vector<int> entry;
+                for(int i=0; i < r; i++) {
+                        entry.emplace_back(data[aux[i]]);
+
+                }
+                permutations.emplace_back(entry);
+                return ;
+        }
+
+        for (int i=rept; i < n; i++) {
+                aux[idx] = i;
+                permute(data, permutations, n, r, i, idx+1, aux);
+        }
+}
+
 

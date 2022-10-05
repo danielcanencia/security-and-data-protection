@@ -10,16 +10,15 @@ using namespace std;
 
 class Tree {
 private:
-	//vector<vector<string>> nodes;
-	vector<int> nodeMax;
-	void permute(vector<int> data,
-	       	     vector<vector<int>>& permutations,
-		     int n, int r, int rept=0, int idx=0,
-		     int aux[]=NULL);
-
+	vector<vector<int>> nodes;
+	//vector<Edge> edges;
+	void generateAllNodesAndEdges(vector<int> node,
+				   vector<int> nodesMax,
+				   int nsize, int index);
+	
 public:
 	Tree(vector<int> nodeMax);
-	vector<vector<int>> getPermutations(int r);
+	void generateNodesAndEdges(vector<int> nodesMax);
 };
 
 

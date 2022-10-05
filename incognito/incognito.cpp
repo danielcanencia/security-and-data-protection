@@ -48,14 +48,14 @@ int main(int argc, char** argv) {
 	for (const auto& entry : hierarchies_set) {
 		nodeMax.emplace_back(entry.size() - 1);
 	}
-	Tree tree(vector<int> { 1,2 });
-	//Tree tree(nodeMax);	
+	nodeMax = vector<int> { 1,2 };
 
 
 	// Main Algorithm
 	//  - Construct Ci and Ei (nodes and edges)
 	vector<vector<int>> C;
-	C = tree.getPermutations(1);
+	C = getPermutations(1, nodeMax);  // Ci
+	Tree tree(nodeMax);		  // Ei
 
 	for (const auto& entry : C) {
 		for (const auto& val : entry) {
@@ -67,7 +67,7 @@ int main(int argc, char** argv) {
 	/*
 	for (int i=1; i < (int)qids.size(); i++) {
 		// Algorithm	
-		C[i-1] = tree.getPermutations(i);
+		C[i-1] = getPermutations(i, nodeMax);
 	}*/
 
 

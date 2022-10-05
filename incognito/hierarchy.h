@@ -19,6 +19,10 @@ vector<vector<vector<string>>> read_directory(fs::path const &directory,
 				vector<int>& qids,
 		    	 	string& headers);
 vector<vector<vector<string>>> transposeAndFormat(const vector<vector<vector<string>>>& hierarchies);
+vector<vector<int>> getPermutations(int r, vector<int> nodeMax);
+void permute(const vector<int> data,
+             vector<vector<int>>& permutations,
+             int n, int r, int rept=0, int idx=0, int aux[]=NULL);
 
 #endif
 
