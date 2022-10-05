@@ -1,10 +1,10 @@
 #include "hierarchy.h"
 
 
-vector<string**> read_directory(fs::path const &directory, 
-	 			vector<vector<string>>& dataset,
-				vector<int> qids,
-			   	string &headers) {
+vector<vector<vector<string>>> read_directory(fs::path const &directory, 
+	 				      vector<vector<string>>& dataset,
+					      vector<int>& qids,
+			   		      string& headers) {
 
 	// Locate csv input file and hierarchies directory
 	string file;
@@ -46,7 +46,6 @@ vector<string**> read_directory(fs::path const &directory,
 
 	// Read hierarchy files
 	vector<vector<vector<string>>> res;
-	vector<vector<string>> hierarchy;
 	string qidName;
 	vector<string> qidNames;
 	for (const string& filename : hierarchies) {
@@ -58,7 +57,9 @@ vector<string**> read_directory(fs::path const &directory,
 		// Read first line: qid's hierarchy name
 		getline(input2, qidName);
 		qidNames.emplace_back(qidName);
+
 		// Read hierarchy values
+		vector<vector<string>> hierarchy;
 		for(; getline(input2, line);) {
 			istringstream strm(move(line));
 			vector<string> row;
@@ -100,15 +101,13 @@ vector<string**> read_directory(fs::path const &directory,
 					  itr));
 	}
 	
-	for (const int& entry : qids) {
-		cout << entry;
-	}
-	// Return tansposed hierchies as an array vector
+	// Return tansposed hierchies
 	return transposeAndFormat(res);
 }
 
 
-string** transpose(const vector<vector<string>>& matrix) {
+vector<vector<string>> transpose(const vector<vector<string>>& matrix) {
+
 	int rows=matrix.size() + 1;
 	int cols=matrix[0].size() + 1;
 	string** array = new string*[rows];
@@ -116,30 +115,40 @@ string** transpose(const vector<vector<string>>& matrix) {
     		array[i] = new string[cols];
 	}
 
+	// Transpose matrix using an array structure
 	int i=0;
 	int j;
 	for (const vector<string>& entry : matrix) {
 		j = 0;
 		for (const string& val : entry) {
-		 	array[i][j] = val;
+		 	array[j][i] = val;
 			j++;
 		}
 		i++;
 	}
-	return array;
+
+	// Convert array to vector
+	vector<vector<string>> res;
+	for (int i=0; i < rows; i++) {
+   		vector<string> aux;
+   		for (int j=0; j < cols; j++) {
+      			aux.emplace_back(array[i][j]);
+   		}
+		res.emplace_back(aux);
+	}
+
+
+	return res;
 }
 
-vector<string**> transposeAndFormat(const vector<vector<vector<string>>>& hierarchies) {
-	vector<string**> res;
+vector<vector<vector<string>>> transposeAndFormat(
+		const vector<vector<vector<string>>>& hierarchies) {
+	vector<vector<vector<string>>> res;
 
 	for (const vector<vector<string>>& entry : hierarchies) {
-		//res[i] = transpose(entry);
 		res.emplace_back(transpose(entry));
 	}
 
-	/*for (const auto x : res) {
-		cout << x[0][0] << endl;
-	}*/
 	return res;
 }
 
