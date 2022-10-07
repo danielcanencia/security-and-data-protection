@@ -3,5 +3,9 @@
 
 using namespace std;
 
+vector<Tree> graphGeneration(const vector<int>& qids,
+			     const vector<int>& nodeMax,
+			     int numAttrs);
+
 #endif
 

@@ -3,6 +3,34 @@
 
 using namespace std;
 
+
+vector<Tree> graphGeneration(const vector<int>& qids,
+			     const vector<int>& nodeMax,
+			     int numAttr) {
+	vector<Tree> trees;
+
+	vector<vector<int>> C;
+	C = getPermutations(numAttr, qids);
+
+	// Generate trees for permutations of $perm qids
+	for (int perm=0; perm < (int)C.size(); perm++) {
+		vector<int> CMaxValue;
+		for (const int& entry : C[perm]) {
+			CMaxValue.emplace_back(nodeMax[entry]);
+		}
+
+		// Generate Tree
+		TreeData treeData;
+		// C[perm] => curr qid indexes 
+		// CMaxValue => max qid indexes
+		Tree tree(CMaxValue, C[perm], treeData);
+		trees.emplace_back(tree);
+		tree.printNodesTable();
+		tree.printEdgesTable();
+	}
+	return trees;
+}
+
 int main(int argc, char** argv) {
 
 	if (argc != 2) {
@@ -55,50 +83,20 @@ int main(int argc, char** argv) {
 	}
 	//nodeMax = vector<int> ({1, 2});
 
-	// Main Algorithm
-	//  - Construct Ci and Ei (nodes and edges)
-	vector<vector<int>> C;
 
-	// Redef
-	//qids = vector<int>{1,2};
-	// CAMBIAR POR 1 !!!!!
-	C = getPermutations(1, qids);  // Ci
-
+	// Generate all posible graphs containing qids
+	// defined by qid variable
+	vector<Tree> graphs = graphGeneration(qids, nodeMax, 1);
 
 	// Main Algorithm
 	for (int i=1; i < (int)qids.size(); i++) {
-		// Generate trees for permutations of $perm qids
-		for (int perm=0; perm < (int)C.size(); perm++) {
-			vector<int> CMaxValue;
-			cout << "Nodemax: ";
-			for (const int& entry : C[perm]) {
-				CMaxValue.emplace_back(nodeMax[entry]);
-				cout << nodeMax[entry];
-			}
 
-			cout << endl;
-			cout << "C[" + to_string(perm) + "]" << endl;
-			for (const int& entry : C[perm]) {
-				cout << entry;
-			}
-
-			// Generate Tree
-			TreeData treeData;
-			// C[perm] => curr qid indexes 
-			// CMaxValue => max qid indexes
-			Tree tree(CMaxValue, C[perm], treeData);
-
-			//Tree tree({1,2}, {2,1}, treeData);
-			tree.printNodesTable();
-			tree.printEdgesTable();
-
-			cout << "Cambiando a sig pos permutacion: " + to_string(perm) << endl;
-
+		for (int perm=0; perm < (int)qids.size(); perm++) {
+			// Logic
 		}
-		C = getPermutations(i + 1, qids);
+		graphs = graphGeneration(qids, nodeMax, i);
 		cout << "PERM "<< to_string(i + 1) << endl;
 	}
-
 
 	return 0;
 }
