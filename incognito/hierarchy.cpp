@@ -107,8 +107,6 @@ vector<vector<vector<string>>> read_directory(fs::path const &directory,
 			qids.emplace_back(distance(headersVector.begin(),
 					  itr));
 	}
-	
-
 
 	// Return tansposed hierchies
 	return transposeAndFormat(res);
@@ -119,12 +117,21 @@ vector<vector<string>> transpose(const vector<vector<string>>& matrix) {
 	int rows=matrix.size();
 	int cols=matrix[0].size();
 
+	string arr[cols][rows];
+
+	// Transpose vector
+	for (int i=0; i < rows; i++) {
+		for (int j=0; j < cols; j++) {
+			arr[j][i] = matrix[i][j];
+		}
+	}	
+
 	// Convert array to vector
 	vector<vector<string>> res;
-	for (int i=0; i < rows; i++) {
+	for (int i=0; i < cols; i++) {
    		vector<string> aux;
-   		for (int j=0; j < cols; j++) {
-      			aux.emplace_back(matrix[i][j]);
+   		for (int j=0; j < rows; j++) {
+      			aux.emplace_back(arr[i][j]);
    		}
 		res.emplace_back(aux);
 	}
@@ -170,9 +177,9 @@ void permute(const vector<int> data,
                 return ;
         }
 
-        for (int i=rept; i < n; i++) {
+        for (int i=rept; (i < n) && (n - i + 1); i++) {
                 aux[idx] = i;
-                permute(data, permutations, n, r, i, idx+1, aux);
+                permute(data, permutations, n, r, i+1, idx+1, aux);
         }
 }
 

@@ -33,42 +33,71 @@ int main(int argc, char** argv) {
 		// [0][x] => B0 (menos generica)
 		// [i][x] => Bi
 		// ...
-
+		for (const auto& hierarchy : hierarchies_set) {
+			for (const auto& entry : hierarchy) {
+				for (const auto& val : entry) { 
+					cout << val + ". ";
+				}
+				cout << "|" << endl;
+			}
+			cout << endl;
+		}
 	} catch (char* e) {
 		cout << e << endl; 
 		return -1;
 	}
 
-	// Sort qid set
-	sort(qids.begin(), qids.end());
-	
 	// Levels per hierchary. Useful to construct node
-	// tables
+	// and edges tables
 	vector<int> nodeMax;
 	for (const auto& entry : hierarchies_set) {
 		nodeMax.emplace_back(entry.size() - 1);
 	}
-	nodeMax = vector<int> { 1,2 };
-
+	//nodeMax = vector<int> ({1, 2});
 
 	// Main Algorithm
 	//  - Construct Ci and Ei (nodes and edges)
 	vector<vector<int>> C;
-	C = getPermutations(1, nodeMax);  // Ci
-	Tree tree(nodeMax);		  // Ei
 
-	for (const auto& entry : C) {
-		for (const auto& val : entry) {
-			cout << to_string(val) + ",";
-		}
-		cout << endl;
-	}
+	// Redef
+	//qids = vector<int>{1,2};
+	// CAMBIAR POR 1 !!!!!
+	C = getPermutations(1, qids);  // Ci
 
-	/*
+
+	// Main Algorithm
 	for (int i=1; i < (int)qids.size(); i++) {
-		// Algorithm	
-		C[i-1] = getPermutations(i, nodeMax);
-	}*/
+		// Generate trees for permutations of $perm qids
+		for (int perm=0; perm < (int)C.size(); perm++) {
+			vector<int> CMaxValue;
+			cout << "Nodemax: ";
+			for (const int& entry : C[perm]) {
+				CMaxValue.emplace_back(nodeMax[entry]);
+				cout << nodeMax[entry];
+			}
+
+			cout << endl;
+			cout << "C[" + to_string(perm) + "]" << endl;
+			for (const int& entry : C[perm]) {
+				cout << entry;
+			}
+
+			// Generate Tree
+			TreeData treeData;
+			// C[perm] => curr qid indexes 
+			// CMaxValue => max qid indexes
+			Tree tree(CMaxValue, C[perm], treeData);
+
+			//Tree tree({1,2}, {2,1}, treeData);
+			tree.printNodesTable();
+			tree.printEdgesTable();
+
+			cout << "Cambiando a sig pos permutacion: " + to_string(perm) << endl;
+
+		}
+		C = getPermutations(i + 1, qids);
+		cout << "PERM "<< to_string(i + 1) << endl;
+	}
 
 
 	return 0;

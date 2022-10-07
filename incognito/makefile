@@ -4,7 +4,7 @@ CXXFLAGS = --std=c++17 -lstdc++fs -Wall
 .PHONY : all clean distclean
 
 EXE = incognito.out
-SRC = incognito.cpp hierarchy.cpp tree.cpp
+SRC = incognito.cpp hierarchy.cpp tree.cpp treeData.cpp edge.cpp node.cpp
 OBJ = $(SRC:.cpp=.o)
 INC = $(wildcard *.hpp)
 
