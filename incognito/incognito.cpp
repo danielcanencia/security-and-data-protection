@@ -8,7 +8,6 @@ vector<Tree> graphGeneration(const vector<int>& qids,
 			     const vector<int>& nodeMax,
 			     int numAttr) {
 	vector<Tree> trees;
-
 	vector<vector<int>> C;
 
 
@@ -124,6 +123,7 @@ int main(int argc, char** argv) {
 		}
 	}*/
 
+
 	// Main Algorithm
 	for (int i=1; i < (int)qids.size(); i++) {
 		// Check graph/edge k-anonymity
@@ -173,7 +173,8 @@ int main(int argc, char** argv) {
 		graphs = graphGeneration(qids, nodeMax, i+1);
 
 	}
-	
+
+
 	return 0;
 }
 

@@ -241,6 +241,8 @@ void permute(const vector<int> data,
                 aux[idx] = i;
                 permute(data, permutations, n, r, i+1, idx+1, aux);
         }
+
+	delete [] aux;
 }
 
 
