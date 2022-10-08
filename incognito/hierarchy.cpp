@@ -215,17 +215,15 @@ vector<vector<int>> getPermutations(int r, vector<int> nodeMax) {
 
         //Permutamos, obteniendo los valores de los nodos del grafo
         vector<vector<int>> permutations;
-        permute(nodeMax, permutations, nodeMax.size(), r);
+	int auxArray[nodeMax.size()];
+        permute(nodeMax, permutations, nodeMax.size(), r, auxArray);
         return permutations;
 }
 
 
 void permute(const vector<int> data,
                    vector<vector<int>>& permutations,
-                   int n, int r, int rept, int idx, int aux[]) {
-        if (aux==NULL) {
-                aux = new int[r];
-        }
+                   int n, int r, int *aux, int rept, int idx) {
 
         if (idx==r) {
                 vector<int> entry;
@@ -239,10 +237,8 @@ void permute(const vector<int> data,
 
         for (int i=rept; (i < n) && (n - i + 1); i++) {
                 aux[idx] = i;
-                permute(data, permutations, n, r, i+1, idx+1, aux);
+                permute(data, permutations, n, r, aux, i+1, idx+1);
         }
-
-	delete [] aux;
 }
 
 

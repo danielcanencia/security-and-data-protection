@@ -24,7 +24,7 @@ vector<vector<string>> transpose(const vector<vector<string>>& matrix);
 vector<vector<int>> getPermutations(int r, vector<int> nodeMax);
 void permute(const vector<int> data,
              vector<vector<int>>& permutations,
-             int n, int r, int rept=0, int idx=0, int aux[]=NULL);
+             int n, int r, int *aux, int rept=0, int idx=0);
 
 #endif
 
