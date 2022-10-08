@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <tuple>
+#include <algorithm>
 #include "edge.h"
 #include "node.h"
 
@@ -21,6 +22,10 @@ public:
 	int contains(const vector<int>& node);
 	int contains(int from, int to);
 	void generateAllEdges();
+	vector<Node> getRoots();
+	int addGeneralizations(const Node& node, vector<Node>& queue);
+	void markGeneralizations(const Node& node);
+	vector<Node> getChildren(Node node);
 	void printNodesTable();
 	void printEdgesTable();
 };

@@ -1,6 +1,26 @@
 #include "hierarchy.h"
 
 
+// Get idx of qid in table input headers
+int getHierarchyIdx(string qidName, vector<string> headers) {
+	string tmp;
+
+	// Convert qid name to lowercase
+	transform(qidName.begin(), qidName.end(), inserter(tmp, tmp.end()), 
+    	  [](unsigned char x){ return tolower(x); });
+
+	// Iterate through the headers and find the correct index
+	std::vector<string>::iterator itr = find(headers.begin(),
+						 headers.end(),
+						 qidName); 
+
+	if (itr != headers.cend())
+		return distance(headers.begin(),
+				itr);
+
+	return -1;
+}
+
 vector<vector<vector<string>>> read_directory(fs::path const &directory, 
 	 				      vector<vector<string>>& dataset,
 					      vector<int>& qids,
@@ -34,6 +54,19 @@ vector<vector<vector<string>>> read_directory(fs::path const &directory,
 	// Skip headers and insert them into a variable
 	string line;
 	getline(input1, headers);
+
+	// Get a lowercase version of the headers
+	string tmp;
+	stringstream ss(headers);
+	vector<string> headersVector;
+	while(getline(ss, tmp, ';')){
+		transform(tmp.begin(), tmp.end(), tmp.begin(),
+    		  [](unsigned char x){ return tolower(x); });
+    		headersVector.push_back(tmp);
+	}
+
+
+	// Read input table
 	for(; getline(input1, line);) {
 		// Dont read empty lines
 		if (line.length() == 0)
@@ -49,9 +82,11 @@ vector<vector<vector<string>>> read_directory(fs::path const &directory,
 	input1.close();
 
 	// Read hierarchy files
-	vector<vector<vector<string>>> res;
+	vector<vector<string>> array[headers.size()];
 	string qidName;
 	vector<string> qidNames;
+
+	int idx;	
 	for (const string& filename : hierarchies) {
 		ifstream input2{filename};
 		if(!input2.is_open()) {
@@ -77,20 +112,44 @@ vector<vector<vector<string>>> read_directory(fs::path const &directory,
 		}
 		input2.close();
 
-		res.emplace_back(hierarchy);
+		idx = getHierarchyIdx(qidName, headersVector);
+		cout << qidName + " >> " + to_string(idx);
+		qids.emplace_back(idx);
+		array[idx] = hierarchy;
 	}
 
-	// Get a lowercase version of the headers
-	string tmp;
-	stringstream ss(headers);
-	vector<string> headersVector;
-	while(getline(ss, tmp, ';')){
-		transform(tmp.begin(), tmp.end(), tmp.begin(),
-    		  [](unsigned char x){ return tolower(x); });
-    		headersVector.push_back(tmp);
+	cout << endl;
+	for (const auto& entry : qids)
+		cout << entry;
+	cout << endl;
+
+	// Order hierarchies by qid index
+	/*vector<vector<vector<string>>> res;
+	for (const int& qid : qids) {
+		res.emplace_back(array[qid]);	
+	}
+	
+	for (const auto& entry : res) {
+		if (entry.empty())
+			continue;
+		for (const auto& val : entry) {
+			for (const auto& v : val)
+				cout << v + ", ";
+			cout << endl;
+		}
+		cout << "----------------" << endl;
+	}
+	*/
+
+	// Convert array to vector
+	vector<vector<vector<string>>> res;
+	for (const auto& entry : array) {
+		if (entry.empty())
+			continue;
+		res.emplace_back(entry);
 	}
 
-	// Convert qids vector to an int vector 
+	/*
 	// (denotes qid index/column in dataset)
 	for (const string& entry : qidNames) {
 
@@ -107,6 +166,7 @@ vector<vector<vector<string>>> read_directory(fs::path const &directory,
 			qids.emplace_back(distance(headersVector.begin(),
 					  itr));
 	}
+	*/
 
 	// Return tansposed hierchies
 	return transposeAndFormat(res);

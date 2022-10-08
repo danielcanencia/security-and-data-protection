@@ -10,7 +10,16 @@ vector<Tree> graphGeneration(const vector<int>& qids,
 	vector<Tree> trees;
 
 	vector<vector<int>> C;
+
+
 	C = getPermutations(numAttr, qids);
+
+	for (const auto& entry : C) {
+		for (const auto& val : entry) {
+			cout << to_string(val) + ", ";
+		}
+		cout << endl;
+	}
 
 	// Generate trees for permutations of $perm qids
 	for (int perm=0; perm < (int)C.size(); perm++) {
@@ -49,11 +58,17 @@ int main(int argc, char** argv) {
 		return -1;
 	}
 
+	/*
+	System.out.print("Insert K: ");
+	int K;
+	getline(cin, K);
+	*/
+	int K = 2;
 
 	// Read csv data file
 	string headers;
 	vector<int> qids;
-	vector<vector<string>> dataset;
+	vector<vector<string>> dataset, transposedDataset;
 	vector<vector<vector<string>>> hierarchies_set;
 
 	try {
@@ -61,6 +76,14 @@ int main(int argc, char** argv) {
 		// [0][x] => B0 (menos generica)
 		// [i][x] => Bi
 		// ...
+
+		transposedDataset = transpose(dataset);
+		for (const auto& entry : dataset) {
+			for (const auto& val : entry) 
+				cout << val + ", ";
+			cout << endl;
+		}
+		cout << "---------------------------" << endl;
 		for (const auto& hierarchy : hierarchies_set) {
 			for (const auto& entry : hierarchy) {
 				for (const auto& val : entry) { 
@@ -70,6 +93,9 @@ int main(int argc, char** argv) {
 			}
 			cout << endl;
 		}
+		cout << "Qids: ";
+		for (const auto& qid : qids) cout << qid;
+		cout << endl;
 	} catch (char* e) {
 		cout << e << endl; 
 		return -1;
@@ -83,21 +109,71 @@ int main(int argc, char** argv) {
 	}
 	//nodeMax = vector<int> ({1, 2});
 
+	cout << "NodeMax: ";
+	for (const auto& entry : nodeMax) cout << entry;
+	cout << endl;
 
 	// Generate all posible graphs containing qids
 	// defined by qid variable
 	vector<Tree> graphs = graphGeneration(qids, nodeMax, 1);
+	cout << "Roots: " << endl;
+	/*for (auto li: graphs) {
+		for (Node entry : li.getRoots()) {
+			entry.print();
+			cout << endl;
+		}
+	}*/
 
 	// Main Algorithm
 	for (int i=1; i < (int)qids.size(); i++) {
+		// Check graph/edge k-anonymity
+		//cout << graphs[i].checkKAnonymity(dataset) << endl;
 
-		for (int perm=0; perm < (int)qids.size(); perm++) {
-			// Logic
+		for (int gsize=0; gsize < (int)graphs.size(); gsize++) {
+			Tree g = graphs[gsize];
+			vector<Node> nodesQueue = g.getRoots();
+			cout << "Roots: ";
+			for (Node entry : nodesQueue) {
+				entry.print();
+				cout << endl;
+			}
+
+			// Main Loop
+			while (!nodesQueue.empty()) {
+				Node node = nodesQueue[0];
+				nodesQueue.erase(nodesQueue.begin());
+
+				if (!node.marked()) {
+					// Not marked
+					cout << "Generalization for ";
+					node.print();
+					if (node.getKAnonymity(hierarchies_set,
+							       transposedDataset,
+							       dataset, 
+							       g.getQids(), K)) {
+						cout << "IT ITS KANON" << endl;
+						g.markGeneralizations(node);
+					}
+					else {
+						cout << "Node GENS: ";
+				 		if (g.addGeneralizations(node, nodesQueue))
+							cout << "No children" << endl;
+						sort(nodesQueue.begin(), nodesQueue.end());
+						cout << "Queue: ";
+						for (const auto& entry : nodesQueue)
+							entry.print();
+						cout << endl;
+					}
+				}
+			}
+
 		}
-		graphs = graphGeneration(qids, nodeMax, i);
-		cout << "PERM "<< to_string(i + 1) << endl;
-	}
 
+		// Generate graphs
+		graphs = graphGeneration(qids, nodeMax, i+1);
+
+	}
+	
 	return 0;
 }
 

@@ -56,6 +56,80 @@ void TreeData::generateAllEdges() {
 
 }
 
+vector<Node> TreeData::getRoots() {
+	vector<Node> roots;
+	vector<int> rootsIds;
+	bool flag;
+
+
+	// Get root nodes ids
+	for (const auto& entry1 : this->edges) {
+		int  parentId = entry1.getNodeId();
+		flag = true;
+		for (const auto& entry2 : this->edges) {
+			if (entry2.getChild() == parentId) {
+				flag = false;
+				break;
+			}
+		}
+		if (flag)
+			rootsIds.emplace_back(entry1.getNodeId());
+	}
+
+	for (const auto& v : rootsIds)
+		cout << v;
+	cout << endl;
+
+	// Remove unique values nodeIds
+	sort(rootsIds.begin(), rootsIds.end());
+	rootsIds.erase(unique(rootsIds.begin(), rootsIds.end()), rootsIds.end());
+
+	// Construct vector of nodes
+	for (size_t i=0; i < rootsIds.size(); i++)
+		roots.emplace_back(this->nodes[rootsIds[i]]);
+
+	// Sort nodes by height
+	sort(roots.begin(), roots.end());
+
+	return roots;
+}
+
+int TreeData::addGeneralizations(const Node& node, vector<Node>& queue) {
+	vector<Node> children = getChildren(node);
+	if (children.empty())
+		return -1;
+
+	cout << "Add generalizations: " << endl;
+	for (const Node& child : children) {
+		if(!child.marked()) {
+			child.print();
+			queue.emplace_back(child);
+		}
+	}
+
+	return 0;
+}
+
+void TreeData::markGeneralizations(const Node& node) {
+	cout << "Marking....." << endl;
+	for (Node& child : getChildren(node)) {
+		child.print();
+		this->nodes[child.getId()].mark();
+	}
+}
+
+vector<Node> TreeData::getChildren(Node node) {
+	vector<Node> children;
+
+	for (const Edge& edge : this->edges) {
+		if (edge.getNodeId() == node.getId()) {
+			children.emplace_back(
+				this->nodes[edge.getChild()]);
+		}
+	}
+	return children;
+}
+
 void TreeData::printNodesTable() {
 	for (const Node& node : this->nodes) {
 		node.print();

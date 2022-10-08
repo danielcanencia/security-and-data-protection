@@ -50,6 +50,36 @@ void Tree::generateAllNodesAndEdges(const vector<int>& node,
 	}
 }
 
+vector<Node> Tree::getRoots() {
+	return this->treeData.getRoots();
+}
+
+
+bool Tree::checkKAnonymity(vector<vector<string>> dataset) {
+	/*for (const auto& entry : dataset) {
+		for (const auto& val : entry)
+			cout << val + ", ";
+		cout << endl;
+	}*/
+
+	// Iterate through nodes by level
+	/*vector firstNode
+	vector<Node> children = this->treeData.getChildren();*/
+	return true;
+}
+
+vector<int> Tree::getQids() const {
+	return this->qids;
+}
+
+int Tree::addGeneralizations(const Node& node, vector<Node>& queue) {
+	return this->treeData.addGeneralizations(node, queue);
+}
+
+void Tree::markGeneralizations(const Node& node) {
+	this->treeData.markGeneralizations(node);
+}
+
 void Tree::printNodesTable() {
 	cout << "***** Nodes Table *****" << endl;
 	cout << "Qids: ";
