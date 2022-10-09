@@ -15,7 +15,7 @@ private:
 	int id;
 	vector<int> data;
 	bool nodeMark = false;
-
+	bool kAnon = false;
 	string generalizeEntry(string entry, const vector<vector<string>> hierarchy,
                        vector<string> generalizations);
 	vector<int> evaluateFrequency(vector<vector<string>> generalizations,
@@ -31,10 +31,10 @@ public:
 	int getSum() const;
 	bool marked() const;
 	void mark(); 
-
+	void setKAnon();
+	bool isKAnon() const;
 	bool getKAnonymity(vector<vector<vector<string>>> hierarchies,
                            vector<vector<string>> transposedTable,
-                           vector<vector<string>> table,
                            vector<int> qids, int K);
 	void print() const;
 };

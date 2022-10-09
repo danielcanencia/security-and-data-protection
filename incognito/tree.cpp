@@ -80,6 +80,10 @@ void Tree::markGeneralizations(const Node& node) {
 	this->treeData.markGeneralizations(node);
 }
 
+void Tree::printAllKAnon() {
+	treeData.printAllKAnon();
+}
+
 void Tree::printNodesTable() {
 	cout << "***** Nodes Table *****" << endl;
 	cout << "Qids: ";

@@ -3,14 +3,6 @@
 TreeData::TreeData() {}
 
 void TreeData::addData(vector<int> data) {
-	/*int nodeId = this->contains(node);
-	if (nodeId == -1) {
-		this->nodes.emplace_back(this->idCount,
-					 data);
-		//this->edges.emplace_back(
-		//	Edge(this->idCount, from, to));
-		return ;
-	}*/
 	int nodeId = this->contains(data);
 	if (nodeId == -1) {
 		this->nodes.emplace_back(this->idCount, data);
@@ -43,13 +35,9 @@ void TreeData::generateAllEdges() {
                 for (int j=0; j < (int)this->nodes.size(); j++) {
                         if (j == i)
                                 continue;
-                        //if (node.isParent(this->nodes[j]))
-                        //        from = j;
                         if (node.isChild(this->nodes[j]))
                                 to.emplace_back(j);
 		}
-		//if (to.size() == 0)
-		//	this->edges.emplace_back(Edge(node.getId(), from, node.getId()));
                 for (const auto& entry : to)
                         this->edges.emplace_back(Edge(node.getId(), from, entry));
         }
@@ -76,10 +64,6 @@ vector<Node> TreeData::getRoots() {
 			rootsIds.emplace_back(entry1.getNodeId());
 	}
 
-	for (const auto& v : rootsIds)
-		cout << v;
-	cout << endl;
-
 	// Remove unique values nodeIds
 	sort(rootsIds.begin(), rootsIds.end());
 	rootsIds.erase(unique(rootsIds.begin(), rootsIds.end()), rootsIds.end());
@@ -99,10 +83,8 @@ int TreeData::addGeneralizations(const Node& node, vector<Node>& queue) {
 	if (children.empty())
 		return -1;
 
-	cout << "Add generalizations: " << endl;
 	for (const Node& child : children) {
 		if(!child.marked()) {
-			child.print();
 			queue.emplace_back(child);
 		}
 	}
@@ -111,9 +93,9 @@ int TreeData::addGeneralizations(const Node& node, vector<Node>& queue) {
 }
 
 void TreeData::markGeneralizations(const Node& node) {
-	cout << "Marking....." << endl;
+	this->nodes[node.getId()].setKAnon();
+
 	for (Node& child : getChildren(node)) {
-		child.print();
 		this->nodes[child.getId()].mark();
 	}
 }
@@ -128,6 +110,27 @@ vector<Node> TreeData::getChildren(Node node) {
 		}
 	}
 	return children;
+}
+
+void TreeData::printAllKAnon(const Node& node, vector<int> kList) {
+	for (const Node& node: getChildren(node)) {
+		if (find(kList.begin(), kList.end(), node.getId())
+			!= kList.end()) {
+			node.print();
+			kList.emplace_back(node.getId());
+			printAllKAnon(node, kList);
+		}
+	}
+}
+
+void TreeData::printAllKAnon() {
+	for (const Node& node : this->nodes) {
+		if (node.isKAnon()) {
+			vector<int> kList;
+			node.print();
+			printAllKAnon(node, kList);
+		}
+	}
 }
 
 void TreeData::printNodesTable() {

@@ -25,6 +25,7 @@ public:
 	vector<int> getQids() const;
 	int addGeneralizations(const Node& node, vector<Node>& queue);
 	void markGeneralizations(const Node& node);
+	void printAllKAnon();
 	void printNodesTable();
 	void printEdgesTable();
 };

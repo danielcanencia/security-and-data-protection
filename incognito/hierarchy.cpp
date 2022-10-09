@@ -24,7 +24,7 @@ int getHierarchyIdx(string qidName, vector<string> headers) {
 vector<vector<vector<string>>> read_directory(fs::path const &directory, 
 	 				      vector<vector<string>>& dataset,
 					      vector<int>& qids,
-			   		      string& headers) {
+			   		      vector<string>& headersVector) {
 
 	// Locate csv input file and hierarchies directory
 	string file;
@@ -52,13 +52,12 @@ vector<vector<vector<string>>> read_directory(fs::path const &directory,
 	}
 
 	// Skip headers and insert them into a variable
-	string line;
+	string headers;
 	getline(input1, headers);
 
 	// Get a lowercase version of the headers
 	string tmp;
 	stringstream ss(headers);
-	vector<string> headersVector;
 	while(getline(ss, tmp, ';')){
 		transform(tmp.begin(), tmp.end(), tmp.begin(),
     		  [](unsigned char x){ return tolower(x); });
@@ -67,6 +66,7 @@ vector<vector<vector<string>>> read_directory(fs::path const &directory,
 
 
 	// Read input table
+	string line;
 	for(; getline(input1, line);) {
 		// Dont read empty lines
 		if (line.length() == 0)
@@ -113,33 +113,9 @@ vector<vector<vector<string>>> read_directory(fs::path const &directory,
 		input2.close();
 
 		idx = getHierarchyIdx(qidName, headersVector);
-		cout << qidName + " >> " + to_string(idx);
 		qids.emplace_back(idx);
 		array[idx] = hierarchy;
 	}
-
-	cout << endl;
-	for (const auto& entry : qids)
-		cout << entry;
-	cout << endl;
-
-	// Order hierarchies by qid index
-	/*vector<vector<vector<string>>> res;
-	for (const int& qid : qids) {
-		res.emplace_back(array[qid]);	
-	}
-	
-	for (const auto& entry : res) {
-		if (entry.empty())
-			continue;
-		for (const auto& val : entry) {
-			for (const auto& v : val)
-				cout << v + ", ";
-			cout << endl;
-		}
-		cout << "----------------" << endl;
-	}
-	*/
 
 	// Convert array to vector
 	vector<vector<vector<string>>> res;
@@ -148,25 +124,6 @@ vector<vector<vector<string>>> read_directory(fs::path const &directory,
 			continue;
 		res.emplace_back(entry);
 	}
-
-	/*
-	// (denotes qid index/column in dataset)
-	for (const string& entry : qidNames) {
-
-		// Convert qid name to lowercase
-		transform(entry.begin(), entry.end(), inserter(tmp, tmp.end()), 
-    		  [](unsigned char x){ return tolower(x); });
-
-
-		// Iterate through the headers and find the correct index
-		std::vector<string>::iterator itr = find(headersVector.begin(),
-							 headersVector.end(),
-							 entry); 
-		if (itr != headersVector.cend())
-			qids.emplace_back(distance(headersVector.begin(),
-					  itr));
-	}
-	*/
 
 	// Return tansposed hierchies
 	return transposeAndFormat(res);

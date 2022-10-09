@@ -67,6 +67,13 @@ void Node::mark() {
 	this->nodeMark = true;
 }
 
+void Node::setKAnon() {
+	this->kAnon = true;
+}
+
+bool Node::isKAnon() const {
+	return this->kAnon;
+}
 
 string Node::generalizeEntry(string entry, const vector<vector<string>> hierarchy,
 		       vector<string> generalizations) {
@@ -98,7 +105,6 @@ vector<int> Node::evaluateFrequency(vector<vector<string>> generalizations,
 
 
 	// Concat values in every row
-	cout << "TRANSPOSED FREQ GENS: " << endl;
 	vector<stringstream> values(cols);
 	for (int i=0; i < cols; i++) {
 		for (int j=0; j < rows; j++) {
@@ -124,20 +130,12 @@ vector<int> Node::evaluateFrequency(vector<vector<string>> generalizations,
 		}
 	}
 
-	for (const auto& entry : values)
-		cout << entry.str() + ", ";
-	cout << endl;
-	for (const auto& c : count) {
-		cout << c;	
-	}
-
 	return count;
 }
 
 
 bool Node::getKAnonymity(vector<vector<vector<string>>> hierarchies,
 			 vector<vector<string>> transposedTable,
-			 vector<vector<string>> table,
 			 vector<int> qids, int K) {
 
 	vector<vector<string>> genArray(qids.size());
@@ -147,45 +145,23 @@ bool Node::getKAnonymity(vector<vector<vector<string>>> hierarchies,
 	int index = 0;
 	for (const int& qid : qids) {
 
+		// Node's data contains the level of generalization,
+		// hierarchy level we should use
+		//	this->data[index]
 		vector<string> generalizations = hierarchies[qid][this->data[index]];
-		cout << "Gens for " + to_string(qid) + " >> ";
-		for (const auto& entry : generalizations) {
-			cout << entry + ", ";
-		}
-		cout << endl;
-
 
 		// Table T rows representing qid's values
 		for (const string& entry : transposedTable[qid]) {
-			cout << entry + "  ->  ";
-
 
 			// Generate new row generalize
 
-			// Node's data contains the level of generalization,
-			// hierarchy level we should use
-			//	this->data[index]
-			cout << "Choosen gen: ";
 			// Iterate through possible generalizations in this
 			// level and find the one that suits the original data.
 			string choosenGen; 
 			choosenGen = generalizeEntry(entry, hierarchies[qid], generalizations);
 			genArray[index].emplace_back(choosenGen);
-
-
-			cout << choosenGen; 
-			cout << endl;
-			cout << "*********************" << endl;
 		}
 		index++;
-	}
-
-
-	// Print generalized rows
-	for (const auto& entry : genArray) {
-		for (const auto& val : entry)
-			cout << val + ", ";
-		cout << endl;
 	}
 
 

@@ -13,13 +13,6 @@ vector<Tree> graphGeneration(const vector<int>& qids,
 
 	C = getPermutations(numAttr, qids);
 
-	for (const auto& entry : C) {
-		for (const auto& val : entry) {
-			cout << to_string(val) + ", ";
-		}
-		cout << endl;
-	}
-
 	// Generate trees for permutations of $perm qids
 	for (int perm=0; perm < (int)C.size(); perm++) {
 		vector<int> CMaxValue;
@@ -33,10 +26,54 @@ vector<Tree> graphGeneration(const vector<int>& qids,
 		// CMaxValue => max qid indexes
 		Tree tree(CMaxValue, C[perm], treeData);
 		trees.emplace_back(tree);
-		tree.printNodesTable();
-		tree.printEdgesTable();
+
+		//tree.printNodesTable();
+		//tree.printEdgesTable();
 	}
 	return trees;
+}
+
+void printHelper(vector<string> headers, vector<int> qids,
+		 vector<int> nodeMax,
+		 vector<vector<vector<string>>> hierarchies_set) {
+
+	// Print Solutions
+	cout << endl;
+	cout << "******* Solution *******" << endl;
+
+	// Print qids and their hierarchy levels
+	cout << "--------Qids hierarchy levels-------" << endl;
+	for (const int& qid : qids) {
+		cout << headers[qid] + " >> " << endl;
+		for (int i=0; i < nodeMax[qid] + 1; i++) {
+			cout << "\tHierarchy Level " + to_string(i) + " ";
+			cout << "{ ";
+			for (const string& value : hierarchies_set[qid][i])
+				cout << value + ", ";
+			cout << " }" << endl;
+		}
+		cout << endl;
+	}
+
+	cout << "------------------------------------" << endl;
+}
+
+void printGraphKAnon(Tree graph, const vector<Node>& kNodes,
+		     const vector<string>& headers,
+		     const vector<int>& qid) {
+	// Print every set of qids that is kanon and/or is
+	// a direct generalization of one
+
+	cout << "Graph with qids: { ";
+	const vector<int>& qids = graph.getQids();
+	cout << headers[qids[0]];
+	for (size_t i=1; i < qids.size(); i++) {
+		cout << ", " + headers[qids[i]];
+	}
+	cout << " }" << endl;
+
+	// Sets of keys for the node
+	graph.printAllKAnon();
 }
 
 int main(int argc, char** argv) {
@@ -65,36 +102,14 @@ int main(int argc, char** argv) {
 	int K = 2;
 
 	// Read csv data file
-	string headers;
+	vector<string> headers;
 	vector<int> qids;
 	vector<vector<string>> dataset, transposedDataset;
 	vector<vector<vector<string>>> hierarchies_set;
 
 	try {
 		hierarchies_set = read_directory(fs::path(argv[1]), dataset, qids, headers);
-		// [0][x] => B0 (menos generica)
-		// [i][x] => Bi
-		// ...
-
 		transposedDataset = transpose(dataset);
-		for (const auto& entry : dataset) {
-			for (const auto& val : entry) 
-				cout << val + ", ";
-			cout << endl;
-		}
-		cout << "---------------------------" << endl;
-		for (const auto& hierarchy : hierarchies_set) {
-			for (const auto& entry : hierarchy) {
-				for (const auto& val : entry) { 
-					cout << val + ". ";
-				}
-				cout << "|" << endl;
-			}
-			cout << endl;
-		}
-		cout << "Qids: ";
-		for (const auto& qid : qids) cout << qid;
-		cout << endl;
 	} catch (char* e) {
 		cout << e << endl; 
 		return -1;
@@ -106,38 +121,22 @@ int main(int argc, char** argv) {
 	for (const auto& entry : hierarchies_set) {
 		nodeMax.emplace_back(entry.size() - 1);
 	}
-	//nodeMax = vector<int> ({1, 2});
 
-	cout << "NodeMax: ";
-	for (const auto& entry : nodeMax) cout << entry;
-	cout << endl;
 
 	// Generate all posible graphs containing qids
 	// defined by qid variable
 	vector<Tree> graphs = graphGeneration(qids, nodeMax, 1);
-	cout << "Roots: " << endl;
-	/*for (auto li: graphs) {
-		for (Node entry : li.getRoots()) {
-			entry.print();
-			cout << endl;
-		}
-	}*/
 
+	// Print a hierarchy level helper
+	printHelper(headers, qids, nodeMax, hierarchies_set);
 
 	// Main Algorithm
-	for (int i=1; i < (int)qids.size(); i++) {
-		// Check graph/edge k-anonymity
-		//cout << graphs[i].checkKAnonymity(dataset) << endl;
-
-		for (int gsize=0; gsize < (int)graphs.size(); gsize++) {
+	for (size_t i=1; i < qids.size() + 1; i++) {
+		for (size_t gsize=0; gsize < graphs.size(); gsize++) {
 			Tree g = graphs[gsize];
 			vector<Node> nodesQueue = g.getRoots();
-			cout << "Roots: ";
-			for (Node entry : nodesQueue) {
-				entry.print();
-				cout << endl;
-			}
-
+			vector<Node> kanon;
+			
 			// Main Loop
 			while (!nodesQueue.empty()) {
 				Node node = nodesQueue[0];
@@ -145,36 +144,31 @@ int main(int argc, char** argv) {
 
 				if (!node.marked()) {
 					// Not marked
-					cout << "Generalization for ";
-					node.print();
 					if (node.getKAnonymity(hierarchies_set,
 							       transposedDataset,
-							       dataset, 
 							       g.getQids(), K)) {
-						cout << "IT ITS KANON" << endl;
 						g.markGeneralizations(node);
 					}
 					else {
-						cout << "Node GENS: ";
-				 		if (g.addGeneralizations(node, nodesQueue))
-							cout << "No children" << endl;
+				 		g.addGeneralizations(node, nodesQueue);
 						sort(nodesQueue.begin(), nodesQueue.end());
-						cout << "Queue: ";
-						for (const auto& entry : nodesQueue)
-							entry.print();
-						cout << endl;
 					}
 				}
 			}
+			// Print Graph Solution
+			printGraphKAnon(g, kanon, headers, qids);
 
 		}
+	
 
 		// Generate graphs
-		graphs = graphGeneration(qids, nodeMax, i+1);
-
+		if (i <= qids.size()) 
+			graphs = graphGeneration(qids, nodeMax, i+1);
 	}
 
 
+
+	
 	return 0;
 }
 

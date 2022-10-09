@@ -16,6 +16,9 @@ private:
 	vector<Node> nodes;
 	vector<Edge> edges;
 	int idCount = 0;
+
+	void printAllKAnon(const Node& node,
+			   vector<int> kList);
 public:
 	TreeData();
 	void addData(vector<int> data);
@@ -23,9 +26,11 @@ public:
 	int contains(int from, int to);
 	void generateAllEdges();
 	vector<Node> getRoots();
-	int addGeneralizations(const Node& node, vector<Node>& queue);
+	int addGeneralizations(const Node& node,
+			       vector<Node>& queue);
 	void markGeneralizations(const Node& node);
 	vector<Node> getChildren(Node node);
+	void printAllKAnon();
 	void printNodesTable();
 	void printEdgesTable();
 };
