@@ -94,12 +94,10 @@ int main(int argc, char** argv) {
 		return -1;
 	}
 
-	/*
-	System.out.print("Insert K: ");
-	int K;
-	getline(cin, K);
-	*/
-	int K = 2;
+	string line;
+	cout << "Insert K: ";
+	getline(cin, line);
+	int K = stoi(line);
 
 	// Read csv data file
 	vector<string> headers;
@@ -108,9 +106,10 @@ int main(int argc, char** argv) {
 	map<int, vector<vector<string>>> hierarchies_map;
 
 	try {
-		hierarchies_map = read_directory(fs::path(argv[1]), dataset, qids, headers);
+		hierarchies_map = read_directory(fs::path(argv[1]),
+					dataset, qids, headers, K);
 		transposedDataset = transpose(dataset);
-	} catch (char* e) {
+	} catch (const char* e) {
 		cout << e << endl; 
 		return -1;
 	}
