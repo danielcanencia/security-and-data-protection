@@ -10,14 +10,16 @@
 #include <iterator>	// iterator utilities
 #include <cctype>	// transform and find
 #include <algorithm>	// transform and find
+#include <map>
 
 using namespace std;
 namespace fs = std::filesystem;
 
-vector<vector<vector<string>>> read_directory(fs::path const &directory,
-				vector<vector<string>>& dataset,
-				vector<int>& qids,
-		    	 	vector<string>& headersVector);
+map<int, vector<vector<string>>> read_directory(
+	fs::path const &directory,
+	vector<vector<string>>& dataset,
+	vector<int>& qids,
+  	vector<string>& headersVector);
 vector<vector<vector<string>>> transposeAndFormat(
                 const vector<vector<vector<string>>>& hierarchies);
 vector<vector<string>> transpose(const vector<vector<string>>& matrix);

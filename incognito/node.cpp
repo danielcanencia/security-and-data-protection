@@ -134,7 +134,7 @@ vector<int> Node::evaluateFrequency(vector<vector<string>> generalizations,
 }
 
 
-bool Node::getKAnonymity(vector<vector<vector<string>>> hierarchies,
+bool Node::getKAnonymity(map<int, vector<vector<string>>> hierarchies,
 			 vector<vector<string>> transposedTable,
 			 vector<int> qids, int K) {
 

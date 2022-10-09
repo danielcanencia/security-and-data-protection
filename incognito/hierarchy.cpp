@@ -21,10 +21,10 @@ int getHierarchyIdx(string qidName, vector<string> headers) {
 	return -1;
 }
 
-vector<vector<vector<string>>> read_directory(fs::path const &directory, 
-	 				      vector<vector<string>>& dataset,
-					      vector<int>& qids,
-			   		      vector<string>& headersVector) {
+map<int, vector<vector<string>>> read_directory(
+	fs::path const &directory,
+	vector<vector<string>>& dataset,
+	vector<int>& qids, vector<string>& headersVector) {
 
 	// Locate csv input file and hierarchies directory
 	string file;
@@ -82,11 +82,11 @@ vector<vector<vector<string>>> read_directory(fs::path const &directory,
 	input1.close();
 
 	// Read hierarchy files
-	vector<vector<string>> array[headers.size()];
 	string qidName;
 	vector<string> qidNames;
 
 	int idx;	
+	vector<vector<vector<string>>> res;
 	for (const string& filename : hierarchies) {
 		ifstream input2{filename};
 		if(!input2.is_open()) {
@@ -112,21 +112,24 @@ vector<vector<vector<string>>> read_directory(fs::path const &directory,
 		}
 		input2.close();
 
+		// Get hierarchy corresponding qid
 		idx = getHierarchyIdx(qidName, headersVector);
 		qids.emplace_back(idx);
-		array[idx] = hierarchy;
+
+		res.emplace_back(hierarchy);
 	}
 
-	// Convert array to vector
-	vector<vector<vector<string>>> res;
-	for (const auto& entry : array) {
-		if (entry.empty())
-			continue;
-		res.emplace_back(entry);
-	}
 
-	// Return tansposed hierchies
-	return transposeAndFormat(res);
+	// Get transposed hierchies
+	auto tRes = transposeAndFormat(res);
+
+
+	// Map qid values and hierarchy sets
+	map<int, vector<vector<string>>> hMap;
+	for (size_t i=0; i < qids.size(); i++)
+		hMap[qids[i]] = tRes[i];
+
+	return hMap;
 }
 
 

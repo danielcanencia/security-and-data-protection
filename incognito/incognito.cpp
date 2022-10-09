@@ -5,7 +5,7 @@ using namespace std;
 
 
 vector<Tree> graphGeneration(const vector<int>& qids,
-			     const vector<int>& nodeMax,
+			     map<int, int> nodeMax,
 			     int numAttr) {
 	vector<Tree> trees;
 	vector<vector<int>> C;
@@ -16,7 +16,7 @@ vector<Tree> graphGeneration(const vector<int>& qids,
 	// Generate trees for permutations of $perm qids
 	for (int perm=0; perm < (int)C.size(); perm++) {
 		vector<int> CMaxValue;
-		for (const int& entry : C[perm]) {
+		for (const auto& entry : C[perm]) {
 			CMaxValue.emplace_back(nodeMax[entry]);
 		}
 
@@ -34,8 +34,8 @@ vector<Tree> graphGeneration(const vector<int>& qids,
 }
 
 void printHelper(vector<string> headers, vector<int> qids,
-		 vector<int> nodeMax,
-		 vector<vector<vector<string>>> hierarchies_set) {
+		 map<int, int> nodeMax,
+		 map<int, vector<vector<string>>> hMap) {
 
 	// Print Solutions
 	cout << endl;
@@ -48,7 +48,7 @@ void printHelper(vector<string> headers, vector<int> qids,
 		for (int i=0; i < nodeMax[qid] + 1; i++) {
 			cout << "\tHierarchy Level " + to_string(i) + " ";
 			cout << "{ ";
-			for (const string& value : hierarchies_set[qid][i])
+			for (const string& value : hMap[qid][i])
 				cout << value + ", ";
 			cout << " }" << endl;
 		}
@@ -105,10 +105,10 @@ int main(int argc, char** argv) {
 	vector<string> headers;
 	vector<int> qids;
 	vector<vector<string>> dataset, transposedDataset;
-	vector<vector<vector<string>>> hierarchies_set;
+	map<int, vector<vector<string>>> hierarchies_map;
 
 	try {
-		hierarchies_set = read_directory(fs::path(argv[1]), dataset, qids, headers);
+		hierarchies_map = read_directory(fs::path(argv[1]), dataset, qids, headers);
 		transposedDataset = transpose(dataset);
 	} catch (char* e) {
 		cout << e << endl; 
@@ -117,18 +117,17 @@ int main(int argc, char** argv) {
 
 	// Levels per hierchary. Useful to construct node
 	// and edges tables
-	vector<int> nodeMax;
-	for (const auto& entry : hierarchies_set) {
-		nodeMax.emplace_back(entry.size() - 1);
+	map<int, int> nodeMax;
+	for (const int& qid : qids) {
+		nodeMax[qid] = hierarchies_map[qid].size() - 1;
 	}
-
 
 	// Generate all posible graphs containing qids
 	// defined by qid variable
 	vector<Tree> graphs = graphGeneration(qids, nodeMax, 1);
 
 	// Print a hierarchy level helper
-	printHelper(headers, qids, nodeMax, hierarchies_set);
+	printHelper(headers, qids, nodeMax, hierarchies_map);
 
 	// Main Algorithm
 	for (size_t i=1; i < qids.size() + 1; i++) {
@@ -144,7 +143,7 @@ int main(int argc, char** argv) {
 
 				if (!node.marked()) {
 					// Not marked
-					if (node.getKAnonymity(hierarchies_set,
+					if (node.getKAnonymity(hierarchies_map,
 							       transposedDataset,
 							       g.getQids(), K)) {
 						g.markGeneralizations(node);
@@ -166,9 +165,6 @@ int main(int argc, char** argv) {
 			graphs = graphGeneration(qids, nodeMax, i+1);
 	}
 
-
-
-	
 	return 0;
 }
 

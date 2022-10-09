@@ -33,7 +33,7 @@ public:
 	void mark(); 
 	void setKAnon();
 	bool isKAnon() const;
-	bool getKAnonymity(vector<vector<vector<string>>> hierarchies,
+	bool getKAnonymity(map<int, vector<vector<string>>> hierarchies,
                            vector<vector<string>> transposedTable,
                            vector<int> qids, int K);
 	void print() const;
