@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "../utilities/hierarchy/hierarchy.h"
+#include "distances.h"
 
 #endif
 

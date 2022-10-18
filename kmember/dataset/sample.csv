@@ -1,7 +1,7 @@
 Age;Country;Occupation;Salary;Diagnosis
 41;USA;Armed-Forces;>=50K;Cancer
-57;India;Tech-support;<50K;Flu
+57;India;Tech-Support;<50K;Flu
 40;Canada;Teacher;<50K;Obesity
-38;Iran;Tech-support;<50K;Flu
+38;Iran;Tech-Support;<50K;Flu
 24;Brazil;Doctor;>=50K;Cancer
-45;Greece;Salesman;<50K;Fever
+45;Mexico;Salesman;<50K;Fever
