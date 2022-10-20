@@ -1,15 +1,6 @@
 #include <iostream>
 #include "kmember.h"
 
-vector<string> sunion(vector<string>& s1, vector<string>& s2) {
-	vector<string> res;
-
-	set_union(s1.begin(), s1.end(),
-		  s2.begin(), s2.end(),
-		  inserter(res, res.end()));
-	return res;
-}
-
 int main(int argc, char** argv) {
 
 
@@ -29,10 +20,25 @@ int main(int argc, char** argv) {
 		return -1;
 	}
 
+	// Read input
 	string line;
 	cout << "Insert K: ";
 	getline(cin, line);
 	const int K = stoi(line);
+
+	set<string> qid_set;
+	cout << "Number of qids: ";
+	getline(cin, line);
+	const int nqids = stoi(line);
+	for (int i=0; i < nqids; i++) {
+		cout << "Enter qid " << i << ": ";
+		string qid;
+		getline(cin, qid);
+		qid_set.insert(qid);
+	}
+	
+	//vector<string> qidNames = {"Age", "Country", "Occupation"};
+	vector<string> qidNames(qid_set.begin(), qid_set.end());
 
 	// Read data file and hierarchy folders
 	vector<string> headers;
@@ -41,58 +47,25 @@ int main(int argc, char** argv) {
 			       transposedDataset;
 	map<int, vector<vector<string>>> hierarchies_map;
 
-	// Read Input !!!
-	vector<string> qidNames = {"Age", "Country", "Occupation"};
 
 	try {
 		hierarchies_map = read_directory(fs::path(argv[1]),
 					dataset, headers, K, qidNames,
 					catQids);
 
+		if (catQids.size() == 0) {
+			cout << endl << "******************" << endl; 
+			cout << "An error occured.\nCheck the qid "
+				"names entered exists. They should be "
+				"referenced\nin their respectives "
+				"hierarchy files." << endl << endl;
+			return -1;
+		}
 		// Compare headers and qids
 		allQids = getQidsHeaders(headers, qidNames);
 		set_difference(allQids.begin(), allQids.end(),
 			catQids.begin(), catQids.end(),
         		inserter(numQids, numQids.begin())); 
-		/*
-		cout << "Num Qids: " << endl;
-		for (const auto& entry : numQids)
-			cout << to_string(entry) + ", ";
-		cout << endl;
-
-		cout << "Cat Quids: " << endl;
-		for (const auto& entry : catQids)
-			cout << to_string(entry) + ", ";
-		cout << endl;
-
-		for (const auto& qid : allQids)
-			cout << to_string(qid) + ", ";
-		cout << endl;
-		*/
-
-		// Get dataset containint just
-		// quasi-identifier attributes
-		transposedDataset = transpose(dataset);
-		for (size_t i=0; i <= transposedDataset.size(); i++) {
-			if (find(allQids.begin(), allQids.end(), i)
-			 	== allQids.end()) {
-				transposedDataset.erase(
-					transposedDataset.begin() + i);
-			}
-		}
-		dataset = transpose(transposedDataset);
-
-		/*
-		for (const auto& entry : dataset) {
-			for (const auto& v : entry) {
-				cout << v + ", ";
-			}
-			cout << endl;
-		}*/
-		cout << endl;
-
-		//for (const auto& entry : hierarchies_set)
-		//	hierarchies.emplace_back(entry);
 
 	} catch (const char* e) {
 		cout << e << endl; 
@@ -102,85 +75,80 @@ int main(int argc, char** argv) {
 	// Main algorithm
 	vector<vector<string>> S = dataset;
 	int r = randomRecord(S);
-	cout << r << endl;
 
 
 	map<int, vector<vector<string>>> res;
 	vector<vector<string>> c;
 	int count = 0;
+	vector<string> aux = S[r];
+
+	// 1st loop
 	while ((int)S.size() >= K) {
 
-		r = furthestRecord(S[r], r, S,
-				   hierarchies_map,
-				   numQids, catQids);
-		cout << to_string(r) + " < " + to_string(S.size()) << endl;
+		r = furthestRecord(aux, r, S,
+			   hierarchies_map,
+			   numQids, catQids);
+
 		vector<vector<string>> c;
 		c.emplace_back(S[r]);
-
 		S.erase(S.begin() + r);
 
 		while((int)c.size() < K) {
-			//r = 1;
-			r = find_best_record(S, c);
+			r = find_best_record(S, c,
+				hierarchies_map,
+				numQids, catQids);
 			c.emplace_back(S[r]);
 			S.erase(S.begin() + r);
 		}
 
-		//res = sunion(res, c);
+		aux = c.back();
 		res[count] = c;
 		count += 1;
 	}
 
 	/*
-	vector<int> result = {1, 2};
-	vector<int> c = {3, 5};
-	vector<int> res;
-
-	set_union(result.begin(), result.end(),
-		  c.begin(), c.end(),
-		  inserter(res, res.end()));
-	vector<int>::iterator it;
-	for (it = res.begin(); it != res.end(); it++)
-		cout << ' ' << *it;
-	cout << '\n';
-
-	*/
-	// Check if all characters in a string are int digits
-	/*string a = "577"; // 577** yields 577
-	if(isdigit(a[0])) {
-		cout << "It contains a number" << endl;
-		cout << atoi(a.c_str()) << endl;
+	cout << "*******************" << endl;
+	cout << "Count: ";
+	cout << count << endl;
+	for (int i=0; i < count; i++) {
+		cout << "Count: ";
+		cout << i << endl;
+		for (const auto& entries : res[i]) {
+			for (const auto& entry : entries) {
+				cout << entry + ", ";
+			}
+			cout << endl;
+		}
 	}*/
 
 
+	// 2nd loop
+	int idx;
+	while (S.size() > 0) {
+		r = randomRecord(S);
+		idx = find_best_cluster(res, S[r],
+			hierarchies_map,
+			numQids, catQids);
+		res[idx].emplace_back(S[r]);
+		S.erase(S.begin() + r);
+	}
 
-	/*
-	string str ="577.976766739.9", value;
-	int maxSize = 0;
-	int flag = 1, index = 0;
 
-	maxSize = str.size();
-	value = str;
-	while(flag) {
-		value = value.substr(0);
-		//maxSize = b.size();
-		if (isdigit(value[index])) {
-			auto aux = atoi(value.c_str());
-
-			//result += atoi(b.cstr());
-
-			if (value[to_string(aux).size()] == '.') {
-				index += to_string(aux).size() + 1;	
-				if (index >= maxSize)
-					flag = 0;
+	// Print results
+	cout << endl << endl; 
+	cout << "Clusters or equivalence classes: ";
+	cout << count << endl << endl;
+	for (int i=0; i < count; i++) {
+		cout << "Cluster " << i+1 << ':' << endl;
+		for (const auto& entries : res[i]) {
+			for (const auto& entry : entries) {
+				cout << entry + ", ";
 			}
-		}
-		else {
-			cout << "It is a string" << endl;
+			cout << endl;
 		}
 	}
 
-	cout << value << endl;*/
+
 	return 0;
 }
 

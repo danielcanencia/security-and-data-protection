@@ -19,6 +19,8 @@ public:
         Info(vector<vector<string>> records,
              map<int, vector<vector<string>>> hierarchies,
 	     vector<int> numQids, vector<int> catQids);
+	vector<int> getNumQids();
+	vector<int> getCatQids();
 	int valueType(int qid);
 	int getSubTreeHeight(string v1, string v2,
 			     int attIndex);

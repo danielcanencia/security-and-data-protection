@@ -2,8 +2,8 @@
 #define _DISTANCES_H
 
 #include <iostream>
+#include <numeric>
 #include "info.h"
-
 
 int randomRecord(vector<vector<string>> records);
 int furthestRecord(const vector<string> record,
@@ -22,6 +22,14 @@ long double distance(const vector<string>& r1,
 		     Info info);
 
 int find_best_record(vector<vector<string>> records,
-		     vector<vector<string>> cluster);
+		     vector<vector<string>> cluster,
+		     map<int, vector<vector<string>>> hierarchies,
+		     const vector<int> numQids,
+		     const vector<int> catQids);
+int find_best_cluster(map<int, vector<vector<string>>> clusters,
+                      vector<string> record,
+                      map<int, vector<vector<string>>> hierarchies,
+                      const vector<int> numQids,
+                      const vector<int> catQids);
 #endif
 

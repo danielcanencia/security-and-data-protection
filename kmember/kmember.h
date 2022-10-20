@@ -2,6 +2,7 @@
 #define _KMEMBER_H
 
 #include <vector>
+#include <set>
 #include "../utilities/hierarchy/hierarchy.h"
 #include "distances.h"
 

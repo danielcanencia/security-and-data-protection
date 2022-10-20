@@ -27,25 +27,17 @@ Info::Info (vector<vector<string>> records,
 	this->numQids = numQids;
 	this->catQids = catQids;
 
-/*
-	cout << "catQIDS: ";
-	for (const auto& entry : this->catQids) {
-		cout << to_string(entry) + ": ";
-		cout << records[entry][0] + ": ";
-		cout << hierarchies[entry][0][0] + ", ";
-	}
-	cout << endl;
-*/
 	calculateHeights();
 	calculateMaxDomSizes();
-	/*
-	for (const auto& entry : this->numQids)
-		cout << to_string(this->maxDomSizes[entry]) + ", ";
-	cout << endl;
-	for (const auto& entry : this->catQids)
-		cout << to_string(this->treeHeights[entry]) + ", ";
-	cout << endl;*/
 } 
+
+vector<int> Info::getNumQids() {
+	return this->numQids;
+}
+
+vector<int> Info::getCatQids() {
+	return this->catQids;
+}
 
 void Info::calculateHeights() {
 	int aux=0;
@@ -53,7 +45,6 @@ void Info::calculateHeights() {
 	for (const auto& idx : this->catQids) {
 		int height = 0;
 		for (const auto& gens : this->hierarchies[idx]) {
-			cout << gens.size();
 			aux = gens.size();
 			if (aux > height)
 				height = aux;
@@ -92,7 +83,7 @@ int Info::getSubTreeHeight(string v1, string v2,
 
 	for (const auto& entry : this->hierarchies[attIndex]) { 
 		for (size_t i=0; i < entry.size(); i++) {
-			//cout << entry[i] + ", ";
+
 			if (!strcmp(v1.c_str(), entry[i].c_str())) {
 				vector<string> aux(entry.begin() + i+1, entry.end());
 
@@ -146,19 +137,20 @@ map<int, vector<vector<string>>> Info::getHierarchies() {
 
 int Info::lowestCommonAncestor(int index) {
 
-	int[this->records.size()] indexes;
-	for (size_t i=0; i < records.size; i++)
-		indexes[i] = i;
+	vector<int> indexes;
+	for (size_t i=0; i < records.size(); i++)
+		indexes.emplace_back(i);
 
 	// Get all permutations of records
-	vector<vector<int>> perms = getPermutations(
-		2, indexes);
+	vector<vector<int>> perms =
+		getPermutations(2, indexes);
 
+	int height = 0;
 	for (const auto& perm : perms) {
-		int aux, height = 0;
+		int aux;
 		aux = getSubTreeHeight(
-			this->records[perm[0]],
-			this->records[perm[1]],
+			this->records[perm[0]][index],
+			this->records[perm[1]][index],
 			index);
 
 		if (aux > height)

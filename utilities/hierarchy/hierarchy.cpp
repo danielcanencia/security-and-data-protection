@@ -14,13 +14,30 @@ int getHierarchyIdx(const string qidName,
 	// Iterate through the headers and find the correct index
 	std::vector<string>::iterator itr = find(headers.begin(),
 						 headers.end(),
-						 qidName);
+						 tmp);
 
 	if (itr != headers.cend())
 		return distance(headers.begin(),
 				itr);
 
 	return -1;
+}
+
+bool compareAttQid(string qidName,
+		   vector<string> qidNames) {
+
+	string s1, s2;
+
+	// Get a lowercase version of the arguments
+	transform(qidName.begin(), qidName.end(),
+		  inserter(s1, s1.end()),
+    	  [](unsigned char x){ return tolower(x); });
+
+
+	if (find(qidNames.begin(), qidNames.end(),
+	    s1) != qidNames.end())
+		return true;
+	return false;
 }
 
 vector<vector<vector<string>>> transposeAndFormat(
@@ -38,8 +55,25 @@ vector<vector<vector<string>>> transposeAndFormat(
 map<int, vector<vector<string>>> read_directory(
 	fs::path const &directory,
 	vector<vector<string>>& dataset,
-	vector<int>& qids, vector<string>& headersVector,
-	const int K) {
+	vector<string>& headersVector,
+	const int K,
+	vector<string> attQids,
+ 	vector<int>& qids) {
+
+	//if (!qids)
+ 	//	qids = new vector<int>;
+
+	// Get a lowercase version of the att Names
+	vector<string> attNames;
+	for (const string& tmp : attQids) {
+		string auxTmp;
+
+		transform(tmp.begin(), tmp.end(),
+			inserter(auxTmp, auxTmp.end()),
+    	  	[](unsigned char x){ return tolower(x); });
+
+    		attNames.push_back(auxTmp);
+	}
 
 	// Locate csv input file and hierarchies directory
 	string file;
@@ -125,6 +159,10 @@ map<int, vector<vector<string>>> read_directory(
 		// Read first line: qid's hierarchy name
 		getline(input2, qidName);
 		qidNames.emplace_back(qidName);
+		
+		// Check if it is a qid 
+		if (!compareAttQid(qidName, attNames))
+			continue;
 
 		// Read hierarchy values
 		vector<vector<string>> hierarchy;
@@ -149,14 +187,10 @@ map<int, vector<vector<string>>> read_directory(
 	}
 
 
-	// Get transposed hierchies
-	const auto tRes = transposeAndFormat(res);
-
-
 	// Map qid values and hierarchy sets
 	map<int, vector<vector<string>>> hMap;
 	for (size_t i=0; i < qids.size(); i++)
-		hMap[qids[i]] = tRes[i];
+		hMap[qids[i]] = res[i];
 
 	return hMap;
 }
@@ -220,3 +254,16 @@ void permute(const vector<int> data,
         }
 }
 
+vector<int> getQidsHeaders(vector<string> headers,
+			   vector<string> qids) {
+	vector<int> res;
+	vector<string> qidsVector;
+	int idx;
+
+	for (const string& qid : qids) {
+		idx = getHierarchyIdx(qid, headers);
+		res.emplace_back(idx);
+	}
+
+	return res;
+}
