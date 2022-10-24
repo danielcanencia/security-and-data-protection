@@ -1,4 +1,3 @@
-#include <iostream>
 #include "kmember.h"
 
 int main(int argc, char** argv) {

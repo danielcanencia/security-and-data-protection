@@ -2,7 +2,7 @@
 #define _INFO_H
 
 #include <iostream>
-#include "../utilities/hierarchy/hierarchy.h"
+#include "../utilities/hierarchy.h"
 
 class Info {
 private:

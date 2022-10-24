@@ -4,13 +4,15 @@ CXXFLAGS = --std=c++17 -lstdc++fs -Wall
 .PHONY : all clean distclean
 
 EXE = kmember.out
-SRC = kmember.cpp ../utilities/hierarchy/hierarchy.cpp distances.cpp info.cpp
+SRC = kmember.cpp ../utilities/hierarchy.cpp distances.cpp info.cpp
 OBJ = $(SRC:.cpp=.o)
 INC = $(wildcard *.hpp)
 
 all : $(EXE)
 clean :
 	$(RM) *.o *.out
+	$(RM) ../utilities/*.o
+
 distclean : clean
 	$(RM) $(EXE)
 
