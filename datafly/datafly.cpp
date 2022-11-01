@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
 
 	// Read data file and hierarchy folders
 	vector<string> headers;
-	vector<int> catQids, numQids, allQids;
+	vector<int> qids;
 	vector<vector<string>> qids_dataset, dataset;
 	map<int, vector<vector<string>>> hierarchies_map;
 
@@ -49,10 +49,9 @@ int main(int argc, char** argv) {
 	try {
 		hierarchies_map = read_directory(fs::path(argv[1]),
 					dataset, headers, K, qidNames,
-					catQids);
-		//transposedDataset = transpose(dataset);
+					qids);
 
-		if (catQids.size() == 0) {
+		if (qids.size() == 0) {
 			cout << endl << "******************" << endl; 
 			cout << "An error occured.\nCheck the qid "
 				"names entered exists. They should be "
@@ -60,34 +59,33 @@ int main(int argc, char** argv) {
 				"hierarchy files." << endl << endl;
 			return -1;
 		}
-		// Compare headers and qids
-		allQids = getQidsHeaders(headers, qidNames);
-		set_difference(allQids.begin(), allQids.end(),
-			catQids.begin(), catQids.end(),
-        		inserter(numQids, numQids.begin())); 
-
-		// Obtain a subset of dataset containing only qids
-		for (const int& idx : allQids) {
-			qids_dataset.emplace_back(dataset[idx]);
-		}
 
 	} catch (const char* e) {
 		cout << e << endl; 
 		return -1;
 	}
 
+
 	// Main algorithm
 
+	// Obtain a subset of dataset containing only qids
+	for (size_t i=0; i < dataset.size(); i++) {
+		vector<string> aux;
+		for (const int& idx : qids) {
+			aux.emplace_back(dataset[i][idx]);
+		}
+		qids_dataset.emplace_back(aux);
+	}
+
 	// 1. Create a hierarchy tree for every qid
-	//map<int, Tree> trees;
 	vector<Tree> trees;
-	for (const int& val : catQids) {
+	for (const int& val : qids) {
 		trees.emplace_back(Tree(hierarchies_map[val]));
 		//tree.print();
 	}
 
-	/* // 2. Calculate frecuency for every qid
-	map<int, FreqList> freq;
+	// 2. Calculate frecuency for every qid
+	/*map<int, FreqList> freq;
 	for (const int& idx : allQids) {
 		// Check if qid is categorical or numeric
 		// 1 => numeric, 0 => categorical
@@ -95,26 +93,35 @@ int main(int argc, char** argv) {
 		//		!= numQids.end());
 		// Add a freqList object to freq vector
 		//freq.emplace_back(freqList(tranposeDataset[idx], qidType);
-
-
 	}*/
 
-	// 2. Calculate record frecuency 
-	map<int, int> freqs = calculateFreqs(dataset); //, allQids);
+	for (const auto& a : qids_dataset) {
+		for (const auto& b : a)
+			cout << b + ", ";
+		cout << endl;
+	}
 
-	/*
+	// 2. Calculate record frecuency 
+	/*vector<int> freqs = calculateFreqs(qids_dataset); //, allQids);
+	for (size_t i=0; i < freqs.size(); i++) {
+		cout << to_string(freqs[i]) + ", ";
+	}
+	cout << endl;*/
+
 	int qid, idx;
 	vector<vector<string>> table;
-	// 3. Check if KAnonimity is satisfied
-	while (isKAnonSatisfied(freqs)) {
+	// 2&3. Calculate frequencies & Check if KAnonimity is satisfied
+	while (!isKAnonSatisfied(qids_dataset, K)) {
 
 		// 3.1 Find qid with the most distinct values
-		idx = findMostDistinctQid(dataset);
+		idx = findMostDistinctQid(qids_dataset);
+		cout << idx << endl;
 
 		// 3.2 Generalize all qid values in freq
-		generalizeQid(dataset, idx, trees[idx]);
+		generalizeQid(qids_dataset, idx, trees[idx]);
 
 	}
+
 
 	// 4. Supress records which are not K-Anonymous (< K times)
 	/*supressRecords(dataset);

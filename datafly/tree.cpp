@@ -111,8 +111,10 @@ string Tree::getNextGen(string value) {
 		   	   this->leaves.end(),
 			   find_value(value));
 
+	cout << "Next: " + value << endl;
 	// It's a leaf
 	if (it != this->leaves.end()) {
+		cout << "Leaf" << endl;
         	int idx = it - this->leaves.begin();
 		int pidx = this->leaves[idx].parent;
 		return this->nodes[pidx].value;
@@ -124,10 +126,13 @@ string Tree::getNextGen(string value) {
 		     find_value(value));
 
 	if (it != this->nodes.end()) {
+		cout << "Node" << endl;
 		int idx = it - this->nodes.begin();
 		int pidx = this->nodes[idx].parent;
 		return this->nodes[pidx].value;
 	}
+
+	cout << "as" << endl;
 
 	// Not found
 	throw "Error: Element not found in the tree";
