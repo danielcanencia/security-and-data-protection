@@ -3,25 +3,63 @@
 Tree::Tree(vector<vector<string>> hierarchy) {
 
 	int child_idx;
-	bool childIsLeaf;
 	for (const auto& entries : hierarchy) {
 		child_idx = addLeave(entries[0], entries[1]);
+		/*cout << "Leaf " + entries[0] + " => ";
+		auto par = child_idx;*/
 
 		size_t i;
-		childIsLeaf = true;
+		bool childIsLeaf = true;
 		for (i=1; i < entries.size() - 1; i++) {
+			//par = child_idx;
 			child_idx = addNode(entries[i], childIsLeaf,
 					    child_idx, entries[i+1].c_str());
+
+			//cout << child_idx << endl;
+			/*if (!childIsLeaf) {
+				//cout << this->nodes[child_idx].value + ", ";
+				cout << to_string(this->nodes[par].parent) + " == ";
+				for (const auto& a : this->nodes[child_idx].children)
+					cout << to_string(a) + ", ";
+				cout << endl;
+			}
+			else {
+				cout << to_string(this->leaves[par].parent) + " == ";
+				for (const auto& a : this->nodes[child_idx].children)
+					cout << to_string(a) + ", ";
+				cout << endl;
+			}*/
 			childIsLeaf = false;
 		}
 
 		if (entries.size() == 2)
-			addNode(entries[i], 1, child_idx);
+			child_idx = addNode(entries[i], 1, child_idx);
 		else
-			addNode(entries[i], 0, child_idx);
+			child_idx = addNode(entries[i], 0, child_idx);
+
+		//cout << this->nodes[child_idx].value + ", ";
+		//cout << endl;
 	}
 
 }
+
+void Tree::print() {
+	int i=0;
+	for (const auto& l : this->leaves) {
+		cout << "Leaf(" + to_string(i) + "): ";
+		cout << l.value + " => " << endl;
+
+		int next = l.parent;
+		while (next != -1) {
+			cout << this->nodes[next].value << endl;
+			next = this->nodes[next].parent;
+		}
+		cout << endl;
+		i++;
+	}
+
+}
+
 
 int Tree::addLeave(string value, string parent) {
 	// Check if leave is already present
@@ -44,7 +82,8 @@ int Tree::addNode(string value, bool childIsLeaf,
 	// Get node index
 	int index = -1;
 	for (size_t i=0; i < this->nodes.size(); i++) {
-		if (!strcmp(this->nodes[i].value.c_str(), value.c_str())) {
+		if (this->nodes[i].value == value) {
+			//cout << value + " == " + this->nodes[i].value << endl;
 			index = i;
 			break;
 		}
@@ -52,7 +91,24 @@ int Tree::addNode(string value, bool childIsLeaf,
 
 	// Node already present
 	if (index != -1) {
-		this->nodes[index].children.emplace_back(child);
+		// Error add to nodes bool childIsLeaf to know if their childs
+		// are leaves
+		if (childIsLeaf)
+			this->nodes[index].childrenAreLeaves = 1;
+		else
+			this->nodes[index].childrenAreLeaves = 0;
+		this->nodes[index].children.insert(child);
+
+		//cout << this->nodes[index].value + " childs: " + this->nodes[child].value;
+
+		// Set child's parent
+		if (childIsLeaf) {
+			this->leaves[child].parent = index;
+			//cout << to_string(child) + "YEASSS" + to_string(index) << endl;
+		}
+		else
+			this->nodes[child].parent = index;
+
 		return index;
 	}
 
@@ -60,10 +116,9 @@ int Tree::addNode(string value, bool childIsLeaf,
 	// Get parent index
 	int pindex = -1;
 	if (parent) {
-		cout << parent << endl;
 		if (childIsLeaf) {
 			for (size_t i=0; i < this->leaves.size(); i++) {
-				if (!strcmp(this->leaves[i].value.c_str(), parent)) {
+				if (this->leaves[i].value == parent) {
 					pindex = i;
 					break;
 				}
@@ -71,7 +126,7 @@ int Tree::addNode(string value, bool childIsLeaf,
 		}	
 		else {
 			for (size_t i=0; i < this->nodes.size(); i++) {
-				if (!strcmp(this->nodes[i].value.c_str(), parent)) {
+				if (this->nodes[i].value == parent) {
 					pindex = i;
 					break;
 				}
@@ -88,8 +143,10 @@ int Tree::addNode(string value, bool childIsLeaf,
 
 	// Set child's parent
 	int childIdx = this->nodes.size() - 1;
-	if (childIsLeaf)
+	if (childIsLeaf) {
 		this->leaves[child].parent = childIdx;
+		//cout << to_string(child) + "YESSS" + to_string(childIdx) << endl;
+	}
 	else
 		this->nodes[child].parent = childIdx;
 
@@ -111,12 +168,16 @@ string Tree::getNextGen(string value) {
 		   	   this->leaves.end(),
 			   find_value(value));
 
-	cout << "Next: " + value << endl;
+	cout << "Next: " + value + " -> ";
 	// It's a leaf
 	if (it != this->leaves.end()) {
-		cout << "Leaf" << endl;
+		cout << "Leaf: ";
         	int idx = it - this->leaves.begin();
+		cout << "(i) " + to_string(idx) + " -> ";
 		int pidx = this->leaves[idx].parent;
+		if (pidx == -1)
+			return value;
+		cout << to_string(pidx) + " => ";
 		return this->nodes[pidx].value;
 	}
 
@@ -129,10 +190,11 @@ string Tree::getNextGen(string value) {
 		cout << "Node" << endl;
 		int idx = it - this->nodes.begin();
 		int pidx = this->nodes[idx].parent;
+		if (pidx == -1)
+			return value;
 		return this->nodes[pidx].value;
 	}
 
-	cout << "as" << endl;
 
 	// Not found
 	throw "Error: Element not found in the tree";

@@ -18,7 +18,7 @@ namespace fs = std::filesystem;
 map<int, vector<vector<string>>> read_directory(
 	fs::path const &directory,
 	vector<vector<string>>& dataset,
-  	vector<string>& headersVector,
+  	vector<string>& headers,
 	const int K,
 	vector<string> attQids,
 	vector<int>& qids);
@@ -30,8 +30,8 @@ void permute(const vector<int> data,
              vector<vector<int>>& permutations,
              int n, int r, int *aux,
 	     int rept=0, int idx=0);
-vector<int> getQidsHeaders(vector<string> headers,
-                           vector<string> qids);
+vector<int> getQidsHeaders(const vector<string> headers,
+                           const vector<string> qids);
 
 #endif
 
