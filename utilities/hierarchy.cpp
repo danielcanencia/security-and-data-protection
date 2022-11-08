@@ -55,13 +55,10 @@ vector<vector<vector<string>>> transposeAndFormat(
 map<int, vector<vector<string>>> read_directory(
 	fs::path const &directory,
 	vector<vector<string>>& dataset,
-	vector<string>& headersVector,
+	vector<string>& headers,
 	const int K,
 	vector<string> attQids,
  	vector<int>& qids) {
-
-	//if (!qids)
- 	//	qids = new vector<int>;
 
 	// Get a lowercase version of the att Names
 	vector<string> attNames;
@@ -102,13 +99,15 @@ map<int, vector<vector<string>>> read_directory(
 	}
 
 	// Skip headers and insert them into a variable
-	string headers;
-	getline(input1, headers);
+	string headers_aux;
+	getline(input1, headers_aux);
 
 	// Get a lowercase version of the headers
+	vector<string> headersVector;
 	string tmp;
-	stringstream ss(headers);
+	stringstream ss(headers_aux);
 	while(getline(ss, tmp, ';')){
+		headers.push_back(tmp);
 		transform(tmp.begin(), tmp.end(), tmp.begin(),
     		  [](unsigned char x){ return tolower(x); });
     		headersVector.push_back(tmp);
@@ -254,16 +253,28 @@ void permute(const vector<int> data,
         }
 }
 
-vector<int> getQidsHeaders(vector<string> headers,
-			   vector<string> qids) {
+vector<int> getQidsHeaders(const vector<string> headers,
+			   const vector<string> qids) {
 	vector<int> res;
 	vector<string> qidsVector;
 	int idx;
 
+	// Get a lowercase version of the headers
+	vector<string> headersVector;
+	for (string s : headers) {
+		transform(s.begin(), s.end(), s.begin(),
+    		  [](unsigned char x){ return tolower(x); });
+    		headersVector.push_back(s);
+	}
+	cout << endl;
+
 	for (const string& qid : qids) {
-		idx = getHierarchyIdx(qid, headers);
+		idx = getHierarchyIdx(qid, headersVector);
 		res.emplace_back(idx);
 	}
 
 	return res;
 }
+
+
+
