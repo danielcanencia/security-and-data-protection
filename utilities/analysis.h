@@ -10,9 +10,7 @@
 using namespace std;
 
 void printAnalysis(vector<vector<vector<string>>> clusters,
-		   int numRecords,
-                   map<int, vector<vector<string>>> hierarchies,
-                   vector<int> qids, vector<double> weights,
+                   int numRecords, vector<int> qids,
                    vector<long double> cncps);
 
 #endif

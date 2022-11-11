@@ -6,7 +6,6 @@
 #include <set>
 #include <algorithm>
 #include <map>
-#include <iostream>
 
 using namespace std;
 
@@ -33,7 +32,7 @@ public:
 	string getNextGen(string value); 
 	int getNumLeaves();
 	Node getLowestCommonAncestor(vector<string> values);
-	long double getNCP(vector<string> values); //, int nDistinctVals);
+	long double getNCP(vector<string> values);
 	void print();
 
 };

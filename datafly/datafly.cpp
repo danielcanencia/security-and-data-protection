@@ -2,7 +2,6 @@
 
 int main(int argc, char** argv) {
 
-
 	if (argc != 2) {
 		cout << "\nInvalid arguments.\n"
 			"Use ./datafly.out [data directory]\n\n"
@@ -20,12 +19,14 @@ int main(int argc, char** argv) {
 	}
 
 	// Read input
+	// K
 	string line;
 	cout << "Insert K: ";
 	getline(cin, line);
 	const int K = stoi(line);
 
-	/*set<string> qid_set;
+	// Qids
+	set<string> qid_set;
 	cout << "Number of qids: ";
 	getline(cin, line);
 	const int nqids = stoi(line);
@@ -34,17 +35,56 @@ int main(int argc, char** argv) {
 		string qid;
 		getline(cin, qid);
 		qid_set.insert(qid);
-	}*/
-	
-	vector<string> qidNames = {"Age", "Country", "Occupation"};
-	//vector<string> qidNames(qid_set.begin(), qid_set.end());
+	}
+	if ((int)qid_set.size() != nqids) {
+		cout << "Input Error: Qids should be unique.";
+		cout << "Check if you repeated some of them" << endl; 
+		return 1;
+	}
+	//vector<string> qidNames = {"Age", "Country", "Occupation"};
+	vector<string> qidNames(qid_set.begin(), qid_set.end());
+
+	// Weights
+	vector<double> weights = {};
+	cout << "Do you want to use weights (will only be used on analysis) [Y(y)/N(n)]: ";
+	char answer;
+	cin >> answer;
+	bool keep;
+	while(!keep) {
+		switch(answer) {
+			case 'Y':
+			case 'y':
+				for (int i=0; i < nqids; i++) {
+					cout << "Weight for qid " << i << ": ";
+					double weight;
+					cin >> weight;
+					weights.emplace_back(weight);
+				}
+				if (accumulate(weights.begin(), weights.end(),
+					(float)0) != (float)1) {
+					cout << "Input Error: Weights must sum 1" << endl;
+					continue;
+				}
+				keep = true;
+				break;
+			case 'N':
+			case 'n':
+				keep = true;
+				break;
+			default:
+				cout << "Do you want to use weights ";
+				cout << "(will only be used on analysis) ";
+				cout << "[Y(y)/N(n)]: ";
+				cin >> answer;
+		}
+	}
+
 
 	// Read data file and hierarchy folders
 	vector<string> headers;
 	vector<int> qids;
 	vector<vector<string>> qids_dataset, dataset;
 	map<int, vector<vector<string>>> hierarchies_map;
-
 
 	try {
 		hierarchies_map = read_directory(fs::path(argv[1]),
@@ -56,7 +96,7 @@ int main(int argc, char** argv) {
 		return -1;
 	}
 
-	if (qids.size() == 0) {
+	if (qids.size() < qidNames.size()) {
 		cout << endl << "******************" << endl; 
 		cout << "An error occured.\nCheck the qid "
 			"names entered exists. They should be "
@@ -64,7 +104,6 @@ int main(int argc, char** argv) {
 			"hierarchy files." << endl << endl;
 		return -1;
 	}
-
 	sort(qids.begin(), qids.end());
 
 
@@ -116,23 +155,19 @@ int main(int argc, char** argv) {
 	// comprobar si existe directorio y si eso no crearlo
 	writeAnonymizedTable(fs::path(argv[1]), headers, dataset, K);
 
+	// End of main algorithm
+
 	// GCP Analysis
 	// 1. Create equivalence classes or clusters
 	vector<vector<vector<string>>> clusters = createClusters(qids_dataset, qids);
 
-	// 2. Especify weights 
-	vector<double> weights = {0.3, 0.4, 0.3};
+	// 2. Especify weights, if any (Already entered by user)
+	//vector<double> weights = {0.3, 0.4, 0.3};
 
 	// 3. Precalculate NCP for every qid value included in every cluster
 	// Count total number of distinct qid values in dataset
-	/*vector<int> nDistinctVals;
-	vector<vector<string>> aux = transpose(qids_dataset);
-	for (auto& entry : aux) {
-		set<string> data(entry.begin(), entry.end());
-		nDistinctVals.emplace_back(data.size());
-	}*/
-
 	vector<long double> cncps;
+	int nweights = weights.size();
 	for (const auto& cluster : clusters) {
 		vector<vector<string>> tcluster = transpose(cluster);
 
@@ -142,20 +177,19 @@ int main(int argc, char** argv) {
 		for (size_t i=0; i < qids.size(); i++) {
 			// Calculate NCP fot qid values 
 			long double card = trees[i].getNCP(tcluster[i]);
-						//nDistinctVals[i]);
 			if (card == 1)
 				continue;
 
 			card /= trees[i].getNumLeaves();
-			ncp += (long double)weights[i] * card;
+			double weight = nweights > 0 ? weights[i] : 1;
+			ncp += (long double)weight * card;
 		}
-		ncp *= qids.size();
+		ncp *= nweights ? qids.size() : 1;
 		cncps.emplace_back(ncp);
 	}
 
 	// 3. Calculate GCP
-	printAnalysis(clusters, dataset.size(), hierarchies_map,
-		      qids, weights, cncps);
+	printAnalysis(clusters, dataset.size(), qids, cncps);
 
 	return 0;
 }
