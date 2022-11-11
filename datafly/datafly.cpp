@@ -82,34 +82,15 @@ int main(int argc, char** argv) {
 	// 1. Create a hierarchy tree for every qid
 	vector<Tree> trees;
 	for (const int& val : qids) {
-		Tree tree(hierarchies_map[val]);
 		trees.emplace_back(Tree(hierarchies_map[val]));
-		//tree.print();
-	}
-
-	for (const auto& a : qids_dataset) {
-		for (const auto& b : a)
-			cout << b + ", ";
-		cout << endl;
 	}
 
 	int idx;
-	vector<vector<string>> table;
 	// 2&3. Calculate frequencies & Check if KAnonimity is satisfied
 	while (!isKAnonSatisfied(qids_dataset, K)) {
 
 		// 3.1 Find qid with the most distinct values
 		idx = findMostDistinctQid(qids_dataset);
-		cout << idx << endl;
-
-		for (const auto& a : qids_dataset) {
-			for (const auto& b : a)
-				cout << b + ", ";
-			cout << endl;
-		}
-		cout << endl;
-		cout << "*****" << endl;
-
 
 		// 3.2 Generalize all qid values in freq
 		try {
@@ -118,23 +99,7 @@ int main(int argc, char** argv) {
 			cout << e << endl;
 			return 1;
 		}
-		cout << "+++++++++++++++++++" << endl;
-
-		for (const auto& a : qids_dataset) {
-			for (const auto& b : a) {
-				cout << b + ", ";
-			}
-			cout << endl;
-		}
-
-		//break;
 	}
-
-	vector<string> a = {"57","USA","Armed-Forces",">=50K","Flu"};
-	qids_dataset.emplace_back(a);
-	qids_dataset.emplace_back(a);
-	qids_dataset.emplace_back(a);
-
 
 	// 4. Supress records which are not K-Anonymous (< K times)
 	supressRecords(qids_dataset, K);
@@ -146,17 +111,51 @@ int main(int argc, char** argv) {
 		}
 	}
 
-	for (const auto& entries : dataset) {
-		for (const auto& entry : entries) {
-			cout << entry + ", ";
-		}
-		cout << endl;
-	}
-
 	// 5. Write anonymized table
 	// Changed headers for non alterated ones
 	// comprobar si existe directorio y si eso no crearlo
-	writeAnonymizedTable(fs::path(argv[1]), headers, dataset);
+	writeAnonymizedTable(fs::path(argv[1]), headers, dataset, K);
+
+	// GCP Analysis
+	// 1. Create equivalence classes or clusters
+	vector<vector<vector<string>>> clusters = createClusters(qids_dataset, qids);
+
+	// 2. Especify weights 
+	vector<double> weights = {0.3, 0.4, 0.3};
+
+	// 3. Precalculate NCP for every qid value included in every cluster
+	// Count total number of distinct qid values in dataset
+	/*vector<int> nDistinctVals;
+	vector<vector<string>> aux = transpose(qids_dataset);
+	for (auto& entry : aux) {
+		set<string> data(entry.begin(), entry.end());
+		nDistinctVals.emplace_back(data.size());
+	}*/
+
+	vector<long double> cncps;
+	for (const auto& cluster : clusters) {
+		vector<vector<string>> tcluster = transpose(cluster);
+
+		// Qids Att Values
+		long double ncp = 0.0;
+
+		for (size_t i=0; i < qids.size(); i++) {
+			// Calculate NCP fot qid values 
+			long double card = trees[i].getNCP(tcluster[i]);
+						//nDistinctVals[i]);
+			if (card == 1)
+				continue;
+
+			card /= trees[i].getNumLeaves();
+			ncp += (long double)weights[i] * card;
+		}
+		ncp *= qids.size();
+		cncps.emplace_back(ncp);
+	}
+
+	// 3. Calculate GCP
+	printAnalysis(clusters, dataset.size(), hierarchies_map,
+		      qids, weights, cncps);
 
 	return 0;
 }

@@ -2,15 +2,11 @@
 
 bool isKAnonSatisfied(const vector<vector<string>> dataset,
                       const int K) {
-        cout << "Frequencies: ";
         for (const int& freq : calculateFreqs(dataset)) {
-                cout << to_string(freq) + ", ";
                 if (freq < K) {
-                        cout << endl;
                         return false;
                 }
         }
-        cout << endl;
 
         return true;
 }
@@ -22,27 +18,12 @@ bool isKAnonSatisfied(const vector<vector<string>> dataset,
 void generalizeQid(vector<vector<string>> &dataset,
                    const int qid, Tree tree) {
 
-        /*vector<string> aux;
         for (size_t i=0; i < dataset.size(); i++) {
-                aux.emplace_back(dataset[i][qid]);
-        }
-
-        vector<string> gen = tree.getNextGens(aux);*/
-
-        cout << "Gens: " << endl;
-        for (size_t i=0; i < dataset.size(); i++) {
-                //dataset[i][qid] = gen;
                 dataset[i][qid] = tree.getNextGen(dataset[i][qid]);
-                cout << dataset[i][qid]  + ", ";
-                cout << endl;
         }
-        cout << endl;
-
-        //transform(dataset[qid].cbegin(), dataset[qid].cend(),
-        //          dataset[qid].begin(),
-        //          [](unsigned string s) { return gen; });
 
 }
+
 void supressRecords(vector<vector<string>> &dataset, const int K) {
         // Concatenate all attributes of each record
         vector<tuple<string, int>> records = concatRecordsByIdx(dataset);
@@ -85,8 +66,6 @@ void supressRecords(vector<vector<string>> &dataset, const int K) {
                 dataset.erase(dataset.begin() + i - n);
                 n++;
         }
-        cout << endl;
-
 }
 
 

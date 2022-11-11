@@ -3,12 +3,13 @@
 
 #include <iostream>
 #include <vector>
+#include <ostream>
 #include "../utilities/hierarchy.h"
+#include "../utilities/analysis.h"
 #include "tree.h"
 #include "frequencies.h"
 #include "generalize.h"
 #include "writeData.h"
-#include <ostream>
 
 int main(int argc, char** argv);
 

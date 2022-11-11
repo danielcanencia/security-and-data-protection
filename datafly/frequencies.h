@@ -3,9 +3,9 @@
 
 
 #include <iostream>
-#include <vector>
 #include <numeric>
 #include <algorithm>
+#include <map>
 
 using namespace std;
 
@@ -13,6 +13,7 @@ vector<tuple<string, int>> concatRecordsByIdx(
         const vector<vector<string>> dataset);
 vector<int> calculateFreqs(const vector<vector<string>> dataset);
 int findMostDistinctQid(const vector<vector<string>> dataset);
-
+vector<vector<vector<string>>> createClusters(vector<vector<string>> dataset,
+                                              vector<int> qids);
 #endif
 

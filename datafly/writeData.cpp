@@ -16,7 +16,7 @@ void writeStrings(ofstream &fp, vector<vector<string>> dataset,
 }
 
 void writeAnonymizedTable(const string inputFname, const vector<string> headers,
-                          const vector<vector<string>> dataset) {
+                          const vector<vector<string>> dataset, const int K) {
         string dname = "generalized_tables";
         if (!fs::is_directory(dname) || !fs::exists(dname)) {
                 if (!fs::create_directory(dname)) {
@@ -25,7 +25,10 @@ void writeAnonymizedTable(const string inputFname, const vector<string> headers,
                 }
         }
 
-        string fname = "generalized_tables/" + inputFname;
+        string fname = "generalized_tables/" + inputFname
+		+ "_" + to_string(K);
+	cout << "===> Writing data to file: " << endl;
+	cout << "\t * " + fname << endl;
         ofstream fp(fname);
 
         vector<vector<string>> aux;

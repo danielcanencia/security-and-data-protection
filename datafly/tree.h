@@ -2,34 +2,38 @@
 #define _TREE_H
 
 #include <string>
-#include <string.h>
 #include <vector>
 #include <set>
-#include <iostream>
 #include <algorithm>
+#include <map>
+#include <iostream>
 
 using namespace std;
 
 struct Node {
-	int parent = -1;
-	set<int> children;
-	int childrenAreLeaves = -1;
+	bool isLeaf = false;
+	int numSubTreeLeaves = 0;
+	string parent;
+	set<string> children;
 	string value;
 };
 
 class Tree {
 private:
-	vector<Node> nodes;
-	vector<Node> leaves;
-	/*int getGenLevel(string value);
-	int getMaxGenLevel(vector<string> values);*/
+	map<string, Node> nodes;
+	vector<string> leaves;
+	string addNode(string value, string child,
+		       const char* parent = NULL);
+	void addLeave(string value, string children);
+	Node getCommonAncestor(Node node, string target);
+	Node getLowestCommonAncestor(string r1, string r2);
+
 public:
 	Tree(vector<vector<string>> hierarchy);
-	int addNode(string value, bool childIsLeaf,
-		    int child, const char* parent = NULL);
-	int addLeave(string value, string children);
 	string getNextGen(string value); 
-	vector<string> getNextGens(vector<string> values);
+	int getNumLeaves();
+	Node getLowestCommonAncestor(vector<string> values);
+	long double getNCP(vector<string> values); //, int nDistinctVals);
 	void print();
 
 };
