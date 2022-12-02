@@ -8,6 +8,7 @@
 #include "../utilities/analysis.h"
 #include "tree.h"
 #include "partition.h"
+#include "evaluate.h"
 
 int main(int argc, char** argv);
 

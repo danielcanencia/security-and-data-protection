@@ -130,10 +130,16 @@ int main(int argc, char** argv) {
 	find_median(qids_dataset, dim);*/
 
 	// 2. Anonymize whole initial partition
-	vector<string> gens(qids.size(), "");
-	Partition partition(dataset, gens, qids, K);
-	//vector<vector<string>> resDataset = partition.evaluate(trees);
-	vector<Partition> resDataset = partition.evaluate(trees);
+	vector<string> gens;
+	vector<int> numLeaves;
+	for (size_t i=0; i < qids.size(); i++) {
+		gens.emplace_back(trees[i].root);
+		numLeaves.emplace_back(
+			trees[i].getNumSubTreeLeaves(trees[i].root));
+	}
+
+	Partition partition(dataset, gens, numLeaves, qids, trees, K);
+	vector<Partition> resDataset = evaluate(partition);
 
 	// End of main algorithm
 	// *********************************

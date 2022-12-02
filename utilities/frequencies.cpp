@@ -29,25 +29,23 @@ vector<string> concatRecords(const vector<vector<string>> dataset) {
 	return records;
 }
 
-map<vector<string>, int> calculateQidFreqs(
-	const vector<vector<string>> dataset, const int dimension) {
+map<string, int> calculateQidFreqs(
+	const vector<vector<string>> dataset, const int dim) {
 
-	// Concatenate all attributes of each record
-	vector<string> qids;
-	for (size_t i=0; i < dataset.size(); i++) {
-		qids.emplace_back(dataset[dimension]);	
-	}
+	vector<vector<string>> records = dataset;
 
 	// Calculate frequency list
-	while (qids.size() > 0) {
-		string val = qids.front();
-		qids.erase(qids.begin());
+	map<string, int> freqs;
+
+	while (records.size() > 0) {
+		string qid = records.front()[dim];
+		records.erase(records.begin());
 
 		// Calculate record freq & records in cluster
 		vector<int> deletions;
 		int freq = 1;
 		for (size_t j=0; j < records.size(); j++) {
-			if (val == qids[j]) {
+			if (qid == records[j][dim]) {
 				deletions.emplace_back(j);
 				freq += 1;
 			}
@@ -55,15 +53,57 @@ map<vector<string>, int> calculateQidFreqs(
 
 		int n = 0;
 		for (const int& idx : deletions) {
-			qids.erase(qids.begin() + idx - n);
+			records.erase(records.begin() + idx - n);
 			n++;
 		}
 
-		freqs[val].emplace_back(freq);
+		freqs[qid] = freq;
 	}
 
 	return freqs;
 }
+
+/*
+map<vector<vector<string>>, int> calculateQidFreqs(
+	const vector<vector<string>> dataset, const int dim) {
+
+	vector<vector<string>> records = dataset;
+
+	// Concatenate all attributes of each record
+	//vector<string> qids;
+	//for (size_t i=0; i < dataset.size(); i++) {
+	//	qids.emplace_back(dataset[dimension]);	
+	//}
+
+	// Calculate frequency list
+	map<vector<vector<string>>, int> freqs;
+	while (records.size() > 0) {
+		vector<string> record = records.front();
+		records.erase(records.begin());
+
+		// Calculate record freq & records in cluster
+		vector<vector<string>> auxRecords = { record };
+		vector<int> deletions;
+		int freq = 1;
+		for (size_t j=0; j < records.size(); j++) {
+			if (record[dim] == records[j][dim]) {
+				auxRecords.emplace_back(record);
+				deletions.emplace_back(j);
+				freq += 1;
+			}
+		}
+
+		int n = 0;
+		for (const int& idx : deletions) {
+			records.erase(records.begin() + idx - n);
+			n++;
+		}
+
+		freqs[auxRecords] = freq;
+	}
+
+	return freqs;
+}*/
 
 
 vector<int> calculateFreqs(

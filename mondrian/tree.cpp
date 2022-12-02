@@ -1,9 +1,10 @@
 #include "tree.h"
+#include <iostream>
 
 Tree::Tree(vector<vector<string>> hierarchy) {
 
 	for (const auto& entries : hierarchy) {
-		addLeave(entries[0], entries[1]);
+		addLeave(entries[0], entries[1], entries.size()-1);
 
 		size_t i;
 		string child = entries[0];
@@ -17,7 +18,7 @@ Tree::Tree(vector<vector<string>> hierarchy) {
 
 }
 
-void Tree::addLeave(string value, string parent) {
+void Tree::addLeave(string value, string parent, int depth) {
 	// Check if leave is already present
 	if (this->nodes.count(value))
 		return ;
@@ -26,6 +27,7 @@ void Tree::addLeave(string value, string parent) {
 	node.value = value;
 	node.parent = parent;
 	node.isLeaf = true;
+	node.depth = depth;
 	this->nodes[value] = node;
 
 	this->leaves.emplace_back(value);
@@ -46,15 +48,128 @@ string Tree::addNode(string value, string child, const char* parent) {
 	if (parent)
 		node.parent = (string)parent;
 	else {
+		this->root = value;
 		node.parent = value;
 	}
 
+	node.depth = this->nodes[child].depth - 1;
 	node.children = {child};
 	node.numSubTreeLeaves += 1;
 	this->nodes[value] = node;
 
 	return value;
 }
+
+int Tree::getNumSubTreeLeaves(string value) {
+	return this->nodes[value].numSubTreeLeaves;
+}
+
+
+int Tree::getDepth(string value) {
+	return this->nodes[value].depth;
+}
+
+bool Tree::isChild(string node, string target) {
+	set<string> children = this->nodes[node].children;
+
+	if (find(children.begin(), children.end(), target)
+		!= children.end())
+		return true;
+
+	for (const auto& child : children) {
+		if (isChild(child, target))
+			return true;
+	}
+
+	return false;
+}
+
+vector<string> Tree::getDirectChildren(string value) {
+	set<string> children = this->nodes[value].children;
+	return vector<string>(children.begin(), children.end());
+}
+
+vector<string> Tree::getAllChildren(string value) {
+	vector<string> children;
+
+	for (const auto& child : this->nodes[value].children) {
+		children.emplace_back(child);
+		vector<string> next = getAllChildren(child);
+		children.insert(children.begin(), next.begin(), next.end());
+	}
+
+	return children;
+}
+
+/*
+Node* Tree::getDescendant(Node* node, string target) {
+
+	set<string> children = (*node).children;
+	if ((*node).isLeaf) {
+		return NULL;
+	}
+
+	if (find(children.begin(), children.end(),
+			target) != children.end())
+		return node;
+
+	for (const string& child : children) {
+		Node* n = getDescendant(
+			&this->nodes[child], target);
+		if (n)
+			return n;
+	}
+
+	return NULL;
+}
+*/
+
+/*
+int Tree::getParentDiff(string value1, string value2) {
+	Node n1 = this->nodes[value1];
+	Node n2 = this->nodes[value2];
+	Node node;
+	string target;
+
+
+	if (n1.value == n2.value)
+		return -1;
+
+	if (n1.depth < n2.depth) {
+		node = n1;
+		target = n2.value;
+	} else {
+		node = n2;
+		target = n1.value;
+	}
+
+	cout << node.value + " == " + target + " ?" << endl;
+
+	Node* n = &this->nodes[node.parent];
+	//vector<string> children(n.children.begin(),
+	//			n.children.end());
+
+	vector<string> children((*n).children.begin(),
+				(*n).children.end());
+
+	Node* nAux;
+	while ((*n).value != (*n).parent) {
+		nAux = getDescendant(n, this->nodes[target].value);
+		//if (nAux)
+		//	n = nAux;
+		if (nAux)
+			break;
+		n = &this->nodes[(*n).parent];
+	}
+
+
+	//Node n = getLowestCommonAncestor(value1, value2);
+	int result = (n1.depth - (*n).depth) + (n2.depth - (*n).depth);
+	cout << "Diff: " + to_string(result) << endl;
+	return result;
+}
+*/
+
 
 string Tree::getNextGen(string value) {
 

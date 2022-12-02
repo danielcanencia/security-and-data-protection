@@ -4,7 +4,7 @@ CXXFLAGS = --std=c++17 -lstdc++fs -Wall
 .PHONY : all clean distclean
 
 EXE = mondrian.out
-SRC = mondrian.cpp partition.cpp tree.cpp ../utilities/hierarchy.cpp ../utilities/frequencies.cpp
+SRC = mondrian.cpp partition.cpp tree.cpp ../utilities/hierarchy.cpp ../utilities/frequencies.cpp evaluate.cpp
 OBJ = $(SRC:.cpp=.o)
 INC = $(wildcard *.hpp)
 

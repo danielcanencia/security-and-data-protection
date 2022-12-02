@@ -2,14 +2,48 @@
 
 Partition::Partition(vector<vector<string>> data,
 		     vector<string> generalizations,
-		     vector<int> qids, int K) {
+		     vector<int> numSubTreeLeaves,
+		     vector<int> qids, vector<Tree> trees,
+		     int K) {
 	this->data = data;
 	this->generalizations = generalizations;
+	this->numSubTreeLeaves = numSubTreeLeaves;
 	this->qids = qids;
+	this->trees = trees;
 	this->K = K;
-	this->allowedCuts = vector<int>(qids.size(), 0);
-	//vector<string> this.generalizations(qids.size(), "");
+	this->allowedCuts = vector<int>(qids.size(), 1);
 }
+
+void Partition::printData() const {
+	for (const auto& entry : this->data) {
+		for (const auto& a : entry) {
+			cout << a + ", ";
+		}
+		cout << endl;
+	}
+}
+
+vector<vector<string>> Partition::getResult() const {
+	vector<vector<string>> result = data;
+
+	for (size_t i=0; i < data.size(); i++) {
+		for (size_t j=0; j < qids.size(); j++) {
+			result[i][j] = generalizations[j];
+		}
+	}
+
+	return result;
+}
+
+int Partition::getNumAllowedCuts() {
+        return accumulate(allowedCuts.begin(),
+                   allowedCuts.end(), 0);
+}
+
+void Partition::setAllowedCuts(int value, int dim) {
+	allowedCuts[dim] = value;
+}
+
 
 int Partition::choose_dimension() {
 	int dimension, width;
@@ -44,15 +78,20 @@ int Partition::normWidth(int dimension) {
 	return elements.size();
 }
 
-vector<int> Partition::find_median(int dimension) {
+/*int Partition::getParentDiff(const string x, const string y,
+			     int dimension) {
+	return trees[dimension].getParentDiff(x, y);
+}*/
+
+int Partition::find_median(int dimension) {
 	// Calculate qid frecuencies (qid values are sorted)
 	//map<vector<int>, int> freqs = calculateQidFreqs(this->data, dimension);
-	map<vector<string>, int> freqs = calculateQidFreqs(this->data, dimension);
+	//map<vector<vector<string>>, int> freqs = calculateQidFreqs(this->data, dimension);
+	map<string, int> freqs = calculateQidFreqs(this->data, dimension);
+
 
 	// **** USAR STRING EN VEZ DE IDX ****
-
-
-	vector<vector<int>> keys;
+	vector<string> keys;
 	// Keys
 	transform(freqs.begin(), freqs.end(), std::back_inserter(keys),
 		[](const auto &tuple){
@@ -66,23 +105,63 @@ vector<int> Partition::find_median(int dimension) {
 		});
 	int nValues = accumulate(values.begin(), values.end(), 0);
 
+
+	/*cout << "Data: " << endl;
+	for (const auto& entry: this->data) {
+		for (const auto& x : entry)
+			cout << x + ", ";
+		cout << endl;
+	}
+	cout << "Keys: " << endl;
+	for (const auto& entry : keys) {
+		for (const auto& x : entry) {
+			for (const auto& y : x)
+				cout << y + ", ";
+			cout << endl;
+		}
+	}
+	cout << "***************" << endl;
+
+	cout << "Sorted Keys: " << endl;
+	for (const auto& entry : sortedKeys) {
+		cout << entry.second; cout << ", ";
+	}
+	cout << endl;*/
+
+	// Sort numerical attributes
+	//*****************************
+
+
 	// Find middle index 
 	int middle = ceil(nValues / 2);
+	// Cut is not allowed
+	//if (middle < K) {
+	//}
 
 	// Find first split set of keys
-	//int splitIdx;
-	int aux;
-	vector<int> split;
+	int splitIdx;
+	int aux = 0;
+	//vector<string> split;
 	for (size_t i = 0; i < freqs.size(); i++) {
 		aux += values[i];
-		split.insert(split.end(), keys[i].begin(),
-			keys[i].end());
+		//split.insert(split.end(), keys[i].begin(),
+		//	keys[i].end());
 		//split.emplace_back(keys[i]);
 		if (aux >= middle) {
-			//splitIdx = i;
+			splitIdx = i;
 			break;
 		}
 	}
+	/*cout << to_string(aux) + " >= " + to_string(middle) << endl;
+	cout << "Split: " << endl;
+	for (const auto& entry : split) {
+		for (const auto& x : entry) {
+			for (const auto& y : x)
+				cout << y + ", ";
+			cout << endl;
+		}
+	}*/
+
 	/*
 	middleVal = values[middle];
 	if (splitIdx + 1 <= values.size())
@@ -93,7 +172,7 @@ vector<int> Partition::find_median(int dimension) {
 	// Create struct to return
 	//return (values[splitIdx], nextVal, values[0], values.back());
 
-	return split;
+	return splitIdx;
 }
 
 bool Partition::isCutAllowed(int index) {
@@ -165,25 +244,94 @@ bool Partition::isCutAllowed(int index) {
 	gens1[dimension] = a1;
 	gens2[dimension] = a2;
 
-	Partition p1(s1, gens1, qids, K);
-	Partition p2(s2, gens2, qids, K);
+	Partition p1(s1, gens1, qids, trees, K);
+	Partition p2(s2, gens2, qids, trees, K);
 	return { p1, p2 };
 }
 */
 
 //vector<vector<string>> Partition::evaluate(vector<Tree> trees) {
-vector<Partition> Partition::evaluate(vector<Tree> trees) {
+/*vector<Partition> Partition::evaluate() {
 	vector<Partition> result;
-	//result.emplace_back(this);
+	result.emplace_back(this);
 
-	evaluate(trees, result);
+	evaluate(result);
 	return result;
+}*/
+
+vector<Partition> Partition::splitPartitionCategorical(int dimension) {
+
+	vector<Partition> pts;
+	Tree tree = trees[dimension];
+	string middle = this->generalizations[dimension];
+	cout << "Middle: " + middle << endl;
+	vector<string> children = trees[dimension].getDirectChildren(middle);
+	for (const auto& child : children)
+		cout << child + ", ";
+	cout << endl;
+
+	// If it doesn't have children, return empty vector
+	if (children.size() == 0)
+		return pts;
+
+	vector<vector<vector<string>>> splits(children.size(), vector<vector<string>>());
+	for (const auto& record : this->data) {
+		string qid = record[dimension];
+
+		int i=0;
+		for (const auto& child : children) {
+			if (!tree.isChild(child, qid)) {
+				i++;
+				continue;
+			}
+			splits[i].emplace_back(record);
+			break;
+		}
+	}
+
+	cout << "Splits: " << endl;
+	for (const auto& entry : splits) {
+		for (const auto& a : entry) {
+			for (const auto& b : a)
+				cout << b + ", ";
+			cout << endl;
+		}
+		cout << "++++++++++++++++++" << endl;
+	}
+
+	//bool flag = true;
+	for (const auto& split : splits) {
+		if (split.size() > 0 && (int)split.size() < K) {
+			return pts;
+			//flag = false;
+			//break;
+		}
+	}
+
+	//if (!flag) {
+	//	return pts;
+	//}
+
+	for (size_t i=0; i < splits.size(); i++) { //const auto& entry : splits) {
+		if (splits[i].size() != 0) {
+			vector<string> gens = generalizations;
+			gens[dimension] = children[i];
+			vector<int> numLeaves = numSubTreeLeaves;
+			numLeaves[dimension] = tree.getNumSubTreeLeaves(
+				children[i]);
+			Partition p = Partition(
+				splits[i], gens, numLeaves, qids, trees, K);
+
+			pts.emplace_back(p);
+		}
+	}
+	
+	return pts;
 }
 
 // Si no funciona, usar función fuera de clase, pasando el argumento
 // Partition partition
-void Partition::evaluate(vector<Tree> trees,
-		vector<Partition> result) { //, Partition partition) {
+/*void Partition::evaluate(vector<Partition> result) { //, Partition partition) {
 	if (accumulate(allowedCuts.begin(),
 		   allowedCuts.end(), 0) == 0) {
 		//result.emplace_back(partition);
@@ -196,40 +344,46 @@ void Partition::evaluate(vector<Tree> trees,
 	//if (!isCutAllowed())
 	//	return dataset;
 
-	for (size_t i=0; i < qids.size(); i++) {
-		int dim = choose_dimension();	// findMostDistinctQid ??
-		vector<int> split = find_median(dim);
-		if (!isCutAllowed(split.size())) {
-			allowedCuts[dim] = 0;
-			continue;
-		}
-		//Tree tree = trees[dim];
+	int dim = choose_dimension();	// findMostDistinctQid ??
+	cout << "Dimension: " + to_string(dim) << endl;
 
-		/*
-		// Cut Partition
-		vector<Partition> pts = cut(split, dim, trees[dim]);
-		// If our splits generalizations are equal, cut is
-		// desirable
-		if (pts.size() == 1)
-			continue;
+	//Tree tree = trees[dim];
 
-		// If k-anonimity is not satisfied, dont evalue cuts
-		if (!isKAnonSatisfied(pts[0], K) || !isKAnonSatisfied(pts[1], K))
-			continue;
+	//int splitIdx = find_median(dim);
 
-		// Evaluate Cuts
-		for (const Partition& pt : pts) {
-			pt.evaluate(trees, result);
-			//for (const auto& partition : pt.evaluate(trees, dataset))
-			//	dataset.emplace_back(partition);
-		}
-
-		// End loop
-		// Other dimensions will be evaluated by children partitions
-		return ;*/
+	auto pts = splitPartitionCategorical(dim);
+	if (pts.size() == 0) {
+		//if (!isCutAllowed(split.size()))
+		allowedCuts[dim] = 0;
+		return ;
 	}
 
+
+	// Cut Partition
+	vector<Partition> pts = cut(split, dim, tree);
+	// If our splits generalizations are equal, cut is
+	// desirable
+	if (pts.size() == 1)
+		continue;
+
+	// If k-anonimity is not satisfied, dont evalue cuts
+	if (!isKAnonSatisfied(pts[0], K) || !isKAnonSatisfied(pts[1], K))
+		continue;
+
+	// Evaluate Cuts
+	for (const Partition& pt : pts) {
+		pt.evaluate(result);
+		//for (const auto& partition : pt.evaluate(trees, dataset))
+		//	dataset.emplace_back(partition);
+	}
+
+	// End loop
+	// Other dimensions will be evaluated by children partitions
+	return ;
+
 	//result.emplace_back(this);
-}
+}*/
+
+
 
 
