@@ -1,6 +1,8 @@
 #include "tree.h"
 #include <iostream>
 
+Tree::Tree() { };
+
 Tree::Tree(vector<vector<string>> hierarchy) {
 
 	for (const auto& entries : hierarchy) {

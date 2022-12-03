@@ -30,7 +30,10 @@ private:
 
 public:
 	string root;
+	// Constructors
+	Tree();
 	Tree(vector<vector<string>> hierarchy);
+	// Methods
 	int getNumSubTreeLeaves(string value);
 	bool isChild(string node, string child);
 	vector<string> getDirectChildren(string value);

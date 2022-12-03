@@ -7,7 +7,7 @@ using namespace std;
 #include <vector>
 #include "partition.h"
 
-vector<Partition> evaluate(Partition partition);
+vector<vector<string>> evaluate(Partition partition);
 void evaluate(Partition partition,
 	      vector<Partition>& result);
 

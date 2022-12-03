@@ -1,6 +1,6 @@
 #include "evaluate.h"
 
-vector<Partition> evaluate(Partition partition) {
+vector<vector<string>> evaluate(Partition partition) {
         vector<Partition> result;
         evaluate(partition, result);
 
@@ -18,7 +18,7 @@ vector<Partition> evaluate(Partition partition) {
 		cout << endl;
 	}
 
-        return result;
+        return data;
 }
 
 void evaluate(Partition partition, vector<Partition>& result) {
@@ -28,24 +28,17 @@ void evaluate(Partition partition, vector<Partition>& result) {
         }
 
 	int dim = partition.choose_dimension();
-        cout << "Dimension: " + to_string(dim) << endl;
 
-        //int splitIdx = find_median(dim);
+        vector<Partition> pts = partition.splitPartition(dim);
 
-        auto pts = partition.splitPartitionCategorical(dim);
         if (pts.size() == 0) {
-		cout << "AAA" << endl;
-                //if (!isCutAllowed(split.size()))
                 partition.setAllowedCuts(0, dim);
-		cout << partition.getNumAllowedCuts() << endl;
 		evaluate(partition, result);
                 return ;
         }
 
 	for (const auto& p : pts)
 		evaluate(p, result);
-
-
 
 	return ;
 }

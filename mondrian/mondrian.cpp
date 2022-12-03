@@ -82,29 +82,52 @@ int main(int argc, char** argv) {
 
 	// Read data file and hierarchy folders
 	vector<string> headers;
-	vector<int> qids;
+	vector<int> catQids, numQids, allQids;
+	vector<int> isQidCat;
 	vector<vector<string>> qids_dataset, dataset;
 	map<int, vector<vector<string>>> hierarchies_map;
 
 	try {
 		hierarchies_map = read_directory(fs::path(argv[1]),
 					dataset, headers, K, qidNames,
-					qids);
+					catQids);
+		sort(catQids.begin(), catQids.end());
 
+
+		// Compare headers and qids
+		allQids = getQidsHeaders(headers, qidNames);
+		if (catQids.size() == 0 || allQids.size() < qidNames.size()) {
+			cout << "An error occured.\nCheck the qid "
+				"names entered exists. They should be "
+				"referenced\nin their respectives "
+				"hierarchy files." << endl << endl;
+			return -1;
+		}
+
+		cout << "allQids: " << endl;
+		for (const auto& a : allQids)
+			cout << to_string(a) + ", ";
+		cout << endl;
+		cout << "catQids: " << endl;
+		for (const auto& a : catQids)
+			cout << to_string(a) + ", ";
+		cout << endl;
+
+
+		// Build a vector containing qid types
+		for (const auto& qid : allQids) {
+			if (find(catQids.begin(), catQids.end(), qid)
+				!= catQids.end()) {
+				isQidCat.emplace_back(1);
+				continue;
+			}
+			isQidCat.emplace_back(0);
+		}
 	} catch (const char* e) {
 		cout << e << endl; 
 		return -1;
 	}
 
-	if (qids.size() < qidNames.size()) {
-		cout << endl << "******************" << endl; 
-		cout << "An error occured.\nCheck the qid "
-			"names entered exists. They should be "
-			"referenced\nin their respectives "
-			"hierarchy files." << endl << endl;
-		return -1;
-	}
-	sort(qids.begin(), qids.end());
 
 
 	// *********************************
@@ -113,34 +136,31 @@ int main(int argc, char** argv) {
 	// Obtain a subset of dataset containing only qids
 	for (size_t i=0; i < dataset.size(); i++) {
 		vector<string> aux;
-		for (const int& idx : qids) {
+		for (const int& idx : allQids) {
 			aux.emplace_back(dataset[i][idx]);
 		}
 		qids_dataset.emplace_back(aux);
 	}
 
 	// 1. Create a hierarchy tree for every qid
-	vector<Tree> trees;
-	for (const int& val : qids) {
-		trees.emplace_back(Tree(hierarchies_map[val]));
+	map<int, Tree> trees;
+	for (const int& i : catQids) {
+		trees[i] = Tree(hierarchies_map[i]);
 	}
-
-	/*vector<int> allowedCuts(qids.size(), 1);
-	int dim = choose_dim(qids_dataset);	
-	find_median(qids_dataset, dim);*/
 
 	// 2. Anonymize whole initial partition
 	vector<string> gens;
-	vector<int> numLeaves;
-	for (size_t i=0; i < qids.size(); i++) {
-		gens.emplace_back(trees[i].root);
-		numLeaves.emplace_back(
-			trees[i].getNumSubTreeLeaves(trees[i].root));
+	for (size_t i=0; i < allQids.size(); i++) {
+		if (isQidCat[i]) {
+			gens.emplace_back(trees[i].root);
+			continue;
+		}
+		gens.emplace_back("");
 	}
 
-	Partition partition(dataset, gens, numLeaves, qids, trees, K);
-	vector<Partition> resDataset = evaluate(partition);
-
+	Partition partition(dataset, gens, allQids,
+			    isQidCat, trees, K);
+	vector<vector<string>> result = evaluate(partition);
 	// End of main algorithm
 	// *********************************
 

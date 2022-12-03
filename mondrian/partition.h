@@ -8,6 +8,8 @@ using namespace std;
 #include <array>
 #include <math.h>
 #include <numeric>
+#include <algorithm>
+#include <string>
 #include "tree.h"
 #include "../utilities/hierarchy.h"
 #include "../utilities/frequencies.h"
@@ -16,35 +18,33 @@ class Partition {
 private:
 	vector<int> allowedCuts;
 	vector<vector<string>> data;
-	vector<int> qids;
-	vector<Tree> trees;
+	vector<int> qids, isQidCat;
+	map<int, Tree> trees;
 	int K;
 	vector<string> generalizations;
-	vector<int> numSubTreeLeaves;
 
-	int getParentDiff(const string x,
-		const string y, int dimension);
+	// Methods
+	string findMedian(int dimension);
+	int normWidth(int dimension);
+	vector<int> getAttributeRanges(int dimension);
+	vector<Partition> splitPartitionNumeric(int dimension);
+	vector<Partition> splitPartitionCategorical(
+		int dimension);
 	/*vector<Partition> cut(vector<int> split,
 		int dimension, Tree tree);*/
 public:
+	// Constructor
 	Partition(vector<vector<string>> data,
                   vector<string> generalizations,
-                  vector<int> numSubTreeLeaves,
-                  vector<int> qids, vector<Tree> trees,
-                  int K);
-	void printData() const;
+                  vector<int> qids, vector<int> isQidCat,
+		  map<int, Tree> trees, int K);
+	// Methods
 	vector<vector<string>> getResult() const;
 	int getNumAllowedCuts();
 	void setAllowedCuts(int value, int dim);
 	int choose_dimension();
-	int normWidth(int dimension);
-	int find_median(int dimension);
+	vector<Partition> splitPartition(int dimension);
 	bool isCutAllowed(int index);
-	vector<Partition> splitPartitionCategorical(
-		int dimension);
-	//vector<vector<string>> evaluate(vector<Tree> Trees);
-	//vector<Partition> evaluate();
-	//void evaluate(vector<Partition> result);
 };
 
 
