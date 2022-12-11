@@ -1,6 +1,54 @@
 #include "hierarchy.h"
 
 
+string getNumericRoot(const vector<vector<string>> dataset,
+		      const int qidIndex) {
+	long double dmin, dmax;
+
+	string value = dataset[0][qidIndex];
+	int index = value.find('~');
+	if (index != (int)string::npos) {
+		dmin = stod(value.substr(0, index));
+		dmax = stod(value.substr(index + 1, value.size()));
+	} else
+		dmin = dmax = stod(value);
+
+
+	long double splitMin, splitMax;
+	for (const auto& entry : dataset) {
+		value = entry[qidIndex];
+		index = value.find('~');
+		if (index != (int)string::npos) {
+			splitMin = stod(value.substr(0, index));
+			splitMax = stod(value.substr(index + 1, value.size()));
+		} else
+			splitMin = splitMax = stod(value);
+
+		if (splitMin < dmin)
+			dmin = splitMin;
+		if (splitMax > dmax)
+			dmax = splitMax;
+	}
+
+	string max = to_string(dmax);
+	string min = to_string(dmin);
+	// Remove trailing decimal zeroes
+	if(min.find('.') != string::npos) {
+        	min = min.substr(0, min.find_last_not_of('0')+1);
+       	 	if(min.find('.') == min.size()-1)
+            		min = min.substr(0, min.size()-1);
+	}
+	if(max.find('.') != string::npos) {
+        	max = max.substr(0, max.find_last_not_of('0')+1);
+       	 	if(max.find('.') == max.size()-1)
+            		max = max.substr(0, max.size()-1);
+	}
+
+	string root = min + "~" + max;
+	return root;
+}
+
+
 // Get idx of qid in table input headers
 int getHierarchyIdx(const string qidName,
 		    vector<string> headers) {

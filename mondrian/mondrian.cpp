@@ -84,8 +84,8 @@ int main(int argc, char** argv) {
 	vector<string> headers;
 	vector<int> catQids, numQids, allQids;
 	vector<int> isQidCat;
-	vector<vector<string>> qids_dataset, dataset;
 	map<int, vector<vector<string>>> hierarchies_map;
+	vector<vector<string>> dataset;
 
 	try {
 		hierarchies_map = read_directory(fs::path(argv[1]),
@@ -104,12 +104,21 @@ int main(int argc, char** argv) {
 			return -1;
 		}
 
+		set_difference(allQids.begin(), allQids.end(),
+			catQids.begin(), catQids.end(),
+        		inserter(numQids, numQids.begin())); 
+
+
 		cout << "allQids: " << endl;
 		for (const auto& a : allQids)
 			cout << to_string(a) + ", ";
 		cout << endl;
 		cout << "catQids: " << endl;
 		for (const auto& a : catQids)
+			cout << to_string(a) + ", ";
+		cout << endl;
+		cout << "numQids: " << endl;
+		for (const auto& a : numQids)
 			cout << to_string(a) + ", ";
 		cout << endl;
 
@@ -133,72 +142,67 @@ int main(int argc, char** argv) {
 	// *********************************
 	// Main algorithm
 	
-	// Obtain a subset of dataset containing only qids
-	for (size_t i=0; i < dataset.size(); i++) {
-		vector<string> aux;
-		for (const int& idx : allQids) {
-			aux.emplace_back(dataset[i][idx]);
-		}
-		qids_dataset.emplace_back(aux);
-	}
-
 	// 1. Create a hierarchy tree for every qid
 	map<int, Tree> trees;
 	for (const int& i : catQids) {
 		trees[i] = Tree(hierarchies_map[i]);
 	}
 
-	// 2. Anonymize whole initial partition
+	// 2.1 Initialize default generalizations
 	vector<string> gens;
 	for (size_t i=0; i < allQids.size(); i++) {
 		if (isQidCat[i]) {
 			gens.emplace_back(trees[i].root);
 			continue;
 		}
-		gens.emplace_back("");
+
+		// Numeric Value
+		string numRoot = getNumericRoot(dataset, allQids[i]);
+		gens.emplace_back(numRoot);
 	}
 
+	// 2.2 Anonymize whole initial partition
 	Partition partition(dataset, gens, allQids,
 			    isQidCat, trees, K);
 	vector<vector<string>> result = evaluate(partition);
+
 	// End of main algorithm
 	// *********************************
 
+	// Obtain a subset of result containing only qids
+	vector<vector<string>> qids_result;
+	for (size_t i=0; i < result.size(); i++) {
+		vector<string> aux;
+		for (const int& idx : allQids) {
+			aux.emplace_back(result[i][idx]);
+		}
+		qids_result.emplace_back(aux);
+	}
 
+
+	// *********************************
 	// GCP Analysis
 	// 1. Create equivalence classes or clusters
-	//vector<vector<vector<string>>> clusters = createClusters(qids_dataset, qids);
+	vector<vector<vector<string>>> clusters = createClusters(qids_result, allQids);
+	/*cout << "Clusters: " << endl;
+	for (const auto& cluster : clusters) {
+		for (const auto& c : cluster) {
+			for (const auto& x : c)
+				cout << x + ", ";
+			cout << endl;
+		}
+	}*/
 
 	// 2. Especify weights, if any (Already entered by user)
-	//vector<double> weights = {0.3, 0.4, 0.3};
+	vector<double> weights = {0.3, 0.4, 0.3};
 
 	// 3. Precalculate NCP for every qid value included in every cluster
 	// Count total number of distinct qid values in dataset
-	/*vector<long double> cncps;
-	int nweights = weights.size();
-	for (const auto& cluster : clusters) {
-		vector<vector<string>> tcluster = transpose(cluster);
-
-		// Qids Att Values
-		long double ncp = 0.0;
-
-		for (size_t i=0; i < qids.size(); i++) {
-			// Calculate NCP fot qid values 
-			long double card = trees[i].getNCP(tcluster[i]);
-			if (card == 1)
-				continue;
-
-			card /= trees[i].getNumLeaves();
-			double weight = nweights > 0 ? weights[i] : 1;
-			ncp += (long double)weight * card;
-		}
-		ncp *= nweights ? qids.size() : 1;
-		cncps.emplace_back(ncp);
-	}
-	*/
-
-	// 3. Calculate GCP
-	//printAnalysis(clusters, dataset.size(), qids, cncps);
+	//vector<long double> cncps;
+	vector<long double> cncps = calculateNCPS(clusters, weights,
+					allQids, numQids, trees);
+	// 4. Calculate GCP
+	printAnalysis(clusters, dataset.size(), allQids, cncps);
 
 	return 0;
 }

@@ -42,6 +42,7 @@ int Partition::choose_dimension() {
 	for (size_t i = 0; i < qids.size(); i++) {
 		if (allowedCuts[i] == 0)
 			continue;
+
 		int aux = normWidth(i);
 		if (aux > width) {
 			width = aux;
@@ -143,7 +144,10 @@ vector<Partition> Partition::splitPartitionNumeric(int dimension) {
 
 	// Cut is not allowed
 	if (splitValue == "") {
-		return {};
+		/*Partition p1(this->data, this->generalizations,
+			     qids, isQidCat, trees, K);
+		return { p1 };*/
+		return { };
 	}
 
 	// Check if splitValue is a range

@@ -15,6 +15,9 @@
 using namespace std;
 namespace fs = std::filesystem;
 
+
+string getNumericRoot(const vector<vector<string>> dataset,
+                      const int qidIndex);
 map<int, vector<vector<string>>> read_directory(
 	fs::path const &directory,
 	vector<vector<string>>& dataset,

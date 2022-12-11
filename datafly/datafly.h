@@ -6,7 +6,7 @@
 #include <ostream>
 #include "../utilities/hierarchy.h"
 #include "../utilities/analysis.h"
-#include "tree.h"
+#include "../utilities/tree.h"
 #include "frequencies.h"
 #include "generalize.h"
 #include "writeData.h"

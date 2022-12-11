@@ -62,6 +62,7 @@ int main(int argc, char** argv) {
 		}
 		// Compare headers and qids
 		allQids = getQidsHeaders(headers, qidNames);
+
 		set_difference(allQids.begin(), allQids.end(),
 			catQids.begin(), catQids.end(),
         		inserter(numQids, numQids.begin())); 

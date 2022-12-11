@@ -10,7 +10,7 @@ using namespace std;
 #include <numeric>
 #include <algorithm>
 #include <string>
-#include "tree.h"
+#include "../utilities/tree.h"
 #include "../utilities/hierarchy.h"
 #include "../utilities/frequencies.h"
 

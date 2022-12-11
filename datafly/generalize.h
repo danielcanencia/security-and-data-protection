@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "../utilities/hierarchy.h"
-#include "tree.h"
+#include "../utilities/tree.h"
 #include "frequencies.h"
 
 using namespace std;
