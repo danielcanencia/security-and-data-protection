@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
 		return 1;
 	}*/
 	//vector<string> qidNames(qid_set.begin(), qid_set.end());
-	vector<string> qidNames = {"Age", "Country", "Occupation"};
+	vector<string> qidNames = {"Age", "Occupation", "Workclass"};
 
 	// Weights
 	/*vector<double> weights = {};
@@ -93,7 +93,6 @@ int main(int argc, char** argv) {
 					catQids);
 		sort(catQids.begin(), catQids.end());
 
-
 		// Compare headers and qids
 		allQids = getQidsHeaders(headers, qidNames);
 		if (catQids.size() == 0 || allQids.size() < qidNames.size()) {
@@ -104,6 +103,7 @@ int main(int argc, char** argv) {
 			return -1;
 		}
 
+		sort(allQids.begin(), allQids.end());
 		set_difference(allQids.begin(), allQids.end(),
 			catQids.begin(), catQids.end(),
         		inserter(numQids, numQids.begin())); 
@@ -170,35 +170,36 @@ int main(int argc, char** argv) {
 	// *********************************
 
 	// Obtain a subset of result containing only qids
-	vector<vector<string>> qids_result;
+	/*vector<vector<string>> qids_result;
 	for (size_t i=0; i < result.size(); i++) {
 		vector<string> aux;
 		for (const int& idx : allQids) {
 			aux.emplace_back(result[i][idx]);
 		}
 		qids_result.emplace_back(aux);
-	}
+	}*/
 
 
 	// *********************************
 	// GCP Analysis
 	// 1. Create equivalence classes or clusters
-	vector<vector<vector<string>>> clusters = createClusters(qids_result, allQids);
-	/*cout << "Clusters: " << endl;
+	//vector<vector<vector<string>>> clusters = createClusters(qids_result, allQids);
+	vector<vector<vector<string>>> clusters = createClusters(result, allQids);
+
+	cout << "Clusters: " << endl;
 	for (const auto& cluster : clusters) {
 		for (const auto& c : cluster) {
 			for (const auto& x : c)
 				cout << x + ", ";
 			cout << endl;
 		}
-	}*/
+	}
 
 	// 2. Especify weights, if any (Already entered by user)
 	vector<double> weights = {0.3, 0.4, 0.3};
 
 	// 3. Precalculate NCP for every qid value included in every cluster
 	// Count total number of distinct qid values in dataset
-	//vector<long double> cncps;
 	vector<long double> cncps = calculateNCPS(clusters, weights,
 					allQids, numQids, trees);
 	// 4. Calculate GCP

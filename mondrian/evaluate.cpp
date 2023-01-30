@@ -11,12 +11,12 @@ vector<vector<string>> evaluate(Partition partition) {
 			      vec.end());
 	}
 
-	cout << "Result: " << endl;
+	/*cout << "Result: " << endl;
 	for (const auto& entry : data) {
 		for (const auto& a : entry)
 			cout << a + ", ";
 		cout << endl;
-	}
+	}*/
 
         return data;
 }

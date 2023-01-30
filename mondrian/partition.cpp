@@ -98,7 +98,6 @@ string Partition::findMedian(int dimension) {
 	// Find first split set of keys
 	string splitValue;
 	int aux = 0;
-	//vector<string> split;
 	for (size_t i = 0; i < freqs.size(); i++) {
 		aux += freqs[i].second;
 		if (aux >= middle) {
