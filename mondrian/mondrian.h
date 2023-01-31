@@ -7,6 +7,7 @@
 #include "../utilities/hierarchy.h"
 #include "../utilities/analysis.h"
 #include "../utilities/tree.h"
+#include "writeData.h"
 #include "partition.h"
 #include "evaluate.h"
 

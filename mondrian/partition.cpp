@@ -18,7 +18,7 @@ vector<vector<string>> Partition::getResult() const {
 
 	for (size_t i=0; i < data.size(); i++) {
 		for (size_t j=0; j < qids.size(); j++) {
-			result[i][j] = generalizations[j];
+			result[i][qids[j]] = generalizations[j];
 		}
 	}
 
@@ -73,8 +73,6 @@ string Partition::findMedian(int dimension) {
 	freqs.resize(map.size());
 	copy(map.begin(), map.end(), freqs.begin());
 
-	cout << "Dim: " + to_string(dimension) << endl;
-	cout << freqs.size() << endl;
 	// Sort values
 	sort(freqs.begin(), freqs.end(),
 		[](const pair<string, int>& x,
@@ -111,13 +109,6 @@ string Partition::findMedian(int dimension) {
 	return splitValue;
 }
 
-/*
-bool Partition::isCutAllowed(int index) {
-	// Cut not allowed if both partitions lengths < K
-	cout << ((int)data.size() - index) << endl;
-	return ((int)data.size() - index) >= K && index >= K;
-}*/
-
 vector<int> Partition::getAttributeRanges(int dimension) {
 	vector<int> values;
 	for (const auto& record : this->data) {
@@ -127,7 +118,7 @@ vector<int> Partition::getAttributeRanges(int dimension) {
 	int min = *min_element(values.begin(), values.end());
 	int max = *max_element(values.begin(), values.end());
 
-	return {min, max}; 
+	return {min, max};
 }
 
 vector<Partition> Partition::splitPartition(int dimension) {
@@ -144,30 +135,13 @@ vector<Partition> Partition::splitPartitionNumeric(int dimension) {
 	string splitValue = findMedian(dimension);
 	// Cut is not allowed
 	if (splitValue == "") {
-		/*Partition p1(this->data, this->generalizations,
-			     qids, isQidCat, trees, K);
-		return { p1 };*/
 		return { };
 	}
 
 	// Check if splitValue is a range
 	string split1, split2;
-	/*int index = splitValue.find('~');
-	if (index == (int)string::npos) {*/
-		split1 = splitValue;
-		split2 = to_string(stoi(splitValue) + 1);
-	/*}
-	else {
-		// Split ranged value in two
-		string v1 = splitValue.substr(0, index - 1);
-		string v2 = splitValue.substr(index + 1, splitValue.size());
-		if (v1 == v2)
-			split1 = split2 = v1;
-		else {
-			split1 = v1;
-			split2 = v2;
-		}
-	}*/
+	split1 = splitValue;
+	split2 = to_string(stoi(splitValue) + 1);
 
 	// Get lowest and highest value present in partition,
 	// Note that ranges are not a problem if not present
@@ -180,7 +154,6 @@ vector<Partition> Partition::splitPartitionNumeric(int dimension) {
 
 	// Cut limit reached
 	if (highest == split1) {
-		cout << "Cut reached" << endl;
 		this->setAllowedCuts(0, dimension);
 		return { };
 	}
@@ -212,10 +185,6 @@ vector<Partition> Partition::splitPartitionNumeric(int dimension) {
 	gens2[dimension] = gen2;
 	Partition p1(d1, gens1, qids, isQidCat, trees, K);
 	Partition p2(d2, gens2, qids, isQidCat, trees, K);
-
-	cout << gen1 + " and " + gen2 + " split at " + splitValue << endl;
-	cout << "P1 size: " + to_string(d1.size()) << endl;
-	cout << "P2 size: " + to_string(d2.size()) << endl;
 
 	return { p1, p2 };
 }

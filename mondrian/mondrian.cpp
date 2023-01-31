@@ -167,6 +167,10 @@ int main(int argc, char** argv) {
 			    isQidCat, trees, K);
 	vector<vector<string>> result = evaluate(partition);
 
+	// 3. Write anonymized table
+	// Changed headers for non alterated ones
+	writeAnonymizedTable(fs::path(argv[1]), headers, result, K);
+	cout << "All";
 	// End of main algorithm
 	// *********************************
 
@@ -187,14 +191,14 @@ int main(int argc, char** argv) {
 	//vector<vector<vector<string>>> clusters = createClusters(qids_result, allQids);
 	vector<vector<vector<string>>> clusters = createClusters(result, allQids);
 
-	cout << "Clusters: " << endl;
+	/*cout << "Clusters: " << endl;
 	for (const auto& cluster : clusters) {
 		for (const auto& c : cluster) {
 			for (const auto& x : c)
 				cout << x + ", ";
 			cout << endl;
 		}
-	}
+	}*/
 
 	// 2. Especify weights, if any (Already entered by user)
 	vector<double> weights = {0.3, 0.4, 0.3};
