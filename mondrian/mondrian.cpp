@@ -42,6 +42,7 @@ int main(int argc, char** argv) {
 		return 1;
 	}*/
 	//vector<string> qidNames(qid_set.begin(), qid_set.end());
+	//vector<string> qidNames = {"Age", "Country", "Occupation" };
 	vector<string> qidNames = {"Age", "Occupation", "Workclass"};
 
 	// Weights

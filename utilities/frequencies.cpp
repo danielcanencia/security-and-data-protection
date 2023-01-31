@@ -19,7 +19,7 @@ vector<tuple<string, int>> concatRecordsByIdx(
 vector<string> concatRecords(const vector<vector<string>> dataset) {
 	vector<string> records;
 
-	// Concatenate all elements 
+	// Concatenate all elements
         for (size_t i=0; i < dataset.size(); i++) {
                 records.emplace_back(accumulate(
                         dataset[i].begin(), dataset[i].end(),
@@ -37,27 +37,12 @@ map<string, int> calculateQidFreqs(
 	// Calculate frequency list
 	map<string, int> freqs;
 
-	while (records.size() > 0) {
-		string qid = records.front()[dim];
-		records.erase(records.begin());
-
-		// Calculate record freq & records in cluster
-		vector<int> deletions;
-		int freq = 1;
-		for (size_t j=0; j < records.size(); j++) {
-			if (qid == records[j][dim]) {
-				deletions.emplace_back(j);
-				freq += 1;
-			}
+	for (const auto& record : records) {
+		try {
+			freqs[record[dim]] += 1;
+		} catch (...) {
+			freqs[record[dim]] = 1;
 		}
-
-		int n = 0;
-		for (const int& idx : deletions) {
-			records.erase(records.begin() + idx - n);
-			n++;
-		}
-
-		freqs[qid] = freq;
 	}
 
 	return freqs;
@@ -176,6 +161,10 @@ int findMostDistinctQid(const vector<vector<string>> dataset) {
 
 vector<vector<vector<string>>> createClusters(vector<vector<string>> dataset,
 					      vector<int> qids) {
+	for (const auto& a : qids)
+		cout << to_string(a) + ", " << endl;
+	cout << dataset[0].size() << endl;
+
 	// Extract qid columns only
 	vector<vector<string>> qids_dataset;
 	for (size_t i=0; i < dataset.size(); i++) {

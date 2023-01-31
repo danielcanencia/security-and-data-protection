@@ -73,6 +73,8 @@ string Partition::findMedian(int dimension) {
 	freqs.resize(map.size());
 	copy(map.begin(), map.end(), freqs.begin());
 
+	cout << "Dim: " + to_string(dimension) << endl;
+	cout << freqs.size() << endl;
 	// Sort values
 	sort(freqs.begin(), freqs.end(),
 		[](const pair<string, int>& x,
@@ -140,7 +142,6 @@ vector<Partition> Partition::splitPartition(int dimension) {
 
 vector<Partition> Partition::splitPartitionNumeric(int dimension) {
 	string splitValue = findMedian(dimension);
-
 	// Cut is not allowed
 	if (splitValue == "") {
 		/*Partition p1(this->data, this->generalizations,
@@ -176,9 +177,16 @@ vector<Partition> Partition::splitPartitionNumeric(int dimension) {
 	vector<int> range = getAttributeRanges(dimension);
 	lowest = to_string(range[0]);
 	highest = to_string(range[1]);
-	
-	string gen1 = lowest==splitValue ? splitValue : lowest + "~" + split1;
-	string gen2 = highest==splitValue ? splitValue : split2 + "~" + highest;
+
+	// Cut limit reached
+	if (highest == split1) {
+		cout << "Cut reached" << endl;
+		this->setAllowedCuts(0, dimension);
+		return { };
+	}
+
+	string gen1 = lowest==splitValue ? splitValue : (lowest==split1 ? lowest : lowest + "~" + split1);
+	string gen2 = highest==splitValue ? splitValue : (highest==split2 ? highest : split2 + "~" + highest);
 
 	// New partitions data
 	vector<vector<string>> d1, d2;
@@ -190,6 +198,13 @@ vector<Partition> Partition::splitPartitionNumeric(int dimension) {
 			d2.emplace_back(record);
 	}
 
+	// If splits aren't k-anonymous, return original partition
+	if (((int)d1.size() > 0 && (int)d1.size() < K) ||
+	    ((int)d2.size() > 0 && (int)d2.size() < K)) {
+		this->setAllowedCuts(0, dimension);
+		return { };
+	}
+
 	// Updata generalizations array with new dimension values
 	vector<string> gens1, gens2;
 	gens1 = gens2 = this->generalizations;
@@ -197,6 +212,10 @@ vector<Partition> Partition::splitPartitionNumeric(int dimension) {
 	gens2[dimension] = gen2;
 	Partition p1(d1, gens1, qids, isQidCat, trees, K);
 	Partition p2(d2, gens2, qids, isQidCat, trees, K);
+
+	cout << gen1 + " and " + gen2 + " split at " + splitValue << endl;
+	cout << "P1 size: " + to_string(d1.size()) << endl;
+	cout << "P2 size: " + to_string(d2.size()) << endl;
 
 	return { p1, p2 };
 }
