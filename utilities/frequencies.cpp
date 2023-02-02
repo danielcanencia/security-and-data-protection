@@ -161,10 +161,6 @@ int findMostDistinctQid(const vector<vector<string>> dataset) {
 
 vector<vector<vector<string>>> createClusters(vector<vector<string>> dataset,
 					      vector<int> qids) {
-	for (const auto& a : qids)
-		cout << to_string(a) + ", " << endl;
-	cout << dataset[0].size() << endl;
-
 	// Extract qid columns only
 	vector<vector<string>> qids_dataset;
 	for (size_t i=0; i < dataset.size(); i++) {

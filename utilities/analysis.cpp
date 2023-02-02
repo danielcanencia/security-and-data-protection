@@ -3,13 +3,15 @@
 long double calculateCatNCP(const int nweights, const int weight,
 			    const vector<string> atts, Tree tree) {
 
-	// Calculate NCP fot qid values 
+	// Calculate NCP fot qid values
 	long double card = tree.getNCP(atts);
 
 	if (card == 1)
 		return -1;
 
-	card /= tree.getNumLeaves();
+	int leaves = tree.getNumLeaves();
+	if (leaves != 0) card /= tree.getNumLeaves();
+
 	double aux = nweights > 0 ? weight : 1;
 	return (long double)aux * card;
 }
@@ -55,12 +57,12 @@ bool sortMaxSplit(string a, string b) {
 	int i1 = a.find('~');
 	int i2 = b.find('~');
         if (i1 != (int)string::npos) {
-               	max1 = stod(a.substr(i1 + 1, a.size())); 
+               	max1 = stod(a.substr(i1 + 1, a.size()));
 	}
 	else
 		max1 = stod(a);
        	if (i2 != (int)string::npos) {
-               	max2 = stod(b.substr(i2 + 1, b.size())); 
+               	max2 = stod(b.substr(i2 + 1, b.size()));
 	}
 	else
 		max2 = stod(b);
@@ -73,12 +75,12 @@ bool sortMinSplit(string a, string b) {
 	int i1 = a.find('~');
 	int i2 = b.find('~');
         if (i1 != (int)string::npos) {
-               	min1 = stod(a.substr(0, i1)); 
+               	min1 = stod(a.substr(0, i1));
 	}
 	else
 		min1 = stod(a);
        	if (i2 != (int)string::npos) {
-               	min2 = stod(b.substr(0, i2)); 
+               	min2 = stod(b.substr(0, i2));
 	}
 	else
 		min2 = stod(b);
