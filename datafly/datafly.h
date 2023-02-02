@@ -9,7 +9,7 @@
 #include "tree.h"
 #include "frequencies.h"
 #include "generalize.h"
-#include "writeData.h"
+#include "../utilities/writeData.h"
 
 int main(int argc, char** argv);
 

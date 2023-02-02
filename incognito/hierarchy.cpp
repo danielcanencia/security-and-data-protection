@@ -133,10 +133,25 @@ map<int, vector<vector<string>>> read_directory(
 		res.emplace_back(hierarchy);
 	}
 
+	/*for (const auto& y : res) {
+		for (const auto& x : y) {
+			for (const auto& a : x)
+				cout << a + "; " << endl;
+			cout << ";" << endl;
+		}
+	}*/
+
 
 	// Get transposed hierchies
 	auto tRes = transposeAndFormat(res);
 
+	/*for (const auto& y : tRes) {
+		for (const auto& x : y) {
+			for (const auto& a : x)
+				cout << a + ", " << endl;
+			cout << endl;
+		}
+	}*/
 
 	// Map qid values and hierarchy sets
 	map<int, vector<vector<string>>> hMap;

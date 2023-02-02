@@ -11,6 +11,8 @@
 #include <cctype>	// transform and find
 #include <algorithm>	// transform and find
 #include <map>
+#include <iostream> // remove
+
 
 using namespace std;
 namespace fs = std::filesystem;
