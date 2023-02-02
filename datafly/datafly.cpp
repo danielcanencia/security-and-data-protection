@@ -38,31 +38,33 @@ int main(int argc, char** argv) {
 	}
 	if ((int)qid_set.size() != nqids) {
 		cout << "Input Error: Qids should be unique.";
-		cout << "Check if you repeated some of them" << endl; 
+		cout << "Check if you repeated some of them" << endl;
 		return 1;
 	}
+	//vector<string> qidNames = {"Age", "Occupation"};
 	//vector<string> qidNames = {"Age", "Country", "Occupation"};
 	vector<string> qidNames(qid_set.begin(), qid_set.end());
 
 	// Weights
-	vector<double> weights = {};
+	vector<float> weights = {};
 	cout << "Do you want to use weights (will only be used on analysis) [Y(y)/N(n)]: ";
 	char answer;
 	cin >> answer;
-	bool keep;
+	bool keep = false;
 	while(!keep) {
 		switch(answer) {
 			case 'Y':
 			case 'y':
 				for (int i=0; i < nqids; i++) {
 					cout << "Weight for qid " << i << ": ";
-					double weight;
+					float weight;
 					cin >> weight;
 					weights.emplace_back(weight);
 				}
 				if (accumulate(weights.begin(), weights.end(),
 					(float)0) != (float)1) {
 					cout << "Input Error: Weights must sum 1" << endl;
+					weights.clear();
 					continue;
 				}
 				keep = true;
@@ -90,17 +92,15 @@ int main(int argc, char** argv) {
 		hierarchies_map = read_directory(fs::path(argv[1]),
 					dataset, headers, K, qidNames,
 					qids);
-
 	} catch (const char* e) {
-		cout << e << endl; 
+		cout << e << endl;
 		return -1;
 	}
 
 	if (qids.size() < qidNames.size()) {
-		cout << endl << "******************" << endl; 
-		cout << "An error occured.\nCheck the qid "
+		cout << "ERROR:\n\tCheck the qid "
 			"names entered exists. They should be "
-			"referenced\nin their respectives "
+			"referenced\n\tin their respectives "
 			"hierarchy files." << endl << endl;
 		return -1;
 	}
@@ -143,10 +143,10 @@ int main(int argc, char** argv) {
 	// 4. Supress records which are not K-Anonymous (< K times)
 	supressRecords(qids_dataset, K);
 
-	// Update original dataset with generalized values 
+	// Update original dataset with generalized values
 	for (size_t i=0; i < dataset.size(); i++) {
 		for (size_t j=0; j < qids.size(); j++) {
-			dataset[i][qids[j]] = qids_dataset[i][qids[j]];
+			dataset[i][qids[j]] = qids_dataset[i][j];
 		}
 	}
 
@@ -155,14 +155,16 @@ int main(int argc, char** argv) {
 	// comprobar si existe directorio y si eso no crearlo
 	writeAnonymizedTable(fs::path(argv[1]), headers, dataset, K);
 
+
 	// End of main algorithm
 
 	// GCP Analysis
 	// 1. Create equivalence classes or clusters
 	vector<vector<vector<string>>> clusters = createClusters(qids_dataset, qids);
 
+
 	// 2. Especify weights, if any (Already entered by user)
-	//vector<double> weights = {0.3, 0.4, 0.3};
+	//vector<double> weights = {0.33, 0.33, 0.33};
 
 	// 3. Precalculate NCP for every qid value included in every cluster
 	// Count total number of distinct qid values in dataset
@@ -175,7 +177,7 @@ int main(int argc, char** argv) {
 		long double ncp = 0.0;
 
 		for (size_t i=0; i < qids.size(); i++) {
-			// Calculate NCP fot qid values 
+			// Calculate NCP fot qid values
 			long double card = trees[i].getNCP(tcluster[i]);
 			if (card == 1)
 				continue;

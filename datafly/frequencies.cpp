@@ -104,8 +104,8 @@ vector<vector<vector<string>>> createClusters(vector<vector<string>> dataset,
 	vector<vector<string>> qids_dataset;
 	for (size_t i=0; i < dataset.size(); i++) {
 		vector<string> aux;
-		for (const int& idx : qids)
-			aux.emplace_back(dataset[i][idx]);
+		for (size_t j=0; j < qids.size(); j++)
+			aux.emplace_back(dataset[i][j]);
 
 		qids_dataset.emplace_back(aux);
 	}
