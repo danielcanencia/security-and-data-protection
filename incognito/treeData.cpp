@@ -96,7 +96,8 @@ void TreeData::markGeneralizations(const Node& node) {
 	this->nodes[node.getId()].setKAnon();
 
 	for (Node& child : getChildren(node)) {
-		this->nodes[child.getId()].mark();
+		//this->nodes[child.getId()].mark();
+		this->nodes[child.getId()].setKAnon();
 	}
 }
 

@@ -21,13 +21,7 @@ bool Node::isEqual (const vector<int>& node) const {
 	return true;
 }
 
-bool Node::isChild (Node node) {
-	/*int sum1 = node.getSum();
-	int sum2 = getSum();
-
-	if (sum1 == 1 + sum2)
-		return true;
-	return false;	*/
+bool Node::isChild(Node node) {
 
 	int sum=0, flag=0;
 	for (int i=0; i < int(this->data.size()); i++) {
@@ -81,6 +75,7 @@ string Node::generalizeEntry(string entry, const vector<vector<string>> hierarch
 
 	for (int i=0; i < int(hierarchy.size()); i++) {
 		for (int j=0; j < int(generalizations.size()); j++) {
+			//cout << hierarchy[i][j] + " =? " + entry << endl;
 			if (hierarchy[i][j].compare(entry) == 0) {
 				index = j; break;
 			}
@@ -97,23 +92,19 @@ vector<int> Node::evaluateFrequency(vector<vector<string>> generalizations,
 	    		      int rows, int cols) {
 
 	// Transpose generalizations matrix
+	// && Concat values in every row
 	string genT[cols][rows];
-	for (int i=0; i < rows; i++) {
-		for (int j=0; j < cols; j++)
-			genT[j][i] = generalizations[i][j];
-	}
-
-
-	// Concat values in every row
 	vector<stringstream> values(cols);
-	for (int i=0; i < cols; i++) {
-		for (int j=0; j < rows; j++) {
-			values[i] << genT[i][j];
+	for (int i=0; i < rows; i++) {
+		for (int j=0; j < cols; j++) {
+			genT[j][i] = generalizations[i][j];
+			values[j] << genT[j][i];
 		}
 	}
 
 	// Convert stringstream array to an array of string
 	vector<string> vals;
+	// Error: No entry found
 	for (auto a = values.begin(); a != values.end(); a++) {
 		vals.emplace_back((*a).str());
 	}
@@ -125,8 +116,9 @@ vector<int> Node::evaluateFrequency(vector<vector<string>> generalizations,
 	// Check frecuencies in values array
 	for (size_t i=0; i < vals.size(); i++) {
 		for (int j=0; j < cols; j++) {
-			if (vals[i] == values[j].str())
+			if (vals[i] == values[j].str()) {
 				count[i]++;
+			}
 		}
 	}
 
@@ -144,10 +136,7 @@ bool Node::getKAnonymity(map<int, vector<vector<string>>> hierarchies,
 	// qids attributes
 	int index = 0;
 	for (const int& qid : qids) {
-
-		// Node's data contains the level of generalization,
-		// hierarchy level we should use
-		//	this->data[index]
+		// Node's data contains the level of generalization
 		vector<string> generalizations = hierarchies[qid][this->data[index]];
 
 		// Table T rows representing qid's values

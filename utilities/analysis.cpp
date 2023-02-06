@@ -1,8 +1,7 @@
 #include "analysis.h"
 
-long double calculateCatNCP(const int nweights, const int weight,
+long double calculateCatNCP(const int nweights, const double weight,
 			    const vector<string> atts, Tree tree) {
-
 	// Calculate NCP fot qid values
 	long double card = tree.getNCP(atts);
 
@@ -10,7 +9,7 @@ long double calculateCatNCP(const int nweights, const int weight,
 		return -1;
 
 	int leaves = tree.getNumLeaves();
-	if (leaves != 0) card /= tree.getNumLeaves();
+	if (leaves != 0) card /= leaves;
 
 	double aux = nweights > 0 ? weight : 1;
 	return (long double)aux * card;
@@ -93,7 +92,7 @@ vector<long double> calculateNCPS(vector<vector<vector<string>>> clusters,
 				  vector<int> numQids, map<int, Tree> trees) {
 	vector<long double> cncps;
 	int nweights = weights.size();
-
+	
 	// Calculate numerical attibute global maximum and minimum values
 	// in all clusters
 	map<int, tuple<long double, long double>> numNumerator;
@@ -104,16 +103,15 @@ vector<long double> calculateNCPS(vector<vector<vector<string>>> clusters,
 
 		for (const auto& cluster : clusters) {
 			vector<vector<string>> tcluster = transpose(cluster);
-
-	      		aux = *max_element(tcluster[qid].begin(),
-					   tcluster[qid].end(),
-				  [](string a, string b) {
-					return sortMaxSplit(a, b);
-				  });
- 		     	int index = aux.find('~');
-      			if (index != (int)string::npos) {
-                		auxMax = stod(aux.substr(index + 1, aux.size()));
-        		}
+	  		aux = *max_element(tcluster[qid].begin(),
+				    tcluster[qid].end(),
+			  	    [](string a, string b) {
+						return sortMaxSplit(a, b);
+					});
+ 		    int index = aux.find('~');
+      		if (index != (int)string::npos) {
+           		auxMax = stod(aux.substr(index + 1, aux.size()));
+        	}
 			else
 				auxMax = stod(aux);
 			if (auxMax > max || max == -1)
@@ -146,15 +144,15 @@ vector<long double> calculateNCPS(vector<vector<vector<string>>> clusters,
 
 		for (size_t i=0; i < allQids.size(); i++) {
 			if (find(numQids.begin(), numQids.end(), allQids[i])
-				!= numQids.end())
+				!= numQids.end()) {
 				// Numeric attributes
-				ncp += calculateNumNCP(tcluster[i],
+				ncp += calculateNumNCP(tcluster[allQids[i]],
 					get<0>(numNumerator[allQids[i]]),
 				 	get<1>(numNumerator[allQids[i]]));
-			else {
+			} else {
 				// Categorical attributes
 				long double aux = calculateCatNCP(weights.size(),
-					weights[i], tcluster[i], trees[i]);
+					weights[i], tcluster[allQids[i]], trees[i]);
 				if (aux == -1)
 					continue;
 				ncp += aux;

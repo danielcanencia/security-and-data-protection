@@ -1,5 +1,4 @@
-#include "hierarchy.h"
-#include "tree.h"
+#include "incognito.h"
 
 using namespace std;
 
@@ -26,9 +25,6 @@ vector<Tree> graphGeneration(const vector<int>& qids,
 		// CMaxValue => max qid indexes
 		Tree tree(CMaxValue, C[perm], treeData);
 		trees.emplace_back(tree);
-
-		//tree.printNodesTable();
-		//tree.printEdgesTable();
 	}
 	return trees;
 }
@@ -39,17 +35,17 @@ void printHelper(vector<string> headers, vector<int> qids,
 
 	// Print Solutions
 	cout << endl;
-	cout << "******* Solution *******" << endl;
 
 	// Print qids and their hierarchy levels
-	cout << "--------Qids hierarchy levels-------" << endl;
+	cout << "------- Qids hierarchy levels ------" << endl;
 	for (const int& qid : qids) {
 		cout << headers[qid] + " >> " << endl;
 		for (int i=0; i < nodeMax[qid] + 1; i++) {
-			cout << "\tHierarchy Level " + to_string(i) + " ";
-			cout << "{ ";
-			for (const string& value : hMap[qid][i])
-				cout << value + ", ";
+			cout << "\tHierarchy Level " + to_string(i) + " { ";
+			size_t j = 0;
+			for (;j < hMap[qid][i].size() - 1; j++)
+				cout << hMap[qid][i][j] + ", ";
+			cout << hMap[qid][i][j];
 			cout << " }" << endl;
 		}
 		cout << endl;
@@ -63,7 +59,6 @@ void printGraphKAnon(Tree graph, const vector<Node>& kNodes,
 		     const vector<int>& qid) {
 	// Print every set of qids that is kanon and/or is
 	// a direct generalization of one
-
 	cout << "Graph with qids: { ";
 	const vector<int>& qids = graph.getQids();
 	cout << headers[qids[0]];
@@ -94,10 +89,37 @@ int main(int argc, char** argv) {
 		return -1;
 	}
 
+	// Read input
+	// K
 	string line;
 	cout << "Insert K: ";
 	getline(cin, line);
 	int K = stoi(line);
+
+	// Qids
+	/*set<string> qid_set;
+	cout << "Number of qids: ";
+	getline(cin, line);
+	const int nqids = stoi(line);
+	for (int i=0; i < nqids; i++) {
+		cout << "Enter qid " << i << ": ";
+		string qid;
+		getline(cin, qid);
+		qid_set.insert(qid);
+	}
+	if ((int)qid_set.size() != nqids) {
+		cout << "Input Error: Qids should be unique.";
+		cout << "Check if you repeated some of them" << endl; 
+		return 1;
+	}*/
+	//vector<string> qidNames(qid_set.begin(), qid_set.end());
+	vector<string> qidNames = {
+		"Age", "Education", "Marital-status",
+		"Native-country", "Occupation", "Race", "Relationship",
+		"Salary", "Sex", "Workclass"
+	};
+	//vector<string> qidNames = {"Birthdate", "Sex", "Zipcode"};
+
 
 	// Read csv data file
 	vector<string> headers;
@@ -106,6 +128,10 @@ int main(int argc, char** argv) {
 	map<int, vector<vector<string>>> hierarchies_map;
 
 	try {
+		//hierarchies_map = read_directory(fs::path(argv[1]),
+		//			dataset, headers, K, qidNames,
+		//			qids);
+
 		hierarchies_map = read_directory(fs::path(argv[1]),
 					dataset, qids, headers, K);
 		transposedDataset = transpose(dataset);
@@ -121,12 +147,12 @@ int main(int argc, char** argv) {
 		nodeMax[qid] = hierarchies_map[qid].size() - 1;
 	}
 
+	// Print a hierarchy level helper
+	// printHelper(headers, qids, nodeMax, hierarchies_map);
+
 	// Generate all posible graphs containing qids
 	// defined by qid variable
 	vector<Tree> graphs = graphGeneration(qids, nodeMax, 1);
-
-	// Print a hierarchy level helper
-	printHelper(headers, qids, nodeMax, hierarchies_map);
 
 	// Main Algorithm
 	for (size_t i=1; i < qids.size() + 1; i++) {

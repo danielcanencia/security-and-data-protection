@@ -1,0 +1,9 @@
+workclass
+Private;Entrepreneur;Non-Government;*
+Self-emp-not-inc;Entrepreneur;Non-Government;*
+Self-emp-inc;Entrepreneur;Non-Government;*
+Federal-gov;Center;Government;*
+Local-gov;Territory;Government;*
+State-gov;Center;Government;*
+Without-pay;Charity;Non-Government;*
+Never-worked;Unemployed;Non-Government;*

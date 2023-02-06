@@ -4,7 +4,7 @@
 #include <vector>
 #include "../utilities/hierarchy.h"
 #include "../utilities/tree.h"
-#include "frequencies.h"
+#include "../utilities/frequencies.h"
 
 using namespace std;
 

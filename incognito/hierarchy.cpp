@@ -134,7 +134,7 @@ map<int, vector<vector<string>>> read_directory(
 	}
 
 
-	// Get transposed hierchies
+	// Get transposed hierchies (add an argument to provide this option)
 	auto tRes = transposeAndFormat(res);
 
 
@@ -146,31 +146,22 @@ map<int, vector<vector<string>>> read_directory(
 	return hMap;
 }
 
+vector<vector<string>> transpose(
+	const vector<vector<string>>& matrix) {
 
-vector<vector<string>> transpose(const vector<vector<string>>& matrix) {
-	int rows=matrix.size();
-	int cols=matrix[0].size();
+	const int rows=matrix.size();
+	const int cols=matrix[0].size();
 
-	string arr[cols][rows];
+	vector<vector<string>> arr(cols, vector<string>(rows));
 
 	// Transpose vector
 	for (int i=0; i < rows; i++) {
 		for (int j=0; j < cols; j++) {
 			arr[j][i] = matrix[i][j];
 		}
-	}	
-
-	// Convert array to vector
-	vector<vector<string>> res;
-	for (int i=0; i < cols; i++) {
-   		vector<string> aux;
-   		for (int j=0; j < rows; j++) {
-      			aux.emplace_back(arr[i][j]);
-   		}
-		res.emplace_back(aux);
 	}
 
-	return res;
+	return arr;
 }
 
 vector<vector<vector<string>>> transposeAndFormat(

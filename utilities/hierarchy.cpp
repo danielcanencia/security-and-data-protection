@@ -249,7 +249,7 @@ vector<vector<string>> transpose(
 	const int rows=matrix.size();
 	const int cols=matrix[0].size();
 
-	string arr[cols][rows];
+	vector<vector<string>> arr(cols, vector<string>(rows));
 
 	// Transpose vector
 	for (int i=0; i < rows; i++) {
@@ -258,47 +258,36 @@ vector<vector<string>> transpose(
 		}
 	}
 
-	// Convert array to vector
-	vector<vector<string>> res;
-	for (int i=0; i < cols; i++) {
-   		vector<string> aux;
-   		for (int j=0; j < rows; j++) {
-      			aux.emplace_back(arr[i][j]);
-   		}
-		res.emplace_back(aux);
-	}
-
-	return res;
+	return arr;
 }
 
 
 vector<vector<int>> getPermutations(int r, const vector<int> data) {
 
-        vector<vector<int>> permutations;
+    vector<vector<int>> permutations;
 	int auxArray[data.size()];
-        permute(data, permutations, data.size(), r, auxArray);
-        return permutations;
+    permute(data, permutations, data.size(), r, auxArray);
+    return permutations;
 }
 
 
 void permute(const vector<int> data,
-	     vector<vector<int>>& permutations,
-	     int n, int r, int *aux, int rept, int idx) {
+		vector<vector<int>>& permutations,
+		int n, int r, int *aux, int rept, int idx) {
 
-        if (idx==r) {
-                vector<int> entry;
-                for(int i=0; i < r; i++) {
-                        entry.emplace_back(data[aux[i]]);
-
-                }
-                permutations.emplace_back(entry);
-                return ;
+    if (idx==r) {
+        vector<int> entry;
+        for(int i=0; i < r; i++) {
+			entry.emplace_back(data[aux[i]]);
         }
+        permutations.emplace_back(entry);
+        return ;
+    }
 
-        for (int i=rept; (i < n) && (n - i + 1); i++) {
-                aux[idx] = i;
-                permute(data, permutations, n, r, aux, i+1, idx+1);
-        }
+    for (int i=rept; (i < n) && (n - i + 1); i++) {
+        aux[idx] = i;
+    	permute(data, permutations, n, r, aux, i+1, idx+1);
+    }
 }
 
 vector<int> getQidsHeaders(const vector<string> headers,

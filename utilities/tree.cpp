@@ -183,7 +183,7 @@ string Tree::getNextGen(string value) {
 
 		return parent;
 	}
-
+	cout << value << endl;
 	// Not found
 	throw "Error: Element not found in the tree";
 }

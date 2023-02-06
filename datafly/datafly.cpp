@@ -41,12 +41,18 @@ int main(int argc, char** argv) {
 		cout << "Check if you repeated some of them" << endl;
 		return 1;
 	}
+	vector<string> qidNames(qid_set.begin(), qid_set.end());
 	//vector<string> qidNames = {"Age", "Occupation"};
 	//vector<string> qidNames = {"Age", "Country", "Occupation"};
-	vector<string> qidNames(qid_set.begin(), qid_set.end());
+	/*vector<string> qidNames = {
+		"Education", "Marital-status",
+		"Native-country", "Occupation", "Race", "Relationship",
+		"Salary", "Sex", "Workclass"
+	};*/
+
 
 	// Weights
-	vector<float> weights = {};
+	vector<double> weights = {};
 	cout << "Do you want to use weights (will only be used on analysis) [Y(y)/N(n)]: ";
 	char answer;
 	cin >> answer;
@@ -152,45 +158,28 @@ int main(int argc, char** argv) {
 
 	// 5. Write anonymized table
 	// Changed headers for non alterated ones
-	// comprobar si existe directorio y si eso no crearlo
 	writeAnonymizedTable(fs::path(argv[1]), headers, dataset, K);
-
 
 	// End of main algorithm
 
 	// GCP Analysis
 	// 1. Create equivalence classes or clusters
-	vector<vector<vector<string>>> clusters = createClusters(qids_dataset, qids);
-
-
+	vector<vector<vector<string>>> clusters = createClusters(dataset, qids);
+   
 	// 2. Especify weights, if any (Already entered by user)
-	//vector<double> weights = {0.33, 0.33, 0.33};
+	//vector<double> weights(qids.size(), 1.0/qids.size());
 
-	// 3. Precalculate NCP for every qid value included in every cluster
-	// Count total number of distinct qid values in dataset
-	vector<long double> cncps;
-	int nweights = weights.size();
-	for (const auto& cluster : clusters) {
-		vector<vector<string>> tcluster = transpose(cluster);
-
-		// Qids Att Values
-		long double ncp = 0.0;
-
-		for (size_t i=0; i < qids.size(); i++) {
-			// Calculate NCP fot qid values
-			long double card = trees[i].getNCP(tcluster[i]);
-			if (card == 1)
-				continue;
-
-			card /= trees[i].getNumLeaves();
-			double weight = nweights > 0 ? weights[i] : 1;
-			ncp += (long double)weight * card;
-		}
-		ncp *= nweights ? qids.size() : 1;
-		cncps.emplace_back(ncp);
+	// 3. Calculate NCP for every qid value included in every cluster
+	// Convert list into map
+	map<int, Tree> treeMap;
+	for (size_t i=0; i < qids.size(); i++) {
+		treeMap[qids[i]] = trees[i];
 	}
+	// Calculate NCP
+	vector<long double> cncps = calculateNCPS(
+		clusters, weights, qids, {}, treeMap);
 
-	// 3. Calculate GCP
+	// 4. Calculate GCP
 	printAnalysis(clusters, dataset.size(), qids, cncps);
 
 	return 0;

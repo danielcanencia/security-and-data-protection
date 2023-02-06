@@ -25,6 +25,7 @@ int main(int argc, char** argv) {
 	getline(cin, line);
 	const int K = stoi(line);
 
+	// Qids
 	set<string> qid_set;
 	cout << "Number of qids: ";
 	getline(cin, line);
@@ -35,7 +36,11 @@ int main(int argc, char** argv) {
 		getline(cin, qid);
 		qid_set.insert(qid);
 	}
-	
+	if ((int)qid_set.size() != nqids) {
+		cout << "Input Error: Qids should be unique.";
+		cout << "Check if you repeated some of them" << endl; 
+		return 1;
+	}
 	//vector<string> qidNames = {"Age", "Country", "Occupation"};
 	vector<string> qidNames(qid_set.begin(), qid_set.end());
 
@@ -75,8 +80,6 @@ int main(int argc, char** argv) {
 	// Main algorithm
 	vector<vector<string>> S = dataset;
 	int r = randomRecord(S);
-
-
 	map<int, vector<vector<string>>> res;
 	vector<vector<string>> c;
 	int count = 0;
@@ -106,22 +109,6 @@ int main(int argc, char** argv) {
 		count += 1;
 	}
 
-	/*
-	cout << "*******************" << endl;
-	cout << "Count: ";
-	cout << count << endl;
-	for (int i=0; i < count; i++) {
-		cout << "Count: ";
-		cout << i << endl;
-		for (const auto& entries : res[i]) {
-			for (const auto& entry : entries) {
-				cout << entry + ", ";
-			}
-			cout << endl;
-		}
-	}*/
-
-
 	// 2nd loop
 	int idx;
 	while (S.size() > 0) {
@@ -135,16 +122,16 @@ int main(int argc, char** argv) {
 
 
 	// Print results
-	cout << endl << endl; 
+	cout << endl; 
 	cout << "Clusters or equivalence classes: ";
 	cout << count << endl << endl;
 	for (int i=0; i < count; i++) {
 		cout << "Cluster " << i+1 << ':' << endl;
 		for (const auto& entries : res[i]) {
-			for (const auto& entry : entries) {
-				cout << entry + ", ";
-			}
-			cout << endl;
+			size_t i=0;
+			for (;i < entries.size() - 1; i++)
+				cout << entries[i] + ", ";
+			cout << entries[i] << endl;
 		}
 	}
 
