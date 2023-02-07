@@ -45,8 +45,6 @@ public:
 	int getNumLeaves();
 	Node getLowestCommonAncestor(vector<string> values);
 	long double getNCP(vector<string> values);
-	void print();
-
 };
 
 #endif

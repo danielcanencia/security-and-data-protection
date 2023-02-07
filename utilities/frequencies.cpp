@@ -48,49 +48,6 @@ map<string, int> calculateQidFreqs(
 	return freqs;
 }
 
-/*
-map<vector<vector<string>>, int> calculateQidFreqs(
-	const vector<vector<string>> dataset, const int dim) {
-
-	vector<vector<string>> records = dataset;
-
-	// Concatenate all attributes of each record
-	//vector<string> qids;
-	//for (size_t i=0; i < dataset.size(); i++) {
-	//	qids.emplace_back(dataset[dimension]);	
-	//}
-
-	// Calculate frequency list
-	map<vector<vector<string>>, int> freqs;
-	while (records.size() > 0) {
-		vector<string> record = records.front();
-		records.erase(records.begin());
-
-		// Calculate record freq & records in cluster
-		vector<vector<string>> auxRecords = { record };
-		vector<int> deletions;
-		int freq = 1;
-		for (size_t j=0; j < records.size(); j++) {
-			if (record[dim] == records[j][dim]) {
-				auxRecords.emplace_back(record);
-				deletions.emplace_back(j);
-				freq += 1;
-			}
-		}
-
-		int n = 0;
-		for (const int& idx : deletions) {
-			records.erase(records.begin() + idx - n);
-			n++;
-		}
-
-		freqs[auxRecords] = freq;
-	}
-
-	return freqs;
-}*/
-
-
 vector<int> calculateFreqs(
 	const vector<vector<string>> dataset) {
 
@@ -98,29 +55,21 @@ vector<int> calculateFreqs(
 	vector<string> records = concatRecords(dataset);
 
 	// Calculate frequency list
+	map<string, int> freqMap;
+
+	for (const auto& record : records) {
+		try {
+			freqMap[record] += 1;
+		} catch (...) {
+			freqMap[record] = 1;
+		}
+	}
+
+	// Get all values from freqMap
 	vector<int> freqs;
-	while (records.size() > 0) {
-		string val = records.front();
-		records.erase(records.begin());
-
-		// Calculate record freq & records in cluster
-		vector<int> deletions;
-		int freq = 1;
-		for (size_t j=0; j < records.size(); j++) {
-			if (val == records[j]) {
-				deletions.emplace_back(j);
-				freq += 1;
-			}
-		}
-
-		int n = 0;
-		for (const int& idx : deletions) {
-			records.erase(records.begin() + idx - n);
-			n++;
-		}
-
-		freqs.emplace_back(freq);
-
+	for(map<string,int>::iterator it = freqMap.begin();
+		it != freqMap.end(); it++) {
+  		freqs.push_back(it->second);
 	}
 
 	return freqs;
@@ -173,6 +122,10 @@ vector<vector<vector<string>>> createClusters(vector<vector<string>> dataset,
 
 	// Concatenate all attributes of each record
 	vector<string> records = concatRecords(qids_dataset);
+	/*for (const auto& a : records) {
+		cout << a << endl;
+	}*/
+
 	// Get only unique records 
 	vector<string> rcopy = records;
 	sort(rcopy.begin(), rcopy.end());

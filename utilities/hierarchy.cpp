@@ -242,14 +242,13 @@ map<int, vector<vector<string>>> read_directory(
 	return hMap;
 }
 
-
 vector<vector<string>> transpose(
 	const vector<vector<string>>& matrix) {
 
 	const int rows=matrix.size();
 	const int cols=matrix[0].size();
 
-	string arr[cols][rows];
+	vector<vector<string>> arr(cols, vector<string>(rows));
 
 	// Transpose vector
 	for (int i=0; i < rows; i++) {
@@ -258,19 +257,8 @@ vector<vector<string>> transpose(
 		}
 	}
 
-	// Convert array to vector
-	vector<vector<string>> res;
-	for (int i=0; i < cols; i++) {
-   		vector<string> aux;
-   		for (int j=0; j < rows; j++) {
-      			aux.emplace_back(arr[i][j]);
-   		}
-		res.emplace_back(aux);
-	}
-
-	return res;
+	return arr;
 }
-
 
 vector<vector<int>> getPermutations(int r, const vector<int> data) {
 

@@ -20,14 +20,17 @@ void writeAnonymizedTable(const string inputFname, const vector<string> headers,
         string dname = "generalized_tables/"
 		+ inputFname.substr(0, inputFname.find_last_of('/'));
         if (!fs::is_directory(dname) || !fs::exists(dname)) {
-                if (!fs::create_directory(dname)) {
+                if (!fs::create_directories(dname)) {
                         throw "Error creating output directory";
                         return ;
                 }
         }
 
-        string fname = "generalized_tables/" + inputFname
-		+ "_" + to_string(K) + ".csv";
+        string fname = "generalized_tables/" + inputFname;
+        if (fname.back() != '/')
+	        fname += "/";
+        fname += to_string(K) + ".csv";
+
 	cout << "===> Writing data to file: " << endl;
 	cout << "\t * " + fname << endl;
         ofstream fp(fname);
