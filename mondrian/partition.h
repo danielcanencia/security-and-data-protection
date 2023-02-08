@@ -30,14 +30,12 @@ private:
 	vector<Partition> splitPartitionNumeric(int dimension);
 	vector<Partition> splitPartitionCategorical(
 		int dimension);
-	/*vector<Partition> cut(vector<int> split,
-		int dimension, Tree tree);*/
 public:
 	// Constructor
 	Partition(vector<vector<string>> data,
-                  vector<string> generalizations,
-                  vector<int> qids, vector<int> isQidCat,
-		  map<int, Tree> trees, int K);
+              vector<string> generalizations,
+              vector<int> qids, vector<int> isQidCat,
+		  	  map<int, Tree> trees, int K);
 	// Methods
 	vector<vector<string>> getResult() const;
 	int getNumAllowedCuts();

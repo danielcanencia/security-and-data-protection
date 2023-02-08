@@ -113,13 +113,15 @@ int main(int argc, char** argv) {
 		return 1;
 	}*/
 	//vector<string> qidNames(qid_set.begin(), qid_set.end());
-	vector<string> qidNames = {
+	/*vector<string> qidNames = {
 		"Age", "Education", "Marital-status",
 		"Native-country", "Occupation", "Race", "Relationship",
 		"Salary", "Sex", "Workclass"
-	};
-	//vector<string> qidNames = {"Birthdate", "Sex", "Zipcode"};
-
+	};*/
+	vector<string> qidNames = {"Birthdate", "Sex", "Zipcode"};
+	/*vector<string> qidNames = {
+		"Age", "Education"
+	};*/
 
 	// Read csv data file
 	vector<string> headers;
@@ -128,16 +130,23 @@ int main(int argc, char** argv) {
 	map<int, vector<vector<string>>> hierarchies_map;
 
 	try {
-		//hierarchies_map = read_directory(fs::path(argv[1]),
-		//			dataset, headers, K, qidNames,
-		//			qids);
-
 		hierarchies_map = read_directory(fs::path(argv[1]),
-					dataset, qids, headers, K);
+					dataset, headers, K, qidNames,
+					qids, true);
+		sort(qids.begin(), qids.end());
+		//hierarchies_map = read_directory(fs::path(argv[1]),
+		//			dataset, qids, headers, K);
 		transposedDataset = transpose(dataset);
 	} catch (const char* e) {
 		cout << e << endl; 
 		return -1;
+	}
+
+	for (const auto& a : hierarchies_map[2]) {
+		for (const auto& b : a) {
+			cout << b + ", ";
+		}
+		cout << endl;
 	}
 
 	// Levels per hierchary. Useful to construct node
@@ -155,6 +164,7 @@ int main(int argc, char** argv) {
 	vector<Tree> graphs = graphGeneration(qids, nodeMax, 1);
 
 	// Main Algorithm
+	vector<Tree> rGraphs;
 	for (size_t i=1; i < qids.size() + 1; i++) {
 		for (size_t gsize=0; gsize < graphs.size(); gsize++) {
 			Tree g = graphs[gsize];
@@ -181,14 +191,53 @@ int main(int argc, char** argv) {
 			}
 			// Print Graph Solution
 			printGraphKAnon(g, kanon, headers, qids);
-
+			rGraphs.emplace_back(g);
+			/*if (i == qids.size() && gsize == graphs.size())
+				rGraph = g;*/
 		}
-	
+
 
 		// Generate graphs
 		if (i <= qids.size()) 
 			graphs = graphGeneration(qids, nodeMax, i+1);
 	}
+
+	// Construct anonymized dataset
+	cout << "Generating Anonymized Table: " << endl;
+	const Node node = rGraphs.back().getFinalKAnon();
+	vector<int> data = node.getData();
+
+	map<int, map<string, string>> gens;
+	for (size_t i=0; i < qids.size(); i++) {
+		const int qid = qids[i];
+		map<string, string> qidMap;
+		for (size_t j = 0; j < hierarchies_map[qid][0].size(); j++)
+			qidMap[hierarchies_map[qid][0][j]] = hierarchies_map[qid][data[i]][j];
+		gens[qid] = qidMap;
+	}
+
+	vector<vector<string>> result;
+	for (size_t i=0; i < dataset.size(); i++) {
+		vector<string> row;
+		for (size_t j=0; j < qids.size(); j++)
+			row.emplace_back(gens[qids[j]][dataset[i][qids[j]]]);
+		result.emplace_back(row);
+	}
+
+	cout << "Result: " << endl;
+	for (const auto& a : result) {
+		for (const auto& b : a)
+			cout << b + ", ";
+		cout << endl;
+	}
+
+	//vector<vector<string>> result = createResult(nodes[nodeIdx], hierarchies_map, qids);
+
+	// Create clusters
+	vector<vector<vector<string>>> clusters;
+
+	// Write data to file
+
 
 	return 0;
 }

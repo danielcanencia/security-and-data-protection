@@ -13,7 +13,11 @@ int Node::getData(int i) const {
 	return this->data[i];
 }
 
-bool Node::isEqual (const vector<int>& node) const {
+vector<int> Node::getData() const {
+	return this->data;
+}
+
+bool Node::isEqual(const vector<int>& node) const {
 	for (int i=0; i < (int)node.size(); i++) {
 		if (this->data[i] != node[i])
 			return false;
@@ -75,7 +79,6 @@ string Node::generalizeEntry(string entry, const vector<vector<string>> hierarch
 
 	for (int i=0; i < int(hierarchy.size()); i++) {
 		for (int j=0; j < int(generalizations.size()); j++) {
-			//cout << hierarchy[i][j] + " =? " + entry << endl;
 			if (hierarchy[i][j].compare(entry) == 0) {
 				index = j; break;
 			}
@@ -84,13 +87,13 @@ string Node::generalizeEntry(string entry, const vector<vector<string>> hierarch
 
 	if (index == -1)
 		return "No entry found";
+
 	return generalizations[index];
 }
 
 
 vector<int> Node::evaluateFrequency(vector<vector<string>> generalizations,
 	    		      int rows, int cols) {
-
 	// Transpose generalizations matrix
 	// && Concat values in every row
 	string genT[cols][rows];
@@ -103,20 +106,24 @@ vector<int> Node::evaluateFrequency(vector<vector<string>> generalizations,
 	}
 
 	// Convert stringstream array to an array of string
-	vector<string> vals;
-	// Error: No entry found
+	map<string, int> vals;
+
 	for (auto a = values.begin(); a != values.end(); a++) {
-		vals.emplace_back((*a).str());
+		//vals.emplace_back((*a).str());
+		vals[(*a).str()] = 1;
 	}
-	// Remove non unique values	
-	sort(vals.begin(), vals.end());
-	vals.erase(unique(vals.begin(), vals.end()), vals.end());
+	// Get map keys
+    vector<string> keys;
+    for (const auto& [k, v] : vals) {
+        keys.push_back(k);
+    }
+ 
 	// Count unique values
-	vector<int> count(vals.size());
+	vector<int> count(keys.size());
 	// Check frecuencies in values array
-	for (size_t i=0; i < vals.size(); i++) {
+	for (size_t i=0; i < keys.size(); i++) {
 		for (int j=0; j < cols; j++) {
-			if (vals[i] == values[j].str()) {
+			if (keys[i] == values[j].str()) {
 				count[i]++;
 			}
 		}
@@ -141,7 +148,6 @@ bool Node::getKAnonymity(map<int, vector<vector<string>>> hierarchies,
 
 		// Table T rows representing qid's values
 		for (const string& entry : transposedTable[qid]) {
-
 			// Generate new row generalize
 
 			// Iterate through possible generalizations in this
@@ -152,7 +158,6 @@ bool Node::getKAnonymity(map<int, vector<vector<string>>> hierarchies,
 		}
 		index++;
 	}
-
 
 	// Evaluate Frecuency set of T with respect to attributes of node (qids)
 	vector<int> freq = evaluateFrequency(genArray, index, transposedTable[0].size());

@@ -1,5 +1,7 @@
 #include "tree.h"
 
+Tree::Tree() { };
+
 Tree::Tree(vector<int> nodesMax, vector<int> qids,
 	   TreeData& treeData) {
 	this->treeData = treeData;
@@ -55,19 +57,6 @@ vector<Node> Tree::getRoots() {
 }
 
 
-bool Tree::checkKAnonymity(vector<vector<string>> dataset) {
-	/*for (const auto& entry : dataset) {
-		for (const auto& val : entry)
-			cout << val + ", ";
-		cout << endl;
-	}*/
-
-	// Iterate through nodes by level
-	/*vector firstNode
-	vector<Node> children = this->treeData.getChildren();*/
-	return true;
-}
-
 vector<int> Tree::getQids() const {
 	return this->qids;
 }
@@ -82,6 +71,10 @@ void Tree::markGeneralizations(const Node& node) {
 
 void Tree::printAllKAnon() {
 	treeData.printAllKAnon();
+}
+
+Node Tree::getFinalKAnon() {
+	return treeData.getFinalKAnon();
 }
 
 void Tree::printNodesTable() {

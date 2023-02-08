@@ -25,6 +25,7 @@ public:
 	Node (int id, vector<int> data);
 	int getId() const;
 	int getData(int i) const;
+	vector<int> getData() const;
 	bool isChild(Node node);
 	bool isEqual (const vector<int>& node) const;
 	bool operator < (const Node& node) const;

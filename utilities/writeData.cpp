@@ -26,8 +26,11 @@ void writeAnonymizedTable(const string inputFname, const vector<string> headers,
                 }
         }
 
-        string fname = "generalized_tables/" + inputFname
-		+ "_" + to_string(K) + ".csv";
+        string fname = "generalized_tables/" + inputFname;
+        if (fname.back() != '/')
+	        fname += "/";
+        fname += to_string(K) + ".csv";
+
 	cout << "===> Writing data to file: " << endl;
 	cout << "\t * " + fname << endl;
         ofstream fp(fname);

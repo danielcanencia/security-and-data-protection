@@ -121,6 +121,7 @@ vector<vector<vector<string>>> createClusters(vector<vector<string>> dataset,
 
 	// Concatenate all attributes of each record
 	vector<string> records = concatRecords(qids_dataset);
+
 	// Get only unique records 
 	vector<string> rcopy = records;
 	sort(rcopy.begin(), rcopy.end());

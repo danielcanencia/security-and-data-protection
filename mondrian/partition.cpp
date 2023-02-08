@@ -26,8 +26,8 @@ vector<vector<string>> Partition::getResult() const {
 }
 
 int Partition::getNumAllowedCuts() {
-        return accumulate(allowedCuts.begin(),
-                   allowedCuts.end(), 0);
+    return accumulate(allowedCuts.begin(),
+        allowedCuts.end(), 0);
 }
 
 void Partition::setAllowedCuts(int value, int dim) {
@@ -57,7 +57,7 @@ int Partition::normWidth(int dimension) {
 	// Normalized range of values for dimension
 	vector<string> elements;
 	for (const vector<string>& entry : data) {
-		elements.emplace_back(entry[dimension]);
+		elements.emplace_back(entry[qids[dimension]]);
 	}
 
 	auto it = unique(elements.begin(), elements.end());
@@ -68,7 +68,7 @@ int Partition::normWidth(int dimension) {
 
 string Partition::findMedian(int dimension) {
 	// Calculate qid frecuencies (qid values are sorted)
-	map<string, int> map = calculateQidFreqs(this->data, dimension);
+	map<string, int> map = calculateQidFreqs(this->data, qids[dimension]);
 	vector<pair<string, int>> freqs;
 	freqs.resize(map.size());
 	copy(map.begin(), map.end(), freqs.begin());
@@ -112,7 +112,7 @@ string Partition::findMedian(int dimension) {
 vector<int> Partition::getAttributeRanges(int dimension) {
 	vector<int> values;
 	for (const auto& record : this->data) {
-		values.emplace_back(stoi(record[dimension]));
+		values.emplace_back(stoi(record[qids[dimension]]));
 	}
 
 	int min = *min_element(values.begin(), values.end());
@@ -123,8 +123,9 @@ vector<int> Partition::getAttributeRanges(int dimension) {
 
 vector<Partition> Partition::splitPartition(int dimension) {
 	// Cut is not allowed for this specific dimension
-	if (allowedCuts[dimension] == 0)
+	if (allowedCuts[dimension] == 0) {
 		return {};
+	}
 
 	if (isQidCat[dimension])
 		return splitPartitionCategorical(dimension);
@@ -164,7 +165,7 @@ vector<Partition> Partition::splitPartitionNumeric(int dimension) {
 	// New partitions data
 	vector<vector<string>> d1, d2;
 	for (const auto& record : this->data) {
-		int number = stoi(record[dimension]);
+		int number = stoi(record[qids[dimension]]);
 		if (number <= stoi(split1))
 			d1.emplace_back(record);
 		else
@@ -192,9 +193,10 @@ vector<Partition> Partition::splitPartitionNumeric(int dimension) {
 vector<Partition> Partition::splitPartitionCategorical(int dimension) {
 
 	vector<Partition> pts;
-	Tree tree = trees[dimension];
+	Tree tree = trees[qids[dimension]];
 	string middle = this->generalizations[dimension];
 	vector<string> children = tree.getDirectChildren(middle);
+
 
 	// If it doesn't have children, return empty vector
 	if (children.size() == 0)
@@ -204,7 +206,7 @@ vector<Partition> Partition::splitPartitionCategorical(int dimension) {
 	vector<vector<vector<string>>> splits(children.size(),
 	       vector<vector<string>>());
 	for (const auto& record : this->data) {
-		string qid = record[dimension];
+		string qid = record[qids[dimension]];
 
 		int i=0;
 		for (const auto& child : children) {
@@ -229,13 +231,13 @@ vector<Partition> Partition::splitPartitionCategorical(int dimension) {
 		if (splits[i].size() != 0) {
 			vector<string> gens = generalizations;
 			gens[dimension] = children[i];
+
 			Partition p = Partition(splits[i], gens,
 					qids, isQidCat, trees, K);
-
 			pts.emplace_back(p);
 		}
 	}
-	
+
 	return pts;
 }
 

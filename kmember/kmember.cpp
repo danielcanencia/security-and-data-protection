@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
 	try {
 		hierarchies_map = read_directory(fs::path(argv[1]),
 					dataset, headers, K, qidNames,
-					catQids);
+					catQids, false);
 
 		if (catQids.size() == 0) {
 			cout << endl << "******************" << endl; 

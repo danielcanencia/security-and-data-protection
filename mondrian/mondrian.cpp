@@ -43,27 +43,36 @@ int main(int argc, char** argv) {
 	}*/
 	//vector<string> qidNames(qid_set.begin(), qid_set.end());
 	//vector<string> qidNames = {"Age", "Country", "Occupation" };
-	vector<string> qidNames = {"Age", "Occupation", "Workclass"};
+	//vector<string> qidNames = {"Salary", "Occupation", "Country"};
+	vector<string> qidNames = {
+		"Education", "Marital-status",
+		"Native-country", "Occupation", "Race", "Relationship",
+		"Salary", "Sex", "Workclass"
+	};
+	/*vector<string> qidNames = {
+		"Workclass", "Education"
+	};*/
 
 	// Weights
 	/*vector<double> weights = {};
 	cout << "Do you want to use weights (will only be used on analysis) [Y(y)/N(n)]: ";
 	char answer;
 	cin >> answer;
-	bool keep;
+	bool keep = false;
 	while(!keep) {
 		switch(answer) {
 			case 'Y':
 			case 'y':
 				for (int i=0; i < nqids; i++) {
 					cout << "Weight for qid " << i << ": ";
-					double weight;
+					float weight;
 					cin >> weight;
 					weights.emplace_back(weight);
 				}
 				if (accumulate(weights.begin(), weights.end(),
 					(float)0) != (float)1) {
 					cout << "Input Error: Weights must sum 1" << endl;
+					weights.clear();
 					continue;
 				}
 				keep = true;
@@ -80,7 +89,6 @@ int main(int argc, char** argv) {
 		}
 	}*/
 
-
 	// Read data file and hierarchy folders
 	vector<string> headers;
 	vector<int> catQids, numQids, allQids;
@@ -91,7 +99,7 @@ int main(int argc, char** argv) {
 	try {
 		hierarchies_map = read_directory(fs::path(argv[1]),
 					dataset, headers, K, qidNames,
-					catQids);
+					catQids, false);
 		sort(catQids.begin(), catQids.end());
 
 		// Compare headers and qids
@@ -109,21 +117,6 @@ int main(int argc, char** argv) {
 			catQids.begin(), catQids.end(),
         		inserter(numQids, numQids.begin())); 
 
-
-		cout << "allQids: " << endl;
-		for (const auto& a : allQids)
-			cout << to_string(a) + ", ";
-		cout << endl;
-		cout << "catQids: " << endl;
-		for (const auto& a : catQids)
-			cout << to_string(a) + ", ";
-		cout << endl;
-		cout << "numQids: " << endl;
-		for (const auto& a : numQids)
-			cout << to_string(a) + ", ";
-		cout << endl;
-
-
 		// Build a vector containing qid types
 		for (const auto& qid : allQids) {
 			if (find(catQids.begin(), catQids.end(), qid)
@@ -139,7 +132,6 @@ int main(int argc, char** argv) {
 	}
 
 
-
 	// *********************************
 	// Main algorithm
 	
@@ -153,7 +145,7 @@ int main(int argc, char** argv) {
 	vector<string> gens;
 	for (size_t i=0; i < allQids.size(); i++) {
 		if (isQidCat[i]) {
-			gens.emplace_back(trees[i].root);
+			gens.emplace_back(trees[allQids[i]].root);
 			continue;
 		}
 
@@ -170,38 +162,16 @@ int main(int argc, char** argv) {
 	// 3. Write anonymized table
 	// Changed headers for non alterated ones
 	writeAnonymizedTable(fs::path(argv[1]), headers, result, K);
-	cout << "All";
+
 	// End of main algorithm
 	// *********************************
 
-	// Obtain a subset of result containing only qids
-	/*vector<vector<string>> qids_result;
-	for (size_t i=0; i < result.size(); i++) {
-		vector<string> aux;
-		for (const int& idx : allQids) {
-			aux.emplace_back(result[i][idx]);
-		}
-		qids_result.emplace_back(aux);
-	}*/
-
-
-	// *********************************
 	// GCP Analysis
 	// 1. Create equivalence classes or clusters
-	//vector<vector<vector<string>>> clusters = createClusters(qids_result, allQids);
 	vector<vector<vector<string>>> clusters = createClusters(result, allQids);
 
-	/*cout << "Clusters: " << endl;
-	for (const auto& cluster : clusters) {
-		for (const auto& c : cluster) {
-			for (const auto& x : c)
-				cout << x + ", ";
-			cout << endl;
-		}
-	}*/
-
 	// 2. Especify weights, if any (Already entered by user)
-	vector<double> weights = {0.3, 0.4, 0.3};
+	vector<double> weights(allQids.size(), 1.0/allQids.size());
 
 	// 3. Precalculate NCP for every qid value included in every cluster
 	// Count total number of distinct qid values in dataset

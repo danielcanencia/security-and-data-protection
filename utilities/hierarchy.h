@@ -24,7 +24,8 @@ map<int, vector<vector<string>>> read_directory(
   	vector<string>& headers,
 	const int K,
 	vector<string> attQids,
-	vector<int>& qids);
+	vector<int>& qids,
+	const bool transpose);
 vector<vector<string>> transpose(
 	const vector<vector<string>>& matrix);
 vector<vector<int>> getPermutations(int r,

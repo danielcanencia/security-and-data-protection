@@ -17,15 +17,16 @@ private:
 				   const vector<int>& nodesMax,
 				   int nsize, int index);
 public:
+	Tree();
 	Tree(vector<int> nodeMax, vector<int> qids,
 	     TreeData& treeData);
 	void generateNodesAndEdges(const vector<int>& nodesMax);
 	vector<Node> getRoots();
-	bool checkKAnonymity(vector<vector<string>> dataset);
 	vector<int> getQids() const;
 	int addGeneralizations(const Node& node, vector<Node>& queue);
 	void markGeneralizations(const Node& node);
 	void printAllKAnon();
+	Node getFinalKAnon();
 	void printNodesTable();
 	void printEdgesTable();
 };

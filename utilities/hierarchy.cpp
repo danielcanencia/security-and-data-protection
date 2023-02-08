@@ -106,7 +106,8 @@ map<int, vector<vector<string>>> read_directory(
 	vector<string>& headers,
 	const int K,
 	vector<string> attQids,
- 	vector<int>& qids) {
+ 	vector<int>& qids,
+	const bool transpose) {
 
 	// Get a lowercase version of the att Names
 	vector<string> attNames;
@@ -234,14 +235,21 @@ map<int, vector<vector<string>>> read_directory(
 	}
 
 
+	// Get transposed hierchies (e.g Incognito algorithm)
+	vector<vector<vector<string>>> tRes;
+	if (transpose)
+		tRes = transposeAndFormat(res);
+
+
 	// Map qid values and hierarchy sets
 	map<int, vector<vector<string>>> hMap;
-	for (size_t i=0; i < qids.size(); i++)
-		hMap[qids[i]] = res[i];
+	for (size_t i=0; i < qids.size(); i++) {
+		if (!transpose) hMap[qids[i]] = res[i];
+		else hMap[qids[i]] = tRes[i];
+	}
 
 	return hMap;
 }
-
 
 vector<vector<string>> transpose(
 	const vector<vector<string>>& matrix) {
@@ -260,7 +268,6 @@ vector<vector<string>> transpose(
 
 	return arr;
 }
-
 
 vector<vector<int>> getPermutations(int r, const vector<int> data) {
 

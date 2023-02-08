@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
 	const int K = stoi(line);
 
 	// Qids
-	set<string> qid_set;
+	/*set<string> qid_set;
 	cout << "Number of qids: ";
 	getline(cin, line);
 	const int nqids = stoi(line);
@@ -41,18 +41,18 @@ int main(int argc, char** argv) {
 		cout << "Check if you repeated some of them" << endl;
 		return 1;
 	}
-	vector<string> qidNames(qid_set.begin(), qid_set.end());
+	vector<string> qidNames(qid_set.begin(), qid_set.end());*/
 	//vector<string> qidNames = {"Age", "Occupation"};
 	//vector<string> qidNames = {"Age", "Country", "Occupation"};
-	/*vector<string> qidNames = {
+	vector<string> qidNames = {
 		"Education", "Marital-status",
 		"Native-country", "Occupation", "Race", "Relationship",
 		"Salary", "Sex", "Workclass"
-	};*/
+	};
 
 
 	// Weights
-	vector<double> weights = {};
+	/*vector<double> weights = {};
 	cout << "Do you want to use weights (will only be used on analysis) [Y(y)/N(n)]: ";
 	char answer;
 	cin >> answer;
@@ -86,7 +86,7 @@ int main(int argc, char** argv) {
 				cin >> answer;
 		}
 	}
-
+*/
 
 	// Read data file and hierarchy folders
 	vector<string> headers;
@@ -97,7 +97,7 @@ int main(int argc, char** argv) {
 	try {
 		hierarchies_map = read_directory(fs::path(argv[1]),
 					dataset, headers, K, qidNames,
-					qids);
+					qids, false);
 	} catch (const char* e) {
 		cout << e << endl;
 		return -1;
@@ -167,7 +167,7 @@ int main(int argc, char** argv) {
 	vector<vector<vector<string>>> clusters = createClusters(dataset, qids);
    
 	// 2. Especify weights, if any (Already entered by user)
-	//vector<double> weights(qids.size(), 1.0/qids.size());
+	vector<double> weights(qids.size(), 1.0/qids.size());
 
 	// 3. Calculate NCP for every qid value included in every cluster
 	// Convert list into map

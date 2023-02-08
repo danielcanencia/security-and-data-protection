@@ -103,7 +103,8 @@ vector<long double> calculateNCPS(vector<vector<vector<string>>> clusters,
 
 		for (const auto& cluster : clusters) {
 			vector<vector<string>> tcluster = transpose(cluster);
-	  		aux = *max_element(tcluster[qid].begin(),
+
+			aux = *max_element(tcluster[qid].begin(),
 				    tcluster[qid].end(),
 			  	    [](string a, string b) {
 						return sortMaxSplit(a, b);
@@ -152,13 +153,12 @@ vector<long double> calculateNCPS(vector<vector<vector<string>>> clusters,
 			} else {
 				// Categorical attributes
 				long double aux = calculateCatNCP(weights.size(),
-					weights[i], tcluster[allQids[i]], trees[i]);
+					weights[i], tcluster[allQids[i]], trees[allQids[i]]);
 				if (aux == -1)
 					continue;
 				ncp += aux;
 			}
 		}
-
 		ncp *= nweights ? allQids.size() : 1;
 		cncps.emplace_back(ncp);
 	}
@@ -171,7 +171,6 @@ void printAnalysis(vector<vector<vector<string>>> clusters,
 		   vector<long double> cncps) {
 
 	long double gcp = 0;
-
 	for (size_t i=0; i < clusters.size(); i++) {
 		gcp += (long double)(clusters[i].size() * cncps[i]);
 	}
