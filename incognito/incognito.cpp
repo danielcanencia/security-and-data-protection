@@ -1,12 +1,9 @@
 #include "incognito.h"
 
-using namespace std;
-
-
-vector<Tree> graphGeneration(const vector<int>& qids,
+vector<Graph> graphGeneration(const vector<int>& qids,
 			     map<int, int> nodeMax,
 			     int numAttr) {
-	vector<Tree> trees;
+	vector<Graph> graphs;
 	vector<vector<int>> C;
 
 
@@ -19,14 +16,14 @@ vector<Tree> graphGeneration(const vector<int>& qids,
 			CMaxValue.emplace_back(nodeMax[entry]);
 		}
 
-		// Generate Tree
-		TreeData treeData;
+		// Generate Graph
+		GraphData graphData;
 		// C[perm] => curr qid indexes 
 		// CMaxValue => max qid indexes
-		Tree tree(CMaxValue, C[perm], treeData);
-		trees.emplace_back(tree);
+		Graph graph(CMaxValue, C[perm], graphData);
+		graphs.emplace_back(graph);
 	}
-	return trees;
+	return graphs;
 }
 
 void printHelper(vector<string> headers, vector<int> qids,
@@ -54,7 +51,7 @@ void printHelper(vector<string> headers, vector<int> qids,
 	cout << "------------------------------------" << endl;
 }
 
-void printGraphKAnon(Tree graph, const vector<Node>& kNodes,
+void printGraphKAnon(Graph graph, const vector<GraphNode>& kNodes,
 		     const vector<string>& headers,
 		     const vector<int>& qid) {
 	// Print every set of qids that is kanon and/or is
@@ -70,6 +67,83 @@ void printGraphKAnon(Tree graph, const vector<Node>& kNodes,
 	// Sets of keys for the node
 	graph.printAllKAnon();
 }
+
+
+map<string, vector<string>> generateGeneralizationMap(
+	vector<vector<string>> hierarchy, vector<int> qids) {
+
+	map<string, vector<string>> genMap;
+
+	for (const auto& entry : hierarchy) {
+		genMap[entry[0]] = entry;
+	}
+
+	return genMap;
+}
+
+map<int, map<string, vector<string>>> generateGeneralizationsMap(
+	map<int, vector<vector<string>>> hierarchies,
+	vector<int> qids) {
+
+	map<int, map<string, vector<string>>> gensMap;
+	for (const auto& qid : qids)
+		gensMap[qid] = generateGeneralizationMap(hierarchies[qid], qids);
+
+	return gensMap;	
+}
+
+
+/*
+map<int, map<string, string>> generateGeneralizationMap(
+	map<int, vector<vector<string>>> hierarchies,
+	vector<int> data, vector<int> qids) {
+
+	map<int, map<string, string>> gens;
+	for (size_t i=0; i < qids.size(); i++) {
+		const int qid = qids[i];
+		map<string, string> qidMap;
+		for (size_t j = 0; j < hierarchies[qid][0].size(); j++)
+			qidMap[hierarchies[qid][0][j]] = hierarchies[qid][data[i]][j];
+		gens[qid] = qidMap;
+	}
+
+	return gens;
+}*/
+
+vector<vector<string>> generateAnonymizedDataset(
+	vector<vector<string>> dataset, map<int, vector<vector<string>>> hierarchies_map,
+	vector<Graph> graphs, vector<int> qids) {
+
+	//cout << "Generating Anonymized Table: " << endl;
+	const GraphNode node = graphs.back().getFinalKAnon();
+	vector<int> data = node.getData();
+
+	map<int, map<string, string>> gens;
+	for (size_t i=0; i < qids.size(); i++) {
+		const int qid = qids[i];
+		map<string, string> qidMap;
+		for (size_t j = 0; j < hierarchies_map[qid][0].size(); j++)
+			qidMap[hierarchies_map[qid][0][j]] = hierarchies_map[qid][data[i]][j];
+		gens[qid] = qidMap;
+	}
+
+	vector<vector<string>> result;
+	for (size_t i=0; i < dataset.size(); i++) {
+		vector<string> row;
+		for (size_t j=0; j < dataset[0].size(); j++) {
+			auto it = find(qids.begin(), qids.end(), j);
+			if (it != qids.end()) {
+				row.emplace_back(gens[j][dataset[i][j]]);
+				continue;
+			}
+			row.emplace_back(dataset[i][j]);
+		}
+		result.emplace_back(row);
+	}
+
+	return result;
+}
+
 
 int main(int argc, char** argv) {
 
@@ -113,12 +187,13 @@ int main(int argc, char** argv) {
 		return 1;
 	}*/
 	//vector<string> qidNames(qid_set.begin(), qid_set.end());
-	/*vector<string> qidNames = {
+	vector<string> qidNames = {
 		"Age", "Education", "Marital-status",
 		"Native-country", "Occupation", "Race", "Relationship",
 		"Salary", "Sex", "Workclass"
-	};*/
-	vector<string> qidNames = {"Birthdate", "Sex", "Zipcode"};
+	};
+
+	//vector<string> qidNames = {"Birthdate", "Sex", "Zipcode"};
 	/*vector<string> qidNames = {
 		"Age", "Education"
 	};*/
@@ -128,25 +203,22 @@ int main(int argc, char** argv) {
 	vector<int> qids;
 	vector<vector<string>> dataset, transposedDataset;
 	map<int, vector<vector<string>>> hierarchies_map;
+	map<int, vector<vector<string>>> transposedHierarchyMap;
 
 	try {
 		hierarchies_map = read_directory(fs::path(argv[1]),
 					dataset, headers, K, qidNames,
 					qids, true);
 		sort(qids.begin(), qids.end());
+		for (const auto& qid : qids) {
+			transposedHierarchyMap[qid] = transpose(hierarchies_map[qid]);
+		}
 		//hierarchies_map = read_directory(fs::path(argv[1]),
 		//			dataset, qids, headers, K);
 		transposedDataset = transpose(dataset);
 	} catch (const char* e) {
 		cout << e << endl; 
 		return -1;
-	}
-
-	for (const auto& a : hierarchies_map[2]) {
-		for (const auto& b : a) {
-			cout << b + ", ";
-		}
-		cout << endl;
 	}
 
 	// Levels per hierchary. Useful to construct node
@@ -156,44 +228,47 @@ int main(int argc, char** argv) {
 		nodeMax[qid] = hierarchies_map[qid].size() - 1;
 	}
 
+	// Generate a generalization map
+	map<int, map<string, vector<string>>> gensMap =
+		generateGeneralizationsMap(transposedHierarchyMap, qids);
+
 	// Print a hierarchy level helper
 	// printHelper(headers, qids, nodeMax, hierarchies_map);
 
 	// Generate all posible graphs containing qids
 	// defined by qid variable
-	vector<Tree> graphs = graphGeneration(qids, nodeMax, 1);
+	vector<Graph> graphs = graphGeneration(qids, nodeMax, 1);
 
 	// Main Algorithm
-	vector<Tree> rGraphs;
+	vector<Graph> rGraphs;
 	for (size_t i=1; i < qids.size() + 1; i++) {
 		for (size_t gsize=0; gsize < graphs.size(); gsize++) {
-			Tree g = graphs[gsize];
-			vector<Node> nodesQueue = g.getRoots();
-			vector<Node> kanon;
-			
+			Graph g = graphs[gsize];
+			set<GraphNode> nodesQueue = g.getRoots();
+			vector<GraphNode> kanon;
+
 			// Main Loop
 			while (!nodesQueue.empty()) {
-				Node node = nodesQueue[0];
+				GraphNode node = *(nodesQueue.begin());
 				nodesQueue.erase(nodesQueue.begin());
 
 				if (!node.marked()) {
 					// Not marked
 					if (node.getKAnonymity(hierarchies_map,
 							       transposedDataset,
+								   gensMap,
 							       g.getQids(), K)) {
 						g.markGeneralizations(node);
 					}
 					else {
 				 		g.addGeneralizations(node, nodesQueue);
-						sort(nodesQueue.begin(), nodesQueue.end());
 					}
 				}
 			}
+
 			// Print Graph Solution
-			printGraphKAnon(g, kanon, headers, qids);
+			//printGraphKAnon(g, kanon, headers, qids);
 			rGraphs.emplace_back(g);
-			/*if (i == qids.size() && gsize == graphs.size())
-				rGraph = g;*/
 		}
 
 
@@ -203,41 +278,41 @@ int main(int argc, char** argv) {
 	}
 
 	// Construct anonymized dataset
-	cout << "Generating Anonymized Table: " << endl;
-	const Node node = rGraphs.back().getFinalKAnon();
-	vector<int> data = node.getData();
+	vector<vector<string>> result = generateAnonymizedDataset(dataset,
+		hierarchies_map, rGraphs, qids);
 
-	map<int, map<string, string>> gens;
+	// 3. Write anonymized table
+	// Changed headers for non alterated ones
+	writeAnonymizedTable(fs::path(argv[1]), headers, result, K);
+
+
+	// GCP Analysis
+	// 1. Create a hierarchy tree for every qid
+	vector<Tree> trees;
+	for (const int& val : qids) {
+		trees.emplace_back(Tree(transposedHierarchyMap[val]));
+	}
+
+	// 2. Create equivalence classes or clusters
+	vector<vector<vector<string>>> clusters = createClusters(result, qids);
+	for (const auto& c : clusters)
+		cout << c.size() << endl;
+
+	// 3. Especify weights, if any (Already entered by user)
+	vector<double> weights(qids.size(), 1.0/qids.size());
+
+	// 4. Calculate NCP for every qid value included in every cluster
+	// Convert list into map
+	map<int, Tree> treeMap;
 	for (size_t i=0; i < qids.size(); i++) {
-		const int qid = qids[i];
-		map<string, string> qidMap;
-		for (size_t j = 0; j < hierarchies_map[qid][0].size(); j++)
-			qidMap[hierarchies_map[qid][0][j]] = hierarchies_map[qid][data[i]][j];
-		gens[qid] = qidMap;
+		treeMap[qids[i]] = trees[i];
 	}
+	// 5. Calculate NCP
+	vector<long double> cncps = calculateNCPS(
+		clusters, weights, qids, {}, treeMap);
 
-	vector<vector<string>> result;
-	for (size_t i=0; i < dataset.size(); i++) {
-		vector<string> row;
-		for (size_t j=0; j < qids.size(); j++)
-			row.emplace_back(gens[qids[j]][dataset[i][qids[j]]]);
-		result.emplace_back(row);
-	}
-
-	cout << "Result: " << endl;
-	for (const auto& a : result) {
-		for (const auto& b : a)
-			cout << b + ", ";
-		cout << endl;
-	}
-
-	//vector<vector<string>> result = createResult(nodes[nodeIdx], hierarchies_map, qids);
-
-	// Create clusters
-	vector<vector<vector<string>>> clusters;
-
-	// Write data to file
-
+	// 6. Calculate GCP
+	printAnalysis(clusters, dataset.size(), qids, cncps);
 
 	return 0;
 }

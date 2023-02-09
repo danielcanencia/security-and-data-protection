@@ -1,32 +1,32 @@
-#ifndef _TREE_H
-#define _TREE_H
+#ifndef _GRAPH_H
+#define _GRAPH_H
 
 #include <iostream>
 #include <vector>
 #include <string>
-#include "treeData.h"
+#include "graphData.h"
 
 using namespace std;
 
-class Tree {
+class Graph {
 private:
 	vector<vector<int>> nodes;
-	TreeData treeData;
+	GraphData graphData;
 	vector<int> qids;
 	void generateAllNodesAndEdges(const vector<int>& node,
 				   const vector<int>& nodesMax,
 				   int nsize, int index);
 public:
-	Tree();
-	Tree(vector<int> nodeMax, vector<int> qids,
-	     TreeData& treeData);
+	Graph();
+	Graph(vector<int> nodeMax, vector<int> qids,
+	      GraphData& treeData);
 	void generateNodesAndEdges(const vector<int>& nodesMax);
-	vector<Node> getRoots();
+	set<GraphNode> getRoots();
 	vector<int> getQids() const;
-	int addGeneralizations(const Node& node, vector<Node>& queue);
-	void markGeneralizations(const Node& node);
+	int addGeneralizations(const GraphNode& node, set<GraphNode>& queue);
+	void markGeneralizations(const GraphNode& node);
 	void printAllKAnon();
-	Node getFinalKAnon();
+	GraphNode getFinalKAnon();
 	void printNodesTable();
 	void printEdgesTable();
 };

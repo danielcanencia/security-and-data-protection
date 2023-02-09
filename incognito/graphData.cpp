@@ -1,8 +1,8 @@
-#include "treeData.h"
+#include "graphData.h"
 
-TreeData::TreeData() {}
+GraphData::GraphData() {}
 
-void TreeData::addData(vector<int> data) {
+void GraphData::addData(vector<int> data) {
 	int nodeId = this->contains(data);
 	if (nodeId == -1) {
 		this->nodes.emplace_back(this->idCount, data);
@@ -11,17 +11,17 @@ void TreeData::addData(vector<int> data) {
 
 }
 
-int TreeData::contains(const vector<int>& node) {
-	for (const Node& entry : this->nodes) {
+int GraphData::contains(const vector<int>& node) {
+	for (const GraphNode& entry : this->nodes) {
 		if (entry.isEqual(node))
 			return entry.getId();
 	} 
 	return -1;
 }
 
-void TreeData::generateAllEdges() {
+void GraphData::generateAllEdges() {
     for (int i=0; i < (int)this->nodes.size(); i++) {
-        Node node = this->nodes[i];
+        GraphNode node = this->nodes[i];
         int from=node.getId();
         vector<int> to;
         for (int j=0; j < (int)this->nodes.size(); j++) {
@@ -35,8 +35,8 @@ void TreeData::generateAllEdges() {
     }
 }
 
-vector<Node> TreeData::getRoots() {
-	vector<Node> roots;
+set<GraphNode> GraphData::getRoots() {
+	set<GraphNode> roots;
 	map<int, int> rootsIds;
 	bool flag;
 
@@ -51,44 +51,37 @@ vector<Node> TreeData::getRoots() {
 			}
 		}
 		if (flag) {
-			rootsIds[parentId] = entry1.getNodeId();
+			roots.insert(this->nodes[entry1.getNodeId()]);
 		}
 	}
 
-	// Construct vector of nodes
-	for (const auto& entry1 : this->edges)
-		roots.emplace_back(this->nodes[entry1.getNodeId()]);
-
-	// Sort nodes by height
-	sort(roots.begin(), roots.end());
 	return roots;
 }
 
-int TreeData::addGeneralizations(const Node& node, vector<Node>& queue) {
-	vector<Node> children = getChildren(node);
+int GraphData::addGeneralizations(const GraphNode& node, set<GraphNode>& queue) {
+	vector<GraphNode> children = getChildren(node);
 	if (children.empty())
 		return -1;
 
-	for (const Node& child : children) {
-		if(!child.marked()) {
-			queue.emplace_back(child);
-		}
+	for (const GraphNode& child : children) {
+		if(!child.marked())
+			queue.insert(child);
 	}
 
 	return 0;
 }
 
-void TreeData::markGeneralizations(const Node& node) {
+void GraphData::markGeneralizations(const GraphNode& node) {
 	this->nodes[node.getId()].setKAnon();
 
-	for (Node& child : getChildren(node)) {
+	for (const GraphNode& child : getChildren(node)) {
 		this->nodes[child.getId()].mark();
 		this->nodes[child.getId()].setKAnon();
 	}
 }
 
-vector<Node> TreeData::getChildren(Node node) {
-	vector<Node> children;
+vector<GraphNode> GraphData::getChildren(GraphNode node) {
+	vector<GraphNode> children;
 
 	for (const Edge& edge : this->edges) {
 		if (edge.getNodeId() == node.getId()) {
@@ -99,8 +92,8 @@ vector<Node> TreeData::getChildren(Node node) {
 	return children;
 }
 
-void TreeData::printAllKAnon(const Node& node, vector<int> kList) {
-	for (const Node& node: getChildren(node)) {
+void GraphData::printAllKAnon(const GraphNode& node, vector<int> kList) {
+	for (const GraphNode& node: getChildren(node)) {
 		if (find(kList.begin(), kList.end(), node.getId())
 			!= kList.end()) {
 			node.print();
@@ -110,8 +103,8 @@ void TreeData::printAllKAnon(const Node& node, vector<int> kList) {
 	}
 }
 
-void TreeData::printAllKAnon() {
-	for (const Node& node : this->nodes) {
+void GraphData::printAllKAnon() {
+	for (const GraphNode& node : this->nodes) {
 		if (node.isKAnon()) {
 			vector<int> kList;
 			node.print();
@@ -120,50 +113,38 @@ void TreeData::printAllKAnon() {
 	}
 }
 
-void TreeData::getAllKAnon(const Node& node, vector<int> kList,
-								   vector<Node>& nodes) {
-	for (const Node& node: getChildren(node)) {
+void GraphData::getAllKAnon(const GraphNode& node, vector<int> kList,
+							set<GraphNode>& nodes) {
+	for (const GraphNode& node: getChildren(node)) {
 		if (find(kList.begin(), kList.end(), node.getId())
 			!= kList.end()) {
-			nodes.emplace_back(node);
+			nodes.insert(node);
 			kList.emplace_back(node.getId());
 			getAllKAnon(node, kList, nodes);
 		}
 	}
 }
 
-Node TreeData::getFinalKAnon() {
-	vector<Node> res;
-	for (const Node& node : this->nodes) {
+GraphNode GraphData::getFinalKAnon() {
+	set<GraphNode> res;
+	for (const GraphNode& node : this->nodes) {
 		if (node.isKAnon()) {
 			vector<int> kList;
-			res.emplace_back(node);
+			res.insert(node);
 			getAllKAnon(node, kList, res);
 		}
 	}
 
-	// Choose the 'first' minimal full-domain generalization
-	int maxSum = res[0].getSum();
-	int nodeIdx = res[0].getId();
-	for (size_t idx=1; idx < res.size(); idx++) {
-		int sum = res[idx].getSum();
-		if (sum < maxSum) {
-			maxSum = sum;
-			nodeIdx = res[idx].getId();
-		}
-	}
-
-	//this->nodes[nodeIdx].print();
-	return this->nodes[nodeIdx];
+	return this->nodes[(*res.begin()).getId()];
 }
 
-void TreeData::printNodesTable() {
-	for (const Node& node : this->nodes) {
+void GraphData::printNodesTable() {
+	for (const GraphNode& node : this->nodes) {
 		node.print();
 	}
 }
 
-void TreeData::printEdgesTable() {
+void GraphData::printEdgesTable() {
 	for (const Edge& edge : this->edges) {
 		edge.print();
 	}

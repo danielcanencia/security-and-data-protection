@@ -1,23 +1,23 @@
-#include "node.h"
+#include "graphNode.h"
 
-Node::Node (int id, vector<int> data) {
+GraphNode::GraphNode (int id, vector<int> data) {
 	this->id = id;
 	this->data = data;
 }
 
-int Node::getId() const {
+int GraphNode::getId() const {
 	return this->id;
 }
 
-int Node::getData(int i) const {
+int GraphNode::getData(int i) const {
 	return this->data[i];
 }
 
-vector<int> Node::getData() const {
+vector<int> GraphNode::getData() const {
 	return this->data;
 }
 
-bool Node::isEqual(const vector<int>& node) const {
+bool GraphNode::isEqual(const vector<int>& node) const {
 	for (int i=0; i < (int)node.size(); i++) {
 		if (this->data[i] != node[i])
 			return false;
@@ -25,7 +25,7 @@ bool Node::isEqual(const vector<int>& node) const {
 	return true;
 }
 
-bool Node::isChild(Node node) {
+bool GraphNode::isChild(GraphNode node) {
 
 	int sum=0, flag=0;
 	for (int i=0; i < int(this->data.size()); i++) {
@@ -46,34 +46,34 @@ bool Node::isChild(Node node) {
 	return false;
 }
 
-bool Node::operator < (const Node& node) const {
-        return (getSum() < node.getSum());
+bool GraphNode::operator < (const GraphNode& node) const {
+	return (getSum() < node.getSum()) || (id < node.getId());
 }
 
-int Node::getSum() const {
+int GraphNode::getSum() const {
 	int sum = 0;
 	for (const auto& entry : this->data)
 		sum += entry;
 	return sum;
 }
 
-bool Node::marked() const {
+bool GraphNode::marked() const {
 	return this->nodeMark;
 }
 
-void Node::mark() {
+void GraphNode::mark() {
 	this->nodeMark = true;
 }
 
-void Node::setKAnon() {
+void GraphNode::setKAnon() {
 	this->kAnon = true;
 }
 
-bool Node::isKAnon() const {
+bool GraphNode::isKAnon() const {
 	return this->kAnon;
 }
 
-string Node::generalizeEntry(string entry, const vector<vector<string>> hierarchy,
+string GraphNode::generalizeEntry(string entry, const vector<vector<string>> hierarchy,
 		       vector<string> generalizations) {
 	int index = -1;
 
@@ -91,9 +91,8 @@ string Node::generalizeEntry(string entry, const vector<vector<string>> hierarch
 	return generalizations[index];
 }
 
-
-vector<int> Node::evaluateFrequency(vector<vector<string>> generalizations,
-	    		      int rows, int cols) {
+vector<int> GraphNode::evaluateFrequency(vector<vector<string>> generalizations,
+	    int rows, int cols) {
 	// Transpose generalizations matrix
 	// && Concat values in every row
 	string genT[cols][rows];
@@ -108,15 +107,13 @@ vector<int> Node::evaluateFrequency(vector<vector<string>> generalizations,
 	// Convert stringstream array to an array of string
 	map<string, int> vals;
 
-	for (auto a = values.begin(); a != values.end(); a++) {
-		//vals.emplace_back((*a).str());
+	for (auto a = values.begin(); a != values.end(); a++)
 		vals[(*a).str()] = 1;
-	}
+
 	// Get map keys
     vector<string> keys;
-    for (const auto& [k, v] : vals) {
-        keys.push_back(k);
-    }
+    for (const auto& [k, v] : vals)
+	    keys.push_back(k);
  
 	// Count unique values
 	vector<int> count(keys.size());
@@ -132,9 +129,9 @@ vector<int> Node::evaluateFrequency(vector<vector<string>> generalizations,
 	return count;
 }
 
-
-bool Node::getKAnonymity(map<int, vector<vector<string>>> hierarchies,
+bool GraphNode::getKAnonymity(map<int, vector<vector<string>>> hierarchies,
 			 vector<vector<string>> transposedTable,
+			 map<int, map<string, vector<string>>> gensMap,
 			 vector<int> qids, int K) {
 
 	vector<vector<string>> genArray(qids.size());
@@ -143,17 +140,14 @@ bool Node::getKAnonymity(map<int, vector<vector<string>>> hierarchies,
 	// qids attributes
 	int index = 0;
 	for (const int& qid : qids) {
-		// Node's data contains the level of generalization
-		vector<string> generalizations = hierarchies[qid][this->data[index]];
-
 		// Table T rows representing qid's values
 		for (const string& entry : transposedTable[qid]) {
 			// Generate new row generalize
 
 			// Iterate through possible generalizations in this
 			// level and find the one that suits the original data.
-			string choosenGen; 
-			choosenGen = generalizeEntry(entry, hierarchies[qid], generalizations);
+			string choosenGen = gensMap[qid][entry][this->data[index]]; 
+			//choosenGen = generalizeEntry(entry, hierarchies[qid], generalizations);
 			genArray[index].emplace_back(choosenGen);
 		}
 		index++;
@@ -171,7 +165,8 @@ bool Node::getKAnonymity(map<int, vector<vector<string>>> hierarchies,
 	return true;
 }
 
-void Node::print() const {
+
+void GraphNode::print() const {
 	cout << "Id: " + to_string(id) + ", ";
 	cout << "Data: ";
 	for (const int& val : this->data)

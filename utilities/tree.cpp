@@ -188,7 +188,7 @@ Node Tree::getLowestCommonAncestor(vector<string> values) {
 	return node;
 }
 
-long double Tree::getNCP(vector<string> values) { //, int nDistinctVals) {
+long double Tree::getNCP(vector<string> values) {
 	// Get unique values only
 	vector<string> aux = values;
 	vector<string>::iterator it =

@@ -1,6 +1,5 @@
 #include "frequencies.h"
 
-
 vector<tuple<string, int>> concatRecordsByIdx(
 	const vector<vector<string>> dataset) {
 

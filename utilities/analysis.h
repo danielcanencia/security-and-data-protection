@@ -5,7 +5,7 @@
 #include <vector>
 #include <iostream>
 #include <map>
-#include "../utilities/hierarchy.h"
+#include "hierarchy.h"
 #include "tree.h"
 #include<bits/stdc++.h>
 
