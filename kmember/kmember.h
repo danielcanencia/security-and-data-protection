@@ -5,6 +5,7 @@
 #include <vector>
 #include <set>
 #include "../utilities/hierarchy.h"
+#include "../utilities/writeData.h"
 #include "distances.h"
 
 #endif

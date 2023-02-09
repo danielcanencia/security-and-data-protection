@@ -15,9 +15,9 @@ using namespace std;
 void writeStrings(ofstream &fp, vector<vector<string>> dataset,
                	  string delimiter);
 void writeAnonymizedTable(const string inputFname,
-			  const vector<string> headers,
-                          const vector<vector<string>> dataset,
-			  const int K);
+			  	  const vector<string> headers,
+                  const vector<vector<string>> dataset,
+			  	  const int K, const string prefix = "");
 
 #endif
 

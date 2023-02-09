@@ -295,8 +295,6 @@ int main(int argc, char** argv) {
 
 	// 2. Create equivalence classes or clusters
 	vector<vector<vector<string>>> clusters = createClusters(result, qids);
-	for (const auto& c : clusters)
-		cout << c.size() << endl;
 
 	// 3. Especify weights, if any (Already entered by user)
 	vector<double> weights(qids.size(), 1.0/qids.size());

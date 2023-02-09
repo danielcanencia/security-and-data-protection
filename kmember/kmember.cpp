@@ -120,21 +120,13 @@ int main(int argc, char** argv) {
 		S.erase(S.begin() + r);
 	}
 
-
-	// Print results
-	cout << endl; 
-	cout << "Clusters or equivalence classes: ";
-	cout << count << endl << endl;
+	// Write Anonymized Clusters
 	for (int i=0; i < count; i++) {
-		cout << "Cluster " << i+1 << ':' << endl;
-		for (const auto& entries : res[i]) {
-			size_t i=0;
-			for (;i < entries.size() - 1; i++)
-				cout << entries[i] + ", ";
-			cout << entries[i] << endl;
-		}
+		writeAnonymizedTable(
+			fs::path(argv[1]),
+			headers, res[i], K,
+			to_string(K) + "K/cluster" + to_string(i+1));
 	}
-
 
 	return 0;
 }
