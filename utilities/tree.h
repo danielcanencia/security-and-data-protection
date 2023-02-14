@@ -38,6 +38,7 @@ public:
 	bool isChild(string node, string child);
 	vector<string> getDirectChildren(string value);
 	vector<string> getAllChildren(string value);
+	vector<string> getChildrenInLevel(string value);
 	Node* getDescendant(Node* node, string target);
 	int getParentDiff(string value1, string value2);
 	int getDepth(string value);

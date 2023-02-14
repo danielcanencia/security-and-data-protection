@@ -4,11 +4,11 @@
 
 #include <iostream>
 #include <vector>
-#include <fstream>	// ifstream
+#include <fstream>		// ifstream
 #include <filesystem>   // filesystem utilities
-#include <string.h>	// strcasecmp
-#include <iterator>	// iterator utilities
-#include <cctype>	// transform and find
+#include <string.h>		// strcasecmp
+#include <iterator>		// iterator utilities
+#include <cctype>		// transform and find
 #include <algorithm>	// transform and find
 #include <map>
 

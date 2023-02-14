@@ -19,61 +19,43 @@ int main(int argc, char** argv) {
 	}
 
 	// Read input
-	// K
-	string line;
-	cout << "Insert K: ";
-	getline(cin, line);
-	const int K = stoi(line);
-
-	// Qids
-	/*set<string> qid_set;
-	cout << "Number of qids: ";
-	getline(cin, line);
-	const int nqids = stoi(line);
-	for (int i=0; i < nqids; i++) {
-		cout << "Enter qid " << i << ": ";
-		string qid;
-		getline(cin, qid);
-		qid_set.insert(qid);
-	}
-	if ((int)qid_set.size() != nqids) {
-		cout << "Input Error: Qids should be unique.";
-		cout << "Check if you repeated some of them" << endl; 
-		return 1;
-	}*/
-	//vector<string> qidNames(qid_set.begin(), qid_set.end());
+	const int K = readK();
+	const int nqids = readNumberOfQids();
+	vector<string> qidNames = readQidNames(nqids);
+	vector<double> weights = readWeights(nqids, qidNames);
 	//vector<string> qidNames = {"Age", "Country", "Occupation" };
 	//vector<string> qidNames = {"Salary", "Occupation", "Country"};
-	vector<string> qidNames = {
+	/*vector<string> qidNames = {
 		"Education", "Marital-status",
 		"Native-country", "Occupation", "Race", "Relationship",
 		"Salary", "Sex", "Workclass"
-	};
+	};*/
 	/*vector<string> qidNames = {
 		"Workclass", "Education"
 	};*/
 
-	// Weights
-	/*vector<double> weights = {};
-	cout << "Do you want to use weights (will only be used on analysis) [Y(y)/N(n)]: ";
-	char answer;
+
+	/*vector<int> numMetricsQids;
+	string question = "Do you want to treat some hierarchical attributes as "
+			 		  "numerical (will only be used on metrics) [Y(y)/N(n)]: ";
+	cout << question;
 	cin >> answer;
-	bool keep = false;
+	keep = false;
 	while(!keep) {
 		switch(answer) {
 			case 'Y':
 			case 'y':
-				for (int i=0; i < nqids; i++) {
-					cout << "Weight for qid " << i << ": ";
-					float weight;
-					cin >> weight;
-					weights.emplace_back(weight);
-				}
-				if (accumulate(weights.begin(), weights.end(),
-					(float)0) != (float)1) {
-					cout << "Input Error: Weights must sum 1" << endl;
-					weights.clear();
-					continue;
+				cout << "Enter number printed between brackets: ";
+				for (size_t i=0; i < qidNames.size(); i++)
+					cout << qidNames[i] + "(" + to_string(i) + ") ";
+				cout << endl;
+				char aux;
+				while (1) {
+					cout << " [enter q to quit] >> ";
+					cin >> aux;
+					if (aux == 'q')
+						break;
+					numMetricsQids.emplace_back((int)aux - 48);
 				}
 				keep = true;
 				break;
@@ -82,12 +64,11 @@ int main(int argc, char** argv) {
 				keep = true;
 				break;
 			default:
-				cout << "Do you want to use weights ";
-				cout << "(will only be used on analysis) ";
-				cout << "[Y(y)/N(n)]: ";
+				cout << question;
 				cin >> answer;
 		}
 	}*/
+
 
 	// Read data file and hierarchy folders
 	vector<string> headers;
@@ -131,6 +112,13 @@ int main(int argc, char** argv) {
 		return -1;
 	}
 
+	// Ask for desired qid types to be used on metrics
+	vector<int> numMetricsQids, catMetricsQids;
+	tuple<vector<int>, vector<int>> metricsQids =
+		readMetricsQids(numQids, catQids, qidNames);
+	numMetricsQids = get<0>(metricsQids);
+	catMetricsQids = get<1>(metricsQids);
+
 
 	// *********************************
 	// Main algorithm
@@ -166,19 +154,29 @@ int main(int argc, char** argv) {
 	// End of main algorithm
 	// *********************************
 
-	// GCP Analysis
-	// 1. Create equivalence classes or clusters
+	// METRICS
+	cout << "===> Analysis: " << endl;
+
+	// Create equivalence classes or clusters
 	vector<vector<vector<string>>> clusters = createClusters(result, allQids);
 
-	// 2. Especify weights, if any (Already entered by user)
-	vector<double> weights(allQids.size(), 1.0/allQids.size());
-
-	// 3. Precalculate NCP for every qid value included in every cluster
+	// GCP
+	// 1. Precalculate NCP for every qid value included in every cluster
 	// Count total number of distinct qid values in dataset
 	vector<long double> cncps = calculateNCPS(clusters, weights,
-					allQids, numQids, trees);
-	// 4. Calculate GCP
+					allQids, numMetricsQids, trees);
+	// 2. Calculate GCP
 	printAnalysis(clusters, dataset.size(), allQids, cncps);
+
+	// DM
+	calculateDM(clusters, dataset.size(), K);
+
+	// CAvg
+	calculateCAVG(clusters, dataset.size(), K);
+
+	// GenILoss
+	calculateGenILoss(transpose(result), trees, catMetricsQids,
+					  numMetricsQids, dataset.size(), K);
 
 	return 0;
 }

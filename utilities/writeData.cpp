@@ -31,7 +31,10 @@ void writeAnonymizedTable(const string inputFname,
         string fname = "generalized_tables/" + inputFname;
         if (fname.back() != '/')
 	        fname += "/";
-        fname += prefix + ".csv";
+        if (prefix == "\0")
+                fname += to_string(K) + ".csv";
+        else
+                fname += prefix + ".csv";
 
 	cout << "===> Writing data to file: " << endl;
 	cout << "\t * " + fname << endl;

@@ -103,6 +103,17 @@ vector<string> Tree::getAllChildren(string value) {
 	return children;
 }
 
+vector<string> Tree::getChildrenInLevel(string value) {
+	vector<string> children;
+	const int level = this->nodes[value].depth + 1;
+
+	for (auto const& [k, v] : this->nodes) {
+		if (v.depth == level)
+			children.emplace_back(k);
+	}
+
+	return children;
+}
 
 string Tree::getNextGen(string value) {
 
@@ -114,7 +125,7 @@ string Tree::getNextGen(string value) {
 
 		return parent;
 	}
-	cout << value << endl;
+
 	// Not found
 	throw "Error: Element not found in the tree";
 }

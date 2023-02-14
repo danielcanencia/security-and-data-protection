@@ -310,7 +310,6 @@ vector<int> getQidsHeaders(const vector<string> headers,
     		  [](unsigned char x){ return tolower(x); });
     		headersVector.push_back(s);
 	}
-	cout << endl;
 
 	for (const string& qid : qids) {
 		idx = getHierarchyIdx(qid, headersVector);

@@ -176,7 +176,6 @@ void printAnalysis(vector<vector<vector<string>>> clusters,
 	}
 	gcp /= (qids.size() * numRecords);
 
-	cout << "===> Analysis: " << endl;
 	// Show only 3 decimals
 	cout << "\t* GCP: ";
 	cout << fixed << setprecision(3) << gcp << endl;
