@@ -122,50 +122,27 @@ int main(int argc, char** argv) {
 
 	// *********************************
 	// Main algorithm
-	
-	// 1. Create a hierarchy tree for every qid
+	vector<vector<string>> result = mondrian(dataset, hierarchies_map,
+		allQids, isQidCat, K);
+	// *********************************
+
+	// METRICS
+	cout << "===> Analysis: " << endl;
+	// Create a hierarchy tree for every qid
 	map<int, Tree> trees;
 	for (const int& i : catQids) {
 		trees[i] = Tree(hierarchies_map[i]);
 	}
 
-	// 2.1 Initialize default generalizations
-	vector<string> gens;
-	for (size_t i=0; i < allQids.size(); i++) {
-		if (isQidCat[i]) {
-			gens.emplace_back(trees[allQids[i]].root);
-			continue;
-		}
-
-		// Numeric Value
-		string numRoot = getNumericRoot(dataset, allQids[i]);
-		gens.emplace_back(numRoot);
-	}
-
-	// 2.2 Anonymize whole initial partition
-	Partition partition(dataset, gens, allQids,
-			    isQidCat, trees, K);
-	vector<vector<string>> result = evaluate(partition);
-
-	// 3. Write anonymized table
-	// Changed headers for non alterated ones
-	writeAnonymizedTable(fs::path(argv[1]), headers, result, K);
-
-	// End of main algorithm
-	// *********************************
-
-	// METRICS
-	cout << "===> Analysis: " << endl;
-
 	// Create equivalence classes or clusters
 	vector<vector<vector<string>>> clusters = createClusters(result, allQids);
 
 	// GCP
-	// 1. Precalculate NCP for every qid value included in every cluster
+	// 	1. Precalculate NCP for every qid value included in every cluster
 	// Count total number of distinct qid values in dataset
 	vector<long double> cncps = calculateNCPS(clusters, weights,
 					allQids, numMetricsQids, trees);
-	// 2. Calculate GCP
+	// 	2. Calculate GCP
 	printAnalysis(clusters, dataset.size(), allQids, cncps);
 
 	// DM

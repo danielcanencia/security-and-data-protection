@@ -35,4 +35,30 @@ void evaluate(Partition partition, vector<Partition>& result) {
 	return ;
 }
 
+vector<vector<string>> mondrian (vector<vector<string>> dataset,
+								 map<int, vector<vector<string>>> hierarchies,
+								 vector<int> allQids, vector<int> isQidCat,
+								 const int K) {	
+	// 1. Create a hierarchy tree for every qid
+	map<int, Tree> trees;
+	// 2. Initialize default generalizations
+	vector<string> gens;
+	for (size_t i=0; i < allQids.size(); i++) {
+		if (isQidCat[i]) {
+			// Generate a hierarchy tree for every categorical attribute
+			trees[allQids[i]] = Tree(hierarchies[i]);
+			gens.emplace_back(trees[allQids[i]].root);
+			continue;
+		}
 
+		// Numeric Value
+		string numRoot = getNumericRoot(dataset, allQids[i]);
+		gens.emplace_back(numRoot);
+	}
+
+	// 3. Anonymize whole initial partition
+	Partition partition(dataset, gens, allQids,
+			    isQidCat, trees, K);
+
+	return evaluate(partition);
+}
