@@ -18,23 +18,6 @@ int main(int argc, char** argv) {
 		return -1;
 	}
 
-	// Read input
-	const int K = readK();
-	const int nqids = readNumberOfQids();
-	vector<string> qidNames = readQidNames(nqids);
-	vector<double> weights = readWeights(nqids, qidNames);
-	//vector<string> qidNames = {"Age", "Country", "Occupation" };
-	//vector<string> qidNames = {"Salary", "Occupation", "Country"};
-	/*vector<string> qidNames = {
-		"Education", "Marital-status",
-		"Native-country", "Occupation", "Race", "Relationship",
-		"Salary", "Sex", "Workclass"
-	};*/
-	/*vector<string> qidNames = {
-		"Workclass", "Education"
-	};*/
-
-
 	/*vector<int> numMetricsQids;
 	string question = "Do you want to treat some hierarchical attributes as "
 			 		  "numerical (will only be used on metrics) [Y(y)/N(n)]: ";
@@ -69,6 +52,9 @@ int main(int argc, char** argv) {
 		}
 	}*/
 
+	// Read qid names
+	const int nqids = readNumberOfQids();
+	vector<string> qidNames = readQidNames(nqids);
 
 	// Read data file and hierarchy folders
 	vector<string> headers;
@@ -79,7 +65,7 @@ int main(int argc, char** argv) {
 
 	try {
 		hierarchies_map = read_directory(fs::path(argv[1]),
-					dataset, headers, K, qidNames,
+					dataset, headers, qidNames,
 					catQids, false);
 		sort(catQids.begin(), catQids.end());
 
@@ -111,6 +97,21 @@ int main(int argc, char** argv) {
 		cout << e << endl; 
 		return -1;
 	}
+
+	// Read input
+	int K, L, P;
+	readParameters(dataset.size(), K, L, P);
+	vector<double> weights = readWeights(nqids, qidNames);
+	//vector<string> qidNames = {"Age", "Country", "Occupation" };
+	//vector<string> qidNames = {"Salary", "Occupation", "Country"};
+	/*vector<string> qidNames = {
+		"Education", "Marital-status",
+		"Native-country", "Occupation", "Race", "Relationship",
+		"Salary", "Sex", "Workclass"
+	};*/
+	/*vector<string> qidNames = {
+		"Workclass", "Education"
+	};*/
 
 	// Ask for desired qid types to be used on metrics
 	vector<int> numMetricsQids, catMetricsQids;
