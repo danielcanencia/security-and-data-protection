@@ -16,6 +16,6 @@ vector<string> readQidNames(const int nqids);
 vector<double> readWeights(const int nqids, vector<string> qidNames);
 tuple<vector<int>, vector<int>> readMetricsQids(vector<int> numQids, vector<int> catQids,
                                                 vector<string> qidNames);
-
+void readParameters(const int datasetSize, int& K, int& P, int& L);
 
 #endif

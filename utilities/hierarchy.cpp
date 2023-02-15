@@ -104,7 +104,6 @@ map<int, vector<vector<string>>> read_directory(
 	fs::path const &directory,
 	vector<vector<string>>& dataset,
 	vector<string>& headers,
-	const int K,
 	vector<string> attQids,
  	vector<int>& qids,
 	const bool transpose) {
@@ -178,19 +177,6 @@ map<int, vector<vector<string>>> read_directory(
 		dataset.emplace_back(row);
 	}
 	input1.close();
-
-
-	// If the value of K introduced
-	// by the user is greater than the
-	// number of records, throw and execption
-	// and inform the user
-	if (K > (int)dataset.size()) {
-		throw "The value of K entered is invalid.\n" 
-		      "Must be equal or less than the "
-		      "number of records present in the "
-		      "input table.";
-	}
-
 
 	// Read hierarchy files
 	string qidName;

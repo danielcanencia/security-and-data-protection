@@ -22,7 +22,6 @@ map<int, vector<vector<string>>> read_directory(
 	fs::path const &directory,
 	vector<vector<string>>& dataset,
   	vector<string>& headers,
-	const int K,
 	vector<string> attQids,
 	vector<int>& qids,
 	const bool transpose);

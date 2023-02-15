@@ -71,7 +71,7 @@ int main(int argc, char** argv) {
 
 		// Compare headers and qids
 		allQids = getQidsHeaders(headers, qidNames);
-		if (catQids.size() == 0 || allQids.size() < qidNames.size()) {
+		if (allQids.size() < qidNames.size()) {
 			cout << "An error occured.\nCheck the qid "
 				"names entered exists. They should be "
 				"referenced\nin their respectives "
