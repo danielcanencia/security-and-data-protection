@@ -3,13 +3,17 @@
 Partition::Partition(vector<vector<string>> data,
 		     vector<string> generalizations,
 		     vector<int> qids, vector<int> isQidCat,
-		     map<int, Tree> trees, int K) {
+		     map<int, Tree> trees, vector<int> confAtts,
+			 int K, int L, int P) {
 	this->data = data;
 	this->generalizations = generalizations;
 	this->qids = qids;
 	this->isQidCat = isQidCat;
 	this->trees = trees;
+	this->confAtts = confAtts;
 	this->K = K;
+	this->L = L;
+	this->P = P;
 	this->allowedCuts = vector<int>(qids.size(), 1);
 }
 
@@ -91,7 +95,8 @@ string Partition::findMedian(int dimension) {
 	// Find middle index 
 	double middle = nValues / 2.0;
 	// Cut is not allowed
-	if (freqs.size() < 2 || middle < K) {
+	if (freqs.size() < 2 || middle < K || middle < L
+		|| middle < P) {
 		return "";
 	}
 
@@ -119,6 +124,55 @@ vector<int> Partition::getAttributeRanges(int dimension) {
 	int max = *max_element(values.begin(), values.end());
 
 	return {min, max};
+}
+
+bool Partition::isSplitKAnonymous(vector<vector<string>> split) {
+	return (int)split.size() >= K;
+}
+
+bool Partition::isSplitLDiverse(vector<vector<string>> split) {
+	vector<map<string, int>> freqs(confAtts.size());
+	string key;
+
+	for (const auto& entry : split) {
+		for (size_t j = 0; j < confAtts.size(); j++) {
+			key = entry[confAtts[j]];
+			try {
+				freqs[j][key] += 1;
+			} catch (...) {
+				freqs[j][key] = 1;
+			}
+		}
+	}
+
+	// Every confidential attribute should have, at least,
+	// l well represented values 
+	for (const map<string, int>& attFreq : freqs) {
+		// Get all values from  map
+		for (const auto& [k, v] : attFreq) {
+			if (v < L)
+				return false;
+		}
+	}
+
+	return true;
+}
+
+bool Partition::isSplitValid(vector<vector<string>> split) {
+	bool kanonymity, ldiversity, tcloseness;
+	kanonymity = ldiversity = tcloseness = true;
+
+	if (K > 0) {
+		kanonymity = isSplitKAnonymous(split);
+	}
+	if (L > 0) {
+		ldiversity = isSplitLDiverse(split);
+	}
+	/*if (P > 0) {
+		tcloseness = isSplitTClose(split);
+	}*/
+
+	return kanonymity && ldiversity;
 }
 
 vector<Partition> Partition::splitPartition(int dimension) {
@@ -173,8 +227,7 @@ vector<Partition> Partition::splitPartitionNumeric(int dimension) {
 	}
 
 	// If splits aren't k-anonymous, return original partition
-	if (((int)d1.size() > 0 && (int)d1.size() < K) ||
-	    ((int)d2.size() > 0 && (int)d2.size() < K)) {
+	if (!isSplitValid(d1) || !isSplitValid(d2)) {
 		this->setAllowedCuts(0, dimension);
 		return { };
 	}
@@ -184,8 +237,8 @@ vector<Partition> Partition::splitPartitionNumeric(int dimension) {
 	gens1 = gens2 = this->generalizations;
 	gens1[dimension] = gen1;
 	gens2[dimension] = gen2;
-	Partition p1(d1, gens1, qids, isQidCat, trees, K);
-	Partition p2(d2, gens2, qids, isQidCat, trees, K);
+	Partition p1(d1, gens1, qids, isQidCat, trees, confAtts, K, L, P);
+	Partition p2(d2, gens2, qids, isQidCat, trees, confAtts, K, L, P);
 
 	return { p1, p2 };
 }
@@ -221,7 +274,7 @@ vector<Partition> Partition::splitPartitionCategorical(int dimension) {
 
 	// If splits aren't k-anonymous, return original partition
 	for (const auto& split : splits) {
-		if (split.size() > 0 && (int)split.size() < K) {
+		if (!isSplitValid(split)) {
 			return pts;
 		}
 	}
@@ -231,9 +284,8 @@ vector<Partition> Partition::splitPartitionCategorical(int dimension) {
 		if (splits[i].size() != 0) {
 			vector<string> gens = generalizations;
 			gens[dimension] = children[i];
-
-			Partition p = Partition(splits[i], gens,
-					qids, isQidCat, trees, K);
+			Partition p = Partition(splits[i], gens, qids,
+				isQidCat, trees, confAtts, K, L, P);
 			pts.emplace_back(p);
 		}
 	}

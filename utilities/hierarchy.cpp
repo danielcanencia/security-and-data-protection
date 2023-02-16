@@ -289,6 +289,14 @@ vector<int> getQidsHeaders(const vector<string> headers,
 	vector<string> qidsVector;
 	int idx;
 
+	// Check qids are present in dataset input file
+	for (const auto& qid : qids) {
+		if (find(headers.begin(), headers.end(), qid)
+			== headers.end()) {
+			return res;
+		}
+	}
+
 	// Get a lowercase version of the headers
 	vector<string> headersVector;
 	for (string s : headers) {
@@ -304,6 +312,3 @@ vector<int> getQidsHeaders(const vector<string> headers,
 
 	return res;
 }
-
-
-

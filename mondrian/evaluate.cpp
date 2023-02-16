@@ -1,17 +1,16 @@
 #include "evaluate.h"
 
-vector<vector<string>> evaluate(Partition partition) {
+vector<vector<vector<string>>> evaluate(Partition partition) {
     vector<Partition> result;
     evaluate(partition, result);
 
-	vector<vector<string>> data;
+	vector<vector<vector<string>>> clusters;
 	for (const auto& p : result) {
 		vector<vector<string>> vec = p.getResult();
-		data.insert(data.begin(), vec.begin(),
-	    vec.end());
+		clusters.emplace_back(vec);
 	}
 
-    return data;
+	return clusters;
 }
 
 void evaluate(Partition partition, vector<Partition>& result) {
@@ -35,10 +34,11 @@ void evaluate(Partition partition, vector<Partition>& result) {
 	return ;
 }
 
-vector<vector<string>> mondrian (vector<vector<string>> dataset,
-								 map<int, vector<vector<string>>> hierarchies,
-								 vector<int> allQids, vector<int> isQidCat,
-								 const int K) {	
+vector<vector<vector<string>>> mondrian(vector<vector<string>> dataset,
+								map<int, vector<vector<string>>> hierarchies,
+								vector<int> allQids, vector<int> isQidCat,
+								vector<int> confAtts, const int K,
+								const int L, const int P) {	
 	// 1. Create a hierarchy tree for every qid
 	map<int, Tree> trees;
 	// 2. Initialize default generalizations
@@ -46,7 +46,7 @@ vector<vector<string>> mondrian (vector<vector<string>> dataset,
 	for (size_t i=0; i < allQids.size(); i++) {
 		if (isQidCat[i]) {
 			// Generate a hierarchy tree for every categorical attribute
-			trees[allQids[i]] = Tree(hierarchies[i]);
+			trees[allQids[i]] = Tree(hierarchies[allQids[i]]);
 			gens.emplace_back(trees[allQids[i]].root);
 			continue;
 		}
@@ -57,8 +57,8 @@ vector<vector<string>> mondrian (vector<vector<string>> dataset,
 	}
 
 	// 3. Anonymize whole initial partition
-	Partition partition(dataset, gens, allQids,
-			    isQidCat, trees, K);
+	Partition partition(dataset, gens, allQids, isQidCat,
+			    		trees, confAtts, K, L, P);
 
 	return evaluate(partition);
 }

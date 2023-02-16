@@ -15,11 +15,11 @@ const int readNumberOfQids() {
 
 vector<string> readQidNames(const int nqids) {
     set<string> qid_set;
-	for (int i=0; i < nqids; i++) {
+	for (int i=0; i < nqids;i++) {
 		cout << "Enter qid " << i << ": ";
-		string qid;
-		cin >> qid;
-		qid_set.insert(qid);
+		string qidName;
+		cin >> qidName;
+		qid_set.insert(qidName);
 	}
 	if ((int)qid_set.size() != nqids) {
         const string error = "Input Error: Qids should be unique."
@@ -27,9 +27,53 @@ vector<string> readQidNames(const int nqids) {
 		cout << error << endl;
 		return vector<string>(1, error);
 	}
-	vector<string> qidNames(qid_set.begin(), qid_set.end());
 
-    return qidNames;
+    return vector<string>(qid_set.begin(), qid_set.end());
+}
+
+vector<int> readConfidentialAtts(vector<string> attNames, const int L) {
+	vector<int> confAtts;
+	string command;
+	int attribute;
+
+	if (L == -1) return confAtts;
+
+	cout << "Confidential Attribute/s (will only be used on metrics): " << endl;
+	while (attNames.size() > 0) {
+		for (size_t i=0; i < attNames.size(); i++) {
+			cout << "\t" + attNames[i] + "(" + to_string(i) + ") ";
+		}
+		cout << endl;
+		cout << "\t\t[enter q to quit] >> ";
+		cin >> command;
+
+		if (command == "q") {
+			if (confAtts.size() == 0) {
+				cout << "\tThere should be at least 1 confidential attribute"
+						"\tif you want to use l-diversity privacy definition.";
+				cout << endl;
+			}
+			else
+				break;
+		}
+
+		try {
+			attribute = stoi(command);
+			if (attribute < 0 || attribute >= (int)attNames.size()) {
+				cin.clear(); cin.ignore();
+				cout << "\tError, enter a valid number." << endl;
+			}
+			else {
+				confAtts.emplace_back(attribute);
+				attNames.erase(attNames.begin() + attribute);
+			}
+		} catch (...) {
+			cin.clear();
+			cout << "\tError, enter a number or q." << endl;
+		}
+	}
+
+	return confAtts;
 }
 
 vector<double> readWeights(const int nqids, vector<string> qidNames) {
@@ -98,21 +142,29 @@ tuple<vector<int>, vector<int>> readMetricsQids(vector<int> numQids, vector<int>
 			case 'y':
 				cout << "Enter number printed between brackets: " << endl;
 				while (catQids.size() > 0) {
+					cout << "\t";
 					for (size_t i=0; i < catQids.size(); i++)
-						cout << "\t" + qidNames[catQids[i]] + "(" + to_string(i) + ") ";
+						cout << qidNames[catQids[i]] + "(" + to_string(i) + ") ";
 					cout << endl;
 					cout << "\t\t[enter q to quit] >> ";
 					cin >> aux;
-					number = stoi(aux);
-					if (number < 0 || number >= (int)catQids.size()) {
+
+					if (aux == "q")
+						break;
+
+					try {
+						number = stoi(aux);
+						if (number < 0 || number >= (int)catQids.size()) {
+							cin.clear();
+							cout << "\tError: Number not present. Try again." << endl;
+						}
+						else {
+							numMetricsQids.emplace_back(catQids[number]);
+							catQids.erase(catQids.begin() + number);
+						}
+					} catch (...) {
 						cin.clear();
-						cout << "\tError: Number not present. Try again." << endl;
-					}
-					else {
-						if (aux == "q")
-							break;
-						numMetricsQids.emplace_back(catQids[number]);
-						catQids.erase(catQids.begin() + number);
+						cout << "\tError, enter a number or q." << endl;
 					}
 				}
 				keep = false;
@@ -185,9 +237,9 @@ int readParameter(const string privacyDef, const string parameter,
 	return param;
 }
 
-void readParameters(const int datasetSize, int& K, int& P, int& L) {
+void readParameters(const int datasetSize, int& K, int& L, int& P) {
 	// K (K-anonimity)
-	K = readParameter("k-anonimity", "K", datasetSize);
+	K = readParameter("k-anonymity", "K", datasetSize);
 
 	// L (l-diversity)
 	L = readParameter("l-diversity", "L", datasetSize);

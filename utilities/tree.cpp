@@ -50,8 +50,8 @@ string Tree::addNode(string value, string child, const char* parent) {
 	if (parent)
 		node.parent = (string)parent;
 	else {
-		this->root = value;
 		node.parent = value;
+		this->root = value;
 	}
 
 	node.depth = this->nodes[child].depth - 1;
@@ -136,7 +136,7 @@ int Tree::getNumLeaves() {
 
 Node Tree::getCommonAncestor(Node node, string target) {
 	if (node.value == target)
-		return node;
+		return this->nodes[node.value];
 
 	// It is a direct child
 	if (find(node.children.begin(), node.children.end(),
@@ -166,7 +166,7 @@ Node Tree::getLowestCommonAncestor(string r1, string r2) {
 	string target;
 
 	if (r1 == r2)
-		return n1;
+		return this->nodes[r1];
 
 	if (this->nodes[n1.parent].numSubTreeLeaves < 
 		this->nodes[n2.parent].numSubTreeLeaves) {
@@ -185,8 +185,9 @@ Node Tree::getLowestCommonAncestor(vector<string> values) {
 	Node node;
 	string aux = values[0];
 
-	if (values.size() == 1)
+	if (values.size() == 1) {
 		return this->nodes[aux];
+	}
 
 	for (size_t i=1; i < values.size(); i++) {
 		node = getLowestCommonAncestor(aux, values[i]);
@@ -207,6 +208,12 @@ long double Tree::getNCP(vector<string> values) {
 	aux.resize(distance(aux.begin(), it));
 
 	int subTreeLeaves = getLowestCommonAncestor(aux).numSubTreeLeaves;
+	/*cout << "LCA of : ";
+	for (const auto& a : values)
+		cout << a + ", ";
+	cout << " => " + getLowestCommonAncestor(aux).value << endl;
+	cout << "subLeavs: " << subTreeLeaves << endl;*/
+
 	long double ncp = (long double)subTreeLeaves;
 	return ncp;
 }

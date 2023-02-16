@@ -52,6 +52,7 @@ int main(int argc, char** argv) {
 		}
 	}*/
 
+
 	// Read qid names
 	const int nqids = readNumberOfQids();
 	vector<string> qidNames = readQidNames(nqids);
@@ -72,6 +73,7 @@ int main(int argc, char** argv) {
 		// Compare headers and qids
 		allQids = getQidsHeaders(headers, qidNames);
 		if (allQids.size() < qidNames.size()) {
+			cout << endl;
 			cout << "An error occured.\nCheck the qid "
 				"names entered exists. They should be "
 				"referenced\nin their respectives "
@@ -99,8 +101,10 @@ int main(int argc, char** argv) {
 	}
 
 	// Read input
+	// Parameters
 	int K, L, P;
 	readParameters(dataset.size(), K, L, P);
+	vector<int> confAtts = readConfidentialAtts(headers, L);
 	vector<double> weights = readWeights(nqids, qidNames);
 	//vector<string> qidNames = {"Age", "Country", "Occupation" };
 	//vector<string> qidNames = {"Salary", "Occupation", "Country"};
@@ -120,12 +124,21 @@ int main(int argc, char** argv) {
 	numMetricsQids = get<0>(metricsQids);
 	catMetricsQids = get<1>(metricsQids);
 
-
 	// *********************************
 	// Main algorithm
-	vector<vector<string>> result = mondrian(dataset, hierarchies_map,
-		allQids, isQidCat, K);
+	vector<vector<vector<string>>> clusters = mondrian(dataset,
+		hierarchies_map, allQids, isQidCat, confAtts, K, L, P);
 	// *********************************
+
+	// Create matrix from clusters
+	vector<vector<string>> result;
+	for (const auto& partition : clusters) {
+		result.insert(result.begin(), partition.begin(),
+	    	partition.end());
+	}
+	// Write anonymized table
+	writeAnonymizedTable(fs::path(argv[1]), headers, result, K, L, P);
+
 
 	// METRICS
 	cout << "===> Analysis: " << endl;
@@ -136,7 +149,7 @@ int main(int argc, char** argv) {
 	}
 
 	// Create equivalence classes or clusters
-	vector<vector<vector<string>>> clusters = createClusters(result, allQids);
+	//vector<vector<vector<string>>> clusters = createClusters(result, allQids);
 
 	// GCP
 	// 	1. Precalculate NCP for every qid value included in every cluster
@@ -146,15 +159,16 @@ int main(int argc, char** argv) {
 	// 	2. Calculate GCP
 	printAnalysis(clusters, dataset.size(), allQids, cncps);
 
+
 	// DM
-	calculateDM(clusters, dataset.size(), K);
+	calculateDM(clusters, dataset.size(), K, L, P);
 
 	// CAvg
-	calculateCAVG(clusters, dataset.size(), K);
+	calculateCAVG(clusters, dataset.size(), K, L, P);
 
 	// GenILoss
 	calculateGenILoss(transpose(result), trees, catMetricsQids,
-					  numMetricsQids, dataset.size(), K);
+					  numMetricsQids, dataset.size(), K, L, P);
 
 	return 0;
 }

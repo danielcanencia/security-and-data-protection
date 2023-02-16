@@ -10,11 +10,14 @@
 using namespace std;
 
 void calculateDM(vector<vector<vector<string>>> clusters,
-                 const int tableSize, const int K);
+                 const int tableSize, const int K,
+                 const int L, const int P);
 void calculateCAVG(vector<vector<vector<string>>> clusters,
-                   const int tableSize, const int K);
+                   const int tableSize, const int K,
+                   const int L, const int P);
 void calculateGenILoss(vector<vector<string>> transposedDataset,
                        map<int, Tree> trees, const vector<int> catQids,
                        const vector<int> numQids,
-                       const int tableSize, const int K);
+                       const int tableSize, const int K,
+                       const int L, const int P);
 #endif

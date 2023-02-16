@@ -7,13 +7,13 @@ using namespace std;
 #include <vector>
 #include "partition.h"
 
-vector<vector<string>> evaluate(Partition partition);
+vector<vector<vector<string>>> evaluate(Partition partition);
 void evaluate(Partition partition,
 	      vector<Partition>& result);
-vector<vector<string>> mondrian (vector<vector<string>> dataset,
-								 map<int, vector<vector<string>>> hierarchies,
-								 vector<int> allQids, vector<int> isQidCat,
-								 const int K);
+vector<vector<vector<string>>> mondrian(vector<vector<string>> dataset,
+								map<int, vector<vector<string>>> hierarchies,
+								vector<int> allQids, vector<int> isQidCat,
+								vector<int> confAtts, const int K,
+								const int L, const int P);
 
 #endif
-

@@ -1,10 +1,14 @@
 #include "metrics.h"
 
+#define GET_NAME(Var) (#Var)
+
+// Discernibility Metric
 void calculateDM(vector<vector<vector<string>>> clusters,
-                 const int tableSize, const int K) {
+                 const int tableSize, const int param,
+                 const string paramName) {
     long double dm = 0;
     for (const vector<vector<string>>& cluster : clusters) {
-        if ((int)cluster.size() >= K) {
+        if ((int)cluster.size() >= param) {
             dm += pow(cluster.size(), 2.0);
             //cout << ">=K: "; cout << cluster.size() << endl;
         }
@@ -15,19 +19,42 @@ void calculateDM(vector<vector<vector<string>>> clusters,
         }
     }
 
-    cout << "\t* DM: ";
+    cout << "\t* DM using " + paramName + ": ";
     cout << fixed << setprecision(3) << dm << endl;
 }
 
+void calculateDM(vector<vector<vector<string>>> clusters,
+                 const int tableSize, const int K,
+                 const int L, const int P) {
+    if (K != -1)
+        calculateDM(clusters, tableSize, K, GET_NAME(K));
+    if (L != -1)
+        calculateDM(clusters, tableSize, L, GET_NAME(L));
+    if (P != -1)
+        calculateDM(clusters, tableSize, P, GET_NAME(P));
+}
+
+// Equivalent Class Size Metric
 void calculateCAVG(vector<vector<vector<string>>> clusters,
-                   const int tableSize, const int K) {
-    cout << "\t* CAvg: ";
+                   const int tableSize, const int param,
+                   const string paramName) {
+    cout << "\t* CAvg using " + paramName + ": ";
     cout << fixed << setprecision(3);
-    cout << tableSize / (long double) (clusters.size() * K) << endl;
+    cout << tableSize / (long double) (clusters.size() * param) << endl;
+}
+
+void calculateCAVG(vector<vector<vector<string>>> clusters,
+                   const int tableSize, const int K,
+                   const int L, const int P) {
+    if (K != -1)
+        calculateCAVG(clusters, tableSize, K, GET_NAME(K));
+    if (L != -1)
+        calculateCAVG(clusters, tableSize, L, GET_NAME(L));
+    if (P != -1)
+        calculateCAVG(clusters, tableSize, P, GET_NAME(P));
 }
 
 // Generalized Information Loss
-
 long double calculateMaxNumValue(vector<string> entries) {
     /*for (const auto& a : entries)
         cout << a + ", ";
@@ -133,10 +160,12 @@ long double calculateCatGenILoss(const string entry, Tree tree) {
         0 : numerator / (long double) denominator;
 }
 
+
 void calculateGenILoss(vector<vector<string>> transposedDataset,
                        map<int, Tree> trees, const vector<int> catQids,
                        const vector<int> numQids,
-                       const int tableSize, const int K) {
+                       const int tableSize, const int param,
+                       const string paramName) {
     const long double initialLoss = 1.0 / (catQids.size() + numQids.size());
     long double loss = 0;
 
@@ -166,12 +195,28 @@ void calculateGenILoss(vector<vector<string>> transposedDataset,
         }
     }
 
-    cout << "QidsS: ";
+    /*cout << "QidsS: ";
     cout << (catQids.size() + numQids.size()) << endl;
     cout << "Loss: "; cout << loss << endl;
-    cout << "ILoss: "; cout << initialLoss << endl;
+    cout << "ILoss: "; cout << initialLoss << endl;*/
 
-    cout << "\t* GenILoss: ";
+    cout << "\t* GenILoss using " + paramName + ": ";
     cout << fixed << setprecision(3);
     cout << initialLoss * loss << endl;
+}
+
+void calculateGenILoss(vector<vector<string>> transposedDataset,
+                       map<int, Tree> trees, const vector<int> catQids,
+                       const vector<int> numQids,
+                       const int tableSize, const int K,
+                       const int L, const int P) {
+    if (K != -1)
+        calculateGenILoss(transposedDataset, trees, catQids,
+                          numQids, tableSize, K, GET_NAME(K));
+    if (L != -1)
+        calculateGenILoss(transposedDataset, trees, catQids,
+                          numQids, tableSize, L, GET_NAME(L));
+    if (P != -1)
+        calculateGenILoss(transposedDataset, trees, catQids,
+                          numQids, tableSize, P, GET_NAME(P));
 }

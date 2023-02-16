@@ -15,8 +15,7 @@ using namespace std;
 long double calculateNumNCP(const vector<string> atts,
                             long double globalMax,
                             long double globalMin);
-long double calculateCatNCP(const int nweights, const double weight,
-                            const vector<string> atts, Tree tree);
+long double calculateCatNCP(const vector<string> atts, Tree tree);
 vector<long double> calculateNCPS(vector<vector<vector<string>>> clusters,
                                   vector<double> weights, vector<int> allQids,
                                   vector<int> numQids, map<int, Tree> trees);

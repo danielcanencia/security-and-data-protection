@@ -1,18 +1,15 @@
 #include "analysis.h"
 
-long double calculateCatNCP(const int nweights, const double weight,
-			    const vector<string> atts, Tree tree) {
+long double calculateCatNCP(const vector<string> atts, Tree tree) {
 	// Calculate NCP fot qid values
 	long double card = tree.getNCP(atts);
-
 	if (card == 1)
-		return -1;
+		return 0;
 
 	int leaves = tree.getNumLeaves();
 	if (leaves != 0) card /= leaves;
 
-	double aux = nweights > 0 ? weight : 1;
-	return (long double)aux * card;
+	return (long double)card;
 }
 
 long double calculateNumNCP(const vector<string> atts,
@@ -91,8 +88,7 @@ vector<long double> calculateNCPS(vector<vector<vector<string>>> clusters,
 				  vector<double> weights, vector<int> allQids,
 				  vector<int> numQids, map<int, Tree> trees) {
 	vector<long double> cncps;
-	int nweights = weights.size();
-	
+
 	// Calculate numerical attibute global maximum and minimum values
 	// in all clusters
 	map<int, tuple<long double, long double>> numNumerator;
@@ -149,17 +145,18 @@ vector<long double> calculateNCPS(vector<vector<vector<string>>> clusters,
 				// Numeric attributes
 				ncp += calculateNumNCP(tcluster[allQids[i]],
 					get<0>(numNumerator[allQids[i]]),
-				 	get<1>(numNumerator[allQids[i]]));
+				 	get<1>(numNumerator[allQids[i]])) * weights[i];
 			} else {
 				// Categorical attributes
-				long double aux = calculateCatNCP(weights.size(),
-					weights[i], tcluster[allQids[i]], trees[allQids[i]]);
+				long double aux = calculateCatNCP(tcluster[allQids[i]],
+												  trees[allQids[i]]);
 				if (aux == -1)
 					continue;
-				ncp += aux;
+				ncp += aux * weights[i];
 			}
 		}
-		ncp *= nweights ? allQids.size() : 1;
+
+		ncp *= allQids.size();
 		cncps.emplace_back(ncp);
 	}
 
@@ -180,4 +177,3 @@ void printAnalysis(vector<vector<vector<string>>> clusters,
 	cout << "\t* GCP: ";
 	cout << fixed << setprecision(3) << gcp << endl;
 }
-

@@ -20,13 +20,17 @@ private:
 	vector<vector<string>> data;
 	vector<int> qids, isQidCat;
 	map<int, Tree> trees;
-	int K;
+	vector<int> confAtts;
+	int K, L, P;
 	vector<string> generalizations;
 
 	// Methods
 	string findMedian(int dimension);
 	int normWidth(int dimension);
 	vector<int> getAttributeRanges(int dimension);
+	bool isSplitKAnonymous(vector<vector<string>> split);
+	bool isSplitLDiverse(vector<vector<string>> split);
+	bool isSplitValid(vector<vector<string>> split);
 	vector<Partition> splitPartitionNumeric(int dimension);
 	vector<Partition> splitPartitionCategorical(
 		int dimension);
@@ -35,7 +39,8 @@ public:
 	Partition(vector<vector<string>> data,
               vector<string> generalizations,
               vector<int> qids, vector<int> isQidCat,
-		  	  map<int, Tree> trees, int K);
+		  	  map<int, Tree> trees, vector<int> confAtts,
+			  int K, int L, int P);
 	// Methods
 	vector<vector<string>> getResult() const;
 	int getNumAllowedCuts();

@@ -18,9 +18,11 @@ void writeStrings(ofstream &fp, vector<vector<string>> dataset,
 void writeAnonymizedTable(const string inputFname,
                           const vector<string> headers,
                           const vector<vector<string>> dataset,
-                          const int K, const string prefix) {
+                          const int K, const int L, const int P,
+                          const string prefix) {
         string dname = "generalized_tables/"
-		+ inputFname.substr(0, inputFname.find_last_of('/'));
+                + inputFname;
+		//+ inputFname.substr(0, inputFname.find_last_of('/'));
         if (!fs::is_directory(dname) || !fs::exists(dname)) {
                 if (!fs::create_directories(dname)) {
                         throw "Error creating output directory";
@@ -32,12 +34,13 @@ void writeAnonymizedTable(const string inputFname,
         if (fname.back() != '/')
 	        fname += "/";
         if (prefix == "\0")
-                fname += to_string(K) + ".csv";
+                fname += to_string(K) + "K_" + to_string(L) +
+                         "L_" + to_string(P) + "P.csv";
         else
                 fname += prefix + ".csv";
 
 	cout << "===> Writing data to file: " << endl;
-	cout << "\t * " + fname << endl;
+	cout << "\t* " + fname << endl;
         ofstream fp(fname);
 
         vector<vector<string>> aux;
