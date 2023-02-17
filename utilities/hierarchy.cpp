@@ -99,16 +99,14 @@ vector<vector<vector<string>>> transposeAndFormat(
 	return res;
 }
 
-
 map<int, vector<vector<string>>> read_directory(
 	fs::path const &directory,
-	vector<vector<string>>& dataset,
-	vector<string>& headers,
-	vector<string> attQids,
- 	vector<int>& qids,
+	vector<vector<string>>& dataset, vector<string>& headers,
+	vector<string> attQids, vector<string> confAtts,
+	vector<int>& qids, vector<int>& atts,
 	const bool transpose) {
 
-	// Get a lowercase version of the att Names
+	// Get a lowercase version of the attribute names
 	vector<string> attNames;
 	for (const string& tmp : attQids) {
 		string auxTmp;
@@ -117,7 +115,20 @@ map<int, vector<vector<string>>> read_directory(
 			inserter(auxTmp, auxTmp.end()),
     	  	[](unsigned char x){ return tolower(x); });
 
-    		attNames.push_back(auxTmp);
+    	attNames.push_back(auxTmp);
+	}
+
+	// Get a lowercase version of the confidential
+	// attribute names
+	vector<string> confAttNames;
+	for (const string& tmp : confAtts) {
+		string auxTmp;
+
+		transform(tmp.begin(), tmp.end(),
+			inserter(auxTmp, auxTmp.end()),
+    	  	[](unsigned char x){ return tolower(x); });
+
+    	confAttNames.push_back(auxTmp);
 	}
 
 	// Locate csv input file and hierarchies directory
@@ -161,6 +172,12 @@ map<int, vector<vector<string>>> read_directory(
     		headersVector.push_back(tmp);
 	}
 
+	// Get confidential attribute indexes
+	for (size_t i=0; i < headersVector.size(); i++) {
+		if (find(confAttNames.begin(), confAttNames.end(), headersVector[i])
+			!= confAttNames.end())
+			atts.emplace_back(i);
+	}
 
 	// Read input table
 	string line;
@@ -193,8 +210,8 @@ map<int, vector<vector<string>>> read_directory(
 		// Read first line: qid's hierarchy name
 		getline(input2, qidName);
 		qidNames.emplace_back(qidName);
-		
-		// Check if it is a qid 
+
+		// Check if it is a qid
 		if (!compareAttQid(qidName, attNames))
 			continue;
 
@@ -216,7 +233,6 @@ map<int, vector<vector<string>>> read_directory(
 		// Get hierarchy corresponding qid
 		idx = getHierarchyIdx(qidName, headersVector);
 		qids.emplace_back(idx);
-
 		res.emplace_back(hierarchy);
 	}
 

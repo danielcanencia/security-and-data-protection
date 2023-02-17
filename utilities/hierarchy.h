@@ -20,10 +20,9 @@ string getNumericRoot(const vector<vector<string>> dataset,
                       const int qidIndex);
 map<int, vector<vector<string>>> read_directory(
 	fs::path const &directory,
-	vector<vector<string>>& dataset,
-  	vector<string>& headers,
-	vector<string> attQids,
-	vector<int>& qids,
+	vector<vector<string>>& dataset, vector<string>& headers,
+	vector<string> attQids, vector<string> confAtts,
+	vector<int>& qids, vector<int>& atts,
 	const bool transpose);
 vector<vector<string>> transpose(
 	const vector<vector<string>>& matrix);

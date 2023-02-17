@@ -5,32 +5,67 @@ const int readNumberOfQids() {
     int nqids;
 	cin >> nqids;
 	if (cin.fail()) {
-		cin.clear(); cin.ignore();
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cout << "Error, enter a valid number." << endl;
 		readNumberOfQids();
 	}
-	cin.clear();
+
     return nqids;
 }
 
 vector<string> readQidNames(const int nqids) {
     set<string> qid_set;
 	for (int i=0; i < nqids;i++) {
-		cout << "Enter qid " << i << ": ";
+		cout << "Enter qid name (" << i << "): ";
 		string qidName;
 		cin >> qidName;
 		qid_set.insert(qidName);
 	}
 	if ((int)qid_set.size() != nqids) {
-        const string error = "Input Error: Qids should be unique."
-		                     "Check if you repeated some of them.";
-		cout << error << endl;
-		return vector<string>(1, error);
+		cout << "Input Error: Qids should be unique."
+		        "Check if you repeated some of them." << endl;
+		return vector<string>();
 	}
 
     return vector<string>(qid_set.begin(), qid_set.end());
 }
 
+vector<string> readConfidentialAttNames() {
+	cout << "Confidential attributes: " << endl;
+	// Read number of confidential attributes
+    int nAtts;
+	while(1) {
+		cout << "\tNumber of confidential attributes: ";
+		cin >> nAtts;
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "\tError, enter a valid number." << endl;
+			continue;
+		}
+		break;
+	}
+
+	// Read confidential attributes names
+	set<string> att_set;
+	for (int i=0; i < nAtts;i++) {
+		cout << "\tEnter att name (" << i << "): ";
+		string attName;
+		cin >> attName;
+		att_set.insert(attName);
+	}
+	if ((int)att_set.size() != nAtts) {
+        const string error = "Input Error: Confidential Attributes should be "
+							 "unique. Check if you repeated some of them.";
+		cout << error << endl;
+		return vector<string>(1, error);
+	}
+
+    return vector<string>(att_set.begin(), att_set.end());
+}
+
+/*
 vector<int> readConfidentialAtts(vector<string> attNames, const int L) {
 	vector<int> confAtts;
 	string command;
@@ -64,6 +99,7 @@ vector<int> readConfidentialAtts(vector<string> attNames, const int L) {
 				cout << "\tError, enter a valid number." << endl;
 			}
 			else {
+				//cout << "\t"
 				confAtts.emplace_back(attribute);
 				attNames.erase(attNames.begin() + attribute);
 			}
@@ -74,7 +110,7 @@ vector<int> readConfidentialAtts(vector<string> attNames, const int L) {
 	}
 
 	return confAtts;
-}
+}*/
 
 vector<double> readWeights(const int nqids, vector<string> qidNames) {
 	vector<double> weights;
@@ -237,7 +273,8 @@ int readParameter(const string privacyDef, const string parameter,
 	return param;
 }
 
-void readParameters(const int datasetSize, int& K, int& L, int& P) {
+bool readParameters(const int datasetSize, const int confAtts,
+					int& K, int& L, int& P) {
 	// K (K-anonimity)
 	K = readParameter("k-anonymity", "K", datasetSize);
 
@@ -247,10 +284,19 @@ void readParameters(const int datasetSize, int& K, int& L, int& P) {
 	// P (t-closeness)
 	P = readParameter("t-closeness", "P", datasetSize);
 
-	if (K == -1 && L == -1 && L == -1) {
-		cout << "Error, some privacy technique should be used." << endl;
-		readParameters(datasetSize, K, P, L);
+	// Check l-diversity and t-closeness errors
+	if (L == -1 && P == -1 && confAtts==0) {
+		cout << endl;
+		cout << "An error occured.\nIf l-diversity or t-closeness "
+				"are used, there should exists, at least, one "
+				"confidential attribute."<< endl << endl;
+		return 1;
 	}
 
-	return ;
+	if (K == -1 && L == -1 && P == -1) {
+		cout << "Error, some privacy technique should be used." << endl;
+		readParameters(datasetSize, confAtts, K, P, L);
+	}
+
+	return 0;
 }

@@ -8,15 +8,10 @@ void calculateDM(vector<vector<vector<string>>> clusters,
                  const string paramName) {
     long double dm = 0;
     for (const vector<vector<string>>& cluster : clusters) {
-        if ((int)cluster.size() >= param) {
+        if ((int)cluster.size() >= param)
             dm += pow(cluster.size(), 2.0);
-            //cout << ">=K: "; cout << cluster.size() << endl;
-        }
-        else {
+        else
             dm += tableSize * cluster.size();
-            //cout << "<K: ";
-            //cout << cluster.size() << endl;
-        }
     }
 
     cout << "\t* DM using " + paramName + ": ";
@@ -56,9 +51,6 @@ void calculateCAVG(vector<vector<vector<string>>> clusters,
 
 // Generalized Information Loss
 long double calculateMaxNumValue(vector<string> entries) {
-    /*for (const auto& a : entries)
-        cout << a + ", ";
-    cout << endl;*/
 
     // Max Value
     string globalMax = (*max_element(entries.begin(), entries.end(),
@@ -72,9 +64,6 @@ long double calculateMaxNumValue(vector<string> entries) {
                                 return strtold(str1.c_str(), NULL) <
                                        strtold(str2.c_str(), NULL);
                             })).c_str();
-
-    //string str2 = globalMax.substr(globalMax.find("~") + 1, globalMax.size());
-    //cout << "GMax: "; cout << str2 << endl;
 
     return strtold(
         globalMax.substr(
@@ -97,9 +86,6 @@ long double calculateMinNumValue(vector<string> entries) {
                                        strtold(str2.c_str(), NULL);
                             })).c_str();
 
-    //cout << "GMin: ";
-    //cout << globalMin.substr(0, globalMin.find("~")).c_str() << endl;
-
     return strtold(
         globalMin.substr(
             0,
@@ -109,12 +95,6 @@ long double calculateMinNumValue(vector<string> entries) {
 
 long double calculateNumGenILoss(const string entry, vector<string> entries,
         const long double globalMax, const long double globalMin) {
-
-    /*for (const auto& a : entries) {
-        cout << a + ", ";
-    }
-    cout << endl;
-    cout << "Entry: "; cout << entry << endl;*/
 
     const int delimeterPos = entry.find("~");
     const long double min = strtold(
@@ -127,34 +107,15 @@ long double calculateNumGenILoss(const string entry, vector<string> entries,
                             entry.size()
                         ).c_str(), NULL);
 
-    /*cout << "Min: "; cout << min << endl;
-    cout << "Max: "; cout << max << endl;
-
-    const long double a = (max - min) / (globalMax - globalMin);
-    cout << "NumGLoss: "; cout << a << endl;*/
     return (max - min) / (globalMax - globalMin);
 }
 
 long double calculateCatGenILoss(const string entry, Tree tree) {
-    /*cout << "Cat GenILoss: " << endl;
-    cout << "Node: " + entry + " Children: " << endl;
-    for (const auto& a : tree.getDirectChildren(entry))
-        cout << a + ", ";
-    cout << endl;*/
 
     const int directChildren = tree.getDirectChildren("America").size();
     const int childrenInLevel = tree.getChildrenInLevel("America").size();
     const int numerator = directChildren >= 1 ? directChildren - 1 : directChildren;
     const int denominator = childrenInLevel >= 1 ? childrenInLevel - 1 : childrenInLevel;
-
-    /*cout << "Size: ", cout << directChildren << endl;
-    cout << "Children In Level: " << childrenInLevel;
-    cout << endl;
-    cout << "Num: "; cout << numerator << endl;
-    cout << "Den: "; cout << denominator << endl;
-    const long double q =  denominator == 0 ? 0 : numerator / (long double) denominator;
-    cout << q << endl;*/
-
 
     return denominator == 0 ?
         0 : numerator / (long double) denominator;
@@ -163,14 +124,12 @@ long double calculateCatGenILoss(const string entry, Tree tree) {
 
 void calculateGenILoss(vector<vector<string>> transposedDataset,
                        map<int, Tree> trees, const vector<int> catQids,
-                       const vector<int> numQids,
-                       const int tableSize, const int param,
-                       const string paramName) {
+                       const vector<int> numQids, const int tableSize) {
     const long double initialLoss = 1.0 / (catQids.size() + numQids.size());
     long double loss = 0;
 
     // Iterate through every attribute in transposed dataset
-    for (size_t i = 0; i < transposedDataset.size(); i++) { //const vector<string>& entries : transposedDataset) {
+    for (size_t i = 0; i < transposedDataset.size(); i++) {
         vector<string> entries = transposedDataset[i];
         long double globalMax, globalMin;
         globalMax = globalMin = 0;
@@ -195,28 +154,7 @@ void calculateGenILoss(vector<vector<string>> transposedDataset,
         }
     }
 
-    /*cout << "QidsS: ";
-    cout << (catQids.size() + numQids.size()) << endl;
-    cout << "Loss: "; cout << loss << endl;
-    cout << "ILoss: "; cout << initialLoss << endl;*/
-
-    cout << "\t* GenILoss using " + paramName + ": ";
+    cout << "\t* GenILoss: ";
     cout << fixed << setprecision(3);
     cout << initialLoss * loss << endl;
-}
-
-void calculateGenILoss(vector<vector<string>> transposedDataset,
-                       map<int, Tree> trees, const vector<int> catQids,
-                       const vector<int> numQids,
-                       const int tableSize, const int K,
-                       const int L, const int P) {
-    if (K != -1)
-        calculateGenILoss(transposedDataset, trees, catQids,
-                          numQids, tableSize, K, GET_NAME(K));
-    if (L != -1)
-        calculateGenILoss(transposedDataset, trees, catQids,
-                          numQids, tableSize, L, GET_NAME(L));
-    if (P != -1)
-        calculateGenILoss(transposedDataset, trees, catQids,
-                          numQids, tableSize, P, GET_NAME(P));
 }

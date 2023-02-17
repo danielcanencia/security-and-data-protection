@@ -52,22 +52,24 @@ int main(int argc, char** argv) {
 		}
 	}*/
 
-
+	// Read input
 	// Read qid names
 	const int nqids = readNumberOfQids();
 	vector<string> qidNames = readQidNames(nqids);
+	// Conf Atts Names
+	vector<string> confAttNames = readConfidentialAttNames();
 
 	// Read data file and hierarchy folders
 	vector<string> headers;
-	vector<int> catQids, numQids, allQids;
+	vector<int> catQids, confAtts, numQids, allQids;
 	vector<int> isQidCat;
 	map<int, vector<vector<string>>> hierarchies_map;
 	vector<vector<string>> dataset;
 
 	try {
 		hierarchies_map = read_directory(fs::path(argv[1]),
-					dataset, headers, qidNames,
-					catQids, false);
+					dataset, headers, qidNames, confAttNames,
+					catQids, confAtts, false);
 		sort(catQids.begin(), catQids.end());
 
 		// Compare headers and qids
@@ -75,8 +77,16 @@ int main(int argc, char** argv) {
 		if (allQids.size() < qidNames.size()) {
 			cout << endl;
 			cout << "An error occured.\nCheck the qid "
-				"names entered exists. They should be "
-				"referenced\nin their respectives "
+				"names entered exists.\nThey should be "
+				"referenced in their respectives "
+				"hierarchy files." << endl << endl;
+			return -1;
+		}
+		if (confAtts.size() < confAttNames.size()) {
+			cout << endl;
+			cout << "An error occured.\nCheck the confidential "
+				"attributte names entered exists.\nThey should be "
+				"referenced in their respectives "
 				"hierarchy files." << endl << endl;
 			return -1;
 		}
@@ -95,16 +105,18 @@ int main(int argc, char** argv) {
 			}
 			isQidCat.emplace_back(0);
 		}
+
 	} catch (const char* e) {
 		cout << e << endl; 
 		return -1;
 	}
 
-	// Read input
-	// Parameters
+	// Read Parameters
 	int K, L, P;
-	readParameters(dataset.size(), K, L, P);
-	vector<int> confAtts = readConfidentialAtts(headers, L);
+	readParameters(dataset.size(), confAttNames.size(), K, L, P);
+
+	//vector<int> confAtts = readConfidentialAtts(headers, L);
+	// Read Weights
 	vector<double> weights = readWeights(nqids, qidNames);
 	//vector<string> qidNames = {"Age", "Country", "Occupation" };
 	//vector<string> qidNames = {"Salary", "Occupation", "Country"};
@@ -157,7 +169,7 @@ int main(int argc, char** argv) {
 	vector<long double> cncps = calculateNCPS(clusters, weights,
 					allQids, numMetricsQids, trees);
 	// 	2. Calculate GCP
-	printAnalysis(clusters, dataset.size(), allQids, cncps);
+	calculateGCP(clusters, dataset.size(), allQids, cncps);
 
 
 	// DM
@@ -168,7 +180,7 @@ int main(int argc, char** argv) {
 
 	// GenILoss
 	calculateGenILoss(transpose(result), trees, catMetricsQids,
-					  numMetricsQids, dataset.size(), K, L, P);
+					  numMetricsQids, dataset.size());
 
 	return 0;
 }

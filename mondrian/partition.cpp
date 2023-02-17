@@ -158,9 +158,77 @@ bool Partition::isSplitLDiverse(vector<vector<string>> split) {
 	return true;
 }
 
+bool Partition::isSplitTClose(vector<vector<string>> split) {
+	// Get transposed split and original table
+	vector<vector<string>> tSplit = transpose(split);
+	vector<vector<string>> tData = transpose(data);
+
+	// Generate a P frequency map for
+	// every confidential attribute
+	vector<map<string, int>> splitMaps;
+	for (const auto& att : confAtts) {
+		map<string, int> freqs;
+		for (const auto& entry : tSplit[att]) {
+			try {
+				freqs[entry] += 1;
+			} catch (...) {
+				freqs[entry] = 1;
+			}
+		}
+		splitMaps.emplace_back(freqs);
+	}
+
+	// Generate a Q frequency map and
+	// a set of entries
+	vector<map<string, int>> dataMaps;
+	vector<set<string>> valueSets;
+	for (const auto& att : confAtts) {
+		set<string> entries;
+		map<string, int> freqs;
+		for (const auto& entry : tData[att]) {
+			entries.insert(entry);
+			try {
+				freqs[entry] += 1;
+			} catch (...) {
+				freqs[entry] = 1;
+			}
+		}
+		dataMaps.emplace_back(freqs);
+		valueSets.emplace_back(entries);
+	}
+
+	// P and Q probability
+	int pProb, qProb;
+	pProb = split.size();
+	qProb = data.size();
+
+	// Calculate EMD for every confidential attribute
+	for (size_t i=0; i < confAtts.size(); i++) {
+		long double emd = 0;
+		for (const auto& entry : valueSets[i]) {
+			if (splitMaps[i][entry]) {
+				// Entry present in P
+				emd += (long double) splitMaps[i][entry]/pProb +
+					   (long double) dataMaps[i][entry]/qProb;
+			} else {
+				// Not present in P
+				emd += (long double) dataMaps[i][entry]/qProb + 0;
+			}
+		}
+
+		if (emd > P)
+			return false;
+	}
+
+	return true;
+}
+
 bool Partition::isSplitValid(vector<vector<string>> split) {
 	bool kanonymity, ldiversity, tcloseness;
 	kanonymity = ldiversity = tcloseness = true;
+
+	if (split.size() == 0)
+		return false;
 
 	if (K > 0) {
 		kanonymity = isSplitKAnonymous(split);
@@ -168,9 +236,9 @@ bool Partition::isSplitValid(vector<vector<string>> split) {
 	if (L > 0) {
 		ldiversity = isSplitLDiverse(split);
 	}
-	/*if (P > 0) {
+	if (P > 0) {
 		tcloseness = isSplitTClose(split);
-	}*/
+	}
 
 	return kanonymity && ldiversity;
 }
@@ -237,8 +305,10 @@ vector<Partition> Partition::splitPartitionNumeric(int dimension) {
 	gens1 = gens2 = this->generalizations;
 	gens1[dimension] = gen1;
 	gens2[dimension] = gen2;
-	Partition p1(d1, gens1, qids, isQidCat, trees, confAtts, K, L, P);
-	Partition p2(d2, gens2, qids, isQidCat, trees, confAtts, K, L, P);
+	Partition p1(d1, gens1, qids, isQidCat, trees,
+				 confAtts, K, L, P);
+	Partition p2(d2, gens2, qids, isQidCat, trees,
+				 confAtts, K, L, P);
 
 	return { p1, p2 };
 }
@@ -292,4 +362,3 @@ vector<Partition> Partition::splitPartitionCategorical(int dimension) {
 
 	return pts;
 }
-

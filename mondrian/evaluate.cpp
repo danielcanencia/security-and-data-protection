@@ -57,8 +57,8 @@ vector<vector<vector<string>>> mondrian(vector<vector<string>> dataset,
 	}
 
 	// 3. Anonymize whole initial partition
-	Partition partition(dataset, gens, allQids, isQidCat,
-			    		trees, confAtts, K, L, P);
+	Partition partition(dataset, gens, allQids, isQidCat, trees,
+			    		confAtts, K, L, P);
 
 	return evaluate(partition);
 }

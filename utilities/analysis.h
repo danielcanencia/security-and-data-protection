@@ -19,9 +19,9 @@ long double calculateCatNCP(const vector<string> atts, Tree tree);
 vector<long double> calculateNCPS(vector<vector<vector<string>>> clusters,
                                   vector<double> weights, vector<int> allQids,
                                   vector<int> numQids, map<int, Tree> trees);
-void printAnalysis(vector<vector<vector<string>>> clusters,
-                   int numRecords, vector<int> qids,
-                   vector<long double> cncps);
+void calculateGCP(vector<vector<vector<string>>> clusters,
+                  int numRecords, vector<int> qids,
+                  vector<long double> cncps);
 
 #endif
 

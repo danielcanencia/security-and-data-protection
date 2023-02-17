@@ -1,5 +1,6 @@
 #include "writeData.h"
 
+#define GET_NAME(Var) (#Var)
 
 void writeStrings(ofstream &fp, vector<vector<string>> dataset,
                   string delimiter) {
@@ -20,6 +21,10 @@ void writeAnonymizedTable(const string inputFname,
                           const vector<vector<string>> dataset,
                           const int K, const int L, const int P,
                           const string prefix) {
+        const string kName = K == -1 ? "" : to_string(K) + GET_NAME(K) + "_";
+        const string lName = L == -1 ? "" : to_string(L) + GET_NAME(L) + "_";
+        const string pName = P == -1 ? "" : to_string(P) + GET_NAME(P);
+
         string dname = "generalized_tables/"
                 + inputFname;
 		//+ inputFname.substr(0, inputFname.find_last_of('/'));
@@ -34,8 +39,7 @@ void writeAnonymizedTable(const string inputFname,
         if (fname.back() != '/')
 	        fname += "/";
         if (prefix == "\0")
-                fname += to_string(K) + "K_" + to_string(L) +
-                         "L_" + to_string(P) + "P.csv";
+                fname += kName + lName + pName + ".csv";
         else
                 fname += prefix + ".csv";
 

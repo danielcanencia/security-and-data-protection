@@ -163,9 +163,9 @@ vector<long double> calculateNCPS(vector<vector<vector<string>>> clusters,
 	return cncps;
 }
 
-void printAnalysis(vector<vector<vector<string>>> clusters,
-		   int numRecords, vector<int> qids,
-		   vector<long double> cncps) {
+void calculateGCP(vector<vector<vector<string>>> clusters,
+		   		  int numRecords, vector<int> qids,
+		   		  vector<long double> cncps) {
 
 	long double gcp = 0;
 	for (size_t i=0; i < clusters.size(); i++) {

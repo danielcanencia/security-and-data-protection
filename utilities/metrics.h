@@ -18,6 +18,5 @@ void calculateCAVG(vector<vector<vector<string>>> clusters,
 void calculateGenILoss(vector<vector<string>> transposedDataset,
                        map<int, Tree> trees, const vector<int> catQids,
                        const vector<int> numQids,
-                       const int tableSize, const int K,
-                       const int L, const int P);
+                       const int tableSize);
 #endif

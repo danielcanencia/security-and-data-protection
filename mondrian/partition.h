@@ -30,6 +30,7 @@ private:
 	vector<int> getAttributeRanges(int dimension);
 	bool isSplitKAnonymous(vector<vector<string>> split);
 	bool isSplitLDiverse(vector<vector<string>> split);
+	bool isSplitTClose(vector<vector<string>> split);
 	bool isSplitValid(vector<vector<string>> split);
 	vector<Partition> splitPartitionNumeric(int dimension);
 	vector<Partition> splitPartitionCategorical(
