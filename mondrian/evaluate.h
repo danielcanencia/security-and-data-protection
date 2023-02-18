@@ -14,6 +14,6 @@ vector<vector<vector<string>>> mondrian(vector<vector<string>> dataset,
 								map<int, vector<vector<string>>> hierarchies,
 								vector<int> allQids, vector<int> isQidCat,
 								vector<int> confAtts, const int K,
-								const int L, const int P);
+								const int L, const long double P);
 
 #endif

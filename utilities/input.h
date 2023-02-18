@@ -11,7 +11,7 @@
 
 using namespace std;
 
-const int readK();
+const long double readK();
 const int readNumberOfQids();
 vector<string> readQidNames(const int nqids);
 vector<string> readConfidentialAttNames();
@@ -19,6 +19,6 @@ vector<double> readWeights(const int nqids, vector<string> qidNames);
 tuple<vector<int>, vector<int>> readMetricsQids(vector<int> numQids, vector<int> catQids,
                                                 vector<string> qidNames);
 bool readParameters(const int datasetSize, const int confAtts,
-                    int& K, int& L, int& P);
+                    int& K, int& L, long double& P);
 
 #endif

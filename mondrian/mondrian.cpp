@@ -112,7 +112,8 @@ int main(int argc, char** argv) {
 	}
 
 	// Read Parameters
-	int K, L, P;
+	int K, L;
+	long double P;
 	readParameters(dataset.size(), confAttNames.size(), K, L, P);
 
 	//vector<int> confAtts = readConfidentialAtts(headers, L);
@@ -151,7 +152,6 @@ int main(int argc, char** argv) {
 	// Write anonymized table
 	writeAnonymizedTable(fs::path(argv[1]), headers, result, K, L, P);
 
-
 	// METRICS
 	cout << "===> Analysis: " << endl;
 	// Create a hierarchy tree for every qid
@@ -159,9 +159,6 @@ int main(int argc, char** argv) {
 	for (const int& i : catQids) {
 		trees[i] = Tree(hierarchies_map[i]);
 	}
-
-	// Create equivalence classes or clusters
-	//vector<vector<vector<string>>> clusters = createClusters(result, allQids);
 
 	// GCP
 	// 	1. Precalculate NCP for every qid value included in every cluster
@@ -179,8 +176,8 @@ int main(int argc, char** argv) {
 	calculateCAVG(clusters, dataset.size(), K, L, P);
 
 	// GenILoss
-	calculateGenILoss(transpose(result), trees, catMetricsQids,
-					  numMetricsQids, dataset.size());
+	calculateGenILoss(transpose(result), trees, allQids,
+					  catMetricsQids, numMetricsQids, dataset.size());
 
 	return 0;
 }

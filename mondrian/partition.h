@@ -21,7 +21,8 @@ private:
 	vector<int> qids, isQidCat;
 	map<int, Tree> trees;
 	vector<int> confAtts;
-	int K, L, P;
+	int K, L;
+	long double P;
 	vector<string> generalizations;
 
 	// Methods
@@ -41,7 +42,7 @@ public:
               vector<string> generalizations,
               vector<int> qids, vector<int> isQidCat,
 		  	  map<int, Tree> trees, vector<int> confAtts,
-			  int K, int L, int P);
+			  int K, int L, long double P);
 	// Methods
 	vector<vector<string>> getResult() const;
 	int getNumAllowedCuts();

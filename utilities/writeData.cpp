@@ -21,8 +21,10 @@ void writeAnonymizedTable(const string inputFname,
                           const vector<vector<string>> dataset,
                           const int K, const int L, const int P,
                           const string prefix) {
-        const string kName = K == -1 ? "" : to_string(K) + GET_NAME(K) + "_";
-        const string lName = L == -1 ? "" : to_string(L) + GET_NAME(L) + "_";
+        string kName = K == -1 ? "" : to_string(K) + GET_NAME(K);
+        if (L != -1 && K != -1) kName += "_";
+        string lName = L == -1 ? "" : to_string(L) + GET_NAME(L);
+        if (P != -1 && L != -1) lName += "_";
         const string pName = P == -1 ? "" : to_string(P) + GET_NAME(P);
 
         string dname = "generalized_tables/"

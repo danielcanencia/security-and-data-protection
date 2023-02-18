@@ -4,7 +4,7 @@ Partition::Partition(vector<vector<string>> data,
 		     vector<string> generalizations,
 		     vector<int> qids, vector<int> isQidCat,
 		     map<int, Tree> trees, vector<int> confAtts,
-			 int K, int L, int P) {
+			 int K, int L, long double P) {
 	this->data = data;
 	this->generalizations = generalizations;
 	this->qids = qids;
@@ -159,6 +159,9 @@ bool Partition::isSplitLDiverse(vector<vector<string>> split) {
 }
 
 bool Partition::isSplitTClose(vector<vector<string>> split) {
+	if (split.size() == 0)
+		return false;
+
 	// Get transposed split and original table
 	vector<vector<string>> tSplit = transpose(split);
 	vector<vector<string>> tData = transpose(data);
@@ -197,10 +200,10 @@ bool Partition::isSplitTClose(vector<vector<string>> split) {
 		valueSets.emplace_back(entries);
 	}
 
-	// P and Q probability
-	int pProb, qProb;
-	pProb = split.size();
-	qProb = data.size();
+	// P and Q size
+	int pSize, qSize;
+	pSize = split.size();
+	qSize = data.size();
 
 	// Calculate EMD for every confidential attribute
 	for (size_t i=0; i < confAtts.size(); i++) {
@@ -208,14 +211,20 @@ bool Partition::isSplitTClose(vector<vector<string>> split) {
 		for (const auto& entry : valueSets[i]) {
 			if (splitMaps[i][entry]) {
 				// Entry present in P
-				emd += (long double) splitMaps[i][entry]/pProb +
-					   (long double) dataMaps[i][entry]/qProb;
+				// EMD(Pi, Qi) = abs(Pi/Pi probability in P -
+				//					 Qi/Qi probability in Q)
+				emd += abs((long double) splitMaps[i][entry]/pSize -
+					   (long double) dataMaps[i][entry]/qSize);
 			} else {
 				// Not present in P
-				emd += (long double) dataMaps[i][entry]/qProb + 0;
+				// EMD(Pi, Qi) = abs(0 - Qi/Qi probability in Q)
+				emd += (long double) dataMaps[i][entry]/qSize;
 			}
 		}
+		// EMD(P, Q) = sum(sum(pj - qj)) / (m - 1)
+		emd /= (qSize - 1);
 
+		// Check if partition is tclose
 		if (emd > P)
 			return false;
 	}

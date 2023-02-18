@@ -65,53 +65,6 @@ vector<string> readConfidentialAttNames() {
     return vector<string>(att_set.begin(), att_set.end());
 }
 
-/*
-vector<int> readConfidentialAtts(vector<string> attNames, const int L) {
-	vector<int> confAtts;
-	string command;
-	int attribute;
-
-	if (L == -1) return confAtts;
-
-	cout << "Confidential Attribute/s (will only be used on metrics): " << endl;
-	while (attNames.size() > 0) {
-		for (size_t i=0; i < attNames.size(); i++) {
-			cout << "\t" + attNames[i] + "(" + to_string(i) + ") ";
-		}
-		cout << endl;
-		cout << "\t\t[enter q to quit] >> ";
-		cin >> command;
-
-		if (command == "q") {
-			if (confAtts.size() == 0) {
-				cout << "\tThere should be at least 1 confidential attribute"
-						"\tif you want to use l-diversity privacy definition.";
-				cout << endl;
-			}
-			else
-				break;
-		}
-
-		try {
-			attribute = stoi(command);
-			if (attribute < 0 || attribute >= (int)attNames.size()) {
-				cin.clear(); cin.ignore();
-				cout << "\tError, enter a valid number." << endl;
-			}
-			else {
-				//cout << "\t"
-				confAtts.emplace_back(attribute);
-				attNames.erase(attNames.begin() + attribute);
-			}
-		} catch (...) {
-			cin.clear();
-			cout << "\tError, enter a number or q." << endl;
-		}
-	}
-
-	return confAtts;
-}*/
-
 vector<double> readWeights(const int nqids, vector<string> qidNames) {
 	vector<double> weights;
 	cout << "Do you want to use custom weights "
@@ -225,11 +178,11 @@ tuple<vector<int>, vector<int>> readMetricsQids(vector<int> numQids, vector<int>
     return tuple;
 }
 
-int readParameter(const string privacyDef, const string parameter,
-				  const int datasetSize) {
+long double readParameter(const string privacyDef, const string parameter,
+				  		  const int datasetSize) {
 	// Default value. Means privacy definition won't be checked
 	// (k-anonimity, l-diversity, t-closeness, etc)
-	int param = -1;
+	long double param = -1;
 
 	string question = "Do yo want to anonymize preserving "
 		+ privacyDef + "? [Y(y)/N(n)]: ";
@@ -274,7 +227,7 @@ int readParameter(const string privacyDef, const string parameter,
 }
 
 bool readParameters(const int datasetSize, const int confAtts,
-					int& K, int& L, int& P) {
+					int& K, int& L, long double& P) {
 	// K (K-anonimity)
 	K = readParameter("k-anonymity", "K", datasetSize);
 
@@ -285,7 +238,7 @@ bool readParameters(const int datasetSize, const int confAtts,
 	P = readParameter("t-closeness", "P", datasetSize);
 
 	// Check l-diversity and t-closeness errors
-	if (L == -1 && P == -1 && confAtts==0) {
+	if ((L == -1 || P == -1.0) && confAtts==0) {
 		cout << endl;
 		cout << "An error occured.\nIf l-diversity or t-closeness "
 				"are used, there should exists, at least, one "
@@ -293,9 +246,9 @@ bool readParameters(const int datasetSize, const int confAtts,
 		return 1;
 	}
 
-	if (K == -1 && L == -1 && P == -1) {
+	if (K == -1 && L == -1 && P == -1.0) {
 		cout << "Error, some privacy technique should be used." << endl;
-		readParameters(datasetSize, confAtts, K, P, L);
+		readParameters(datasetSize, confAtts, K, L, P);
 	}
 
 	return 0;
