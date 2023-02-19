@@ -91,78 +91,40 @@ string GraphNode::generalizeEntry(string entry, const vector<vector<string>> hie
 	return generalizations[index];
 }
 
-vector<int> GraphNode::evaluateFrequency(vector<vector<string>> generalizations,
-	    int rows, int cols) {
-	// Transpose generalizations matrix
-	// && Concat values in every row
-	string genT[cols][rows];
-	vector<stringstream> values(cols);
-	for (int i=0; i < rows; i++) {
-		for (int j=0; j < cols; j++) {
-			genT[j][i] = generalizations[i][j];
-			values[j] << genT[j][i];
-		}
-	}
-
-	// Convert stringstream array to an array of string
-	map<string, int> vals;
-
-	for (auto a = values.begin(); a != values.end(); a++)
-		vals[(*a).str()] = 1;
-
-	// Get map keys
-    vector<string> keys;
-    for (const auto& [k, v] : vals)
-	    keys.push_back(k);
- 
-	// Count unique values
-	vector<int> count(keys.size());
-	// Check frecuencies in values array
-	for (size_t i=0; i < keys.size(); i++) {
-		for (int j=0; j < cols; j++) {
-			if (keys[i] == values[j].str()) {
-				count[i]++;
-			}
-		}
-	}
-
-	return count;
-}
-
-bool GraphNode::getKAnonymity(map<int, vector<vector<string>>> hierarchies,
+bool GraphNode::isAnonymityValid(map<int, vector<vector<string>>> hierarchies,
+			 vector<vector<string>> dataset,
 			 vector<vector<string>> transposedTable,
 			 map<int, map<string, vector<string>>> gensMap,
-			 vector<int> qids, int K) {
-
-	vector<vector<string>> genArray(qids.size());
-
-	// Iterate through every table row corresponding to node's
-	// qids attributes
-	int index = 0;
-	for (const int& qid : qids) {
-		// Table T rows representing qid's values
-		for (const string& entry : transposedTable[qid]) {
-			// Generate new row generalize
-
-			// Iterate through possible generalizations in this
-			// level and find the one that suits the original data.
-			string choosenGen = gensMap[qid][entry][this->data[index]]; 
-			//choosenGen = generalizeEntry(entry, hierarchies[qid], generalizations);
-			genArray[index].emplace_back(choosenGen);
+			 vector<int> qids, vector<int> confAtts,
+			 const int K, const int L, const long double P) {
+	// Map every unique combination of qids to a matrix/cluster;
+	map<string, vector<vector<string>>> splits;
+	vector<vector<string>> anonData;
+	string value, choosenGen;
+	for (const auto& entry : dataset) {
+		string value;
+		vector<string> record = entry;
+		for (size_t i=0; i < qids.size(); i++) {
+			choosenGen = gensMap[qids[i]][entry[qids[i]]][this->data[i]];
+			value.append(choosenGen);
+			record[qids[i]] = choosenGen;
 		}
-		index++;
+
+		try {
+			splits[value].emplace_back(record);
+		} catch (...) {
+			splits[value] = vector<vector<string>>(1, record);
+		}
+
+		anonData.emplace_back(record);
 	}
 
-	// Evaluate Frecuency set of T with respect to attributes of node (qids)
-	vector<int> freq = evaluateFrequency(genArray, index, transposedTable[0].size());
+	// Create clusters from map values
+	vector<vector<vector<string>>> clusters;
+	for (const auto& [k, v] : splits)
+		clusters.emplace_back(v);
 
-	int flag = 1;
-	for (const int& value : freq)
-		if (value < K) flag = 0;
-	if (!flag)
-		return false;
-
-	return true;
+	return isSplitValid(clusters, anonData, confAtts, K, L, P);
 }
 
 

@@ -21,7 +21,7 @@ void writeAnonymizedTable(const string inputFname,
 void writeAnonymizedTable(const string inputFname,
                           const vector<string> headers,
                           const vector<vector<string>> dataset,
-                          const int K, const int L, const int P,
+                          const int K, const int L, const long double P,
                           const string prefix = "");
 
 

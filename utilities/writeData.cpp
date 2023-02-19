@@ -19,13 +19,15 @@ void writeStrings(ofstream &fp, vector<vector<string>> dataset,
 void writeAnonymizedTable(const string inputFname,
                           const vector<string> headers,
                           const vector<vector<string>> dataset,
-                          const int K, const int L, const int P,
+                          const int K, const int L, const long double P,
                           const string prefix) {
         string kName = K == -1 ? "" : to_string(K) + GET_NAME(K);
         if (L != -1 && K != -1) kName += "_";
         string lName = L == -1 ? "" : to_string(L) + GET_NAME(L);
         if (P != -1 && L != -1) lName += "_";
-        const string pName = P == -1 ? "" : to_string(P) + GET_NAME(P);
+        stringstream stream;
+        stream << fixed << setprecision(2) << P;
+        const string pName = P == -1 ? "" : stream.str() + GET_NAME(P);
 
         string dname = "generalized_tables/"
                 + inputFname;
@@ -44,7 +46,7 @@ void writeAnonymizedTable(const string inputFname,
                 fname += kName + lName + pName + ".csv";
         else
                 fname += prefix + ".csv";
-
+        
 	cout << "===> Writing data to file: " << endl;
 	cout << "\t* " + fname << endl;
         ofstream fp(fname);

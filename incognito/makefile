@@ -4,7 +4,7 @@ CXXFLAGS = --std=c++17 -lstdc++fs -Wall
 .PHONY : all clean distclean
 
 EXE = incognito.out
-SRC = incognito.cpp graph.cpp graphNode.cpp edge.cpp graphData.cpp ../utilities/hierarchy.cpp ../utilities/analysis.cpp ../utilities/frequencies.cpp ../utilities/tree.cpp ../utilities/writeData.cpp
+SRC = incognito.cpp graph.cpp graphNode.cpp edge.cpp graphData.cpp evaluate.cpp anonymity.cpp ../utilities/hierarchy.cpp ../utilities/input.cpp ../utilities/analysis.cpp ../utilities/frequencies.cpp ../utilities/tree.cpp ../utilities/writeData.cpp ../utilities/metrics.cpp
 OBJ = $(SRC:.cpp=.o)
 INC = $(wildcard *.hpp)
 

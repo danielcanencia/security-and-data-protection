@@ -6,6 +6,9 @@
 #include <numeric>
 #include <bits/stdc++.h>
 #include <sstream>
+#include "anonymity.h"
+#include "../utilities/hierarchy.h"
+#include "../utilities/frequencies.h"
 
 using namespace std;
 
@@ -34,10 +37,12 @@ public:
 	void mark(); 
 	void setKAnon();
 	bool isKAnon() const;
-	bool getKAnonymity(map<int, vector<vector<string>>> hierarchies,
-                       vector<vector<string>> transposedTable,
-					   map<int, map<string, vector<string>>> gensMap,
-                       vector<int> qids, int K);
+	bool isAnonymityValid(map<int, vector<vector<string>>> hierarchies,
+						  vector<vector<string>> dataset,
+                       	  vector<vector<string>> transposedTable,
+					   	  map<int, map<string, vector<string>>> gensMap,
+                       	  vector<int> qids, vector<int> confAtts,
+						  const int K, const int L, const long double P);
 	void print() const;
 };
 
