@@ -18,6 +18,8 @@ vector<string> readConfidentialAttNames();
 vector<double> readWeights(const int nqids, vector<string> qidNames);
 tuple<vector<int>, vector<int>> readMetricsQids(vector<int> numQids, vector<int> catQids,
                                                 vector<string> qidNames);
+long double readParameter(const string privacyDef, const string parameter,
+				  		  const int datasetSize);
 bool readParameters(const int datasetSize, const int confAtts,
                     int& K, int& L, long double& P);
 

@@ -4,7 +4,7 @@ CXXFLAGS = --std=c++17 -lstdc++fs -Wall
 .PHONY : all clean distclean
 
 EXE = datafly.out
-SRC = datafly.cpp ../utilities/hierarchy.cpp ../utilities/analysis.cpp ../utilities/tree.cpp generalize.cpp ../utilities/frequencies.cpp ../utilities/writeData.cpp
+SRC = datafly.cpp evaluate.cpp ../utilities/hierarchy.cpp ../utilities/input.cpp ../utilities/analysis.cpp ../utilities/tree.cpp generalize.cpp ../utilities/frequencies.cpp ../utilities/metrics.cpp ../utilities/writeData.cpp
 OBJ = $(SRC:.cpp=.o)
 INC = $(wildcard *.hpp)
 

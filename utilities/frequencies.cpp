@@ -107,59 +107,28 @@ int findMostDistinctQid(const vector<vector<string>> dataset) {
 }
 
 vector<vector<vector<string>>> createClusters(vector<vector<string>> dataset,
-					      vector<int> qids) {
-	// Extract qid columns only
-	vector<vector<string>> qids_dataset;
-	for (size_t i=0; i < dataset.size(); i++) {
-		vector<string> aux;
-		for (const int& idx : qids)
-			aux.emplace_back(dataset[i][idx]);
+					      					  vector<int> qids) {
+    // Construct clusters based on generalizations
+    vector<vector<vector<string>>> clusters;
+	// Map every unique combination of qids to a matrix/cluster;
+	map<string, vector<vector<string>>> splitMap;
 
-		qids_dataset.emplace_back(aux);
-	}
+	for (const auto& entry : dataset) {
+		string value;
+		vector<string> record = entry;
+		for (const auto& qid : qids)
+			value.append(entry[qid]);
 
-	// Concatenate all attributes of each record
-	vector<string> records = concatRecords(qids_dataset);
-
-	// Get only unique records 
-	vector<string> rcopy = records;
-	sort(rcopy.begin(), rcopy.end());
-	auto it = unique(rcopy.begin(), rcopy.end());
-	rcopy.resize(distance(rcopy.begin(), it));
-
-	// List from 0 to records.size()
-	vector<int> indexes(records.size(), 0);
-	iota(indexes.begin(), indexes.end(), 0);
-
-	// Get elements positions in records vector
-	map<string, vector<int>> cmap;
-	for (size_t i=0; i < rcopy.size(); i++) {
-		string val = rcopy[i];
-		cmap[val] = {};
-
-		vector<int> deletions;
-		for (size_t j=0; j < indexes.size(); j++) {
-			if (records[indexes[j]] == val) {
-				cmap[val].emplace_back(indexes[j]);
-				deletions.emplace_back(j);
-			}
-		}
-
-		int n=0;
-		for (const auto& idx : deletions) {
-			indexes.erase(indexes.begin() + idx - n);
-			n++;
+		try {
+			splitMap[value].emplace_back(record);
+		} catch (...) {
+			splitMap[value] = vector<vector<string>>(1, record);
 		}
 	}
 
-	vector<vector<vector<string>>> clusters;
-	for (const auto& [key, values] : cmap) {
-		vector<vector<string>> cluster;
-		for (const auto& idx : values)
-			cluster.emplace_back(dataset[idx]);
-
-		clusters.emplace_back(cluster);
-	}
+	// Create clusters from map values
+	for (const auto& [k, v] : splitMap)
+		clusters.emplace_back(v);
 
 	return clusters;
 }

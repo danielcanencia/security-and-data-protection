@@ -29,9 +29,14 @@ void writeAnonymizedTable(const string inputFname,
         stream << fixed << setprecision(2) << P;
         const string pName = P == -1 ? "" : stream.str() + GET_NAME(P);
 
-        string dname = "generalized_tables/"
-                + inputFname;
-		//+ inputFname.substr(0, inputFname.find_last_of('/'));
+
+        string input = inputFname;
+        if (input.back() == '/')
+               input.resize(input.size() - 1); 
+        const string parentPath = filesystem::path{input}.string();
+        string dname = "generalized_tables"
+                + parentPath.substr(parentPath.find_last_of('/'), parentPath.size()) + "/";
+
         if (!fs::is_directory(dname) || !fs::exists(dname)) {
                 if (!fs::create_directories(dname)) {
                         throw "Error creating output directory";
@@ -39,9 +44,7 @@ void writeAnonymizedTable(const string inputFname,
                 }
         }
 
-        string fname = "generalized_tables/" + inputFname;
-        if (fname.back() != '/')
-	        fname += "/";
+        string fname = dname;
         if (prefix == "\0")
                 fname += kName + lName + pName + ".csv";
         else

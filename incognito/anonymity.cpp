@@ -7,7 +7,7 @@ bool isSplitKAnonymous(vector<vector<string>> split,
 }
 
 bool isSplitLDiverse(vector<vector<string>> split,
-                     vector<int> confAtts, const long double L) {
+                     vector<int> confAtts, const int L) {
 	vector<map<string, int>> freqs(confAtts.size());
 	string key;
 
@@ -69,29 +69,6 @@ bool isSplitTClose(vector<vector<string>> split, vector<vector<string>> data,
 			valueSets[j].insert(key);
 		}
 	}
-
-	cout << "SplitMaps: ";
-	for (const auto& m : splitMaps) {
-		cout << "Size: "; cout << m.size() << endl;
-		for (const auto& [k, v] : m) {
-			cout << k; cout << ", "; cout << v << endl;
-		}
-		cout << "-......................." << endl;
-	}
-	cout << "DataMaps: ";
-	for (const auto& m : dataMaps) {
-		for (const auto& [k, v] : m) {
-			cout << k; cout << ", "; cout << v << endl;
-		}
-		cout << "-......................." << endl;
-	}
-	cout << "Value Sets: ";
-	for (const auto& m : valueSets) {
-		for (const auto& k : m)
-			cout << k + ", ";
-		cout << endl;
-	}
-	cout << endl;
 
 	// P and Q size
 	int pSize, qSize;

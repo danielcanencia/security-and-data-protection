@@ -103,7 +103,7 @@ int main(int argc, char** argv) {
 	// GCP
 	// 1. Precalculate NCP for every qid value included in every cluster
 	vector<long double> cncps = calculateNCPS(
-		clusters, weights, qids, {}, treeMap);
+		clusters, weights, qids, numMetricsQids, treeMap);
 
 	// 2. Calculate GCP
 	calculateGCP(clusters, dataset.size(), qids, cncps);

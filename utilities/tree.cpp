@@ -208,12 +208,6 @@ long double Tree::getNCP(vector<string> values) {
 	aux.resize(distance(aux.begin(), it));
 
 	int subTreeLeaves = getLowestCommonAncestor(aux).numSubTreeLeaves;
-	/*cout << "LCA of : ";
-	for (const auto& a : values)
-		cout << a + ", ";
-	cout << " => " + getLowestCommonAncestor(aux).value << endl;
-	cout << "subLeavs: " << subTreeLeaves << endl;*/
-
 	long double ncp = (long double)subTreeLeaves;
 	return ncp;
 }

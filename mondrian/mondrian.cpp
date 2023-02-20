@@ -115,8 +115,6 @@ int main(int argc, char** argv) {
 	int K, L;
 	long double P;
 	readParameters(dataset.size(), confAttNames.size(), K, L, P);
-
-	//vector<int> confAtts = readConfidentialAtts(headers, L);
 	// Read Weights
 	vector<double> weights = readWeights(nqids, qidNames);
 	//vector<string> qidNames = {"Age", "Country", "Occupation" };

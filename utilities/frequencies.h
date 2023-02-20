@@ -17,5 +17,5 @@ map<string, int> calculateQidFreqs(
         const vector<vector<string>> dataset, const int dim);
 vector<vector<vector<string>>> createClusters(vector<vector<string>> dataset,
                                               vector<int> qids);
-#endif
 
+#endif

@@ -148,7 +148,7 @@ bool Partition::isSplitLDiverse(vector<vector<string>> split) {
 	// Every confidential attribute should have, at least,
 	// l well represented values 
 	for (const map<string, int>& attFreq : freqs) {
-		// Get all values from  map
+		// Get all values from map
 		for (const auto& [k, v] : attFreq) {
 			if (v < L)
 				return false;
@@ -249,7 +249,7 @@ bool Partition::isSplitValid(vector<vector<string>> split) {
 		tcloseness = isSplitTClose(split);
 	}
 
-	return kanonymity && ldiversity;
+	return kanonymity && ldiversity && tcloseness;
 }
 
 vector<Partition> Partition::splitPartition(int dimension) {

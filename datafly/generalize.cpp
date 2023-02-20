@@ -67,5 +67,3 @@ void supressRecords(vector<vector<string>> &dataset, const int K) {
                 n++;
         }
 }
-
-
