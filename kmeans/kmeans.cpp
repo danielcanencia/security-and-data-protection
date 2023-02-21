@@ -1,93 +1,8 @@
 #include "kmeans.h"
 
-Record::Record(int ridx) {
-	rindex = ridx;
-} 
-
-void Record::push_back_value(double value) {
-	values.emplace_back(value);
-}
-
-void Record::set_group(int gidx) { gindex = gidx; }
-int Record::get_gindex() const { return gindex; }
-int Record::size() { return values.size(); }
-double Record::at(int idx) const { return values[idx]; }
-double Record::euclidean_distance(const vector<double> tuple) const {
-	int sum = 0;
-	for (int i=0; i < (int)min(tuple.size(), values.size()); i++)
-		sum += pow((double)(values[i]) - (double)(tuple[i]), 2);
-	return sqrt(sum);
-}
-vector<double> Record::getValues() { return values; }
-
-void Record::write_to_file(ofstream& file) const {
-	for (auto it = begin(values); it != end(values)-1; it++) {
-		file << to_string(*it) + ",";
-	}
-	file << to_string(values.back()) << endl;
-}
-
-void Record::print_values() const {
-	for(const double& val : values) {
-		cout << to_string(val) + ", ";
-	}
-	cout << '\n';
-}
-
-
-
-Group::Group(int gidx, Record& _centroid) : gindex(gidx) {
-	this->insert_centroid(_centroid);
-}
-
-int Group::get_index() { return gindex; }
-vector<double> Group::get_centroid() const { return centroid; }
-void Group::insert_centroid(Record& centroid) {
-	this->centroid = centroid.getValues();
-	centroid.set_group(gindex);
-	records.emplace_back(centroid);
-}
-
-void Group::add_record(Record& record) {
-	records.emplace_back(record);
-}
-void Group::remove_record(Record& record) {
-	records.erase(records.begin() + 1);
-}
-
-void Group::recalculate_centroid() {
-	int atts = this->records[0].size();
-	vector<double> centroid(atts, 0.0);
-	for(Record& record : this->records) {
-		for (int j=0; j < atts; j++) {
-			centroid[j] += record.at(j);
-		}
-	}
-	for(int j=0; j < atts; j++)
-		centroid[j] /= records.size();
-
-	this->centroid = centroid;
-}
-
-void Group::write_to_file(ofstream& file) const {
-	for (const Record& record : records) {
-		file << "Cluster: " + to_string(gindex);
-		file << ", Atts.Values: ";
-		record.write_to_file(file);
-	}
-
-}
-
-void Group::print_records() {
-	for(const Record& record : records) {
-		record.print_values();
-		}
-	}
-
-
 Kmeans::Kmeans(int K) { this->K = K; }
 
-vector<Group> Kmeans::inicialize_centroids(vector<Record>& records) {
+vector<Group> Kmeans::inicializeCentroids(vector<Record>& records) {
 	vector<Group> groups;
 	vector<int> aux;
 
@@ -100,7 +15,7 @@ vector<Group> Kmeans::inicialize_centroids(vector<Record>& records) {
 			if (find(aux.begin(), aux.end(), random) == aux.end()) {
 				// Inicialize centroids and assign them a cluster
 		 		aux.emplace_back(random);
-				records.at(random).set_group(i);
+				records.at(random).setGroup(i);
 				Group group(i, records.at(random));
 				groups.emplace_back(group);
 				break;
@@ -110,23 +25,23 @@ vector<Group> Kmeans::inicialize_centroids(vector<Record>& records) {
 	return groups;
 }
 
-vector<double> Kmeans::centroids_distances(const vector<Group>& groups,
+vector<double> Kmeans::centroidsDistances(const vector<Group>& groups,
 				  	   const vector<Record>& records) {
 	vector<double> res;
 	int gindex;
 	double min, ed;
 	vector<vector<double>> centroids;
 	for (const Group& group : groups) {
-		centroids.emplace_back(group.get_centroid());
+		centroids.emplace_back(group.getCentroid());
 	}
 
 	// Calculate euclidian distance between records and all centroids
 	for(const Record& record : records) {
-		min = record.euclidean_distance(centroids[0]);
+		min = record.euclideanDistance(centroids[0]);
 		gindex = 0;
 
 		for(int i=1; i < (int)centroids.size(); i++) {
-			ed = record.euclidean_distance(centroids[i]);
+			ed = record.euclideanDistance(centroids[i]);
 			if (ed < min) {
 				min = ed;
 				gindex = i;
@@ -140,58 +55,49 @@ vector<double> Kmeans::centroids_distances(const vector<Group>& groups,
 	return res;
 }
 
-bool Kmeans::update_groups (vector<Group>& groups,
+bool Kmeans::updateGroups (vector<Group>& groups,
  	           const vector<double>& newGroups,
      	           vector<Record>& curRecords) {
 	bool end = 1;
 	int newGroup, curGroup;
 	for (int i=0; i < (int)newGroups.size(); i++) {
 		newGroup = newGroups[i];
-		curGroup = curRecords[i].get_gindex();
+		curGroup = curRecords[i].getGindex();
 		if (newGroup != curGroup) {
 			if (curGroup != -1) {
-				groups[curGroup].remove_record(curRecords[i]);
+				groups[curGroup].removeRecord(curRecords[i]);
 			}
-			curRecords[i].set_group(newGroup);
-			groups[newGroup].add_record(curRecords[i]);
+			curRecords[i].setGroup(newGroup);
+			groups[newGroup].addRecord(curRecords[i]);
 			end = 0;
 		}
 	}	
 	return end;
 }
 
-vector<Group> Kmeans::compute_all(vector<Record> &records) {
+vector<Group> Kmeans::computeAll(vector<Record> &records) {
 
 	// 1. Inicialize centroids
-	vector<Group> groups = inicialize_centroids(records);
+	vector<Group> groups = inicializeCentroids(records);
 
 	// Loop
 	while (1) {	
 		// 2. Euclidean Distance And Group Classification
-		vector<double> newGroups = centroids_distances(groups, records);
+		vector<double> newGroups = centroidsDistances(groups, records);
 		// 3. Update all record's group
-		bool end = update_groups(groups, newGroups, records);
+		bool end = updateGroups(groups, newGroups, records);
 		if (end) break;
 
 		// 4. Recalculate the centroid for each group/cluster
 		for(Group& group : groups) {
-			group.recalculate_centroid();
+			group.recalculateCentroid();
 		}
-		/*for(Group& group : groups) {
-			cout << "////////////////" << endl;
-			cout << "GIndex: " + to_string(group.get_index()) << endl;
-			cout << "---------------" << endl;
-			for(double& x: group.get_centroid()) {
-				cout << to_string(x) << endl;
-			}
-			cout << "----- Vals-----" << endl;
-			group.print_records();
-		}*/
 	}
+
 	return groups;
 }
 
-void Kmeans::write_output(vector<Group> groups, string filename, string headers) {
+void Kmeans::writeOutput(vector<Group> groups, string filename, string headers) {
 	ofstream file;
 	file.open(filename, ios::trunc);
 
@@ -199,9 +105,9 @@ void Kmeans::write_output(vector<Group> groups, string filename, string headers)
   	{
    		file << headers << endl;
 		for (const Group& group : groups) {
-			group.write_to_file(file);
+			group.writeToFile(file);
 		}
-    		file.close();
+    	file.close();
   	}
   	else cout << "Unable to open file" << endl;
 }
@@ -226,8 +132,7 @@ vector<Record> preprocessing(string file, string &headers) {
 			istringstream strm(move(line));
 
 			for(string val; getline(strm, val, ';');) {
-				//cout << stod(val) << endl;
-				record.push_back_value(stod(val));
+				record.pushBackValue(stod(val));
 			}
 			values.push_back(move(record));
 			index++;
@@ -243,9 +148,6 @@ vector<Record> preprocessing(string file, string &headers) {
 
 }
 
-
-
-
 int main(int argc, char** argv) {
 
   	// Arguments	
@@ -260,9 +162,7 @@ int main(int argc, char** argv) {
 		cout << "Please, use a csv input file" << endl;
 		return -1;
 	}
-	// Output Filename
-	//string output_file = argv[2]; 
-	
+
 	// k
 	int k = atoi(argv[2]);
 
@@ -283,15 +183,15 @@ int main(int argc, char** argv) {
 	// Especify the number of clusters/groups to use
 	Kmeans kmeans(k);
 	// Run the algorithm
-	vector<Group> groups = kmeans.compute_all(records);
+	vector<Group> groups = kmeans.computeAll(records);
 	cout << "* K-Means algorithm finished. A csv file will be generated...." << endl;
 
 	// Write resulting groups to file
 	filename = filename.substr(filename.find("/")+1, filename.size());
-	filename.insert(filename.length()-4, string("_") + "k" + to_string(k) + "_out");
+	filename.insert(filename.length()-4, string("_") + "K" + to_string(k) + "_out");
 	filename.insert(0, "outputs/");
 	fs::create_directory("outputs");
-	kmeans.write_output(groups, filename, headers);
+	kmeans.writeOutput(groups, filename, headers);
 	cout << "* Filename: " + filename << endl;
 
 	return 0;

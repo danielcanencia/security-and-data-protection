@@ -35,8 +35,10 @@ void writeAnonymizedTable(const string inputFname,
                input.resize(input.size() - 1); 
         const string parentPath = filesystem::path{input}.string();
         string dname = "generalized_tables"
-                + parentPath.substr(parentPath.find_last_of('/'), parentPath.size()) + "/";
+                + parentPath.substr(parentPath.find_first_of('/'), parentPath.size()) + "/";
+        //        + parentPath.substr(parentPath.find_last_of('/'), parentPath.size()) + "/";
 
+        cout << dname << endl;
         if (!fs::is_directory(dname) || !fs::exists(dname)) {
                 if (!fs::create_directories(dname)) {
                         throw "Error creating output directory";

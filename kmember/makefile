@@ -4,7 +4,7 @@ CXXFLAGS = --std=c++17 -lstdc++fs -Wall
 .PHONY : all clean distclean
 
 EXE = kmember.out
-SRC = kmember.cpp ../utilities/hierarchy.cpp ../utilities/writeData.cpp distances.cpp info.cpp
+SRC = kmember.cpp ../utilities/hierarchy.cpp ../utilities/input.cpp ../utilities/writeData.cpp distances.cpp info.cpp
 OBJ = $(SRC:.cpp=.o)
 INC = $(wildcard *.hpp)
 
