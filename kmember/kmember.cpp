@@ -113,6 +113,9 @@ int main(int argc, char** argv) {
 	// Read Parameters
 	const int K = readParameter("k-anonymity", "K", dataset.size());
 
+
+	// Measure Execution Time
+	auto start = chrono::high_resolution_clock::now();
 	// *********************************
 	// Main algorithm
 	int count = 0;
@@ -120,6 +123,11 @@ int main(int argc, char** argv) {
 													numQids, catQids, K,
 													count);
 	// *********************************
+	auto stop = chrono::high_resolution_clock::now();
+	auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+	cout << endl << "===> Kmember Execution Time: ";
+	cout << duration.count() << " microseconds" << endl;
+
 
 	// Write Anonymized Clusters
 	string directory = argv[1];

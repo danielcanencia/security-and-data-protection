@@ -135,11 +135,19 @@ int main(int argc, char** argv) {
 	numMetricsQids = get<0>(metricsQids);
 	catMetricsQids = get<1>(metricsQids);
 
+
+	// Measure Execution Time
+	auto start = chrono::high_resolution_clock::now();
 	// *********************************
 	// Main algorithm
 	vector<vector<vector<string>>> clusters = mondrian(dataset,
 		hierarchies_map, allQids, isQidCat, confAtts, K, L, P);
 	// *********************************
+	auto stop = chrono::high_resolution_clock::now();
+	auto duration = chrono::duration_cast<chrono::seconds>(stop - start);
+	cout << endl << "===> Mondrian Execution Time: ";
+	cout << duration.count() << " seconds" << endl;
+
 
 	// Create matrix from clusters
 	vector<vector<string>> result;

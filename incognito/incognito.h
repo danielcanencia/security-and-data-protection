@@ -1,6 +1,7 @@
 #ifndef _INCOGNITO_H
 #define _INCOGNITO_H
 
+#include <chrono>
 #include "../utilities/input.h"
 #include "../utilities/hierarchy.h"
 #include "../utilities/writeData.h"

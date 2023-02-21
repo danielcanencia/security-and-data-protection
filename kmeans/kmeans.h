@@ -1,9 +1,7 @@
 #ifndef _KMEANS_H
 #define _KMEANS_H
 
-#include "group.h"
-#include "record.h"
-
+#include <chrono>
 #include <iostream>		// cout
 #include <fstream>		// ofstream
 #include <vector>
@@ -12,6 +10,8 @@
 #include <filesystem>	// fs
 #include <algorithm>	// find
 #include <ctime>		// time
+#include "group.h"
+#include "record.h"
 
 using namespace std;
 namespace fs = std::filesystem;

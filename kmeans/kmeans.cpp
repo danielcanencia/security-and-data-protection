@@ -180,10 +180,17 @@ int main(int argc, char** argv) {
 	}
 	
 	cout << "* K-Means algorithm is being run..." << endl;
+	// Measure Execution Time
+	auto start = chrono::high_resolution_clock::now();
 	// Especify the number of clusters/groups to use
 	Kmeans kmeans(k);
 	// Run the algorithm
 	vector<Group> groups = kmeans.computeAll(records);
+	// Execution Time
+	auto stop = chrono::high_resolution_clock::now();
+	auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+	cout << endl << "===> Mondrian Execution Time: ";
+	cout << duration.count() << " microseconds" << endl;
 	cout << "* K-Means algorithm finished. A csv file will be generated...." << endl;
 
 	// Write resulting groups to file

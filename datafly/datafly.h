@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <ostream>
+#include <chrono>
 #include "../utilities/hierarchy.h"
 #include "../utilities/input.h"
 #include "../utilities/analysis.h"

@@ -74,6 +74,8 @@ int main(int argc, char** argv) {
 	catMetricsQids = get<1>(metricsQids);
 
 
+	// Measure Execution Time
+	auto start = chrono::high_resolution_clock::now();
 	// *********************************
 	// Main algorithm
 	auto resTuple = incognito(dataset, hierarchiesMap, qids,
@@ -81,6 +83,11 @@ int main(int argc, char** argv) {
 	vector<vector<string>> result = get<0>(resTuple);
 	vector<vector<vector<string>>> clusters = get<1>(resTuple);
 	// *********************************
+	auto stop = chrono::high_resolution_clock::now();
+	auto duration = chrono::duration_cast<chrono::seconds>(stop - start);
+	cout << endl << "===> Incognito Execution Time: ";
+	cout << duration.count() << " seconds" << endl;
+
 
 	// Write anonymized table
 	writeAnonymizedTable(fs::path(argv[1]), headers, result, K, L, P);

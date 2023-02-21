@@ -69,6 +69,9 @@ int main(int argc, char** argv) {
 	numMetricsQids = get<0>(metricsQids);
 	catMetricsQids = get<1>(metricsQids);
 
+
+	// Measure Execution Time
+	auto start = chrono::high_resolution_clock::now();
 	// *********************************
 	// Main algorithm
 	auto resTuple = datafly(dataset, hierarchiesMap, qids, K);
@@ -77,11 +80,15 @@ int main(int argc, char** argv) {
 	if (result.size() == 0 || clusters.size() == 0)
 		return 1;
 	// *********************************
+	auto stop = chrono::high_resolution_clock::now();
+	auto duration = chrono::duration_cast<chrono::seconds>(stop - start);
+	cout << endl << "===> Datafly Execution Time: ";
+	cout << duration.count() << " seconds" << endl;
+
 
 	// Write anonymized table
 	// Changed headers for non alterated ones
 	writeAnonymizedTable(fs::path(argv[1]), headers, result, K, -1, -1);
-
 
 	// METRICS
 	cout << "===> Analysis: " << endl;
