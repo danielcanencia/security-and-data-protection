@@ -9,8 +9,8 @@ using namespace std;
 
 class Group {
 private:
-	const int gindex;
-	vector<double> centroid;
+	const int gindex;		 // Determines equivalence class/cluster
+	vector<double> centroid; // Centroids are assign to a specific record (id)
 	vector<Record> records;
 public:
 	Group(int gidx, Record& _centroid);

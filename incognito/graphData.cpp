@@ -125,7 +125,9 @@ void GraphData::getAllKAnon(const GraphNode& node, vector<int> kList,
 	}
 }
 
-GraphNode GraphData::getFinalKAnon() {
+GraphNode GraphData::getFinalKAnon(
+			map<int, map<string, vector<string>>> gens,
+			vector<vector<string>> dataset, vector<int> qids) {
 	set<GraphNode> res;
 	for (const GraphNode& node : this->nodes) {
 		if (node.isKAnon()) {
@@ -135,7 +137,20 @@ GraphNode GraphData::getFinalKAnon() {
 		}
 	}
 
-	return this->nodes[(*res.begin()).getId()];
+	// Get one node based on criteria. One that maximizes data
+	// utility metric (the one that presents the maximum number of clusters)
+	int max = 0;
+	GraphNode finalNode;
+	for (const GraphNode& node : res) {
+		vector<int> freqs = node.evaluateFrequency(gens, dataset, qids);
+
+		if ((int)freqs.size() > max) {
+			max = freqs.size();
+			finalNode = node;
+		}
+	}
+
+	return finalNode;
 }
 
 void GraphData::printNodesTable() {

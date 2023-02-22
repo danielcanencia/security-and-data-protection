@@ -1,5 +1,6 @@
 #include "graphNode.h"
 
+GraphNode::GraphNode () { };
 GraphNode::GraphNode (int id, vector<int> data) {
 	this->id = id;
 	this->data = data;
@@ -127,6 +128,35 @@ bool GraphNode::isAnonymityValid(map<int, vector<vector<string>>> hierarchies,
 	return isSplitValid(clusters, anonData, confAtts, K, L, P);
 }
 
+vector<int> GraphNode::evaluateFrequency(
+			map<int, map<string, vector<string>>> generalizations,
+	 		vector<vector<string>> dataset, vector<int> qids) const {
+
+	// Construct anonymized column for one qid
+	vector<string> genData;
+	int qid = qids[0];
+	for (size_t i=0; i < dataset.size(); i++) {
+		genData.emplace_back(generalizations[qid][dataset[i][qid]][data[0]]);
+	}
+
+	// Check frequencies for this specific qid
+	map<string, int> freqMap;
+	for (const auto& gen : genData) {
+		// Need to check for just one qid
+		try {
+			freqMap[gen] += 1;
+		} catch (...) {
+			freqMap[gen] = 1;
+		}
+	}
+
+	// Get vector
+	vector<int> freqs;
+	for (const auto& [k, v] : freqMap)
+		freqs.emplace_back(v);
+
+	return freqs;
+}
 
 void GraphNode::print() const {
 	cout << "Id: " + to_string(id) + ", ";

@@ -10,8 +10,8 @@ using namespace std;
 
 class Record {
 private:
-	int rindex;
-	int gindex = -1;
+	int rindex;			// Determines records. Record's id
+	int gindex = -1;	// Determines equivalence class/cluster
 	vector<double> values;
 
 public:

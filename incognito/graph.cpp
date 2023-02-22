@@ -67,8 +67,9 @@ void Graph::printAllKAnon() {
 	graphData.printAllKAnon();
 }
 
-GraphNode Graph::getFinalKAnon() {
-	return graphData.getFinalKAnon();
+GraphNode Graph::getFinalKAnon(map<int, map<string, vector<string>>> gens,
+			vector<vector<string>> dataset, vector<int> qids) {
+	return graphData.getFinalKAnon(gens, dataset, qids);
 }
 
 void Graph::printNodesTable() {

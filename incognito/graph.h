@@ -26,7 +26,9 @@ public:
 	int addGeneralizations(const GraphNode& node, set<GraphNode>& queue);
 	void markGeneralizations(const GraphNode& node);
 	void printAllKAnon();
-	GraphNode getFinalKAnon();
+	GraphNode getFinalKAnon(map<int, map<string, vector<string>>> gens,
+							vector<vector<string>> dataset,
+							vector<int> qids);
 	void printNodesTable();
 	void printEdgesTable();
 };

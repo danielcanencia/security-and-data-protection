@@ -32,7 +32,9 @@ public:
 	void markGeneralizations(const GraphNode& node);
 	vector<GraphNode> getChildren(GraphNode node);
 	void printAllKAnon();
-	GraphNode getFinalKAnon();
+	GraphNode getFinalKAnon(map<int, map<string, vector<string>>> gens,
+							vector<vector<string>> dataset,
+							vector<int> qids);
 	void printNodesTable();
 	void printEdgesTable();
 };

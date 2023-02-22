@@ -1,0 +1,7 @@
+marital-status
+Single;Not-married;*
+Separated;Not-married;*
+Divorced;Not-married;*
+Widowed;Not-married;*
+Married;Married;*
+Re-married;Married;*

@@ -67,20 +67,26 @@ map<int, map<string, vector<string>>> generateGeneralizationsMap(
 }
 
 vector<vector<string>> generateAnonymizedDataset(
-	vector<vector<string>> dataset, map<int, vector<vector<string>>> hierarchies_map,
+	vector<vector<string>> dataset,
+	map<int, vector<vector<string>>> hierarchiesMap,
+	map<int, map<string, vector<string>>> gens,
 	vector<Graph> graphs, vector<int> qids) {
 
-	//cout << "Generating Anonymized Table: " << endl;
-	const GraphNode node = graphs.back().getFinalKAnon();
+	// Select one solution among the ones that satisfy K
+	// Criteria: Generalization/Node that produces the maximum amount
+	// 			 of equivalence classes
+	const GraphNode node = graphs.back().getFinalKAnon(gens, dataset, qids);
+	cout << "dsdsassd" << endl;
+	node.print();
 	vector<int> data = node.getData();
 
-	map<int, map<string, string>> gens;
+	map<int, map<string, string>> generalizations;
 	for (size_t i=0; i < qids.size(); i++) {
 		const int qid = qids[i];
 		map<string, string> qidMap;
-		for (size_t j = 0; j < hierarchies_map[qid][0].size(); j++)
-			qidMap[hierarchies_map[qid][0][j]] = hierarchies_map[qid][data[i]][j];
-		gens[qid] = qidMap;
+		for (size_t j = 0; j < hierarchiesMap[qid][0].size(); j++)
+			qidMap[hierarchiesMap[qid][0][j]] = hierarchiesMap[qid][data[i]][j];
+		generalizations[qid] = qidMap;
 	}
 
 	vector<vector<string>> result;
@@ -89,7 +95,7 @@ vector<vector<string>> generateAnonymizedDataset(
 		for (size_t j=0; j < dataset[0].size(); j++) {
 			auto it = find(qids.begin(), qids.end(), j);
 			if (it != qids.end()) {
-				row.emplace_back(gens[j][dataset[i][j]]);
+				row.emplace_back(generalizations[j][dataset[i][j]]);
 				continue;
 			}
 			row.emplace_back(dataset[i][j]);
@@ -169,7 +175,7 @@ tuple<vector<vector<string>>, vector<vector<vector<string>>>> incognito(
 
 	// Construct anonymized dataset
 	vector<vector<string>> result = generateAnonymizedDataset(dataset,
-		hierarchies, rGraphs, qids);
+		hierarchies, gensMap, rGraphs, qids);
 
 	// Create equivalence classes or clusters
 	return make_tuple(result, createClusters(result, qids));

@@ -19,13 +19,12 @@ private:
 	vector<int> data;
 	bool nodeMark = false;
 	bool kAnon = false;
-	vector<int> evaluateFrequency(vector<vector<string>> generalizations,
-	 		       int rows, int cols);
 	string generalizeEntry(string entry, const vector<vector<string>> hierarchy,
 			       vector<string> generalizations);
 
 public:
-	GraphNode (int id, vector<int> data);
+	GraphNode();
+	GraphNode(int id, vector<int> data);
 	int getId() const;
 	int getData(int i) const;
 	vector<int> getData() const;
@@ -43,6 +42,9 @@ public:
 					   	  map<int, map<string, vector<string>>> gensMap,
                        	  vector<int> qids, vector<int> confAtts,
 						  const int K, const int L, const long double P);
+	vector<int> evaluateFrequency(
+						  map<int, map<string, vector<string>>> generalizations,
+	 			       	  vector<vector<string>> dataset, vector<int> qids) const;
 	void print() const;
 };
 
