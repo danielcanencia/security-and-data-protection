@@ -1,0 +1,9 @@
+education
+basic.4y;primary-education;*
+basic.6y;primary-education;*
+basic.9y;primary-education;*
+high.school;secondary-education;*
+illiterate;other;*
+professional.course;higher-education;*
+university.degree;higher-education;*
+unknown;other;*

@@ -74,13 +74,12 @@ int getHierarchyIdx(const string qidName,
 bool compareAttQid(string qidName,
 		   vector<string> qidNames) {
 
-	string s1, s2;
+	string s1;
 
 	// Get a lowercase version of the arguments
 	transform(qidName.begin(), qidName.end(),
 		  inserter(s1, s1.end()),
     	  [](unsigned char x){ return tolower(x); });
-
 
 	if (find(qidNames.begin(), qidNames.end(),
 	    s1) != qidNames.end())
@@ -145,10 +144,14 @@ map<int, vector<vector<string>>> read_directory(
 	vector<string> hierarchies;
 	const string hierarchies_dir = string(directory) +
 				       "/"+ "hierarchies" + "/";
-	for (auto const& entry : fs::recursive_directory_iterator(hierarchies_dir)) {
-		if (fs::is_directory(entry))
-			continue;
-		hierarchies.emplace_back(hierarchies_dir + entry.path().filename().c_str());
+	try {
+		for (auto const& entry : fs::recursive_directory_iterator(hierarchies_dir)) {
+			if (fs::is_directory(entry))
+				continue;
+			hierarchies.emplace_back(hierarchies_dir + entry.path().filename().c_str());
+		}
+	} catch (...) {
+		throw "Error, directory doesn't exist";
 	}
 
 	// Read csv dataset
@@ -173,10 +176,10 @@ map<int, vector<vector<string>>> read_directory(
 	}
 
 	// Get confidential attribute indexes
-	for (size_t i=0; i < headersVector.size(); i++) {
-		if (find(confAttNames.begin(), confAttNames.end(), headersVector[i])
-			!= confAttNames.end())
-			atts.emplace_back(i);
+	for (size_t i=0; i < confAttNames.size(); i++) {
+		auto it = find(headersVector.begin(), headersVector.end(), confAttNames[i]);
+		if (it != headersVector.end() || headersVector[i] != confAttNames[i])
+			atts.emplace_back(it - headersVector.begin());
 	}
 
 	// Read input table
@@ -302,16 +305,7 @@ void permute(const vector<int> data,
 vector<int> getQidsHeaders(const vector<string> headers,
 			   const vector<string> qids) {
 	vector<int> res;
-	vector<string> qidsVector;
 	int idx;
-
-	// Check qids are present in dataset input file
-	for (const auto& qid : qids) {
-		if (find(headers.begin(), headers.end(), qid)
-			== headers.end()) {
-			return res;
-		}
-	}
 
 	// Get a lowercase version of the headers
 	vector<string> headersVector;
@@ -321,7 +315,23 @@ vector<int> getQidsHeaders(const vector<string> headers,
     		headersVector.push_back(s);
 	}
 
-	for (const string& qid : qids) {
+	// Get a lowercase version of the qids
+	vector<string> qidsVector;
+	for (string qid : qids) {
+		transform(qid.begin(), qid.end(), qid.begin(),
+    		  [](unsigned char x){ return tolower(x); });
+    	qidsVector.push_back(qid);
+	}
+
+	// Check if qids are present in dataset input file
+	for (const auto& qid : qidsVector) {
+		if (find(headersVector.begin(), headersVector.end(), qid)
+			== headersVector.end()) {
+			return res;
+		}
+	}
+
+	for (const string& qid : qidsVector) {
 		idx = getHierarchyIdx(qid, headersVector);
 		res.emplace_back(idx);
 	}
