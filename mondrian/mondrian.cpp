@@ -63,11 +63,11 @@ int main(int argc, char** argv) {
 	vector<string> headers;
 	vector<int> catQids, confAtts, numQids, allQids;
 	vector<int> isQidCat;
-	map<int, vector<vector<string>>> hierarchies_map;
+	map<int, vector<vector<string>>> hierarchiesMap;
 	vector<vector<string>> dataset;
 
 	try {
-		hierarchies_map = read_directory(fs::path(argv[1]),
+		hierarchiesMap = read_directory(fs::path(argv[1]),
 					dataset, headers, qidNames, confAttNames,
 					catQids, confAtts, false);
 		sort(catQids.begin(), catQids.end());
@@ -131,7 +131,7 @@ int main(int argc, char** argv) {
 	// Ask for desired qid types to be used on metrics
 	vector<int> numMetricsQids, catMetricsQids;
 	tuple<vector<int>, vector<int>> metricsQids =
-		readMetricsQids(numQids, catQids, qidNames);
+		readMetricsQids(numQids, catQids, headers);
 	numMetricsQids = get<0>(metricsQids);
 	catMetricsQids = get<1>(metricsQids);
 
@@ -141,12 +141,15 @@ int main(int argc, char** argv) {
 	// *********************************
 	// Main algorithm
 	vector<vector<vector<string>>> clusters = mondrian(dataset,
-		hierarchies_map, allQids, isQidCat, confAtts, K, L, P);
+		hierarchiesMap, allQids, isQidCat, confAtts, K, L, P);
 	// *********************************
 	auto stop = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::seconds>(stop - start);
 	cout << endl << "===> Mondrian Execution Time: ";
 	cout << duration.count() << " seconds" << endl;
+
+	cout << "===> Number of clusters: ";
+	cout << clusters.size() << endl;
 
 
 	// Create matrix from clusters
@@ -163,7 +166,7 @@ int main(int argc, char** argv) {
 	// Create a hierarchy tree for every qid
 	map<int, Tree> trees;
 	for (const int& i : catQids) {
-		trees[i] = Tree(hierarchies_map[i]);
+		trees[i] = Tree(hierarchiesMap[i]);
 	}
 
 	// GCP

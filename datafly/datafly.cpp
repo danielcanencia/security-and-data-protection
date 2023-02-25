@@ -65,7 +65,7 @@ int main(int argc, char** argv) {
 	// Ask for desired qid types to be used on metrics
 	vector<int> numMetricsQids, catMetricsQids;
 	tuple<vector<int>, vector<int>> metricsQids =
-		readMetricsQids({}, qids, qidNames);
+		readMetricsQids({}, qids, headers);
 	numMetricsQids = get<0>(metricsQids);
 	catMetricsQids = get<1>(metricsQids);
 
@@ -85,6 +85,8 @@ int main(int argc, char** argv) {
 	cout << endl << "===> Datafly Execution Time: ";
 	cout << duration.count() << " seconds" << endl;
 
+	cout << "===> Number of clusters: ";
+	cout << clusters.size() << endl;
 
 	// Write anonymized table
 	// Changed headers for non alterated ones

@@ -128,6 +128,9 @@ int main(int argc, char** argv) {
 	cout << endl << "===> Kmember Execution Time: ";
 	cout << duration.count() << " microseconds" << endl;
 
+	cout << "===> Number of clusters: ";
+	cout << count << endl;
+
 
 	// Write Anonymized Clusters
 	string directory = argv[1];

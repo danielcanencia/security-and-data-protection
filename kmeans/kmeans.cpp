@@ -191,6 +191,8 @@ int main(int argc, char** argv) {
 	auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
 	cout << endl << "===> Mondrian Execution Time: ";
 	cout << duration.count() << " microseconds" << endl;
+	cout << "===> Number of clusters: ";
+	cout << groups.size() << endl;
 	cout << "* K-Means algorithm finished. A csv file will be generated...." << endl;
 
 	// Write resulting groups to file

@@ -163,7 +163,8 @@ void calculateGenILoss(vector<vector<string>> transposedDataset,
                        map<int, Tree> trees, const vector<int> allQids,
                        const vector<int> catQids, const vector<int> numQids,
                        const int tableSize) {
-    const long double initialLoss = 1.0 / (catQids.size() + numQids.size());
+    const long double initialLoss = 1.0 / (transposedDataset[0].size()
+        * (catQids.size() + numQids.size()));
     long double loss = 0;
 
     vector<map<string, int>> catFreqs, numFreqs;

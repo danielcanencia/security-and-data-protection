@@ -114,7 +114,11 @@ vector<double> readWeights(const int nqids, vector<string> qidNames) {
 }
 
 tuple<vector<int>, vector<int>> readMetricsQids(vector<int> numQids, vector<int> catQids,
-                                                vector<string> qidNames) {
+                                                vector<string> headers) {
+				for (const auto& a : catQids)
+					cout << to_string(a) + ", ";
+				cout << "QidNames size: "; cout << headers.size();
+
 	vector<int> numMetricsQids = numQids, catMetricsQids;
 	string question = "Do you want to treat some hierarchical attributes as "
 			 		  "numerical? (will only be used on metrics) [Y(y)/N(n)]: ";
@@ -133,7 +137,7 @@ tuple<vector<int>, vector<int>> readMetricsQids(vector<int> numQids, vector<int>
 				while (catQids.size() > 0) {
 					cout << "\t";
 					for (size_t i=0; i < catQids.size(); i++)
-						cout << qidNames[catQids[i]] + "(" + to_string(i) + ") ";
+						cout << headers[catQids[i]] + "(" + to_string(i) + ") ";
 					cout << endl;
 					cout << "\t\t[enter q to quit] >> ";
 					cin >> aux;
