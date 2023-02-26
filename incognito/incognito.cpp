@@ -26,17 +26,6 @@ int main(int argc, char** argv) {
 	// Conf Atts Names
 	vector<string> confAttNames = readConfidentialAttNames();
 
-	/*vector<string> qidNames = {
-		"Age", "Education", "Marital-status",
-		"Native-country", "Occupation", "Race", "Relationship",
-		"Salary", "Sex", "Workclass"
-	};*/
-
-	//vector<string> qidNames = {"Birthdate", "Sex", "Zipcode"};
-	/*vector<string> qidNames = {
-		"Age", "Education"
-	};*/
-
 	// Read csv data file
 	vector<string> headers;
 	vector<int> qids, confAtts;

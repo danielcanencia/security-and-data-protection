@@ -19,7 +19,7 @@ void evaluate(Partition partition, vector<Partition>& result) {
 		return ;
     }
 
-	int dim = partition.choose_dimension();
+	int dim = partition.chooseDimension();
     vector<Partition> pts = partition.splitPartition(dim);
 
     if (pts.size() == 0) {

@@ -18,40 +18,6 @@ int main(int argc, char** argv) {
 		return -1;
 	}
 
-	/*vector<int> numMetricsQids;
-	string question = "Do you want to treat some hierarchical attributes as "
-			 		  "numerical (will only be used on metrics) [Y(y)/N(n)]: ";
-	cout << question;
-	cin >> answer;
-	keep = false;
-	while(!keep) {
-		switch(answer) {
-			case 'Y':
-			case 'y':
-				cout << "Enter number printed between brackets: ";
-				for (size_t i=0; i < qidNames.size(); i++)
-					cout << qidNames[i] + "(" + to_string(i) + ") ";
-				cout << endl;
-				char aux;
-				while (1) {
-					cout << " [enter q to quit] >> ";
-					cin >> aux;
-					if (aux == 'q')
-						break;
-					numMetricsQids.emplace_back((int)aux - 48);
-				}
-				keep = true;
-				break;
-			case 'N':
-			case 'n':
-				keep = true;
-				break;
-			default:
-				cout << question;
-				cin >> answer;
-		}
-	}*/
-
 	// Read input
 	// Read qid names
 	const int nqids = readNumberOfQids();
@@ -174,9 +140,9 @@ int main(int argc, char** argv) {
 	// Count total number of distinct qid values in dataset
 	vector<long double> cncps = calculateNCPS(clusters, weights,
 					allQids, numMetricsQids, trees);
+
 	// 	2. Calculate GCP
 	calculateGCP(clusters, dataset.size(), allQids, cncps);
-
 
 	// DM
 	calculateDM(clusters, dataset.size(), K, L, P);

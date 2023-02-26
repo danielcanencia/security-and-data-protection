@@ -39,7 +39,7 @@ void Partition::setAllowedCuts(int value, int dim) {
 }
 
 
-int Partition::choose_dimension() {
+int Partition::chooseDimension() {
 	int dimension, width;
 	dimension = width = -1;
 
@@ -206,8 +206,9 @@ bool Partition::isSplitTClose(vector<vector<string>> split) {
 	qSize = data.size();
 
 	// Calculate EMD for every confidential attribute
+	long double emd;
 	for (size_t i=0; i < confAtts.size(); i++) {
-		long double emd = 0;
+		emd = 0;
 		for (const auto& entry : valueSets[i]) {
 			if (splitMaps[i][entry]) {
 				// Entry present in P
@@ -222,7 +223,7 @@ bool Partition::isSplitTClose(vector<vector<string>> split) {
 			}
 		}
 		// EMD(P, Q) = sum(sum(pj - qj)) / (m - 1)
-		emd /= (qSize - 1);
+		emd /= (qSize-1 == 0) ? 1 : (qSize - 1);
 
 		// Check if partition is tclose
 		if (emd > P)

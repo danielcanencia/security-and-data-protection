@@ -26,7 +26,7 @@ void writeAnonymizedTable(const string inputFname,
         string lName = L == -1 ? "" : to_string(L) + GET_NAME(L);
         if (P != -1 && L != -1) lName += "_";
         stringstream stream;
-        stream << fixed << setprecision(2) << P;
+        stream << fixed << setprecision(7) << P;
         const string pName = P == -1 ? "" : stream.str() + GET_NAME(P);
 
 

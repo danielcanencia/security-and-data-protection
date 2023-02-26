@@ -105,6 +105,7 @@ bool isSplitTClose(vector<vector<string>> split, vector<vector<string>> data,
 bool isSplitValid(vector<vector<vector<string>>> splits,
 				  vector<vector<string>> dataset, vector<int> confAtts,
 				  const int K, const int L, const long double P) {
+	cout << "B2" << endl;
 	bool kanonymity, ldiversity, tcloseness;
 	kanonymity = ldiversity = tcloseness = true;
 
@@ -129,6 +130,8 @@ bool isSplitValid(vector<vector<vector<string>>> splits,
 				tcloseness = false;
 		}
 	}
+
+	cout << "E2" << endl;
 
 	return kanonymity && ldiversity && tcloseness;
 }

@@ -47,7 +47,7 @@ public:
 	vector<vector<string>> getResult() const;
 	int getNumAllowedCuts();
 	void setAllowedCuts(int value, int dim);
-	int choose_dimension();
+	int chooseDimension();
 	vector<Partition> splitPartition(int dimension);
 	bool isCutAllowed(int index);
 };

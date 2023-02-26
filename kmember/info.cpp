@@ -1,9 +1,9 @@
 #include "info.h"
 
 int Info::valueType(int qid) {
-        // If we read a point and no
-        // categorical value it must be a
-        // numeric value
+    // If we read a point and no
+    // categorical value it must be a
+    // numeric value
 	if (find(this->numQids.begin(),
 		 this->numQids.end(), qid)
 		!= this->numQids.end()) {

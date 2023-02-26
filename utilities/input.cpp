@@ -1,14 +1,20 @@
 #include "input.h"
 
 const int readNumberOfQids() {
-	cout << "Number of qids: ";
+	string question = "Number of qids: ";
+	cout << question;
     int nqids;
-	cin >> nqids;
-	if (cin.fail()) {
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		cout << "Error, enter a valid number." << endl;
-		readNumberOfQids();
+
+	while(1) {
+		cin >> nqids;
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "Error, enter a valid number." << endl;
+			cout << question;
+			continue;
+		}
+		break;
 	}
 
     return nqids;
@@ -115,10 +121,6 @@ vector<double> readWeights(const int nqids, vector<string> qidNames) {
 
 tuple<vector<int>, vector<int>> readMetricsQids(vector<int> numQids, vector<int> catQids,
                                                 vector<string> headers) {
-				for (const auto& a : catQids)
-					cout << to_string(a) + ", ";
-				cout << "QidNames size: "; cout << headers.size();
-
 	vector<int> numMetricsQids = numQids, catMetricsQids;
 	string question = "Do you want to treat some hierarchical attributes as "
 			 		  "numerical? (will only be used on metrics) [Y(y)/N(n)]: ";

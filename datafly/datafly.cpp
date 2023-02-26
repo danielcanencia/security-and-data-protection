@@ -24,16 +24,6 @@ int main(int argc, char** argv) {
 	const int nqids = readNumberOfQids();
 	vector<string> qidNames = readQidNames(nqids);
 
-
-	//vector<string> qidNames(qid_set.begin(), qid_set.end());
-	//vector<string> qidNames = {"Age", "Occupation"};
-	//vector<string> qidNames = {"Age", "Country", "Occupation"};
-	/*vector<string> qidNames = {
-		"Education", "Marital-status",
-		"Native-country", "Occupation", "Race", "Relationship",
-		"Salary", "Sex", "Workclass"
-	};*/
-
 	// Read data file and hierarchy folders
 	vector<string> headers;
 	vector<int> qids, confAtts;

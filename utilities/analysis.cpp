@@ -52,14 +52,13 @@ bool sortMaxSplit(string a, string b) {
 	long double max1, max2;
 	int i1 = a.find('~');
 	int i2 = b.find('~');
-        if (i1 != (int)string::npos) {
-               	max1 = stod(a.substr(i1 + 1, a.size()));
-	}
+    if (i1 != (int)string::npos)
+		max1 = stod(a.substr(i1 + 1, a.size()));
 	else
 		max1 = stod(a);
-       	if (i2 != (int)string::npos) {
-               	max2 = stod(b.substr(i2 + 1, b.size()));
-	}
+
+    if (i2 != (int)string::npos)
+		max2 = stod(b.substr(i2 + 1, b.size()));
 	else
 		max2 = stod(b);
 
@@ -70,14 +69,13 @@ bool sortMinSplit(string a, string b) {
 	long double min1, min2;
 	int i1 = a.find('~');
 	int i2 = b.find('~');
-        if (i1 != (int)string::npos) {
-               	min1 = stod(a.substr(0, i1));
-	}
+    if (i1 != (int)string::npos)
+		min1 = stod(a.substr(0, i1));
 	else
 		min1 = stod(a);
-       	if (i2 != (int)string::npos) {
-               	min2 = stod(b.substr(0, i2));
-	}
+
+	if (i2 != (int)string::npos)
+	    min2 = stod(b.substr(0, i2));
 	else
 		min2 = stod(b);
 
@@ -106,23 +104,23 @@ vector<long double> calculateNCPS(vector<vector<vector<string>>> clusters,
 						return sortMaxSplit(a, b);
 					});
  		    int index = aux.find('~');
-      		if (index != (int)string::npos) {
+			if (index != (int)string::npos)
            		auxMax = stod(aux.substr(index + 1, aux.size()));
-        	}
 			else
 				auxMax = stod(aux);
+
 			if (auxMax > max || max == -1)
 				max = auxMax;
 
-	      		aux = *min_element(tcluster[qid].begin(),
-		 			   tcluster[qid].end(),
-				[](string a, string b) {
-					return sortMinSplit(a, b);
-				});
- 		     	index = aux.find('~');
-      			if (index != (int)string::npos) {
-                		auxMin = stod(aux.substr(0, index));
-        		}
+      		aux = *min_element(tcluster[qid].begin(),
+	 			   tcluster[qid].end(),
+					[](string a, string b) {
+						return sortMinSplit(a, b);
+					});
+ 		    index = aux.find('~');
+			if (index != (int)string::npos) {
+            	auxMin = stod(aux.substr(0, index));
+        	}
 			else
 				auxMin = stod(aux);
 			if (auxMin < min || min == -1)

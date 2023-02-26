@@ -73,8 +73,6 @@ int main(int argc, char** argv) {
 	// Read qid names
 	const int nqids = readNumberOfQids();
 	vector<string> qidNames = readQidNames(nqids);
-	//vector<string> qidNames = {"Age", "Country", "Occupation"};
-	//vector<string> qidNames(qid_set.begin(), qid_set.end());
 
 	// Read data file and hierarchy folders
 	vector<string> headers;

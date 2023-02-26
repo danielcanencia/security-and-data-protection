@@ -31,11 +31,14 @@ void calculateDM(vector<vector<vector<string>>> clusters,
 
 // Equivalent Class Size Metric
 void calculateCAVG(vector<vector<vector<string>>> clusters,
-                   const int tableSize, const int param,
+                   const int tableSize, const long double param,
                    const string paramName) {
+    const long double denom =  (long double) (clusters.size() * param);
+    const long double cavg = (denom == 0) ? 0 : tableSize / denom;
+
     cout << "\t* CAvg using " + paramName + ": ";
     cout << fixed << setprecision(3);
-    cout << tableSize / (long double) (clusters.size() * param) << endl;
+    cout << cavg << endl;
 }
 
 void calculateCAVG(vector<vector<vector<string>>> clusters,
