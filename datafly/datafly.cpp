@@ -86,7 +86,7 @@ int main(int argc, char** argv) {
 	cout << "===> Analysis: " << endl;
 	// Create a hierarchy tree for every qid
 	map<int, Tree> trees;
-	for (size_t i=0; i < qids.size(); i++) {
+	for (const int& i : qids) {
 		trees[i] = Tree(hierarchiesMap[i]);
 	}
 
