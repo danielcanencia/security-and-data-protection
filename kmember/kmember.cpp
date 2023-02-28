@@ -4,7 +4,10 @@ map<int, vector<vector<string>>> evaluate(
 		vector<vector<string>> dataset,
 		map<int, vector<vector<string>>> hierarchies,
 		vector<int> numQids, vector<int> catQids,
-		const int K, int& count) {
+		const int confAtt, const int K, const int L,
+		const vector<string> sensitiveValues,
+		const int diversityPenalty,	const int diversity,
+		int& count) {
 	// Main algorithm
 	vector<vector<string>> S = dataset;
 	int r = randomRecord(S);
@@ -24,9 +27,10 @@ map<int, vector<vector<string>>> evaluate(
 		S.erase(S.begin() + r);
 
 		while((int)c.size() < K) {
-			r = find_best_record(S, c,
-				hierarchies,
-				numQids, catQids);
+			r = find_best_record(S, c, hierarchies,
+				numQids, catQids, confAtt, L,
+				sensitiveValues, diversityPenalty,
+				diversity);
 			c.emplace_back(S[r]);
 			S.erase(S.begin() + r);
 		}
@@ -73,19 +77,20 @@ int main(int argc, char** argv) {
 	// Read qid names
 	const int nqids = readNumberOfQids();
 	vector<string> qidNames = readQidNames(nqids);
+	// Conf Att
+	vector<string> confAttNames(1, readConfidentialAttName());
 
 	// Read data file and hierarchy folders
 	vector<string> headers;
 	vector<int> catQids, numQids, allQids;
 	vector<int> confAtts;
-	vector<vector<string>> hierarchies, dataset,
-			       transposedDataset;
+	vector<vector<string>> hierarchies, dataset;
 	map<int, vector<vector<string>>> hierarchiesMap;
 
 
 	try {
 		hierarchiesMap = read_directory(fs::path(argv[1]),
-					dataset, headers, qidNames, {},
+					dataset, headers, qidNames, confAttNames,
 					catQids, confAtts, false);
 
 		if (catQids.size() == 0) {
@@ -110,6 +115,20 @@ int main(int argc, char** argv) {
 
 	// Read Parameters
 	const int K = readParameter("k-anonymity", "K", dataset.size());
+	if (K == -1) {
+		cout << "Kmember needs parameter K" << endl;
+		return 1;
+	}
+	const int L = readParameter("l-diversity", "L", dataset.size());
+	// Diversity Penalty, select metric used
+	const int confAtt = confAtts[0];
+	const int diversityPenalty = readDiversityPenalty();
+	const int diversity = readDiversity();
+	vector<vector<string>> transposedDataset = transpose(dataset);
+	// Read sensitive values for sensitive diversity metric
+	vector<string> sensitiveValues;
+	if (diversity == 1)
+		sensitiveValues = readSensitiveValues(transposedDataset[confAtt]);
 
 
 	// Measure Execution Time
@@ -118,8 +137,9 @@ int main(int argc, char** argv) {
 	// Main algorithm
 	int count = 0;
 	map<int, vector<vector<string>>> res = evaluate(dataset, hierarchiesMap,
-													numQids, catQids, K,
-													count);
+													numQids, catQids, confAtt,
+													K, L, sensitiveValues,
+													diversityPenalty, diversity, count);
 	// *********************************
 	auto stop = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -132,7 +152,11 @@ int main(int argc, char** argv) {
 
 	// Write Anonymized Clusters
 	string directory = argv[1];
-	directory += "/" + to_string(K) + "K";
+	if (directory.back() != '/')
+		directory += "/";
+	directory += to_string(K) + "K";
+	if (L != -1)
+		directory += "_" + to_string(L) + "L";
 	for (int i=0; i < count; i++) {
 		writeAnonymizedTable(
 			fs::path(directory),

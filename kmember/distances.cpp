@@ -137,8 +137,10 @@ long double information_loss(vector<vector<string>> records,
 int find_best_record(vector<vector<string>> records,
 		     vector<vector<string>> cluster,
 		     map<int, vector<vector<string>>> hierarchies,
-		     const vector<int> numQids,
-		     const vector<int> catQids) {
+		     const vector<int> numQids, const vector<int> catQids,
+			 const int confAtt, const int L,
+			 const vector<string> sensitiveValues,
+			 const int diversityPenalty, const int diversity) {
 	long double min = -1, diff;
 	int best;
 
@@ -147,10 +149,31 @@ int find_best_record(vector<vector<string>> records,
 		aux = cluster;
 		aux.emplace_back(records[i]);
 
-		diff = information_loss(aux, hierarchies,
-					numQids, catQids)
-			- information_loss(cluster, hierarchies,
-				    	numQids, catQids);
+		long double auxDiff = information_loss(aux, hierarchies,
+											   numQids, catQids)
+							 - information_loss(cluster, hierarchies,
+												numQids, catQids);
+		// K Anonymity
+		diff = auxDiff;
+		if (L != -1) {
+			string majorClass = majorityClass(cluster, confAtt);
+			string recordClass = records[i][confAtt];
+			// Equal Diversity Metric
+			if (diversity == 0) {
+				if (isDiverse(cluster, confAtt, L))
+					diff = auxDiff;
+				else if (majorClass != recordClass)
+					diff = auxDiff + diversityPenalty;
+			}
+			// Sensitive Diversity Metric
+			else if (diversity) {
+				if (isDiverse(cluster, confAtt, L))
+					diff = auxDiff;
+				else if (isSensitive(majorClass, confAtt, cluster)
+						 && majorClass != recordClass)
+					diff = auxDiff + diversityPenalty;
+			}
+		}
 		if (diff < min || min == -1) {
 			min = diff;
 			best = i;

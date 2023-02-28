@@ -153,7 +153,6 @@ vector<long double> calculateNCPS(vector<vector<vector<string>>> clusters,
 				ncp += aux * weights[i];
 			}
 		}
-
 		ncp *= allQids.size();
 		cncps.emplace_back(ncp);
 	}

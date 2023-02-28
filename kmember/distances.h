@@ -4,6 +4,7 @@
 #include <iostream>
 #include <numeric>
 #include "info.h"
+#include "diversity.h"
 
 int randomRecord(vector<vector<string>> records);
 int furthestRecord(const vector<string> record,
@@ -24,8 +25,10 @@ long double distance(const vector<string>& r1,
 int find_best_record(vector<vector<string>> records,
 		     vector<vector<string>> cluster,
 		     map<int, vector<vector<string>>> hierarchies,
-		     const vector<int> numQids,
-		     const vector<int> catQids);
+		     const vector<int> numQids, const vector<int> catQids,
+                     const int confAtt, const int L,
+                     const vector<string> sensitiveValues,
+                     const int diversityPenalty, const int diversity);
 int find_best_cluster(map<int, vector<vector<string>>> clusters,
                       vector<string> record,
                       map<int, vector<vector<string>>> hierarchies,

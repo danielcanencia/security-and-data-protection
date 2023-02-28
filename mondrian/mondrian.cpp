@@ -140,7 +140,6 @@ int main(int argc, char** argv) {
 	// Count total number of distinct qid values in dataset
 	vector<long double> cncps = calculateNCPS(clusters, weights,
 					allQids, numMetricsQids, trees);
-
 	// 	2. Calculate GCP
 	calculateGCP(clusters, dataset.size(), allQids, cncps);
 

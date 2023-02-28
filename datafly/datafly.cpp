@@ -50,6 +50,10 @@ int main(int argc, char** argv) {
 
 	// Read Parameters
 	const int K = readParameter("k-anonymity", "K", dataset.size());
+	if (K == -1) {
+		cout << "Datafly needs parameter K" << endl;
+		return 1;
+	}
 	// Read Weights
 	vector<double> weights = readWeights(nqids, qidNames);
 	// Ask for desired qid types to be used on metrics

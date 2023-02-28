@@ -137,7 +137,7 @@ map<int, vector<vector<string>>> read_directory(
 		if (fs::is_regular_file(entry) && entry.path().extension()==".csv")
 			file = entry.path().filename();
 		else
-			throw "Error, file format error";
+			throw "Error, file format error.";
 	}
 	const string filename = string(directory) + "/" + file;
 
@@ -151,7 +151,7 @@ map<int, vector<vector<string>>> read_directory(
 			hierarchies.emplace_back(hierarchies_dir + entry.path().filename().c_str());
 		}
 	} catch (...) {
-		throw "Error, directory doesn't exist";
+		throw "Error, directory doesn't exist.";
 	}
 
 	// Read csv dataset

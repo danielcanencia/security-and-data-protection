@@ -9,6 +9,7 @@
 #include "../utilities/input.h"
 #include "../utilities/writeData.h"
 #include "distances.h"
+#include "diversity.h"
 
 #endif
 
