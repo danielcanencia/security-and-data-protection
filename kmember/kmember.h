@@ -8,6 +8,7 @@
 #include "../utilities/hierarchy.h"
 #include "../utilities/input.h"
 #include "../utilities/writeData.h"
+#include "../utilities/metrics.h"
 #include "distances.h"
 #include "diversity.h"
 

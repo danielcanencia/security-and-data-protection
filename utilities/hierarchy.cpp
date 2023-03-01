@@ -98,7 +98,7 @@ vector<vector<vector<string>>> transposeAndFormat(
 	return res;
 }
 
-map<int, vector<vector<string>>> read_directory(
+map<int, vector<vector<string>>> readDirectory(
 	fs::path const &directory,
 	vector<vector<string>>& dataset, vector<string>& headers,
 	vector<string> attQids, vector<string> confAtts,
@@ -259,9 +259,11 @@ map<int, vector<vector<string>>> read_directory(
 vector<vector<string>> transpose(
 	const vector<vector<string>>& matrix) {
 
+	if (matrix.size() == 0)
+		return matrix;
+
 	const int rows=matrix.size();
 	const int cols=matrix[0].size();
-
 	vector<vector<string>> arr(cols, vector<string>(rows));
 
 	// Transpose vector

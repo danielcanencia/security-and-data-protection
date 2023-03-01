@@ -53,12 +53,32 @@ bool isSensitive(string majorityClass, const int confAtt,
 }
 
 string readConfidentialAttName() {
-	cout << "Confidential attribute: " << endl;
-
-	// Read confidential attributes name
 	string attName;
-	cout << "\tEnter att name: ";
-	cin >> attName;
+	string question = "Do yo want to use a confidential attribute? "
+		"(will only be used if l-diversity is choosen) [Y(y)/N(n)]: ";
+	cout << question;
+	char answer;
+	cin >> answer;
+	bool keep = true;
+	while(keep) {
+		switch(answer) {
+			case 'Y':
+			case 'y':
+				cout << "Confidential attribute: " << endl;
+				// Read confidential attributes name
+				cout << "\tEnter att name: ";
+				cin >> attName;
+				keep = false;
+				break;
+			case 'N':
+			case 'n':
+				keep = false;
+				break;
+			default:
+				cout << question << endl;
+				cin >> answer;
+		}
+	}
 
     return attName;
 }

@@ -8,18 +8,16 @@ int randomRecord(vector<vector<string>> records) {
 }
 
 int furthestRecord(const vector<string> record,
-	      	   int index,
-		   const vector<vector<string>> records,
-		   const map<int, vector<vector<string>>> hierarchies,
-		   const vector<int> numQids,
-		   const vector<int> catQids) {
+	      	   	   int index,
+		   		   const vector<vector<string>> records,
+		   		   const map<int, vector<vector<string>>> hierarchies,
+		   		   const vector<int> numQids,
+		   		   const vector<int> catQids) {
 	long double furthestDiff = -1;
 	int furthestIdx = -1;
 
-
 	// Precalculate all needed values
 	Info info(records, hierarchies, numQids, catQids);
-
 
 	// Compare current record with all records
 	// except himself
@@ -37,9 +35,10 @@ int furthestRecord(const vector<string> record,
 		}
 	}
 
-	// Must fail if records contains just
-	// the record 'record'
-
+	// If records contains just
+	// the record 'record' return given index
+	if (furthestIdx == -1)
+		return index;
 	return furthestIdx;
 }
 
@@ -64,7 +63,6 @@ long double distance(const vector<string>& r1,
 		     Info info) {
 	long double numSum = 0.0, catSum = 0.0;
 	string v1, v2;
-
 	// Numeric Values
 	for (const auto& idx : info.getNumQids()) {
 		v1 = r1[idx];
@@ -84,25 +82,26 @@ long double distance(const vector<string>& r1,
 		catSum += catDistance(v1, v2, info, idx);
 	}
 
-
 	return numSum + catSum;
 }
 
-long double information_loss(vector<vector<string>> records,
+long double informationLoss(vector<vector<string>> records,
 			     map<int, vector<vector<string>>> hierarchies,
 		   	     const vector<int> numQids,
 		   	     const vector<int> catQids) {
 	int e = records.size();
 	vector<long double> numValues, catValues;
 
+	cout << "E: "; cout << e << endl;
 	// Numeric Attributes
 	for (const int& idx : numQids) {
+		cout << "Idx: "; cout << idx << endl;
 		long double max, min, aux;
 		max = min = -1;
-		vector<long double> numericDomain;	
+		vector<long double> numericDomain;
 		for (const vector<string>& record : records) {
+			cout << record[idx] << endl;
 			aux = stold(record[idx]);
-
 			numericDomain.emplace_back(aux);	
 
 			if (aux > max)
@@ -126,7 +125,6 @@ long double information_loss(vector<vector<string>> records,
 			info.getTreeHeight(idx));
 	}
 
-
 	// Sum all values in every vector
 	auto r1 = reduce(numValues.begin(), numValues.end());
 	auto r2 = reduce(catValues.begin(), catValues.end());
@@ -134,7 +132,7 @@ long double information_loss(vector<vector<string>> records,
 	return e * (r1 + r2);
 }
 
-int find_best_record(vector<vector<string>> records,
+int findBestRecord(vector<vector<string>> records,
 		     vector<vector<string>> cluster,
 		     map<int, vector<vector<string>>> hierarchies,
 		     const vector<int> numQids, const vector<int> catQids,
@@ -149,9 +147,9 @@ int find_best_record(vector<vector<string>> records,
 		aux = cluster;
 		aux.emplace_back(records[i]);
 
-		long double auxDiff = information_loss(aux, hierarchies,
+		long double auxDiff = informationLoss(aux, hierarchies,
 											   numQids, catQids)
-							 - information_loss(cluster, hierarchies,
+							 - informationLoss(cluster, hierarchies,
 												numQids, catQids);
 		// K Anonymity
 		diff = auxDiff;
@@ -183,7 +181,7 @@ int find_best_record(vector<vector<string>> records,
 	return best;
 }
 
-int find_best_cluster(map<int, vector<vector<string>>> clusters,
+int findBestCluster(map<int, vector<vector<string>>> clusters,
 		      vector<string> record,
 		      map<int, vector<vector<string>>> hierarchies,
 		      const vector<int> numQids,
@@ -196,9 +194,9 @@ int find_best_cluster(map<int, vector<vector<string>>> clusters,
 		aux = clusters[i];
 		aux.emplace_back(record);
 
-		diff = information_loss(aux, hierarchies,
+		diff = informationLoss(aux, hierarchies,
 					numQids, catQids)
-			- information_loss(clusters[i], hierarchies,
+			- informationLoss(clusters[i], hierarchies,
 				    	numQids, catQids);
 		if (diff < min || min == -1) {
 			min = diff;
@@ -208,4 +206,3 @@ int find_best_cluster(map<int, vector<vector<string>>> clusters,
 
 	return best;
 }
-

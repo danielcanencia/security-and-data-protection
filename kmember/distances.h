@@ -21,18 +21,17 @@ long double catDistance(const string& v1, const string& v2,
 long double distance(const vector<string>& r1,
                      const vector<string>& r2,
 		     Info info);
-
-int find_best_record(vector<vector<string>> records,
-		     vector<vector<string>> cluster,
-		     map<int, vector<vector<string>>> hierarchies,
-		     const vector<int> numQids, const vector<int> catQids,
-                     const int confAtt, const int L,
-                     const vector<string> sensitiveValues,
-                     const int diversityPenalty, const int diversity);
-int find_best_cluster(map<int, vector<vector<string>>> clusters,
-                      vector<string> record,
-                      map<int, vector<vector<string>>> hierarchies,
-                      const vector<int> numQids,
-                      const vector<int> catQids);
+int findBestRecord(vector<vector<string>> records,
+		   vector<vector<string>> cluster,
+		   map<int, vector<vector<string>>> hierarchies,
+		   const vector<int> numQids, const vector<int> catQids,
+                   const int confAtt, const int L,
+                   const vector<string> sensitiveValues,
+                   const int diversityPenalty, const int diversity);
+int findBestCluster(map<int, vector<vector<string>>> clusters,
+                    vector<string> record,
+                    map<int, vector<vector<string>>> hierarchies,
+                    const vector<int> numQids,
+                    const vector<int> catQids);
 #endif
 

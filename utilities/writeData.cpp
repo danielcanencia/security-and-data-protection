@@ -20,7 +20,7 @@ void writeAnonymizedTable(const string inputFname,
                           const vector<string> headers,
                           const vector<vector<string>> dataset,
                           const int K, const int L, const long double P,
-                          const string prefix) {
+                          const string prefix, const bool verbose) {
         string kName = K == -1 ? "" : to_string(K) + GET_NAME(K);
         if (L != -1 && K != -1) kName += "_";
         string lName = L == -1 ? "" : to_string(L) + GET_NAME(L);
@@ -34,9 +34,13 @@ void writeAnonymizedTable(const string inputFname,
         if (input.back() == '/')
                input.resize(input.size() - 1); 
         const string parentPath = filesystem::path{input}.string();
-        string dname = "generalized_tables"
-                + parentPath.substr(parentPath.find_first_of('/'), parentPath.size()) + "/";
 
+        string dname = "generalized_tables";
+        if (parentPath.find_first_of('/') != parentPath.size() -1 )
+                dname += "/" + parentPath + "/";
+        else
+                dname += parentPath.substr(parentPath.find_first_of('/'), parentPath.size()) + "/";
+        cout << dname << endl;
         if (!fs::is_directory(dname) || !fs::exists(dname)) {
                 if (!fs::create_directories(dname)) {
                         throw "Error creating output directory";
@@ -50,8 +54,10 @@ void writeAnonymizedTable(const string inputFname,
         else
                 fname += prefix + ".csv";
         
-	cout << "===> Writing data to file: " << endl;
-	cout << "\t* " + fname << endl;
+	if (verbose) {
+                cout << "===> Writing data to file: " << endl;
+	        cout << "\t* " + fname << endl;
+        }
         ofstream fp(fname);
 
         vector<vector<string>> aux;

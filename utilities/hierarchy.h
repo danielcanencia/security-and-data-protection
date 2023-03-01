@@ -18,7 +18,7 @@ namespace fs = std::filesystem;
 
 string getNumericRoot(const vector<vector<string>> dataset,
                       const int qidIndex);
-map<int, vector<vector<string>>> read_directory(
+map<int, vector<vector<string>>> readDirectory(
 	fs::path const &directory,
 	vector<vector<string>>& dataset, vector<string>& headers,
 	vector<string> attQids, vector<string> confAtts,

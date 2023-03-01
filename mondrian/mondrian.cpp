@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
 	vector<vector<string>> dataset;
 
 	try {
-		hierarchiesMap = read_directory(fs::path(argv[1]),
+		hierarchiesMap = readDirectory(fs::path(argv[1]),
 					dataset, headers, qidNames, confAttNames,
 					catQids, confAtts, false);
 		sort(catQids.begin(), catQids.end());
@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
 
 		sort(allQids.begin(), allQids.end());
 		set_difference(allQids.begin(), allQids.end(),
-			catQids.begin(), catQids.end(),
+				catQids.begin(), catQids.end(),
         		inserter(numQids, numQids.begin())); 
 
 		// Build a vector containing qid types
@@ -83,16 +83,6 @@ int main(int argc, char** argv) {
 	readParameters(dataset.size(), confAttNames.size(), K, L, P);
 	// Read Weights
 	vector<double> weights = readWeights(nqids, qidNames);
-	//vector<string> qidNames = {"Age", "Country", "Occupation" };
-	//vector<string> qidNames = {"Salary", "Occupation", "Country"};
-	/*vector<string> qidNames = {
-		"Education", "Marital-status",
-		"Native-country", "Occupation", "Race", "Relationship",
-		"Salary", "Sex", "Workclass"
-	};*/
-	/*vector<string> qidNames = {
-		"Workclass", "Education"
-	};*/
 
 	// Ask for desired qid types to be used on metrics
 	vector<int> numMetricsQids, catMetricsQids;

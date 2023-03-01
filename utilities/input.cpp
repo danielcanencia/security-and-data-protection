@@ -73,7 +73,7 @@ vector<string> readConfidentialAttNames() {
 
 vector<double> readWeights(const int nqids, vector<string> qidNames) {
 	vector<double> weights;
-	cout << "Do you want to use custom weights "
+	cout << "Do you want to use custom weights? "
 			"(will only be used on gcp metric) [Y(y)/N(n)]: ";
 	char answer;
 	cin >> answer;

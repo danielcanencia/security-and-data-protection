@@ -34,10 +34,28 @@ int main(int argc, char** argv) {
 	map<int, vector<vector<string>>> transposedHierarchyMap;
 
 	try {
-		hierarchiesMap = read_directory(fs::path(argv[1]),
+		hierarchiesMap = readDirectory(fs::path(argv[1]),
 					dataset, headers, qidNames, confAttNames,
 					qids, confAtts, true);
 		sort(qids.begin(), qids.end());
+	
+		if (catQids.size() < qidNames) {
+			cout << endl << "******************" << endl; 
+			cout << "An error occured.\nCheck the qid "
+				"names entered exists. They should be "
+				"referenced\nin their respectives "
+				"hierarchy files." << endl << endl;
+			return -1;
+		}
+		if (confAtts.size() < confAttNames.size()) {
+			cout << endl;
+			cout << "An error occured.\nCheck the confidential "
+				"attributte names entered exists.\nThey should be "
+				"referenced in their respectives "
+				"hierarchy files." << endl << endl;
+			return -1;
+		}
+
 		for (const auto& qid : qids) {
 			transposedHierarchyMap[qid] = transpose(hierarchiesMap[qid]);
 		}
