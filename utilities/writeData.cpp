@@ -36,7 +36,7 @@ void writeAnonymizedTable(const string inputFname,
         const string parentPath = filesystem::path{input}.string();
 
         string dname = "generalized_tables";
-        if (parentPath.find_first_of('/') != parentPath.size() -1 )
+        if (parentPath.find_first_of('/') == parentPath.find_last_of('/'))
                 dname += "/" + parentPath + "/";
         else
                 dname += parentPath.substr(parentPath.find_first_of('/'), parentPath.size()) + "/";

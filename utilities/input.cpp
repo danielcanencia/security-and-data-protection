@@ -29,9 +29,8 @@ vector<string> readQidNames(const int nqids) {
 		qid_set.insert(qidName);
 	}
 	if ((int)qid_set.size() != nqids) {
-		cout << "Input Error: Qids should be unique."
-		        "Check if you repeated some of them." << endl;
-		return vector<string>();
+		throw "Input Error: Qids should be unique. "
+		        "Check if you repeated some of them.";
 	}
 
     return vector<string>(qid_set.begin(), qid_set.end());

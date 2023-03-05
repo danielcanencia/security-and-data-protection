@@ -1,7 +1,6 @@
 #include "edge.h"
 
-Edge::Edge(int nodeId, int from, int to) {
-	this->nodeId = nodeId;
+Edge::Edge(int from, int to) {
 	this->from = from;
 	this->to = to;
 }
@@ -12,10 +11,6 @@ int Edge::getParent() const {
 
 int Edge::getChild() const {
 	return this->to;
-}
-
-int Edge::getNodeId() const {
-	return this->nodeId;
 }
 
 void Edge::setChild(const int to) {
@@ -30,8 +25,7 @@ bool Edge::isEqual(int from, int to) const {
 }
 
 void Edge::print() const {
-	std::cout << "nodeId: " + std::to_string(nodeId) +
-		", from: " + std::to_string(from) + ", "
+	std::cout << "from: " + std::to_string(from) + ", "
 		"to: " + std::to_string(to) << std::endl;
 }
 

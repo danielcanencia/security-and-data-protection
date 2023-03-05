@@ -172,14 +172,16 @@ map<int, vector<vector<string>>> readDirectory(
 		headers.push_back(tmp);
 		transform(tmp.begin(), tmp.end(), tmp.begin(),
     		  [](unsigned char x){ return tolower(x); });
-    		headersVector.push_back(tmp);
+    	headersVector.push_back(tmp);
 	}
 
 	// Get confidential attribute indexes
 	for (size_t i=0; i < confAttNames.size(); i++) {
 		auto it = find(headersVector.begin(), headersVector.end(), confAttNames[i]);
-		if (it != headersVector.end() || headersVector[i] != confAttNames[i])
+		if (it != headersVector.end())
 			atts.emplace_back(it - headersVector.begin());
+		else if (headersVector.back() == confAttNames[i])
+			atts.emplace_back(confAttNames.size() - 1);
 	}
 
 	// Read input table

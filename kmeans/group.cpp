@@ -33,13 +33,20 @@ void Group::recalculateCentroid() {
 	this->centroid = centroid;
 }
 
-void Group::writeToFile(ofstream& file) const {
-	for (const Record& record : records) {
-		file << "Cluster: " + to_string(gindex);
-		file << ", Atts.Values: ";
-		record.writeToFile(file);
+void Group::writeToFile(string filename, string headers) const {
+	ofstream file;
+
+	file.open(filename, ios::trunc);
+	if (!file.is_open()) {
+		cout << "Unable to open file" << endl;
+		return ;
 	}
 
+	file << headers << endl;
+	for (const Record& record : records)
+		record.writeToFile(file);
+
+   	file.close();
 }
 
 void Group::printRecords() {

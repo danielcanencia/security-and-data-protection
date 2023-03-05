@@ -20,11 +20,18 @@ int main(int argc, char** argv) {
 
 
 	// Read input
-	// Read qid names
 	const int nqids = readNumberOfQids();
-	vector<string> qidNames = readQidNames(nqids);
-	// Conf Atts Names
-	vector<string> confAttNames = readConfidentialAttNames();
+	vector<string> qidNames;
+	vector<string> confAttNames;
+	try {
+		// Read Qid Names
+		qidNames = readQidNames(nqids);
+		// Conf Atts Names
+		confAttNames = readConfidentialAttNames();
+	} catch (const char* e) {
+		cout << e << endl;
+		return -1;
+	}
 
 	// Read csv data file
 	vector<string> headers;
@@ -38,8 +45,7 @@ int main(int argc, char** argv) {
 					dataset, headers, qidNames, confAttNames,
 					qids, confAtts, true);
 		sort(qids.begin(), qids.end());
-	
-		if (catQids.size() < qidNames) {
+		if (qids.size() < qidNames.size()) {
 			cout << endl << "******************" << endl; 
 			cout << "An error occured.\nCheck the qid "
 				"names entered exists. They should be "
@@ -47,8 +53,9 @@ int main(int argc, char** argv) {
 				"hierarchy files." << endl << endl;
 			return -1;
 		}
+
 		if (confAtts.size() < confAttNames.size()) {
-			cout << endl;
+			cout << endl << "******************" << endl; 
 			cout << "An error occured.\nCheck the confidential "
 				"attributte names entered exists.\nThey should be "
 				"referenced in their respectives "
@@ -117,13 +124,17 @@ int main(int argc, char** argv) {
 	}
 
 	// GCP
-	// 1. Precalculate NCP for every qid value included in every cluster
-	vector<long double> cncps = calculateNCPS(
-		clusters, weights, qids, numMetricsQids, treeMap);
+	try {
+		// 1. Precalculate NCP for every qid value included in every cluster
+		vector<long double> cncps = calculateNCPS(
+			clusters, weights, qids, numMetricsQids, treeMap);
 
-	// 2. Calculate GCP
-	calculateGCP(clusters, dataset.size(), qids, cncps);
-
+		// 2. Calculate GCP
+		calculateGCP(clusters, dataset.size(), qids, cncps);
+	} catch (const char* e) {
+		cout << e << endl;
+		return -1;
+	}
 
 	// DM
 	calculateDM(clusters, dataset.size(), K, L, P);
@@ -132,8 +143,14 @@ int main(int argc, char** argv) {
 	calculateCAVG(clusters, dataset.size(), K, L, P);
 
 	// GenILoss
-	calculateGenILoss(transpose(result), treeMap, qids,
-					  catMetricsQids, numMetricsQids, dataset.size());
+	try {
+		calculateGenILoss(transpose(result), treeMap, qids,
+						  catMetricsQids, numMetricsQids,
+						  dataset.size());
+	} catch (const char* e) {
+		cout << e << endl;
+		return -1;
+	}
 
 	return 0;
 }

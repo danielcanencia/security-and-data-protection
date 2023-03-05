@@ -2,12 +2,14 @@
 
 vector<Graph> graphGeneration(const vector<int>& qids,
 			     map<int, int> nodeMax,
-			     int numAttr) {
+			     int numAttr, set<vector<int>> toPrune) {
 	vector<Graph> graphs;
 	vector<vector<int>> C;
 
-
 	C = getPermutations(numAttr, qids);
+
+	// Convert from set to vector
+	vector<vector<int>> pruneVector(toPrune.begin(), toPrune.end());
 
 	// Generate trees for permutations of $perm qids
 	for (int perm=0; perm < (int)C.size(); perm++) {
@@ -20,27 +22,11 @@ vector<Graph> graphGeneration(const vector<int>& qids,
 		GraphData graphData;
 		// C[perm] => curr qid indexes 
 		// CMaxValue => max qid indexes
-		Graph graph(CMaxValue, C[perm], graphData);
+		Graph graph(CMaxValue, C[perm], pruneVector, graphData);
 		graphs.emplace_back(graph);
 	}
+
 	return graphs;
-}
-
-void printGraphKAnon(Graph graph, const vector<GraphNode>& kNodes,
-		     const vector<string>& headers,
-		     const vector<int>& qid) {
-	// Print every set of qids that is kanon and/or is
-	// a direct generalization of one
-	cout << "Graph with qids: { ";
-	const vector<int>& qids = graph.getQids();
-	cout << headers[qids[0]];
-	for (size_t i=1; i < qids.size(); i++) {
-		cout << ", " + headers[qids[i]];
-	}
-	cout << " }" << endl;
-
-	// Sets of keys for the node
-	graph.printAllKAnon();
 }
 
 map<string, vector<string>> generateGeneralizationMap(
@@ -76,16 +62,15 @@ vector<vector<string>> generateAnonymizedDataset(
 	// Criteria: Generalization/Node that produces the maximum amount
 	// 			 of equivalence classes
 	const GraphNode node = graphs.back().getFinalKAnon(gens, dataset, qids);
-	cout << "dsdsassd" << endl;
-	node.print();
 	vector<int> data = node.getData();
 
 	map<int, map<string, string>> generalizations;
 	for (size_t i=0; i < qids.size(); i++) {
 		const int qid = qids[i];
 		map<string, string> qidMap;
-		for (size_t j = 0; j < hierarchiesMap[qid][0].size(); j++)
+		for (size_t j = 0; j < hierarchiesMap[qid][0].size(); j++) {
 			qidMap[hierarchiesMap[qid][0][j]] = hierarchiesMap[qid][data[i]][j];
+		}
 		generalizations[qid] = qidMap;
 	}
 
@@ -133,10 +118,11 @@ tuple<vector<vector<string>>, vector<vector<vector<string>>>> incognito(
 
 	// Generate all posible graphs containing qids
 	// defined by qid variable
-	vector<Graph> graphs = graphGeneration(qids, nodeMax, 1);
+	vector<Graph> graphs = graphGeneration(qids, nodeMax, 1, {});
 
 	// Main Algorithm
 	vector<Graph> rGraphs;
+	set<vector<int>> pruningVector;
 	for (size_t i=1; i < qids.size() + 1; i++) {
 		for (size_t gsize=0; gsize < graphs.size(); gsize++) {
 			Graph g = graphs[gsize];
@@ -148,29 +134,28 @@ tuple<vector<vector<string>>, vector<vector<vector<string>>>> incognito(
 				GraphNode node = *(nodesQueue.begin());
 				nodesQueue.erase(nodesQueue.begin());
 
-				if (!node.marked()) {
+				if (!g.isNodeMarked(node)) {
 					// Not marked
 					if (node.isAnonymityValid(hierarchies,
-								   dataset, transposedDataset,
-								   gensMap, g.getQids(), confAtts,
-								   K, L, P)) {
+								   dataset, gensMap, g.getQids(),
+								   confAtts, K, L, P)) {
 						g.markGeneralizations(node);
 					}
 					else {
+						// Add node to pruning vector
+						pruningVector.insert(node.getData());
 				 		g.addGeneralizations(node, nodesQueue);
 					}
 				}
 			}
 
-			// Print Graph Solution
-			//printGraphKAnon(g, kanon, headers, qids);
 			rGraphs.emplace_back(g);
 		}
 
 
 		// Generate graphs
 		if (i <= qids.size()) 
-			graphs = graphGeneration(qids, nodeMax, i+1);
+			graphs = graphGeneration(qids, nodeMax, i+1, pruningVector);
 	}
 
 	// Construct anonymized dataset

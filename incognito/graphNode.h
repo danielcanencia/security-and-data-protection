@@ -38,7 +38,6 @@ public:
 	bool isKAnon() const;
 	bool isAnonymityValid(map<int, vector<vector<string>>> hierarchies,
 						  vector<vector<string>> dataset,
-                       	  vector<vector<string>> transposedTable,
 					   	  map<int, map<string, vector<string>>> gensMap,
                        	  vector<int> qids, vector<int> confAtts,
 						  const int K, const int L, const long double P);

@@ -97,19 +97,12 @@ vector<Group> Kmeans::computeAll(vector<Record> &records) {
 	return groups;
 }
 
-void Kmeans::writeOutput(vector<Group> groups, string filename, string headers) {
-	ofstream file;
-	file.open(filename, ios::trunc);
-
-	if (file.is_open())
-  	{
-   		file << headers << endl;
-		for (const Group& group : groups) {
-			group.writeToFile(file);
-		}
-    	file.close();
-  	}
-  	else cout << "Unable to open file" << endl;
+void Kmeans::writeOutput(vector<Group> groups, string directory,
+						 string headers) {
+	for (size_t i=0; i < groups.size(); i++) {
+		groups[i].writeToFile(directory + "cluster" + to_string(i) + ".csv",
+							  headers);
+	}
 }
 
 
@@ -188,20 +181,22 @@ int main(int argc, char** argv) {
 	vector<Group> groups = kmeans.computeAll(records);
 	// Execution Time
 	auto stop = chrono::high_resolution_clock::now();
-	auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
-	cout << endl << "===> Mondrian Execution Time: ";
-	cout << duration.count() << " microseconds" << endl;
+	auto duration = chrono::duration_cast<chrono::seconds>(stop - start);
+	cout << endl << "===> K-Means Execution Time: ";
+	cout << duration.count() << " seconds" << endl;
 	cout << "===> Number of clusters: ";
 	cout << groups.size() << endl;
 	cout << "* K-Means algorithm finished. A csv file will be generated...." << endl;
 
 	// Write resulting groups to file
-	filename = filename.substr(filename.find("/")+1, filename.size());
-	filename.insert(filename.length()-4, string("_") + "K" + to_string(k) + "_out");
-	filename.insert(0, "outputs/");
-	fs::create_directory("outputs");
-	kmeans.writeOutput(groups, filename, headers);
-	cout << "* Filename: " + filename << endl;
+	string directory = filename;
+	directory = directory.substr(directory.find('/')+1, directory.size());
+	directory = directory.substr(0, directory.find_last_of("."));
+	directory.insert(0, "outputs/");
+	directory += "_K" + to_string(k) + "/clusters/";
+	fs::create_directories(directory);
+	cout << "* Writing output to directory: " + directory << endl;
+	kmeans.writeOutput(groups, directory, headers);
 
 	return 0;
 }

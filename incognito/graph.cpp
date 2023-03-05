@@ -3,25 +3,30 @@
 Graph::Graph() { };
 
 Graph::Graph(vector<int> nodesMax, vector<int> qids,
-	   GraphData& graphData) {
+			 vector<vector<int>> toPrune,
+	   		 GraphData& graphData) {
 	this->graphData = graphData;
 	this->qids = qids;
-	generateNodesAndEdges(nodesMax);
+	generateNodesAndEdges(nodesMax, toPrune);
 }
 
-void Graph::generateNodesAndEdges(const vector<int>& nodesMax) {
+void Graph::generateNodesAndEdges(const vector<int>& nodesMax,
+								  vector<vector<int>> toPrune) {
 	int nsize = nodesMax.size();
 	vector<int> inode(nsize, 0);
 	this->graphData.addData(inode);
 
 	int index = 0;
-	generateAllNodesAndEdges(inode, nodesMax,
- 				 nsize, index);
+	generateAllNodes(inode, nodesMax,
+ 				 	 nsize, index);
+	// Pruning phase
+	this->graphData.pruneNodes(toPrune);
 	this->graphData.generateAllEdges();
+
 	return ;
 }
 
-void Graph::generateAllNodesAndEdges(const vector<int>& node,
+void Graph::generateAllNodes(const vector<int>& node,
 	   		      const vector<int>& nodesMax,
 			      int nsize, int index) {
 	vector<vector<int>> aux;
@@ -41,8 +46,8 @@ void Graph::generateAllNodesAndEdges(const vector<int>& node,
 	}
 
 	for (const vector<int>& entry : aux) {
-		generateAllNodesAndEdges(entry, nodesMax,
-				nsize, index);
+		generateAllNodes(entry, nodesMax,
+						 nsize, index);
 	}
 }
 
@@ -55,6 +60,10 @@ vector<int> Graph::getQids() const {
 	return this->qids;
 }
 
+bool Graph::isNodeMarked(GraphNode node) {
+	return this->graphData.isNodeMarked(node);
+}
+
 int Graph::addGeneralizations(const GraphNode& node, set<GraphNode>& queue) {
 	return this->graphData.addGeneralizations(node, queue);
 }
@@ -63,28 +72,7 @@ void Graph::markGeneralizations(const GraphNode& node) {
 	this->graphData.markGeneralizations(node);
 }
 
-void Graph::printAllKAnon() {
-	graphData.printAllKAnon();
-}
-
 GraphNode Graph::getFinalKAnon(map<int, map<string, vector<string>>> gens,
 			vector<vector<string>> dataset, vector<int> qids) {
 	return graphData.getFinalKAnon(gens, dataset, qids);
 }
-
-void Graph::printNodesTable() {
-	cout << "***** Nodes Table *****" << endl;
-	cout << "Qids: ";
-	for (const int& entry : this->qids) {
-		cout << to_string(entry) + " ";
-	} 
-	cout << endl;
-	cout << "Table Info: " << endl;
-	this->graphData.printNodesTable();
-}
-
-void Graph::printEdgesTable() {
-	cout << "***** Edges Table *****" << endl;
-	this->graphData.printEdgesTable();
-}
-

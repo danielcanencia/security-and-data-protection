@@ -31,14 +31,14 @@ int main(int argc, char** argv) {
 	map<int, vector<vector<string>>> hierarchiesMap;
 
 	try {
-		hierarchiesMap = read_directory(fs::path(argv[1]),
+		hierarchiesMap = readDirectory(fs::path(argv[1]),
 					dataset, headers, qidNames, {},
 					qids, confAtts, false);
-
 		if (qids.size() < qidNames.size()) {
-			cout << "ERROR:\n\tCheck the qid "
+			cout << endl << "******************" << endl; 
+			cout << "An error occured.\nCheck the qid "
 				"names entered exists. They should be "
-				"referenced\n\tin their respectives "
+				"referenced\nin their respectives "
 				"hierarchy files." << endl << endl;
 			return -1;
 		}
@@ -95,12 +95,17 @@ int main(int argc, char** argv) {
 	}
 
 	// GCP
-	// 1. Precalculate NCP for every qid value included in every cluster
-	vector<long double> cncps = calculateNCPS(clusters, weights,
-		qids, numMetricsQids, trees);
+	try {
+		// 1. Precalculate NCP for every qid value included in every cluster
+		vector<long double> cncps = calculateNCPS(clusters, weights,
+			qids, numMetricsQids, trees);
 
-	// 2. Calculate GCP
-	calculateGCP(clusters, dataset.size(), qids, cncps);
+		// 2. Calculate GCP
+		calculateGCP(clusters, dataset.size(), qids, cncps);
+	} catch (const char* e) {
+		cout << e << endl;
+		return -1;
+	}
 
 	// DM
 	calculateDM(clusters, dataset.size(), K, -1, -1);
@@ -109,8 +114,14 @@ int main(int argc, char** argv) {
 	calculateCAVG(clusters, dataset.size(), K, -1, -1);
 
 	// GenILoss
-	calculateGenILoss(transpose(result), trees, qids,
-					  catMetricsQids, numMetricsQids, dataset.size());
+	try {
+		calculateGenILoss(transpose(result), trees, qids,
+						  catMetricsQids, numMetricsQids,
+						  dataset.size());
+	} catch (const char* e) {
+		cout << e << endl;
+		return -1;
+	}
 
 	return 0;
 }

@@ -20,7 +20,7 @@ public:
 	void addRecord(Record& record);
 	void removeRecord(Record& record);
 	void recalculateCentroid();
-	void writeToFile(ofstream& file) const;
+	void writeToFile(string filename, string headers) const;
 	void printRecords();
 };
 

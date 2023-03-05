@@ -54,6 +54,12 @@ void calculateCAVG(vector<vector<vector<string>>> clusters,
 
 // Generalized Information Loss
 long double calculateMaxNumValue(vector<string> entries) {
+    try {
+        stold(entries[0]);
+    } catch (const exception& e) {
+        throw "\nError, some categorical attribute "
+		      " can't be treated as numerical\n";
+    }
 
     // Max Value
     string globalMax = (*max_element(entries.begin(), entries.end(),

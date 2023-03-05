@@ -1,6 +1,9 @@
 #include "graphNode.h"
 
-GraphNode::GraphNode () { };
+GraphNode::GraphNode () {
+	this->id = -1;
+};
+
 GraphNode::GraphNode (int id, vector<int> data) {
 	this->id = id;
 	this->data = data;
@@ -94,10 +97,10 @@ string GraphNode::generalizeEntry(string entry, const vector<vector<string>> hie
 
 bool GraphNode::isAnonymityValid(map<int, vector<vector<string>>> hierarchies,
 			 vector<vector<string>> dataset,
-			 vector<vector<string>> transposedTable,
 			 map<int, map<string, vector<string>>> gensMap,
 			 vector<int> qids, vector<int> confAtts,
 			 const int K, const int L, const long double P) {
+
 	// Map every unique combination of qids to a matrix/cluster;
 	map<string, vector<vector<string>>> splits;
 	vector<vector<string>> anonData;
@@ -150,7 +153,7 @@ vector<int> GraphNode::evaluateFrequency(
 		}
 	}
 
-	// Get vector
+	// Get list of values
 	vector<int> freqs;
 	for (const auto& [k, v] : freqMap)
 		freqs.emplace_back(v);

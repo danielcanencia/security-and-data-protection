@@ -20,12 +20,16 @@ long double calculateNumNCP(const vector<string> atts,
 
 	string value = atts[0];
 	int index = atts[0].find('~');
-	if (index != (int)string::npos) {
-		min = stod(value.substr(0, index));
-		max = stod(value.substr(index + 1, value.size()));
-	} else
-		min = max = stod(value);
-
+	try {
+		if (index != (int)string::npos) {
+			min = stod(value.substr(0, index));
+			max = stod(value.substr(index + 1, value.size()));
+		} else
+			min = max = stod(value);
+	} catch (const exception& e) {
+		cout << e.what() << endl;
+		return -1;
+	}
 
 	for (size_t i=0; i < atts.size(); i++) {
 		value = atts[i];
@@ -98,11 +102,17 @@ vector<long double> calculateNCPS(vector<vector<vector<string>>> clusters,
 		for (const auto& cluster : clusters) {
 			vector<vector<string>> tcluster = transpose(cluster);
 
-			aux = *max_element(tcluster[qid].begin(),
+			try {
+				aux = *max_element(tcluster[qid].begin(),
 				    tcluster[qid].end(),
 			  	    [](string a, string b) {
 						return sortMaxSplit(a, b);
 					});
+			} catch (const exception& e) {
+				throw "\nError, some categorical attribute "
+					  " can't be treated as numerical\n";
+			}
+
  		    int index = aux.find('~');
 			if (index != (int)string::npos)
            		auxMax = stod(aux.substr(index + 1, aux.size()));

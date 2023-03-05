@@ -13,24 +13,24 @@ private:
 	vector<vector<int>> nodes;
 	GraphData graphData;
 	vector<int> qids;
-	void generateAllNodesAndEdges(const vector<int>& node,
+	void generateAllNodes(const vector<int>& node,
 				   const vector<int>& nodesMax,
 				   int nsize, int index);
 public:
 	Graph();
 	Graph(vector<int> nodeMax, vector<int> qids,
+		  vector<vector<int>> toPrune,
 	      GraphData& treeData);
-	void generateNodesAndEdges(const vector<int>& nodesMax);
+	void generateNodesAndEdges(const vector<int>& nodesMax,
+							   vector<vector<int>> toPrune);
 	set<GraphNode> getRoots();
 	vector<int> getQids() const;
+	bool isNodeMarked(GraphNode node);
 	int addGeneralizations(const GraphNode& node, set<GraphNode>& queue);
 	void markGeneralizations(const GraphNode& node);
-	void printAllKAnon();
 	GraphNode getFinalKAnon(map<int, map<string, vector<string>>> gens,
 							vector<vector<string>> dataset,
 							vector<int> qids);
-	void printNodesTable();
-	void printEdgesTable();
 };
 
 

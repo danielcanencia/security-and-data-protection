@@ -99,9 +99,7 @@ int main(int argc, char** argv) {
 		hierarchiesMap = readDirectory(fs::path(argv[1]),
 					dataset, headers, qidNames, confAttNames,
 					catQids, confAtts, false);
-		sort(catQids.begin(), catQids.end());
-
-		if (catQids.size() < qidNames) {
+		if (catQids.size() < qidNames.size()) {
 			cout << endl << "******************" << endl; 
 			cout << "An error occured.\nCheck the qid "
 				"names entered exists. They should be "
@@ -110,7 +108,7 @@ int main(int argc, char** argv) {
 			return -1;
 		}
 		if (confAtts.size() < confAttNames.size()) {
-			cout << endl;
+			cout << endl << "******************" << endl; 
 			cout << "An error occured.\nCheck the confidential "
 				"attributte names entered exists.\nThey should be "
 				"referenced in their respectives "
@@ -118,6 +116,7 @@ int main(int argc, char** argv) {
 			return -1;
 		}
 
+		sort(catQids.begin(), catQids.end());
 		// Compare headers and qids
 		allQids = getQidsHeaders(headers, qidNames);
 

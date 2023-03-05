@@ -25,11 +25,8 @@ bool isSplitLDiverse(vector<vector<string>> split,
 	// Every confidential attribute should have, at least,
 	// l well represented values 
 	for (const map<string, int>& attFreq : freqs) {
-		// Get all values from  map
-		for (const auto& [k, v] : attFreq) {
-			if (v < L)
-				return false;
-		}
+		if ((int)attFreq.size() < L)
+			return false;
 	}
 
 	return true;
@@ -105,7 +102,6 @@ bool isSplitTClose(vector<vector<string>> split, vector<vector<string>> data,
 bool isSplitValid(vector<vector<vector<string>>> splits,
 				  vector<vector<string>> dataset, vector<int> confAtts,
 				  const int K, const int L, const long double P) {
-	cout << "B2" << endl;
 	bool kanonymity, ldiversity, tcloseness;
 	kanonymity = ldiversity = tcloseness = true;
 
@@ -114,24 +110,25 @@ bool isSplitValid(vector<vector<vector<string>>> splits,
 
 	if (K > 0) {
 		for (const auto& split : splits) {
-			if (!isSplitKAnonymous(split, K))
-				kanonymity = false;
+			if (!isSplitKAnonymous(split, K)) {
+				kanonymity = false; break;
+			}
 		}
 	}
 	if (L > 0) {
 		for (const auto& split : splits) {
-			if(!isSplitLDiverse(split, confAtts, L))
-				ldiversity = false;
+			if(!isSplitLDiverse(split, confAtts, L)) {
+				ldiversity = false;	break;
+			}
 		}
 	}
 	if (P > 0) {
 		for (const auto& split : splits) {
-			if (!isSplitTClose(split, dataset, confAtts, P))
-				tcloseness = false;
+			if (!isSplitTClose(split, dataset, confAtts, P)) {
+				tcloseness = false; break;
+			}
 		}
 	}
-
-	cout << "E2" << endl;
 
 	return kanonymity && ldiversity && tcloseness;
 }

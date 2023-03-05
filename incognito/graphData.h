@@ -13,7 +13,7 @@ using namespace std;
 
 class GraphData {
 private:
-	vector<GraphNode> nodes;
+	map<int, GraphNode> nodes;
 	vector<Edge> edges;
 	int idCount = 0;
 
@@ -25,18 +25,17 @@ public:
 	GraphData();
 	void addData(vector<int> data);
 	int contains(const vector<int>& node);
+	void pruneNodes(vector<vector<int>> toPrune);
 	void generateAllEdges();
 	set<GraphNode> getRoots();
+	bool isNodeMarked(GraphNode node);
 	int addGeneralizations(const GraphNode& node,
 			set<GraphNode>& queue);
 	void markGeneralizations(const GraphNode& node);
 	vector<GraphNode> getChildren(GraphNode node);
-	void printAllKAnon();
 	GraphNode getFinalKAnon(map<int, map<string, vector<string>>> gens,
 							vector<vector<string>> dataset,
 							vector<int> qids);
-	void printNodesTable();
-	void printEdgesTable();
 };
 
 #endif

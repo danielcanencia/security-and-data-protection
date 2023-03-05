@@ -41,15 +41,15 @@ int main(int argc, char** argv) {
 		// Compare headers and qids
 		allQids = getQidsHeaders(headers, qidNames);
 		if (allQids.size() < qidNames.size()) {
-			cout << endl;
+			cout << endl << "******************" << endl; 
 			cout << "An error occured.\nCheck the qid "
-				"names entered exists.\nThey should be "
-				"referenced in their respectives "
+				"names entered exists. They should be "
+				"referenced\nin their respectives "
 				"hierarchy files." << endl << endl;
 			return -1;
 		}
 		if (confAtts.size() < confAttNames.size()) {
-			cout << endl;
+			cout << endl << "******************" << endl; 
 			cout << "An error occured.\nCheck the confidential "
 				"attributte names entered exists.\nThey should be "
 				"referenced in their respectives "
@@ -126,12 +126,16 @@ int main(int argc, char** argv) {
 	}
 
 	// GCP
-	// 	1. Precalculate NCP for every qid value included in every cluster
-	// Count total number of distinct qid values in dataset
-	vector<long double> cncps = calculateNCPS(clusters, weights,
-					allQids, numMetricsQids, trees);
-	// 	2. Calculate GCP
-	calculateGCP(clusters, dataset.size(), allQids, cncps);
+	try {
+		// 	1. Precalculate NCP for every qid value included in every cluster
+		vector<long double> cncps = calculateNCPS(clusters, weights,
+			allQids, numMetricsQids, trees);
+		// 	2. Calculate GCP
+		calculateGCP(clusters, dataset.size(), allQids, cncps);
+	} catch (const char* e) {
+		cout << e << endl;
+		return -1;
+	}
 
 	// DM
 	calculateDM(clusters, dataset.size(), K, L, P);
@@ -140,8 +144,14 @@ int main(int argc, char** argv) {
 	calculateCAVG(clusters, dataset.size(), K, L, P);
 
 	// GenILoss
-	calculateGenILoss(transpose(result), trees, allQids,
-					  catMetricsQids, numMetricsQids, dataset.size());
+	try {
+		calculateGenILoss(transpose(result), trees, allQids,
+						  catMetricsQids, numMetricsQids,
+						  dataset.size());
+	} catch (const char* e) {
+		cout << e << endl;
+		return -1;
+	}
 
 	return 0;
 }
