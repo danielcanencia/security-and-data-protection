@@ -232,18 +232,18 @@ long double readParameter(const string privacyDef, const string parameter,
 }
 
 bool readParameters(const int datasetSize, const int confAtts,
-					int& K, int& L, long double& P) {
+					int& K, int& L, long double& T) {
 	// K (K-anonimity)
 	K = readParameter("k-anonymity", "K", datasetSize);
 
 	// L (l-diversity)
 	L = readParameter("l-diversity", "L", datasetSize);
 
-	// P (t-closeness)
-	P = readParameter("t-closeness", "P", datasetSize);
+	// T (t-closeness)
+	T = readParameter("t-closeness", "T", datasetSize);
 
 	// Check l-diversity and t-closeness errors
-	if ((L == -1 || P == -1.0) && confAtts==0) {
+	if ((L == -1 || T == -1.0) && confAtts==0) {
 		cout << endl;
 		cout << "An error occured.\nIf l-diversity or t-closeness "
 				"are used, there should exists, at least, one "
@@ -251,9 +251,9 @@ bool readParameters(const int datasetSize, const int confAtts,
 		return 1;
 	}
 
-	if (K == -1 && L == -1 && P == -1.0) {
+	if (K == -1 && L == -1 && T == -1.0) {
 		cout << "Error, some privacy technique should be used." << endl;
-		readParameters(datasetSize, confAtts, K, L, P);
+		readParameters(datasetSize, confAtts, K, L, T);
 	}
 
 	return 0;

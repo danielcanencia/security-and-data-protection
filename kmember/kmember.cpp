@@ -17,38 +17,27 @@ map<int, vector<vector<string>>> evaluate(
 
 	// 1st loop
 	while ((int)S.size() >= K) {
-		cout << "B1" << endl;
 		r = furthestRecord(aux, r, S,
 			   hierarchies,
 			   numQids, catQids);
-
-		/*for (const auto& a : S[r])
-			cout << a + ", " << endl;*/
-		cout << "E1" << endl;
-
-		cout << dataset.size() << endl;
-		cout << "r: "; cout << r << endl;
-		cout << "S[r]: "; cout <<  S[r].size() << endl;
 		vector<vector<string>> c(1, S[r]);
 		S.erase(S.begin() + r);
 
-		cout << "B2" << endl;
 		while((int)c.size() < K) {
 			r = findBestRecord(S, c, hierarchies,
 				numQids, catQids, confAtt, L,
 				sensitiveValues, diversityPenalty,
 				diversity);
+
 			c.emplace_back(S[r]);
 			S.erase(S.begin() + r);
 		}
-		cout << "C1" << endl;
 
 		aux = c.back();
 		res[count] = c;
 		count += 1;
 	}
 
-	cout << "Sec Loop" << endl;
 	// 2nd loop
 	int idx;
 	while (S.size() > 0) {
@@ -87,7 +76,11 @@ int main(int argc, char** argv) {
 	const int nqids = readNumberOfQids();
 	vector<string> qidNames = readQidNames(nqids);
 	// Conf Att
-	vector<string> confAttNames(1, readConfidentialAttName());
+	string attName = readConfidentialAttName();
+	vector<string> confAttNames;
+	if (attName.size() != 0)
+		confAttNames.emplace_back(attName);
+
 	// Read data file and hierarchy folders
 	vector<string> headers;
 	vector<int> catQids, numQids, allQids;
@@ -99,14 +92,6 @@ int main(int argc, char** argv) {
 		hierarchiesMap = readDirectory(fs::path(argv[1]),
 					dataset, headers, qidNames, confAttNames,
 					catQids, confAtts, false);
-		if (catQids.size() < qidNames.size()) {
-			cout << endl << "******************" << endl; 
-			cout << "An error occured.\nCheck the qid "
-				"names entered exists. They should be "
-				"referenced\nin their respectives "
-				"hierarchy files." << endl << endl;
-			return -1;
-		}
 		if (confAtts.size() < confAttNames.size()) {
 			cout << endl << "******************" << endl; 
 			cout << "An error occured.\nCheck the confidential "
@@ -130,6 +115,11 @@ int main(int argc, char** argv) {
 		return -1;
 	}
 
+	// Confidential attribute
+	int confAtt; 
+	if (confAttNames.size() != 0)
+		confAtt = confAtts[0];
+
 	// Read Parameters
 	const int K = readParameter("k-anonymity", "K", dataset.size());
 	if (K == -1) {
@@ -137,15 +127,14 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 	const int L = readParameter("l-diversity", "L", dataset.size());
-	// Confidential attribute
-	const int confAtt = confAtts[0];
+
 	// Diversity Penalty, select metric used
 	int diversityPenalty, diversity;
 	vector<string> sensitiveValues;
 	if (L != -1) {
 		diversityPenalty = readDiversityPenalty();
 		diversity = readDiversity();
-		
+
 		// Read sensitive values for sensitive diversity metric
 		if (diversity == 1) {
 			vector<vector<string>> transposedDataset = transpose(dataset);

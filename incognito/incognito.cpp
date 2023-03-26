@@ -76,8 +76,8 @@ int main(int argc, char** argv) {
 
 	// Read Parameters
 	int K, L;
-	long double P;
-	readParameters(dataset.size(), confAttNames.size(), K, L, P);
+	long double T;
+	readParameters(dataset.size(), confAttNames.size(), K, L, T);
 	// Read Weights
 	vector<double> weights = readWeights(nqids, qidNames);
 	// Ask for desired qid types to be used on metrics
@@ -93,7 +93,7 @@ int main(int argc, char** argv) {
 	// *********************************
 	// Main algorithm
 	auto resTuple = incognito(dataset, hierarchiesMap, qids,
-							  confAtts, K, L, P);
+							  confAtts, K, L, T);
 	vector<vector<string>> result = get<0>(resTuple);
 	vector<vector<vector<string>>> clusters = get<1>(resTuple);
 	// *********************************
@@ -106,7 +106,7 @@ int main(int argc, char** argv) {
 	cout << clusters.size() << endl;
 
 	// Write anonymized table
-	writeAnonymizedTable(fs::path(argv[1]), headers, result, K, L, P);
+	writeAnonymizedTable(fs::path(argv[1]), headers, result, K, L, T);
 
 
 	// Create a hierarchy tree for every qid
@@ -137,10 +137,10 @@ int main(int argc, char** argv) {
 	}
 
 	// DM
-	calculateDM(clusters, dataset.size(), K, L, P);
+	calculateDM(clusters, dataset.size(), K, L, T);
 
 	// CAvg
-	calculateCAVG(clusters, dataset.size(), K, L, P);
+	calculateCAVG(clusters, dataset.size(), K, L, T);
 
 	// GenILoss
 	try {

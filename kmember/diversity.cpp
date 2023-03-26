@@ -13,13 +13,11 @@ bool isDiverse(vector<vector<string>> cluster,
 		}
 	}
 
-	// Confidential attribute should have, at least,
-	// l well represented values
-	// Get all values from map
-	for (const auto& [k, v] : freqs) {
-		if (v < L)
-			return false;
-	}
+	// Every confidential attribute should have, at least,
+	// l well represented values 
+	if ((int)freqs.size() < L)
+		return false;
+
 
 	return true;
 }

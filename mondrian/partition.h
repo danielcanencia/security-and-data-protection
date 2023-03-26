@@ -22,7 +22,7 @@ private:
 	map<int, Tree> trees;
 	vector<int> confAtts;
 	int K, L;
-	long double P;
+	long double T;
 	vector<string> generalizations;
 
 	// Methods
@@ -42,7 +42,7 @@ public:
               vector<string> generalizations,
               vector<int> qids, vector<int> isQidCat,
 		  	  map<int, Tree> trees, vector<int> confAtts,
-			  int K, int L, long double P);
+			  int K, int L, long double T);
 	// Methods
 	vector<vector<string>> getResult() const;
 	int getNumAllowedCuts();
@@ -54,4 +54,3 @@ public:
 
 
 #endif
-

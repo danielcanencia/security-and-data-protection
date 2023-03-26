@@ -19,15 +19,15 @@ void writeStrings(ofstream &fp, vector<vector<string>> dataset,
 void writeAnonymizedTable(const string inputFname,
                           const vector<string> headers,
                           const vector<vector<string>> dataset,
-                          const int K, const int L, const long double P,
+                          const int K, const int L, const long double T,
                           const string prefix, const bool verbose) {
         string kName = K == -1 ? "" : to_string(K) + GET_NAME(K);
         if (L != -1 && K != -1) kName += "_";
         string lName = L == -1 ? "" : to_string(L) + GET_NAME(L);
-        if (P != -1 && L != -1) lName += "_";
+        if (T != -1 && L != -1) lName += "_";
         stringstream stream;
-        stream << fixed << setprecision(7) << P;
-        const string pName = P == -1 ? "" : stream.str() + GET_NAME(P);
+        stream << fixed << setprecision(7) << T;
+        const string pName = T == -1 ? "" : stream.str() + GET_NAME(T);
 
 
         string input = inputFname;
@@ -40,7 +40,7 @@ void writeAnonymizedTable(const string inputFname,
                 dname += "/" + parentPath + "/";
         else
                 dname += parentPath.substr(parentPath.find_first_of('/'), parentPath.size()) + "/";
-        cout << dname << endl;
+
         if (!fs::is_directory(dname) || !fs::exists(dname)) {
                 if (!fs::create_directories(dname)) {
                         throw "Error creating output directory";

@@ -4,7 +4,7 @@ Partition::Partition(vector<vector<string>> data,
 		     vector<string> generalizations,
 		     vector<int> qids, vector<int> isQidCat,
 		     map<int, Tree> trees, vector<int> confAtts,
-			 int K, int L, long double P) {
+			 int K, int L, long double T) {
 	this->data = data;
 	this->generalizations = generalizations;
 	this->qids = qids;
@@ -13,7 +13,7 @@ Partition::Partition(vector<vector<string>> data,
 	this->confAtts = confAtts;
 	this->K = K;
 	this->L = L;
-	this->P = P;
+	this->T = T;
 	this->allowedCuts = vector<int>(qids.size(), 1);
 }
 
@@ -96,7 +96,7 @@ string Partition::findMedian(int dimension) {
 	double middle = nValues / 2.0;
 	// Cut is not allowed
 	if (freqs.size() < 2 || middle < K || middle < L
-		|| middle < P) {
+		|| middle < T) {
 		return "";
 	}
 
@@ -145,14 +145,12 @@ bool Partition::isSplitLDiverse(vector<vector<string>> split) {
 		}
 	}
 
+
 	// Every confidential attribute should have, at least,
 	// l well represented values 
 	for (const map<string, int>& attFreq : freqs) {
-		// Get all values from map
-		for (const auto& [k, v] : attFreq) {
-			if (v < L)
-				return false;
-		}
+		if ((int)attFreq.size() < L)
+			return false;
 	}
 
 	return true;
@@ -226,7 +224,7 @@ bool Partition::isSplitTClose(vector<vector<string>> split) {
 		emd /= (qSize-1 == 0) ? 1 : (qSize - 1);
 
 		// Check if partition is tclose
-		if (emd > P)
+		if (emd > T)
 			return false;
 	}
 
@@ -246,7 +244,7 @@ bool Partition::isSplitValid(vector<vector<string>> split) {
 	if (L > 0) {
 		ldiversity = isSplitLDiverse(split);
 	}
-	if (P > 0) {
+	if (T > 0) {
 		tcloseness = isSplitTClose(split);
 	}
 
@@ -316,9 +314,9 @@ vector<Partition> Partition::splitPartitionNumeric(int dimension) {
 	gens1[dimension] = gen1;
 	gens2[dimension] = gen2;
 	Partition p1(d1, gens1, qids, isQidCat, trees,
-				 confAtts, K, L, P);
+				 confAtts, K, L, T);
 	Partition p2(d2, gens2, qids, isQidCat, trees,
-				 confAtts, K, L, P);
+				 confAtts, K, L, T);
 
 	return { p1, p2 };
 }
@@ -365,7 +363,7 @@ vector<Partition> Partition::splitPartitionCategorical(int dimension) {
 			vector<string> gens = generalizations;
 			gens[dimension] = children[i];
 			Partition p = Partition(splits[i], gens, qids,
-				isQidCat, trees, confAtts, K, L, P);
+				isQidCat, trees, confAtts, K, L, T);
 			pts.emplace_back(p);
 		}
 	}

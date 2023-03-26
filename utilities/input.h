@@ -21,6 +21,6 @@ tuple<vector<int>, vector<int>> readMetricsQids(vector<int> numQids, vector<int>
 long double readParameter(const string privacyDef, const string parameter,
 				  		  const int datasetSize);
 bool readParameters(const int datasetSize, const int confAtts,
-                    int& K, int& L, long double& P);
+                    int& K, int& L, long double& T);
 
 #endif

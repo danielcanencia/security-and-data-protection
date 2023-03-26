@@ -38,7 +38,7 @@ vector<vector<vector<string>>> mondrian(vector<vector<string>> dataset,
 								map<int, vector<vector<string>>> hierarchies,
 								vector<int> allQids, vector<int> isQidCat,
 								vector<int> confAtts, const int K,
-								const int L, const long double P) {	
+								const int L, const long double T) {	
 	// 1. Create a hierarchy tree for every qid
 	map<int, Tree> trees;
 	// 2. Initialize default generalizations
@@ -58,7 +58,7 @@ vector<vector<vector<string>>> mondrian(vector<vector<string>> dataset,
 
 	// 3. Anonymize whole initial partition
 	Partition partition(dataset, gens, allQids, isQidCat, trees,
-			    		confAtts, K, L, P);
+			    		confAtts, K, L, T);
 
 	return evaluate(partition);
 }

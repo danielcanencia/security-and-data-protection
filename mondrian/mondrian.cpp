@@ -79,8 +79,8 @@ int main(int argc, char** argv) {
 
 	// Read Parameters
 	int K, L;
-	long double P;
-	readParameters(dataset.size(), confAttNames.size(), K, L, P);
+	long double T;
+	readParameters(dataset.size(), confAttNames.size(), K, L, T);
 	// Read Weights
 	vector<double> weights = readWeights(nqids, qidNames);
 
@@ -97,7 +97,7 @@ int main(int argc, char** argv) {
 	// *********************************
 	// Main algorithm
 	vector<vector<vector<string>>> clusters = mondrian(dataset,
-		hierarchiesMap, allQids, isQidCat, confAtts, K, L, P);
+		hierarchiesMap, allQids, isQidCat, confAtts, K, L, T);
 	// *********************************
 	auto stop = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::seconds>(stop - start);
@@ -115,7 +115,7 @@ int main(int argc, char** argv) {
 	    	partition.end());
 	}
 	// Write anonymized table
-	writeAnonymizedTable(fs::path(argv[1]), headers, result, K, L, P);
+	writeAnonymizedTable(fs::path(argv[1]), headers, result, K, L, T);
 
 	// METRICS
 	cout << "===> Analysis: " << endl;
@@ -138,10 +138,10 @@ int main(int argc, char** argv) {
 	}
 
 	// DM
-	calculateDM(clusters, dataset.size(), K, L, P);
+	calculateDM(clusters, dataset.size(), K, L, T);
 
 	// CAvg
-	calculateCAVG(clusters, dataset.size(), K, L, P);
+	calculateCAVG(clusters, dataset.size(), K, L, T);
 
 	// GenILoss
 	try {

@@ -33,7 +33,7 @@ bool isSplitLDiverse(vector<vector<string>> split,
 }
 
 bool isSplitTClose(vector<vector<string>> split, vector<vector<string>> data,
-                   vector<int> confAtts, const long double P) {
+                   vector<int> confAtts, const long double T) {
 
 	if (split.size() == 0)
 		return false;
@@ -90,9 +90,8 @@ bool isSplitTClose(vector<vector<string>> split, vector<vector<string>> data,
 		}
 		// EMD(P, Q) = sum(sum(pj - qj)) / (m - 1)
 		emd /= (qSize - 1);
-		cout << emd << endl;
 		// Check if partition is tclose
-		if (emd > P)
+		if (emd > T)
 			return false;
 	}
 
@@ -101,7 +100,7 @@ bool isSplitTClose(vector<vector<string>> split, vector<vector<string>> data,
 
 bool isSplitValid(vector<vector<vector<string>>> splits,
 				  vector<vector<string>> dataset, vector<int> confAtts,
-				  const int K, const int L, const long double P) {
+				  const int K, const int L, const long double T) {
 	bool kanonymity, ldiversity, tcloseness;
 	kanonymity = ldiversity = tcloseness = true;
 
@@ -122,9 +121,9 @@ bool isSplitValid(vector<vector<vector<string>>> splits,
 			}
 		}
 	}
-	if (P > 0) {
+	if (T > 0) {
 		for (const auto& split : splits) {
-			if (!isSplitTClose(split, dataset, confAtts, P)) {
+			if (!isSplitTClose(split, dataset, confAtts, T)) {
 				tcloseness = false; break;
 			}
 		}

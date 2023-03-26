@@ -33,8 +33,18 @@ void calculateDM(vector<vector<vector<string>>> clusters,
 void calculateCAVG(vector<vector<vector<string>>> clusters,
                    const int tableSize, const long double param,
                    const string paramName) {
+    cout << "Clusters: ";
+    cout << clusters.size() << endl;
+    cout << "Param: ";
+    cout << param << endl;
+    cout << "TableSize: ";
+    cout << tableSize << endl;
+
     const long double denom =  (long double) (clusters.size() * param);
     const long double cavg = (denom == 0) ? 0 : tableSize / denom;
+
+    cout << "Denom: " << endl;
+    cout << denom << endl;
 
     cout << "\t* CAvg using " + paramName + ": ";
     cout << fixed << setprecision(3);

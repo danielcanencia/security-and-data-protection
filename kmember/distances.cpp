@@ -57,7 +57,7 @@ long double catDistance(const string& v1, const string& v2,
 
 	return 1;
 }
-	
+
 long double distance(const vector<string>& r1,
 		     const vector<string>& r2,
 		     Info info) {
@@ -92,15 +92,13 @@ long double informationLoss(vector<vector<string>> records,
 	int e = records.size();
 	vector<long double> numValues, catValues;
 
-	cout << "E: "; cout << e << endl;
 	// Numeric Attributes
 	for (const int& idx : numQids) {
-		cout << "Idx: "; cout << idx << endl;
 		long double max, min, aux;
 		max = min = -1;
 		vector<long double> numericDomain;
+
 		for (const vector<string>& record : records) {
-			cout << record[idx] << endl;
 			aux = stold(record[idx]);
 			numericDomain.emplace_back(aux);	
 
