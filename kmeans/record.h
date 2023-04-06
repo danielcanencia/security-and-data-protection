@@ -1,10 +1,11 @@
 #ifndef _RECORD_H
 #define _RECORD_H
 
-#include <cmath>    // pow
-#include <fstream>  // ofstream
-#include <iostream> // cout
+#include <cmath>      // pow
+#include <fstream>    // ofstream
+#include <iostream>   // cout
 #include <vector>
+#include <algorithm>  // transform
 
 using namespace std;
 
@@ -23,6 +24,7 @@ public:
   double at(int idx) const;
   double euclideanDistance(const vector<double> tuple) const;
   vector<double> getValues();
+  vector<string> getRecord() const;
   void writeToFile(ofstream &file) const;
   void printValues() const;
 };

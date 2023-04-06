@@ -50,3 +50,13 @@ void Group::printRecords() {
     record.printValues();
   }
 }
+
+vector<vector<string>> Group::getRecords() const {
+  vector<vector<string>> values;
+
+  for (const Record &record : records) {
+    values.emplace_back(record.getRecord());
+  }
+
+  return values;
+}

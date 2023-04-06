@@ -1,6 +1,7 @@
 #ifndef _KMEANS_H
 #define _KMEANS_H
 
+#include "../utilities/metrics.h"
 #include "group.h"
 #include "record.h"
 #include <algorithm> // find
@@ -15,6 +16,8 @@
 
 using namespace std;
 namespace fs = std::filesystem;
+
+#define MAX_ITERATIONS 30
 
 class Kmeans {
 private:

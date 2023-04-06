@@ -4,7 +4,7 @@ CXXFLAGS = --std=c++17 -lstdc++fs -Wall
 .PHONY : all clean distclean
 
 EXE = kmeans.out
-SRC = kmeans.cpp record.cpp group.cpp
+SRC = kmeans.cpp record.cpp group.cpp ../utilities/metrics.cpp ../utilities/tree.cpp
 OBJ = $(SRC:.cpp=.o)
 INC = $(wildcard *.hpp)
 

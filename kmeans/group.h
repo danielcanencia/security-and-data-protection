@@ -23,6 +23,7 @@ public:
   void recalculateCentroid();
   void writeToFile(string filename, string headers) const;
   void printRecords();
+  vector<vector<string>> getRecords() const;
 };
 
 #endif
