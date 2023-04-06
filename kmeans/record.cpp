@@ -14,17 +14,6 @@ double Record::euclideanDistance(const vector<double> tuple) const {
   return sqrt(sum);
 }
 vector<double> Record::getValues() { return values; }
-vector<string> Record::getRecord() const {
-  vector<string> record;
-
-  transform(begin(values), end(values), 
-            back_inserter(record),
-            [](double v) {
-              return to_string(v); 
-            });
-
-  return record;
-}
 void Record::writeToFile(ofstream &file) const {
   for (auto it = begin(values); it != end(values) - 1; it++) {
     file << to_string(*it) + ",";

@@ -198,10 +198,5 @@ int main(int argc, char **argv) {
   cout << "* Writing output to directory: " + directory << endl;
   kmeans.writeOutput(groups, directory, headers);
 
-  // METRICS
-  vector<vector<vector<string>>> clusters;
-  for (const auto &group : groups)
-    clusters.emplace_back(group.getRecords());
-
   return 0;
 }
