@@ -156,9 +156,10 @@ int findBestRecord(vector<vector<string>> records,
       else if (diversity) {
         if (isDiverse(cluster, confAtt, L))
           diff = auxDiff;
-        else if (isSensitive(majorClass, confAtt, cluster) &&
-                 majorClass != recordClass)
+        else if (isSensitive(majorClass, confAtt, sensitiveValues) &&
+                 majorClass != recordClass) {
           diff = auxDiff + diversityPenalty;
+        }
       }
     }
     if (diff < min || min == -1) {

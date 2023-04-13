@@ -135,8 +135,8 @@ int main(int argc, char **argv) {
 
     // Read sensitive values for sensitive diversity metric
     if (diversity == 1) {
-      vector<vector<string>> transposedDataset = transpose(dataset);
-      sensitiveValues = readSensitiveValues(transposedDataset[confAtt]);
+      vector<string> values = transpose(hierarchiesMap[confAtt])[0];
+      sensitiveValues = readSensitiveValues(values);
     }
   }
 

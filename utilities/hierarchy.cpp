@@ -193,6 +193,7 @@ readDirectory(fs::path const &directory, vector<vector<string>> &dataset,
 
   int idx;
   vector<vector<vector<string>>> res;
+  vector<int> indexes;
   for (const string &filename : hierarchies) {
     ifstream input2{filename};
     if (!input2.is_open()) {
@@ -203,8 +204,13 @@ readDirectory(fs::path const &directory, vector<vector<string>> &dataset,
     getline(input2, qidName);
     qidNames.emplace_back(qidName);
 
-    // Check if it is a qid
-    if (!compareAttQid(qidName, attNames))
+    // Check if it is a qid or a confidential attribute
+    bool confAttFlag = false;
+    if (compareAttQid(qidName, confAttNames))
+      confAttFlag = true;
+
+    if (!compareAttQid(qidName, attNames) &&
+        !compareAttQid(qidName, confAttNames))
       continue;
 
     // Read hierarchy values
@@ -224,7 +230,9 @@ readDirectory(fs::path const &directory, vector<vector<string>> &dataset,
 
     // Get hierarchy corresponding qid
     idx = getHierarchyIdx(qidName, headersVector);
-    qids.emplace_back(idx);
+    if (!confAttFlag)
+      qids.emplace_back(idx);
+    indexes.emplace_back(idx);
     res.emplace_back(hierarchy);
   }
 
@@ -235,11 +243,11 @@ readDirectory(fs::path const &directory, vector<vector<string>> &dataset,
 
   // Map qid values and hierarchy sets
   map<int, vector<vector<string>>> hMap;
-  for (size_t i = 0; i < qids.size(); i++) {
+  for (size_t i = 0; i < indexes.size(); i++) {
     if (!transpose)
-      hMap[qids[i]] = res[i];
+      hMap[indexes[i]] = res[i];
     else
-      hMap[qids[i]] = tRes[i];
+      hMap[indexes[i]] = tRes[i];
   }
 
   return hMap;

@@ -40,9 +40,8 @@ string majorityClass(vector<vector<string>> cluster, const int confAtt) {
 }
 
 bool isSensitive(string majorityClass, const int confAtt,
-                 vector<vector<string>> cluster) {
-  vector<string> values = transpose(cluster)[confAtt];
-  return find(values.begin(), values.end(), majorityClass) != values.begin();
+                 vector<string> values) {
+  return find(values.begin(), values.end(), majorityClass) != values.end();
 }
 
 string readConfidentialAttName() {

@@ -14,7 +14,7 @@ using namespace std;
 bool isDiverse(vector<vector<string>> cluster, const int confAtt, const int L);
 string majorityClass(vector<vector<string>> cluster, const int confAtt);
 bool isSensitive(string majorityClass, const int confAtt,
-                 vector<vector<string>> cluster);
+                 vector<string> values);
 string readConfidentialAttName();
 int readDiversityPenalty();
 int readDiversity();
