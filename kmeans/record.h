@@ -23,7 +23,7 @@ public:
   int size();
   double at(int idx) const;
   double euclideanDistance(const vector<double> tuple) const;
-  vector<double> getValues();
+  vector<double> getValues() const;
   void writeToFile(ofstream &file) const;
   void printValues() const;
 };

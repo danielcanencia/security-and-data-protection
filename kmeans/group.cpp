@@ -29,20 +29,50 @@ void Group::recalculateCentroid() {
   this->centroid = centroid;
 }
 
-void Group::writeToFile(string filename, string headers) const {
-  ofstream file;
+vector<vector<string>> Group::generalize(vector<int> qids) {
+  vector<vector<double>> values;
+  for (const auto& record : records)
+    values.emplace_back(record.getValues());
 
-  file.open(filename, ios::trunc);
-  if (!file.is_open()) {
-    cout << "Unable to open file" << endl;
-    return;
+  // Transpose matrix and generalized based on ranges
+  //vector<vector<string>> matrix = transpose(values);
+  
+  // Transpose matrix
+  vector<vector<double>> matrix;
+  for (size_t i=0; i < values[0].size(); i++) {
+    vector<double> aux;
+    for (size_t j=0; j < values.size(); j++)
+      aux.emplace_back(values[j][i]);
+    matrix.emplace_back(aux);
   }
 
-  file << headers << endl;
-  for (const Record &record : records)
-    record.writeToFile(file);
+  // Generalize based on ranges
+  vector<vector<string>> anonMatrix;
+  for (size_t i=0; i < values[0].size(); i++) {
+    if (find(qids.begin(), qids.end(), i) != qids.end()) {
+      double max = *max_element(matrix[i].begin(), matrix[i].end());
+      double min = *min_element(matrix[i].begin(), matrix[i].end());
 
-  file.close();
+      string element = to_string(min) + '~' + to_string(max);
+      anonMatrix.emplace_back(vector<string>(matrix[i].size(), element));
+      continue;
+    }
+
+    vector<string> unmodifiedVector;
+    transform(begin(matrix[i]), end(matrix[i]),
+              back_inserter(unmodifiedVector),
+              [](double a) { return to_string(a); });
+    anonMatrix.emplace_back(unmodifiedVector);
+  }
+
+  vector<vector<string>> resMatrix(anonMatrix[0].size(),
+    vector<string>(anonMatrix.size()));
+  for (size_t i=0; i < anonMatrix.size(); i++) {
+    for (size_t j=0; j < anonMatrix[0].size(); j++)
+      resMatrix[j][i] = anonMatrix[i][j];
+  }
+
+  return resMatrix;
 }
 
 void Group::printRecords() {

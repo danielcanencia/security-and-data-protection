@@ -2,6 +2,9 @@
 #define _KMEANS_H
 
 #include "../utilities/metrics.h"
+#include "../utilities/hierarchy.h"
+#include "../utilities/writeData.h"
+#include "../utilities/input.h"
 #include "group.h"
 #include "record.h"
 #include <algorithm> // find
@@ -31,9 +34,10 @@ private:
 public:
   Kmeans(int K);
   vector<Group> computeAll(vector<Record> &records);
-  void writeOutput(vector<Group> groups, string filename, string headers);
 };
 
-vector<Record> preprocessing(string file, string &headers);
-
+vector<vector<vector<string>>> generalize(vector<Group> groups, vector<int> qids);
+vector<Record> preprocessing(string file, vector<string>& headers,
+                             vector<string> qidNames,
+                             vector<int>& qids);
 #endif

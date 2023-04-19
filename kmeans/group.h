@@ -21,7 +21,7 @@ public:
   void addRecord(Record &record);
   void removeRecord(Record &record);
   void recalculateCentroid();
-  void writeToFile(string filename, string headers) const;
+  vector<vector<string>> generalize(vector<int> qids);
   void printRecords();
 };
 

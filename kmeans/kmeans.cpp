@@ -101,16 +101,20 @@ vector<Group> Kmeans::computeAll(vector<Record> &records) {
   return groups;
 }
 
-void Kmeans::writeOutput(vector<Group> groups, string directory,
-                         string headers) {
-  for (size_t i = 0; i < groups.size(); i++) {
-    groups[i].writeToFile(directory + "cluster" + to_string(i) + ".csv",
-                          headers);
+vector<vector<vector<string>>> generalize(vector<Group> groups, vector<int> qids) {
+  vector<vector<vector<string>>> clusters;
+
+  // Global recoding
+  for (auto& group : groups) {
+    clusters.emplace_back(group.generalize(qids));
   }
+
+  return clusters;
 }
 
-vector<Record> preprocessing(string file, string &headers) {
-
+vector<Record> preprocessing(string file, vector<string>& headers,
+                             vector<string> qidNames,
+                             vector<int>& qids) {
   // Read CSV Input files
   ifstream input{file};
   if (!input.is_open()) {
@@ -120,9 +124,30 @@ vector<Record> preprocessing(string file, string &headers) {
   // Parse CSV Input file
   vector<Record> values;
   int index = 0;
-  string line;
+  string line, headersAux;
   try {
-    getline(input, headers);
+    // Headers && Qids
+    getline(input, headersAux);
+    string tmp;
+    stringstream ss(headersAux);
+    while (getline(ss, tmp, ';')) {
+      headers.push_back(tmp);
+    }
+    headers.back().pop_back();
+
+    /*for (const auto& a : headers)
+      cout << a << endl;*/
+
+    // Get qids indexes
+    for (size_t i=0; i < qidNames.size(); i++) {
+      auto it = find(headers.begin(), headers.end(), qidNames[i]);
+      if (it != headers.end())
+        qids.emplace_back(it - headers.begin());
+      else if (headers.back() == qidNames[i])
+        qids.emplace_back(headers.size() - 1);
+    }
+
+    // Records
     for (; getline(input, line);) {
       Record record = Record(index);
       istringstream strm(move(line));
@@ -138,6 +163,7 @@ vector<Record> preprocessing(string file, string &headers) {
     // It throws an expetion because of stod(val) conversion to double
     return values;
   }
+
   input.close();
   return values;
 }
@@ -159,13 +185,29 @@ int main(int argc, char **argv) {
 
   // K
   int K = atoi(argv[2]);
+  // Read input
+  // Read qid names
+  const int nqids = readNumberOfQids();
+  vector<string> qidNames = readQidNames(nqids);
 
   // Data Preprocessing
   vector<Record> records;
-  string headers;
+  vector<int> qids;
+  vector<string> headers;
 
   try {
-    records = preprocessing(filename, headers);
+    records = preprocessing(filename, headers, qidNames, qids);
+    if (qids.size() < qidNames.size()) {
+      cout << endl << "******************" << endl;
+      cout << "An error occured.\nCheck the qid "
+              "names entered exists. They should be "
+              "referenced\nin their respectives "
+              "hierarchy files."
+           << endl
+           << endl;
+      return -1;
+    }
+    sort(qids.begin(), qids.end());
   } catch (exception &e) {
     cout << "Error reading file" << endl;
     return -1;
@@ -178,6 +220,9 @@ int main(int argc, char **argv) {
   Kmeans kmeans(K);
   // Run the algorithm
   vector<Group> groups = kmeans.computeAll(records);
+  // Generalize clusters
+  vector<vector<vector<string>>> clusters = generalize(groups, qids);
+
   // Execution Time
   auto stop = chrono::high_resolution_clock::now();
   auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -188,7 +233,7 @@ int main(int argc, char **argv) {
   cout << "* K-Means algorithm finished. A csv file will be generated...."
        << endl;
 
-  // Write resulting groups to file
+  // Write resulting clusters to file
   string directory = filename;
   directory = directory.substr(directory.find('/') + 1, directory.size());
   directory = directory.substr(0, directory.find_last_of("."));
@@ -196,7 +241,11 @@ int main(int argc, char **argv) {
   directory += "_K" + to_string(K) + "/clusters/";
   fs::create_directories(directory);
   cout << "* Writing output to directory: " + directory << endl;
-  kmeans.writeOutput(groups, directory, headers);
+
+  for (size_t i=0; i < clusters.size(); i++) {
+    writeAnonymizedTable(fs::path(directory), headers, clusters[i], K, -1, -1,
+                         "cluster" + to_string(i + 1), false);
+  }
 
   return 0;
 }
