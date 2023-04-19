@@ -66,15 +66,13 @@ long double calculateMaxNumValue(vector<string> entries) {
                       size_t posB = b.find("~");
                       if (posA == string::npos)
                         str1 = a;
-                      else {
+                      else
                         str1 = a.substr(a.find("~") + 1, a.size());
-                      }
 
                       if (posB == string::npos)
                         str2 = b;
-                      else {
+                      else
                         str2 = b.substr(b.find("~") + 1, b.size());
-                      }
 
                       return strtold(str1.c_str(), NULL) <
                              strtold(str2.c_str(), NULL);
@@ -90,6 +88,7 @@ long double calculateMaxNumValue(vector<string> entries) {
 }
 
 long double calculateMinNumValue(vector<string> entries) {
+
   // Max Value
   string globalMin = (*min_element(entries.begin(), entries.end(),
                                    [&](const string &a, const string &b) {
@@ -98,17 +97,15 @@ long double calculateMinNumValue(vector<string> entries) {
                                      size_t posB = b.find("~");
                                      if (posA == string::npos)
                                        str1 = a;
-                                     else {
+                                     else
                                        str1 = a.substr(0, a.find("~"));
-                                     }
 
                                      if (posB == string::npos)
                                        str2 = b;
-                                     else {
+                                     else
                                        str2 = b.substr(0, b.find("~"));
-                                     }
 
-                                     return strtold(str1.c_str(), NULL) >
+                                     return strtold(str1.c_str(), NULL) <
                                             strtold(str2.c_str(), NULL);
                                    }))
                          .c_str();
@@ -194,6 +191,7 @@ void calculateGenILoss(vector<vector<string>> transposedDataset,
 
   // Categorical Attributes
   for (size_t i = 0; i < catFreqs.size(); i++) {
+    cout << "Some Cat " << endl;
     // Calculate Attributes GenILoss
     for (const auto &[k, v] : catFreqs[i])
       loss += calculateCatGenILoss(k, trees[catQids[i]]) * v;

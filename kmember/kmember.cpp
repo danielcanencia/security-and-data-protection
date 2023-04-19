@@ -47,6 +47,33 @@ evaluate(vector<vector<string>> dataset,
     S.erase(S.begin() + r);
   }
 
+  // Generalize values based on clusters (global recoding)
+  for (int i = 0; i < count; i++) {
+    vector<vector<string>> cluster = res[i];
+    vector<vector<string>> matrix = transpose(cluster);
+
+    // Generalize only quasi'identifier attributes
+    for (const auto &qid : catQids) {
+      // Generalize values based on their common ancestor
+      string gen = trees[qid].getLowestCommonAncestor(matrix[qid]).value;
+      for (size_t idx = 0; idx < cluster.size(); idx++)
+        res[i][idx][qid] = gen;
+    }
+
+    // Generalize numerical attributes by range
+    for (const auto &qid : numQids) {
+      double max = stod(
+          *max_element(matrix[qid].begin(), matrix[qid].end(),
+                       [](string a, string b) { return stod(a) < stod(b); }));
+      double min = stod(
+          *min_element(matrix[qid].begin(), matrix[qid].end(),
+                       [](string a, string b) { return stod(a) < stod(b); }));
+
+      for (size_t idx = 0; idx < cluster.size(); idx++)
+        res[i][idx][qid] = to_string(min) + '~' + to_string(max);
+    }
+  }
+
   return res;
 }
 
@@ -140,6 +167,15 @@ int main(int argc, char **argv) {
     }
   }
 
+  // Read Weights
+  vector<double> weights = readWeights(nqids, qidNames);
+  // Ask for desired qid types to be used on metrics
+  vector<int> numMetricsQids, catMetricsQids;
+  tuple<vector<int>, vector<int>> metricsQids =
+      readMetricsQids(numQids, catQids, headers);
+  numMetricsQids = get<0>(metricsQids);
+  catMetricsQids = get<1>(metricsQids);
+
   // Measure Execution Time
   auto start = chrono::high_resolution_clock::now();
   // *********************************
@@ -166,7 +202,10 @@ int main(int argc, char **argv) {
   if (L != -1)
     directory += "_" + to_string(L) + "L";
 
+  // Create matrix from clusters
+  vector<vector<string>> result;
   for (int i = 0; i < count; i++) {
+    result.insert(result.begin(), res[i].begin(), res[i].end());
     writeAnonymizedTable(fs::path(directory), headers, res[i], K, -1, -1,
                          "cluster" + to_string(i + 1), false);
   }
@@ -175,11 +214,37 @@ int main(int argc, char **argv) {
   vector<vector<vector<string>>> clusters;
   for (const auto &[k, cluster] : res)
     clusters.emplace_back(cluster);
+  // Create a hierarchy tree for every qid
+  map<int, Tree> trees;
+  for (const int &i : catQids) {
+    trees[i] = Tree(hierarchiesMap[i]);
+  }
+
+  // GCP
+  try {
+    // 	1. Precalculate NCP for every qid value included in every cluster
+    vector<long double> cncps =
+        calculateNCPS(clusters, weights, allQids, numMetricsQids, trees);
+    // 	2. Calculate GCP
+    calculateGCP(clusters, dataset.size(), allQids, cncps);
+  } catch (const char *e) {
+    cout << e << endl;
+    return -1;
+  }
 
   // DM
   calculateDM(clusters, dataset.size(), K, L, -1);
   // CAvg
   calculateCAVG(clusters, dataset.size(), K, L, -1);
+
+  // GenILoss
+  try {
+    calculateGenILoss(transpose(result), trees, allQids, catMetricsQids,
+                      numMetricsQids, dataset.size());
+  } catch (const char *e) {
+    cout << e << endl;
+    return -1;
+  }
 
   return 0;
 }

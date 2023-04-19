@@ -3,8 +3,8 @@
 
 #include "../utilities/hierarchy.h"
 #include "../utilities/tree.h"
-#include <vector>
 #include <iostream>
+#include <vector>
 
 class Info {
 private:
@@ -21,9 +21,8 @@ private:
 
 public:
   Info(vector<vector<string>> records,
-       map<int, vector<vector<string>>> hierarchies,
-       map<int, Tree> trees, vector<int> numQids,
-       vector<int> catQids);
+       map<int, vector<vector<string>>> hierarchies, map<int, Tree> trees,
+       vector<int> numQids, vector<int> catQids);
   vector<int> getNumQids();
   vector<int> getCatQids();
   int valueType(int qid);

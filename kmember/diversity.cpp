@@ -39,8 +39,7 @@ string majorityClass(vector<vector<string>> cluster, const int confAtt) {
       .first;
 }
 
-bool isSensitive(string majorityClass, const int confAtt,
-                 vector<string> values) {
+bool isSensitive(string majorityClass, vector<string> values) {
   return find(values.begin(), values.end(), majorityClass) != values.end();
 }
 

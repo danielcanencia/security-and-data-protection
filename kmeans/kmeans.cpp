@@ -101,20 +101,20 @@ vector<Group> Kmeans::computeAll(vector<Record> &records) {
   return groups;
 }
 
-vector<vector<vector<string>>> generalize(vector<Group> groups, vector<int> qids) {
+vector<vector<vector<string>>> generalize(vector<Group> groups,
+                                          vector<int> qids) {
   vector<vector<vector<string>>> clusters;
 
   // Global recoding
-  for (auto& group : groups) {
+  for (auto &group : groups) {
     clusters.emplace_back(group.generalize(qids));
   }
 
   return clusters;
 }
 
-vector<Record> preprocessing(string file, vector<string>& headers,
-                             vector<string> qidNames,
-                             vector<int>& qids) {
+vector<Record> preprocessing(string file, vector<string> &headers,
+                             vector<string> qidNames, vector<int> &qids) {
   // Read CSV Input files
   ifstream input{file};
   if (!input.is_open()) {
@@ -139,7 +139,7 @@ vector<Record> preprocessing(string file, vector<string>& headers,
       cout << a << endl;*/
 
     // Get qids indexes
-    for (size_t i=0; i < qidNames.size(); i++) {
+    for (size_t i = 0; i < qidNames.size(); i++) {
       auto it = find(headers.begin(), headers.end(), qidNames[i]);
       if (it != headers.end())
         qids.emplace_back(it - headers.begin());
@@ -213,6 +213,9 @@ int main(int argc, char **argv) {
     return -1;
   }
 
+  // Read Weights
+  vector<double> weights = readWeights(nqids, qidNames);
+
   cout << "* K-Means algorithm is being run..." << endl;
   // Measure Execution Time
   auto start = chrono::high_resolution_clock::now();
@@ -242,9 +245,53 @@ int main(int argc, char **argv) {
   fs::create_directories(directory);
   cout << "* Writing output to directory: " + directory << endl;
 
-  for (size_t i=0; i < clusters.size(); i++) {
+  // Create matrix from clusters
+  vector<vector<string>> result;
+  for (size_t i = 0; i < clusters.size(); i++) {
+    result.insert(result.begin(), clusters[i].begin(), clusters[i].end());
     writeAnonymizedTable(fs::path(directory), headers, clusters[i], K, -1, -1,
                          "cluster" + to_string(i + 1), false);
+  }
+
+  // METRICS
+  // GCP
+  try {
+    // 	1. Precalculate NCP for every qid value included in every cluster
+    vector<long double> cncps =
+        calculateNCPS(clusters, weights, qids, qids, {});
+    // 	2. Calculate GCP
+    calculateGCP(clusters, records.size(), qids, cncps);
+  } catch (const char *e) {
+    cout << e << endl;
+    return -1;
+  }
+
+  // For DM and CAvg metrics we should calculate K
+  // based on clusters minimum size
+  cout << "\t===> Evaluating K value to be used on DM and CAvg metrics"
+          " based on clusters sizes"
+       << endl;
+  int KValue =
+      (*min_element(clusters.begin(), clusters.end(),
+                    [](vector<vector<string>> a, vector<vector<string>> b) {
+                      return a.size() < b.size();
+                    }))
+          .size();
+  cout << "\t===> K Value: ";
+  cout << KValue << endl;
+
+  // DM
+  calculateDM(clusters, records.size(), KValue, -1, -1);
+  // CAvg
+  calculateCAVG(clusters, records.size(), KValue, -1, -1);
+
+  // Mirar valor GenILoss
+  // GenILoss
+  try {
+    calculateGenILoss(transpose(result), {}, qids, {}, qids, records.size());
+  } catch (const char *e) {
+    cout << e << endl;
+    return -1;
   }
 
   return 0;

@@ -1,11 +1,11 @@
 #ifndef _RECORD_H
 #define _RECORD_H
 
-#include <cmath>      // pow
-#include <fstream>    // ofstream
-#include <iostream>   // cout
+#include <algorithm> // transform
+#include <cmath>     // pow
+#include <fstream>   // ofstream
+#include <iostream>  // cout
 #include <vector>
-#include <algorithm>  // transform
 
 using namespace std;
 

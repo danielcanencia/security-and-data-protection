@@ -10,8 +10,8 @@ int randomRecord(vector<vector<string>> records) {
 int furthestRecord(vector<string> record, int index,
                    vector<vector<string>> records,
                    map<int, vector<vector<string>>> hierarchies,
-                   map<int, Tree> trees,
-                   vector<int> numQids, vector<int> catQids) {
+                   map<int, Tree> trees, vector<int> numQids,
+                   vector<int> catQids) {
   long double furthestDiff = -1;
   int furthestIdx = -1;
 
@@ -45,16 +45,14 @@ long double numDistance(long double v1, long double v2,
   return abs(v1 - v2) / maxDomSize;
 }
 
-long double catDistance(string &v1, string &v2, Info info,
-                        int attIndex) {
+long double catDistance(string &v1, string &v2, Info info, int attIndex) {
 
   return info.getSubTreeHeight(v1, v2, attIndex) / info.getTreeHeight(attIndex);
 
   return 1;
 }
 
-long double distance(vector<string> &r1, vector<string> &r2,
-                     Info info) {
+long double distance(vector<string> &r1, vector<string> &r2, Info info) {
   long double numSum = 0.0, catSum = 0.0;
   string v1, v2;
   // Numeric Values
@@ -79,8 +77,7 @@ long double distance(vector<string> &r1, vector<string> &r2,
 
 long double informationLoss(vector<vector<string>> records,
                             map<int, vector<vector<string>>> hierarchies,
-                            map<int, Tree> trees,
-                            vector<int> numQids,
+                            map<int, Tree> trees, vector<int> numQids,
                             vector<int> catQids) {
   int e = records.size();
   vector<long double> numValues, catValues;
@@ -124,11 +121,10 @@ long double informationLoss(vector<vector<string>> records,
 int findBestRecord(vector<vector<string>> records,
                    vector<vector<string>> cluster,
                    map<int, vector<vector<string>>> hierarchies,
-                   map<int, Tree> trees,
-                   vector<int> numQids, vector<int> catQids,
-                   int confAtt, const int L,
-                   vector<string> sensitiveValues,
-                   const int diversityPenalty, const int diversity) {
+                   map<int, Tree> trees, vector<int> numQids,
+                   vector<int> catQids, int confAtt, const int L,
+                   vector<string> sensitiveValues, const int diversityPenalty,
+                   const int diversity) {
   long double min = -1, diff;
   int best;
 
@@ -156,7 +152,7 @@ int findBestRecord(vector<vector<string>> records,
       else if (diversity) {
         if (isDiverse(cluster, confAtt, L))
           diff = auxDiff;
-        else if (isSensitive(majorClass, confAtt, sensitiveValues) &&
+        else if (isSensitive(majorClass, sensitiveValues) &&
                  majorClass != recordClass) {
           diff = auxDiff + diversityPenalty;
         }
@@ -174,8 +170,8 @@ int findBestRecord(vector<vector<string>> records,
 int findBestCluster(map<int, vector<vector<string>>> clusters,
                     vector<string> record,
                     map<int, vector<vector<string>>> hierarchies,
-                    map<int, Tree> trees,
-                    vector<int> numQids, vector<int> catQids) {
+                    map<int, Tree> trees, vector<int> numQids,
+                    vector<int> catQids) {
   long double min = -1, diff;
   int best;
 

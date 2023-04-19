@@ -1,10 +1,11 @@
 #ifndef _KMEANS_H
 #define _KMEANS_H
 
-#include "../utilities/metrics.h"
+#include "../utilities/analysis.h"
 #include "../utilities/hierarchy.h"
-#include "../utilities/writeData.h"
 #include "../utilities/input.h"
+#include "../utilities/metrics.h"
+#include "../utilities/writeData.h"
 #include "group.h"
 #include "record.h"
 #include <algorithm> // find
@@ -36,8 +37,8 @@ public:
   vector<Group> computeAll(vector<Record> &records);
 };
 
-vector<vector<vector<string>>> generalize(vector<Group> groups, vector<int> qids);
-vector<Record> preprocessing(string file, vector<string>& headers,
-                             vector<string> qidNames,
-                             vector<int>& qids);
+vector<vector<vector<string>>> generalize(vector<Group> groups,
+                                          vector<int> qids);
+vector<Record> preprocessing(string file, vector<string> &headers,
+                             vector<string> qidNames, vector<int> &qids);
 #endif

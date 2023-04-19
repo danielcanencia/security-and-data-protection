@@ -1,9 +1,8 @@
 #include "info.h"
 
 Info::Info(vector<vector<string>> records,
-           map<int, vector<vector<string>>> hierarchies,
-           map<int, Tree> trees, vector<int> numQids,
-           vector<int> catQids) {
+           map<int, vector<vector<string>>> hierarchies, map<int, Tree> trees,
+           vector<int> numQids, vector<int> catQids) {
   this->records = records;
   this->attsValues = transpose(records);
   this->hierarchies = hierarchies;
@@ -83,7 +82,8 @@ map<int, vector<vector<string>>> Info::getHierarchies() {
 }
 
 int Info::getSubTreeHeight(string v1, string v2, int index) {
-  string ancestor = trees[index].getLowestCommonAncestor(vector<string>({v1, v2})).value;
+  string ancestor =
+      trees[index].getLowestCommonAncestor(vector<string>({v1, v2})).value;
   return trees[index].getHeight(ancestor);
 }
 
@@ -100,41 +100,4 @@ int Info::lowestCommonAncestor(int index) {
   string ancestor = trees[index].getLowestCommonAncestor(values).value;
 
   return trees[index].getHeight(ancestor);
-
-  /*
-  // Get all permutations of records
-  vector<vector<int>> perms = getPermutations(2, indexes);
-
-  int height = 0;
-  for (const auto &perm : perms) {
-    int aux;
-    aux = getSubTreeHeight(this->records[perm[0]][index],
-                           this->records[perm[1]][index], index);
-
-    cout << "SHeight: ";
-    cout << aux << endl;
-    cout << trees[index].getSubTreeHeight(this->records[perm[0]][index],
-                  this->records[perm[1]][index]) << endl;
-
-  
-    if (aux > height)
-      height = aux;
-  }
-
-
-  if (height == 0) {
-    cout << "Ancestor: ";
-    cout << ancestor << endl;
-    cout << "Ch: ";
-    for (const auto& a : values)
-      cout << a + ", ";
-    cout << endl;
-    
-    cout << "Sheight: ";
-    cout << height << endl;
-    cout << "NSHeight: ";
-    cout << trees[index].getHeight(ancestor) << endl;
-  }
-
-  return height;*/
 }
