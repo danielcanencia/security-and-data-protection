@@ -22,7 +22,8 @@ public:
         GraphData &treeData);
   void generateNodesAndEdges(const vector<int> &nodesMax,
                              vector<vector<int>> toPrune);
-  set<GraphNode> getRoots();
+  GraphNode getRoot();
+  set<GraphNode> getLeaves();
   vector<int> getQids() const;
   bool isNodeMarked(GraphNode node);
   int addGeneralizations(const GraphNode &node, set<GraphNode> &queue);

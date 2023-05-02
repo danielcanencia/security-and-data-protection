@@ -20,7 +20,7 @@ void Graph::generateNodesAndEdges(const vector<int> &nodesMax,
   // Pruning phase
   this->graphData.pruneNodes(toPrune);
   this->graphData.generateAllEdges();
-
+  this->graphData.setRoot();
   return;
 }
 
@@ -48,8 +48,8 @@ void Graph::generateAllNodes(const vector<int> &node,
   }
 }
 
-set<GraphNode> Graph::getRoots() { return this->graphData.getRoots(); }
-
+GraphNode Graph::getRoot() { return this->graphData.getRoot(); }
+set<GraphNode> Graph::getLeaves() { return this->graphData.getLeaves(); }
 vector<int> Graph::getQids() const { return this->qids; }
 
 bool Graph::isNodeMarked(GraphNode node) {

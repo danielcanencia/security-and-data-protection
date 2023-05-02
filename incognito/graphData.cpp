@@ -59,12 +59,36 @@ void GraphData::generateAllEdges() {
   }
 }
 
-set<GraphNode> GraphData::getRoots() {
+void GraphData::setRoot() {
+  bool flag;
+
+  for (const auto &entry1 : this->edges) {
+    int childId = entry1.getChild();
+    flag = true;
+    for (const auto &entry2 : this->edges) {
+      if (entry2.getParent() == childId) {
+        flag = false;
+        break;
+      }
+    }
+
+    if (flag) {
+      this->root = this->nodes[childId];
+      return;
+    }
+  }
+
+  this->root = GraphNode();
+}
+
+GraphNode GraphData::getRoot() { return this->root; }
+
+set<GraphNode> GraphData::getLeaves() {
   set<GraphNode> roots;
   map<int, int> rootsIds;
   bool flag;
 
-  // Get root nodes ids
+  // Get root node's ids
   for (const auto &entry1 : this->edges) {
     int parentId = entry1.getParent();
     flag = true;
@@ -143,6 +167,10 @@ GraphNode GraphData::getFinalKAnon(map<int, map<string, vector<string>>> gens,
       getAllKAnon(node, kList, res);
     }
   }
+
+  // If no node matches the criteria return root node
+  if (res.size() == 0)
+    return getRoot();
 
   // Get one node based on criteria. One that maximizes data
   // utility metric (the one that presents the maximum number of clusters)
