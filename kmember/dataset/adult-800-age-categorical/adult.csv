@@ -797,4 +797,5 @@ Age;Workclass;Fnlwgt;Education;Education-num;Marital-status;Occupation;Relations
 33;Private;80945;HS-grad;9;Married-civ-spouse;Machine-op-inspct;Husband;White;Male;0;0;40;United-States;<=50K
 24;Private;309055;Some-college;10;Never-married;Sales;Not-in-family;White;Female;0;0;15;United-States;<=50K
 21;Private;62339;10th;6;Never-married;Handlers-cleaners;Not-in-family;White;Male;0;0;40;United-States;<=50K
-20;Private;184045;Some-college;10;Never-married;Sales;Unmarried;Black;Female;0;0;30;United-States;<=50K
+17;Private;368700;11th;7;Never-married;Sales;Own-child;White;Male;0;0;28;United-States;<=50K
+39;Private;176186;Some-college;10;Married-civ-spouse;Farming-fishing;Husband;White;Male;0;0;50;United-States;>50K
