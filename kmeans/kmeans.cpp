@@ -135,9 +135,6 @@ vector<Record> preprocessing(string file, vector<string> &headers,
     }
     headers.back().pop_back();
 
-    /*for (const auto& a : headers)
-      cout << a << endl;*/
-
     // Get qids indexes
     for (size_t i = 0; i < qidNames.size(); i++) {
       auto it = find(headers.begin(), headers.end(), qidNames[i]);

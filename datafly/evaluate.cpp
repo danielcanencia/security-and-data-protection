@@ -36,7 +36,6 @@ tuple<vector<vector<string>>, vector<vector<vector<string>>>> datafly(
 			return make_tuple(qidsDataset, clusters);
 		}
 	}
-	cout << "END" << endl;
 
 	// 4. Supress records which are not K-Anonymous (< K times)
 	supressRecords(qidsDataset, K);

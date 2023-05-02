@@ -21,7 +21,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-#define MAX_ITERATIONS 30
+#define MAX_ITERATIONS 80
 
 class Kmeans {
 private:

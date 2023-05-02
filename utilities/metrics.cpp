@@ -18,13 +18,13 @@ void calculateDM(vector<vector<vector<string>>> clusters, const int tableSize,
 }
 
 void calculateDM(vector<vector<vector<string>>> clusters, const int tableSize,
-                 const int K, const int L, const long double P) {
+                 const int K, const int L, const long double T) {
   if (K != -1)
     calculateDM(clusters, tableSize, (long double)K, GET_NAME(K));
   if (L != -1)
     calculateDM(clusters, tableSize, (long double)L, GET_NAME(L));
-  if (P != -1.0)
-    calculateDM(clusters, tableSize, P, GET_NAME(P));
+  if (T != -1.0)
+    calculateDM(clusters, tableSize, T, GET_NAME(T));
 }
 
 // Equivalent Class Size Metric
@@ -39,13 +39,13 @@ void calculateCAVG(vector<vector<vector<string>>> clusters, const int tableSize,
 }
 
 void calculateCAVG(vector<vector<vector<string>>> clusters, const int tableSize,
-                   const int K, const int L, const long double P) {
+                   const int K, const int L, const long double T) {
   if (K != -1)
     calculateCAVG(clusters, tableSize, K, GET_NAME(K));
   if (L != -1)
     calculateCAVG(clusters, tableSize, L, GET_NAME(L));
-  if (P != -1.0)
-    calculateCAVG(clusters, tableSize, P, GET_NAME(P));
+  if (T != -1.0)
+    calculateCAVG(clusters, tableSize, T, GET_NAME(T));
 }
 
 // Generalized Information Loss
@@ -191,7 +191,6 @@ void calculateGenILoss(vector<vector<string>> transposedDataset,
 
   // Categorical Attributes
   for (size_t i = 0; i < catFreqs.size(); i++) {
-    cout << "Some Cat " << endl;
     // Calculate Attributes GenILoss
     for (const auto &[k, v] : catFreqs[i])
       loss += calculateCatGenILoss(k, trees[catQids[i]]) * v;

@@ -56,7 +56,6 @@ generateAnonymizedDataset(vector<vector<string>> dataset,
                           map<int, vector<vector<string>>> hierarchiesMap,
                           map<int, map<string, vector<string>>> gens,
                           vector<Graph> graphs, vector<int> qids) {
-
   // Select one solution among the ones that satisfy K
   // Criteria: Generalization/Node that produces the maximum amount
   // 			 of equivalence classes
@@ -67,9 +66,10 @@ generateAnonymizedDataset(vector<vector<string>> dataset,
   for (size_t i = 0; i < qids.size(); i++) {
     const int qid = qids[i];
     map<string, string> qidMap;
-    for (size_t j = 0; j < hierarchiesMap[qid][0].size(); j++) {
+
+    for (size_t j = 0; j < hierarchiesMap[qid][0].size(); j++)
       qidMap[hierarchiesMap[qid][0][j]] = hierarchiesMap[qid][data[i]][j];
-    }
+
     generalizations[qid] = qidMap;
   }
 
@@ -123,7 +123,7 @@ incognito(vector<vector<string>> dataset,
   for (size_t i = 1; i < qids.size() + 1; i++) {
     for (size_t gsize = 0; gsize < graphs.size(); gsize++) {
       Graph g = graphs[gsize];
-      set<GraphNode> nodesQueue = g.getRoots();
+      set<GraphNode> nodesQueue = g.getLeaves();
       vector<GraphNode> kanon;
 
       // Main Loop
