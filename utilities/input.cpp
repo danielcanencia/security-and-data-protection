@@ -248,7 +248,7 @@ bool readParameters(const int datasetSize, const int confAtts, int &K, int &L,
   T = readParameter("t-closeness", "T", datasetSize);
 
   // Check l-diversity and t-closeness errors
-  if ((L == -1 || T == -1.0) && confAtts == 0) {
+  if ((L != -1 || T != -1.0) && confAtts == 0) {
     cout << endl;
     cout << "An error occured.\nIf l-diversity or t-closeness "
             "are used, there should exists, at least, one "
