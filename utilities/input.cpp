@@ -134,7 +134,11 @@ tuple<vector<int>, vector<int>> readMetricsQids(vector<int> numQids,
     switch (answer) {
     case 'Y':
     case 'y':
-      cout << "Enter number printed between brackets: " << endl;
+      if (catQids.size() > 0)
+        cout << "Enter number printed between brackets: " << endl;
+      else
+        cout << "\tThere are no categorical attributes. Continuing" << endl;
+
       while (catQids.size() > 0) {
         cout << "\t";
         for (size_t i = 0; i < catQids.size(); i++)
