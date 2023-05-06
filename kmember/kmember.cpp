@@ -13,6 +13,12 @@ evaluate(vector<vector<string>> dataset,
   }
 
   // Main algorithm
+  if (dataset.size() <= (size_t)K) {
+    map<int, vector<vector<string>>> res;
+    res[0] = dataset;
+    return res;
+  }
+
   vector<vector<string>> S = dataset;
   int r = randomRecord(S);
   map<int, vector<vector<string>>> res;
@@ -74,6 +80,7 @@ evaluate(vector<vector<string>> dataset,
     }
   }
 
+
   return res;
 }
 
@@ -116,6 +123,7 @@ int main(int argc, char **argv) {
     hierarchiesMap =
         readDirectory(fs::path(argv[1]), dataset, headers, qidNames,
                       confAttNames, catQids, confAtts, false);
+
     if (confAtts.size() < confAttNames.size()) {
       cout << endl << "******************" << endl;
       cout << "An error occured.\nCheck the confidential "
@@ -201,6 +209,7 @@ int main(int argc, char **argv) {
   directory += to_string(K) + "K";
   if (L != -1)
     directory += "_" + to_string(L) + "L";
+
 
   // Create matrix from clusters
   vector<vector<string>> result;
