@@ -22,6 +22,8 @@ int main(int argc, char **argv) {
   // Read qid names
   const int nqids = readNumberOfQids();
   vector<string> qidNames = readQidNames(nqids);
+  // Conf Atts Names
+  vector<string> confAttNames = readConfidentialAttNames();
 
   // Read data file and hierarchy folders
   vector<string> headers;
@@ -30,8 +32,9 @@ int main(int argc, char **argv) {
   map<int, vector<vector<string>>> hierarchiesMap;
 
   try {
-    hierarchiesMap = readDirectory(fs::path(argv[1]), dataset, headers,
-                                   qidNames, {}, qids, confAtts, false);
+    hierarchiesMap =
+        readDirectory(fs::path(argv[1]), dataset, headers, qidNames,
+                      confAttNames, qids, confAtts, false);
     if (qids.size() < qidNames.size()) {
       cout << endl << "******************" << endl;
       cout << "An error occured.\nCheck the qid "
@@ -49,11 +52,15 @@ int main(int argc, char **argv) {
   }
 
   // Read Parameters
-  const int K = readParameter("k-anonymity", "K", dataset.size());
+  int K, L;
+  long double T;
+  readParameters(dataset.size(), confAttNames.size(), K, L, T);
   if (K == -1) {
     cout << "Datafly needs parameter K" << endl;
     return 1;
   }
+  long double suppThreshold = readSuppThreshold();
+
   // Read Weights
   vector<double> weights = readWeights(nqids, qidNames);
   // Ask for desired qid types to be used on metrics
@@ -67,7 +74,8 @@ int main(int argc, char **argv) {
   auto start = chrono::high_resolution_clock::now();
   // *********************************
   // Main algorithm
-  auto resTuple = datafly(dataset, hierarchiesMap, qids, K);
+  auto resTuple =
+      datafly(dataset, hierarchiesMap, qids, confAtts, suppThreshold, K, L, T);
   vector<vector<string>> result = get<0>(resTuple);
   vector<vector<vector<string>>> clusters = get<1>(resTuple);
   if (result.size() == 0 || clusters.size() == 0)
@@ -83,7 +91,7 @@ int main(int argc, char **argv) {
 
   // Write anonymized table
   // Changed headers for non alterated ones
-  writeAnonymizedTable(fs::path(argv[1]), headers, result, K, -1, -1);
+  writeAnonymizedTable(fs::path(argv[1]), headers, result, K, L, T);
 
   // METRICS
   cout << "===> Analysis: " << endl;
@@ -107,10 +115,10 @@ int main(int argc, char **argv) {
   }
 
   // DM
-  calculateDM(clusters, dataset.size(), K, -1, -1);
+  calculateDM(clusters, dataset.size(), K);
 
   // CAvg
-  calculateCAVG(clusters, dataset.size(), K, -1, -1);
+  calculateCAVG(clusters, dataset.size(), K);
 
   // GenILoss
   try {
