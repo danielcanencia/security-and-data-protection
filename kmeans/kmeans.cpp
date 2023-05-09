@@ -278,9 +278,9 @@ int main(int argc, char **argv) {
   cout << KValue << endl;
 
   // DM
-  calculateDM(clusters, records.size(), KValue, -1, -1);
+  calculateDM(clusters, records.size(), KValue);
   // CAvg
-  calculateCAVG(clusters, records.size(), KValue, -1, -1);
+  calculateCAVG(clusters, records.size(), KValue);
 
   // Mirar valor GenILoss
   // GenILoss

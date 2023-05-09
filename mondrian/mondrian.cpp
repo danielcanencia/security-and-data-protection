@@ -85,7 +85,6 @@ int main(int argc, char **argv) {
   readParameters(dataset.size(), confAttNames.size(), K, L, T);
   // Read Weights
   vector<double> weights = readWeights(nqids, qidNames);
-
   // Ask for desired qid types to be used on metrics
   vector<int> numMetricsQids, catMetricsQids;
   tuple<vector<int>, vector<int>> metricsQids =
@@ -137,10 +136,10 @@ int main(int argc, char **argv) {
   }
 
   // DM
-  calculateDM(clusters, dataset.size(), K, L, T);
+  calculateDM(clusters, dataset.size(), K);
 
   // CAvg
-  calculateCAVG(clusters, dataset.size(), K, L, T);
+  calculateCAVG(clusters, dataset.size(), K);
 
   // GenILoss
   try {

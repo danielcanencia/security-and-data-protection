@@ -242,9 +242,9 @@ int main(int argc, char **argv) {
   }
 
   // DM
-  calculateDM(clusters, dataset.size(), K, L, -1);
+  calculateDM(clusters, dataset.size(), K);
   // CAvg
-  calculateCAVG(clusters, dataset.size(), K, L, -1);
+  calculateCAVG(clusters, dataset.size(), K);
 
   // GenILoss
   try {
