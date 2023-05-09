@@ -15,6 +15,7 @@ const long double readK();
 const int readNumberOfQids();
 vector<string> readQidNames(const int nqids);
 vector<string> readConfidentialAttNames();
+long double readSuppThreshold();
 vector<double> readWeights(const int nqids, vector<string> qidNames);
 tuple<vector<int>, vector<int>> readMetricsQids(vector<int> numQids,
                                                 vector<int> catQids,

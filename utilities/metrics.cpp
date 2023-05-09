@@ -4,48 +4,29 @@
 
 // Discernibility Metric
 void calculateDM(vector<vector<vector<string>>> clusters, const int tableSize,
-                 const long double param, const string paramName) {
+                 const int K) {
   long double dm = 0;
   for (const vector<vector<string>> &cluster : clusters) {
-    if ((long double)cluster.size() >= param)
+    if ((long double)cluster.size() >= K)
       dm += pow(cluster.size(), 2.0);
     else
       dm += tableSize * cluster.size();
   }
 
-  cout << "\t* DM using " + paramName + ": ";
+  cout << "\t* DM: ";
   cout << fixed << setprecision(3) << dm << endl;
 }
 
-void calculateDM(vector<vector<vector<string>>> clusters, const int tableSize,
-                 const int K, const int L, const long double T) {
-  if (K != -1)
-    calculateDM(clusters, tableSize, (long double)K, GET_NAME(K));
-  if (L != -1)
-    calculateDM(clusters, tableSize, (long double)L, GET_NAME(L));
-  if (T != -1.0)
-    calculateDM(clusters, tableSize, T, GET_NAME(T));
-}
 
 // Equivalent Class Size Metric
 void calculateCAVG(vector<vector<vector<string>>> clusters, const int tableSize,
-                   const long double param, const string paramName) {
-  const long double denom = (long double)(clusters.size() * param);
+                   const int K) {
+  const long double denom = (long double)(clusters.size() * K);
   const long double cavg = (denom == 0) ? 0 : tableSize / denom;
 
-  cout << "\t* CAvg using " + paramName + ": ";
+  cout << "\t* CAvg: ";
   cout << fixed << setprecision(3);
   cout << cavg << endl;
-}
-
-void calculateCAVG(vector<vector<vector<string>>> clusters, const int tableSize,
-                   const int K, const int L, const long double T) {
-  if (K != -1)
-    calculateCAVG(clusters, tableSize, K, GET_NAME(K));
-  if (L != -1)
-    calculateCAVG(clusters, tableSize, L, GET_NAME(L));
-  if (T != -1.0)
-    calculateCAVG(clusters, tableSize, T, GET_NAME(T));
 }
 
 // Generalized Information Loss

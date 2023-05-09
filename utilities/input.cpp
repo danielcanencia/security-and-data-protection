@@ -70,6 +70,32 @@ vector<string> readConfidentialAttNames() {
   return vector<string>(att_set.begin(), att_set.end());
 }
 
+long double readSuppThreshold() {
+  string question = "Suppresion Threshold (percentage, recommended 0.1-2%): ";
+  cout << question;
+  long double threshold;
+
+  while (1) {
+    cin >> threshold;
+    if (cin.fail()) {
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Error, enter a valid number." << endl;
+      cout << question;
+      continue;
+    }
+
+    if (threshold < 0.0 || threshold > 100.0) {
+      cout << "Error, value should be between 0 and 100." << endl;
+      cout << question;
+      continue;
+    }
+    break;
+  }
+  
+  return threshold;
+}
+
 vector<double> readWeights(const int nqids, vector<string> qidNames) {
   vector<double> weights;
   cout << "Do you want to use custom weights? "

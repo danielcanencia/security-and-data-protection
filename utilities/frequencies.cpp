@@ -1,26 +1,65 @@
 #include "frequencies.h"
 
 vector<tuple<string, int>>
-concatRecordsByIdx(const vector<vector<string>> dataset) {
-
+concatRecordsByIdx(vector<vector<string>> dataset, vector<int> qids) {
   vector<tuple<string, int>> records;
+  map<string, vector<int>> idxs;
 
   // Concatenate all elements
   for (size_t i = 0; i < dataset.size(); i++) {
-    records.emplace_back(make_tuple(
-        accumulate(dataset[i].begin(), dataset[i].end(), string()), i));
+    vector<string> record;
+    for (const auto& qid : qids) {
+      record.emplace_back(dataset[i][qid]);
+    }
+
+    string s;
+    for (auto const& value : record) {
+      s += value;
+    }
+
+    records.emplace_back(make_tuple(s, i));
   }
 
   return records;
 }
 
-vector<string> concatRecords(const vector<vector<string>> dataset) {
+map<string, tuple<int, vector<int>>>
+evaluateFrequencyByIdx(vector<vector<string>> dataset, vector<int> qids) {
+  map<string, tuple<int, vector<int>>> idxs;
+
+  // Concatenate all elements
+  for (size_t i = 0; i < dataset.size(); i++) {
+    vector<string> record;
+    for (const auto& qid : qids) {
+      record.emplace_back(dataset[i][qid]);
+    }
+
+    string s;
+    for (auto const& value : record) {
+      s += value;
+    }
+
+    // Save indexes
+    try {
+      get<0>(idxs[s]) = get<0>(idxs[s]) + 1;
+      get<1>(idxs[s]).emplace_back(i);
+    } catch (...) {
+      idxs[s] = make_tuple(1, vector<int>(i));
+    }
+  }
+
+  return idxs;
+}
+
+vector<string> concatRecords(vector<vector<string>> dataset) {
   vector<string> records;
 
   // Concatenate all elements
   for (size_t i = 0; i < dataset.size(); i++) {
-    records.emplace_back(
-        accumulate(dataset[i].begin(), dataset[i].end(), string()));
+    string s;
+    for (auto const& value : dataset[i])
+      s += value;
+    records.emplace_back(s);
   }
 
   return records;
@@ -71,28 +110,37 @@ vector<int> calculateFreqs(const vector<vector<string>> dataset) {
   return freqs;
 }
 
-int findMostDistinctQid(const vector<vector<string>> dataset) {
+int findMostDistinctQid(const vector<vector<string>> dataset, vector<int> qids) {
 
-  size_t cols = dataset[0].size();
+	// Obtain a subset of dataset containing only qids
+  vector<vector<string>> qidsDataset;
+	for (size_t i=0; i < dataset.size(); i++) {
+		vector<string> aux;
+		for (const int& idx : qids) {
+			aux.emplace_back(dataset[i][idx]);
+		}
+		qidsDataset.emplace_back(aux);
+	}
+
+  size_t cols = qids.size();
   vector<vector<string>> values(cols);
 
   // Get firt value of every attribute
   for (size_t i = 0; i < cols; i++)
-    values[i].emplace_back(dataset[0][i]);
+    values[i].emplace_back(qidsDataset[0][i]);
 
   // Every attribute has at least 1 distinct value
   vector<int> nvalues(cols, 1);
 
   // For all records
-  for (size_t i = 1; i < dataset.size(); i++) {
-
+  for (size_t i = 1; i < qidsDataset.size(); i++) {
     // Check if the auxiliar list (values) contains
     // the attribute value
     for (size_t j = 0; j < cols; j++) {
-      if (find(values[j].begin(), values[j].end(), dataset[i][j]) ==
+      if (find(values[j].begin(), values[j].end(), qidsDataset[i][j]) ==
           values[j].end()) {
 
-        values[j].emplace_back(dataset[i][j]);
+        values[j].emplace_back(qidsDataset[i][j]);
         nvalues[j]++;
       }
     }
