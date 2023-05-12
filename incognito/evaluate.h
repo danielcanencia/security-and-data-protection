@@ -13,6 +13,6 @@ using namespace std;
 tuple<vector<vector<string>>, vector<vector<vector<string>>>>
 incognito(vector<vector<string>> dataset,
           map<int, vector<vector<string>>> hierarchies, vector<int> qids,
-          vector<int> confAtts, const int K, const int L, const long double P);
+          vector<int> confAtts, const int K, const int L, const long double T);
 
 #endif

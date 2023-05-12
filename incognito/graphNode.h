@@ -35,11 +35,13 @@ public:
   void mark();
   void setKAnon();
   bool isKAnon() const;
-  bool isAnonymityValid(map<int, vector<vector<string>>> hierarchies,
-                        vector<vector<string>> dataset,
-                        map<int, map<string, vector<string>>> gensMap,
-                        vector<int> qids, vector<int> confAtts, const int K,
-                        const int L, const long double P);
+  bool
+  isAnonymityValid(map<int, vector<vector<string>>> hierarchies,
+                   vector<vector<string>> dataset,
+                   map<int, map<string, vector<string>>> gensMap,
+                   tuple<vector<map<string, int>>, vector<set<string>>> dataMap,
+                   vector<int> qids, vector<int> confAtts, const int K,
+                   const int L, const long double P);
   vector<int>
   evaluateFrequency(map<int, map<string, vector<string>>> generalizations,
                     vector<vector<string>> dataset, vector<int> qids) const;

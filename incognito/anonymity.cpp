@@ -31,6 +31,7 @@ bool isSplitLDiverse(vector<vector<string>> split, vector<int> confAtts,
 }
 
 bool isSplitTClose(vector<vector<string>> split, vector<vector<string>> data,
+                   tuple<vector<map<string, int>>, vector<set<string>>> dataMap,
                    vector<int> confAtts, const long double T) {
 
   if (split.size() == 0)
@@ -51,19 +52,8 @@ bool isSplitTClose(vector<vector<string>> split, vector<vector<string>> data,
     }
   }
 
-  vector<map<string, int>> dataMaps(confAtts.size());
-  vector<set<string>> valueSets(confAtts.size());
-  for (const auto &entry : data) {
-    for (size_t j = 0; j < confAtts.size(); j++) {
-      key = entry[confAtts[j]];
-      try {
-        dataMaps[j][key] += 1;
-      } catch (...) {
-        dataMaps[j][key] = 1;
-      }
-      valueSets[j].insert(key);
-    }
-  }
+  vector<map<string, int>> dataFreqs = get<0>(dataMap);
+  vector<set<string>> valueSets = get<1>(dataMap);
 
   // P and Q size
   int pSize, qSize;
@@ -79,11 +69,11 @@ bool isSplitTClose(vector<vector<string>> split, vector<vector<string>> data,
         // EMD(Pi, Qi) = abs(Pi/Pi probability in P -
         //					 Qi/Qi probability in Q)
         emd += abs((long double)splitMaps[i][entry] / pSize -
-                   (long double)dataMaps[i][entry] / qSize);
+                   (long double)dataFreqs[i][entry] / qSize);
       } else {
         // Not present in P
         // EMD(Pi, Qi) = abs(0 - Qi/Qi probability in Q)
-        emd += (long double)dataMaps[i][entry] / qSize;
+        emd += (long double)dataFreqs[i][entry] / qSize;
       }
     }
     // EMD(P, Q) = sum(sum(pj - qj)) / (m - 1)
@@ -97,6 +87,7 @@ bool isSplitTClose(vector<vector<string>> split, vector<vector<string>> data,
 }
 
 bool isSplitValid(vector<vector<vector<string>>> splits,
+                  tuple<vector<map<string, int>>, vector<set<string>>> dataMap,
                   vector<vector<string>> dataset, vector<int> confAtts,
                   const int K, const int L, const long double T) {
   bool kanonymity, ldiversity, tcloseness;
@@ -123,7 +114,7 @@ bool isSplitValid(vector<vector<vector<string>>> splits,
   }
   if (T > 0) {
     for (const auto &split : splits) {
-      if (!isSplitTClose(split, dataset, confAtts, T)) {
+      if (!isSplitTClose(split, dataset, dataMap, confAtts, T)) {
         tcloseness = false;
         break;
       }

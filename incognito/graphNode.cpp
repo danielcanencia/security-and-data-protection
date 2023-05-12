@@ -81,12 +81,13 @@ string GraphNode::generalizeEntry(string entry,
   return generalizations[index];
 }
 
-bool GraphNode::isAnonymityValid(map<int, vector<vector<string>>> hierarchies,
-                                 vector<vector<string>> dataset,
-                                 map<int, map<string, vector<string>>> gensMap,
-                                 vector<int> qids, vector<int> confAtts,
-                                 const int K, const int L,
-                                 const long double P) {
+bool GraphNode::isAnonymityValid(
+    map<int, vector<vector<string>>> hierarchies,
+    vector<vector<string>> dataset,
+    map<int, map<string, vector<string>>> gensMap,
+    tuple<vector<map<string, int>>, vector<set<string>>> dataMap,
+    vector<int> qids, vector<int> confAtts, const int K, const int L,
+    const long double P) {
 
   // Map every unique combination of qids to a matrix/cluster;
   map<string, vector<vector<string>>> splits;
@@ -115,7 +116,7 @@ bool GraphNode::isAnonymityValid(map<int, vector<vector<string>>> hierarchies,
   for (const auto &[k, v] : splits)
     clusters.emplace_back(v);
 
-  return isSplitValid(clusters, anonData, confAtts, K, L, P);
+  return isSplitValid(clusters, dataMap, anonData, confAtts, K, L, P);
 }
 
 vector<int> GraphNode::evaluateFrequency(

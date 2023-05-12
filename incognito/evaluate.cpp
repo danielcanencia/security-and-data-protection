@@ -93,7 +93,13 @@ generateAnonymizedDataset(vector<vector<string>> dataset,
 tuple<vector<vector<string>>, vector<vector<vector<string>>>>
 incognito(vector<vector<string>> dataset,
           map<int, vector<vector<string>>> hierarchies, vector<int> qids,
-          vector<int> confAtts, const int K, const int L, const long double P) {
+          vector<int> confAtts, const int K, const int L, const long double T) {
+
+  // Generate auxiliar data used in t-closeness privacy method
+  tuple<vector<map<string, int>>, vector<set<string>>> dataMap;
+  if (T != -1)
+    dataMap = createDataMap(dataset, confAtts);
+
   // Levels per hierchary. Useful to construct node
   // and edges tables
   map<int, int> nodeMax;
@@ -133,8 +139,8 @@ incognito(vector<vector<string>> dataset,
 
         if (!g.isNodeMarked(node)) {
           // Not marked
-          if (node.isAnonymityValid(hierarchies, dataset, gensMap, g.getQids(),
-                                    confAtts, K, L, P)) {
+          if (node.isAnonymityValid(hierarchies, dataset, gensMap, dataMap,
+                                    g.getQids(), confAtts, K, L, P)) {
             g.markGeneralizations(node);
           } else {
             // Add node to pruning vector
