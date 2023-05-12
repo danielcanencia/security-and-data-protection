@@ -140,7 +140,7 @@ incognito(vector<vector<string>> dataset,
         if (!g.isNodeMarked(node)) {
           // Not marked
           if (node.isAnonymityValid(hierarchies, dataset, gensMap, dataMap,
-                                    g.getQids(), confAtts, K, L, P)) {
+                                    g.getQids(), confAtts, K, L, T)) {
             g.markGeneralizations(node);
           } else {
             // Add node to pruning vector
