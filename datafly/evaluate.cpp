@@ -33,6 +33,11 @@ datafly(vector<vector<string>> dataset,
 
   qidsDataset = dataset;
 
+  // Generate auxiliar data used in t-closeness privacy method
+  tuple<vector<map<string, int>>, vector<set<string>>> dataMap;
+  if (T != -1)
+    dataMap = createDataMap(dataset, confAtts);
+
   // 1. Create a hierarchy tree for every qid
   vector<Tree> trees;
   for (const int &val : qids) {
@@ -41,7 +46,8 @@ datafly(vector<vector<string>> dataset,
 
   int idx;
   // 2&3. Calculate frequencies & Check if KAnonimity is satisfied
-  while (!isSplitValid(qidsDataset, dataset, qids, confAtts, K, L, T)) {
+  while (
+      !isSplitValid(qidsDataset, dataMap, dataset, qids, confAtts, K, L, T)) {
     // Check if table is ready for suppression
     if (readyForSuppression(qidsDataset, qids, dataset.size(), K,
                             suppThreshold)) {

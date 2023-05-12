@@ -15,8 +15,11 @@ bool isSplitKAnonymous(vector<vector<string>> split, vector<int> qids,
 bool isSplitLDiverse(vector<vector<string>> split, vector<int> confAtts,
                      const int L);
 bool isSplitTClose(vector<vector<string>> split, vector<vector<string>> data,
+                   tuple<vector<map<string, int>>, vector<set<string>>> dataMap,
                    vector<int> confAtts, const long double T);
-bool isSplitValid(vector<vector<string>> split, vector<vector<string>> dataset,
-                  vector<int> qids, vector<int> confAtts, const int K,
-                  const int L, const long double T);
+bool isSplitValid(vector<vector<string>> split,
+                  tuple<vector<map<string, int>>, vector<set<string>>> dataMap,
+                  vector<vector<string>> dataset, vector<int> qids,
+                  vector<int> confAtts, const int K, const int L,
+                  const long double T);
 #endif

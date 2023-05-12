@@ -1,19 +1,19 @@
 #include "frequencies.h"
 
-vector<tuple<string, int>>
-concatRecordsByIdx(vector<vector<string>> dataset, vector<int> qids) {
+vector<tuple<string, int>> concatRecordsByIdx(vector<vector<string>> dataset,
+                                              vector<int> qids) {
   vector<tuple<string, int>> records;
   map<string, vector<int>> idxs;
 
   // Concatenate all elements
   for (size_t i = 0; i < dataset.size(); i++) {
     vector<string> record;
-    for (const auto& qid : qids) {
+    for (const auto &qid : qids) {
       record.emplace_back(dataset[i][qid]);
     }
 
     string s;
-    for (auto const& value : record) {
+    for (auto const &value : record) {
       s += value;
     }
 
@@ -30,12 +30,12 @@ evaluateFrequencyByIdx(vector<vector<string>> dataset, vector<int> qids) {
   // Concatenate all elements
   for (size_t i = 0; i < dataset.size(); i++) {
     vector<string> record;
-    for (const auto& qid : qids) {
+    for (const auto &qid : qids) {
       record.emplace_back(dataset[i][qid]);
     }
 
     string s;
-    for (auto const& value : record) {
+    for (auto const &value : record) {
       s += value;
     }
 
@@ -57,7 +57,7 @@ vector<string> concatRecords(vector<vector<string>> dataset) {
   // Concatenate all elements
   for (size_t i = 0; i < dataset.size(); i++) {
     string s;
-    for (auto const& value : dataset[i])
+    for (auto const &value : dataset[i])
       s += value;
     records.emplace_back(s);
   }
@@ -110,17 +110,18 @@ vector<int> calculateFreqs(const vector<vector<string>> dataset) {
   return freqs;
 }
 
-int findMostDistinctQid(const vector<vector<string>> dataset, vector<int> qids) {
+int findMostDistinctQid(const vector<vector<string>> dataset,
+                        vector<int> qids) {
 
-	// Obtain a subset of dataset containing only qids
+  // Obtain a subset of dataset containing only qids
   vector<vector<string>> qidsDataset;
-	for (size_t i=0; i < dataset.size(); i++) {
-		vector<string> aux;
-		for (const int& idx : qids) {
-			aux.emplace_back(dataset[i][idx]);
-		}
-		qidsDataset.emplace_back(aux);
-	}
+  for (size_t i = 0; i < dataset.size(); i++) {
+    vector<string> aux;
+    for (const int &idx : qids) {
+      aux.emplace_back(dataset[i][idx]);
+    }
+    qidsDataset.emplace_back(aux);
+  }
 
   size_t cols = qids.size();
   vector<vector<string>> values(cols);
@@ -175,3 +176,25 @@ vector<vector<vector<string>>> createClusters(vector<vector<string>> dataset,
 
   return clusters;
 }
+
+tuple<vector<map<string, int>>, vector<set<string>>>
+createDataMap(vector<vector<string>> dataset, vector<int> confAtts) {
+
+  vector<map<string, int>> dataMaps(confAtts.size());
+  vector<set<string>> valueSets(confAtts.size());
+  string key;
+
+  for (const auto &entry : dataset) {
+    for (size_t j = 0; j < confAtts.size(); j++) {
+      key = entry[confAtts[j]];
+      try {
+        dataMaps[j][key] += 1;
+      } catch (...) {
+        dataMaps[j][key] = 1;
+      }
+      valueSets[j].insert(key);
+    }
+  }
+
+  return make_tuple(dataMaps, valueSets);
+};
