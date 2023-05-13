@@ -206,18 +206,20 @@ int main(int argc, char **argv) {
   string directory = argv[1];
   if (directory.back() != '/')
     directory += "/";
-  directory += to_string(K) + "K";
+  /*directory += to_string(K) + "K";
   if (L != -1)
-    directory += "_" + to_string(L) + "L";
+    directory += "_" + to_string(L) + "L";*/
 
 
   // Create matrix from clusters
   vector<vector<string>> result;
-  for (int i = 0; i < count; i++) {
+  for (int i=0; i < count; i++) {
     result.insert(result.begin(), res[i].begin(), res[i].end());
-    writeAnonymizedTable(fs::path(directory), headers, res[i], K, -1, -1,
-                         "cluster" + to_string(i + 1), false);
+    //writeAnonymizedTable(fs::path(directory), headers, res[i], K, L, -1,
+    //                     "cluster" + to_string(i + 1), false);
   }
+
+  writeAnonymizedTable(fs::path(directory), headers, result, K, L, -1);
 
   // METRICS
   vector<vector<vector<string>>> clusters;
