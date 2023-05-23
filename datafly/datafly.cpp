@@ -45,6 +45,18 @@ int main(int argc, char **argv) {
            << endl;
       return -1;
     }
+
+    if (confAtts.size() < confAttNames.size()) {
+      cout << endl << "******************" << endl;
+      cout << "An error occured.\nCheck the confidential "
+              "attributte names entered exists.\nThey should be "
+              "referenced in their respectives "
+              "hierarchy files."
+           << endl
+           << endl;
+      return -1;
+    }
+
     sort(qids.begin(), qids.end());
   } catch (const char *e) {
     cout << e << endl;

@@ -5,9 +5,8 @@
 */
 void generalizeQid(vector<vector<string>> &dataset, const int qid, Tree tree) {
 
-  for (size_t i = 0; i < dataset.size(); i++) {
+  for (size_t i = 0; i < dataset.size(); i++)
     dataset[i][qid] = tree.getNextGen(dataset[i][qid]);
-  }
 }
 
 void supressRecords(vector<vector<string>> &dataset, vector<int> qids,

@@ -16,7 +16,7 @@ bool readyForSuppression(vector<vector<string>> dataset, vector<int> qids,
   int count = 0;
   for (const auto &freq : calculateFreqs(records)) {
     if (freq < K)
-      count += 1;
+      count += freq;
   }
 
   // Percentage of tuple that can be suppress: (loss * dataset.size() / 100)
