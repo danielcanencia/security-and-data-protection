@@ -64,9 +64,7 @@ int main(int argc, char **argv) {
   }
 
   // Read Parameters
-  int K, L;
-  long double T;
-  readParameters(dataset.size(), confAttNames.size(), K, L, T);
+  const int K = readParameter("k-anonymity", "K", dataset.size());
   if (K == -1) {
     cout << "Datafly needs parameter K" << endl;
     return 1;
@@ -87,7 +85,7 @@ int main(int argc, char **argv) {
   // *********************************
   // Main algorithm
   auto resTuple =
-      datafly(dataset, hierarchiesMap, qids, confAtts, suppThreshold, K, L, T);
+      datafly(dataset, hierarchiesMap, qids, confAtts, suppThreshold, K);
   vector<vector<string>> result = get<0>(resTuple);
   vector<vector<vector<string>>> clusters = get<1>(resTuple);
   if (result.size() == 0 || clusters.size() == 0)
@@ -103,7 +101,7 @@ int main(int argc, char **argv) {
 
   // Write anonymized table
   // Changed headers for non alterated ones
-  writeAnonymizedTable(fs::path(argv[1]), headers, result, K, L, T);
+  writeAnonymizedTable(fs::path(argv[1]), headers, result, K, -1, -1);
 
   // METRICS
   cout << "===> Analysis: " << endl;

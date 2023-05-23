@@ -8,6 +8,7 @@
 
 using namespace std;
 
+bool isKAnonSatisfied(const vector<vector<string>> dataset, const int K);
 void generalizeQid(vector<vector<string>> &dataset, const int qid, Tree tree);
 void supressRecords(vector<vector<string>> &dataset, vector<int> qids,
                     const int K);

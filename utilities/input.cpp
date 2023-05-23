@@ -71,7 +71,7 @@ vector<string> readConfidentialAttNames() {
 }
 
 long double readSuppThreshold() {
-  string question = "Suppresion Threshold (percentage, recommended 0.1-2%): ";
+  string question = "Suppresion Threshold (percentage, recommended 0.3-2%): ";
   cout << question;
   long double threshold;
 
@@ -133,9 +133,8 @@ vector<double> readWeights(const int nqids, vector<string> qidNames) {
       keep = true;
       break;
     default:
-      cout << "Do you want to use weights ";
-      cout << "(will only be used on metrics) ";
-      cout << "[Y(y)/N(n)]: ";
+      cout << "Do you want to use custom weights? "
+              "(will only be used on gcp metric) [Y(y)/N(n)]: ";
       cin >> answer;
     }
   }

@@ -1,5 +1,15 @@
 #include "generalize.h"
 
+bool isKAnonSatisfied(const vector<vector<string>> dataset, const int K) {
+  for (const int &freq : calculateFreqs(dataset)) {
+    if (freq < K) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 /*
   Full-Domain Generalization
 */

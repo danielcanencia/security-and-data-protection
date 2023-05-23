@@ -26,17 +26,11 @@ bool readyForSuppression(vector<vector<string>> dataset, vector<int> qids,
 tuple<vector<vector<string>>, vector<vector<vector<string>>>>
 datafly(vector<vector<string>> dataset,
         map<int, vector<vector<string>>> hierarchies, vector<int> qids,
-        vector<int> confAtts, const long double suppThreshold, const int K,
-        const int L, const long double T) {
+        vector<int> confAtts, const long double suppThreshold, const int K) {
   vector<vector<string>> qidsDataset, result;
   vector<vector<vector<string>>> clusters;
 
   qidsDataset = dataset;
-
-  // Generate auxiliar data used in t-closeness privacy method
-  tuple<vector<map<string, int>>, vector<set<string>>> dataMap;
-  if (T != -1)
-    dataMap = createDataMap(dataset, confAtts);
 
   // 1. Create a hierarchy tree for every qid
   vector<Tree> trees;
@@ -46,8 +40,7 @@ datafly(vector<vector<string>> dataset,
 
   int idx;
   // 2&3. Calculate frequencies & Check if KAnonimity is satisfied
-  while (
-      !isSplitValid(qidsDataset, dataMap, dataset, qids, confAtts, K, L, T)) {
+	while (!isKAnonSatisfied(qidsDataset, K)) {
     // Check if table is ready for suppression
     if (readyForSuppression(qidsDataset, qids, dataset.size(), K,
                             suppThreshold)) {
