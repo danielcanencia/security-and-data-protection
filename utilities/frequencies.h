@@ -10,8 +10,6 @@
 
 using namespace std;
 
-vector<tuple<string, int>> concatRecordsByIdx(vector<vector<string>> dataset,
-                                              vector<int> qids);
 map<string, tuple<int, vector<int>>>
 evaluateFrequencyByIdx(vector<vector<string>> dataset, vector<int> qids);
 vector<int> calculateFreqs(vector<vector<string>> dataset);

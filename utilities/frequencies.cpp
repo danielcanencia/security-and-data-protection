@@ -1,28 +1,5 @@
 #include "frequencies.h"
 
-vector<tuple<string, int>> concatRecordsByIdx(vector<vector<string>> dataset,
-                                              vector<int> qids) {
-  vector<tuple<string, int>> records;
-  map<string, vector<int>> idxs;
-
-  // Concatenate all elements
-  for (size_t i = 0; i < dataset.size(); i++) {
-    vector<string> record;
-    for (const auto &qid : qids) {
-      record.emplace_back(dataset[i][qid]);
-    }
-
-    string s;
-    for (auto const &value : record) {
-      s += value;
-    }
-
-    records.emplace_back(make_tuple(s, i));
-  }
-
-  return records;
-}
-
 map<string, tuple<int, vector<int>>>
 evaluateFrequencyByIdx(vector<vector<string>> dataset, vector<int> qids) {
   map<string, tuple<int, vector<int>>> idxs;
