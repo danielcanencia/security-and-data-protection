@@ -1,5 +1,38 @@
 #include "kmember.h"
 
+map<int, vector<vector<string>>> generalize(map<int, vector<vector<string>>> data,
+                                            map<int, Tree> trees, vector<int> numQids,
+                                            vector<int> catQids, int clusters) {
+  // Generalize values based on clusters (global recoding)
+  for (int i = 0; i < clusters; i++) {
+    vector<vector<string>> cluster = data[i];
+    vector<vector<string>> matrix = transpose(cluster);
+
+    // Generalize only quasi'identifier attributes
+    for (const auto &qid : catQids) {
+      // Generalize values based on their common ancestor
+      string gen = trees[qid].getLowestCommonAncestor(matrix[qid]).value;
+      for (size_t idx = 0; idx < cluster.size(); idx++)
+        data[i][idx][qid] = gen;
+    }
+
+    // Generalize numerical attributes by range
+    for (const auto &qid : numQids) {
+      double max = stod(
+          *max_element(matrix[qid].begin(), matrix[qid].end(),
+                       [](string a, string b) { return stod(a) < stod(b); }));
+      double min = stod(
+          *min_element(matrix[qid].begin(), matrix[qid].end(),
+                       [](string a, string b) { return stod(a) < stod(b); }));
+
+      for (size_t idx = 0; idx < cluster.size(); idx++)
+        data[i][idx][qid] = to_string(min) + '~' + to_string(max);
+    }
+  }
+
+  return data;
+}
+
 map<int, vector<vector<string>>>
 evaluate(vector<vector<string>> dataset,
          map<int, vector<vector<string>>> hierarchies, vector<int> numQids,
@@ -13,15 +46,15 @@ evaluate(vector<vector<string>> dataset,
   }
 
   // Main algorithm
+  map<int, vector<vector<string>>> res;
   if (dataset.size() <= (size_t)K) {
-    map<int, vector<vector<string>>> res;
     res[0] = dataset;
-    return res;
+    count = 1;
+    return generalize(res, trees, numQids, catQids, count);
   }
 
   vector<vector<string>> S = dataset;
   int r = randomRecord(S);
-  map<int, vector<vector<string>>> res;
   vector<vector<string>> c;
   vector<string> aux = S[r];
 
@@ -53,35 +86,7 @@ evaluate(vector<vector<string>> dataset,
     S.erase(S.begin() + r);
   }
 
-  // Generalize values based on clusters (global recoding)
-  for (int i = 0; i < count; i++) {
-    vector<vector<string>> cluster = res[i];
-    vector<vector<string>> matrix = transpose(cluster);
-
-    // Generalize only quasi'identifier attributes
-    for (const auto &qid : catQids) {
-      // Generalize values based on their common ancestor
-      string gen = trees[qid].getLowestCommonAncestor(matrix[qid]).value;
-      for (size_t idx = 0; idx < cluster.size(); idx++)
-        res[i][idx][qid] = gen;
-    }
-
-    // Generalize numerical attributes by range
-    for (const auto &qid : numQids) {
-      double max = stod(
-          *max_element(matrix[qid].begin(), matrix[qid].end(),
-                       [](string a, string b) { return stod(a) < stod(b); }));
-      double min = stod(
-          *min_element(matrix[qid].begin(), matrix[qid].end(),
-                       [](string a, string b) { return stod(a) < stod(b); }));
-
-      for (size_t idx = 0; idx < cluster.size(); idx++)
-        res[i][idx][qid] = to_string(min) + '~' + to_string(max);
-    }
-  }
-
-
-  return res;
+  return generalize(res, trees, numQids, catQids, count);
 }
 
 int main(int argc, char **argv) {
@@ -123,6 +128,16 @@ int main(int argc, char **argv) {
     hierarchiesMap =
         readDirectory(fs::path(argv[1]), dataset, headers, qidNames,
                       confAttNames, catQids, confAtts, false);
+    if (catQids.size() < catQids.size()) {
+      cout << endl << "******************" << endl;
+      cout << "An error occured.\nCheck the qid "
+              "names entered exists. They should be "
+              "referenced\nin their respectives "
+              "hierarchy files."
+           << endl
+           << endl;
+      return -1;
+    }
 
     if (confAtts.size() < confAttNames.size()) {
       cout << endl << "******************" << endl;
@@ -206,18 +221,12 @@ int main(int argc, char **argv) {
   string directory = argv[1];
   if (directory.back() != '/')
     directory += "/";
-  /*directory += to_string(K) + "K";
-  if (L != -1)
-    directory += "_" + to_string(L) + "L";*/
-
 
   // Create matrix from clusters
   vector<vector<string>> result;
-  for (int i=0; i < count; i++) {
+  for (int i=0; i < count; i++)
     result.insert(result.begin(), res[i].begin(), res[i].end());
-    //writeAnonymizedTable(fs::path(directory), headers, res[i], K, L, -1,
-    //                     "cluster" + to_string(i + 1), false);
-  }
+
 
   writeAnonymizedTable(fs::path(directory), headers, result, K, L, -1);
 
