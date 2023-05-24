@@ -17,7 +17,6 @@ void calculateDM(vector<vector<vector<string>>> clusters, const int tableSize,
   cout << fixed << setprecision(3) << dm << endl;
 }
 
-
 // Equivalent Class Size Metric
 void calculateCAVG(vector<vector<vector<string>>> clusters, const int tableSize,
                    const int K) {

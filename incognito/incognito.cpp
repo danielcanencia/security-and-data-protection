@@ -135,11 +135,13 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  // DM
-  calculateDM(clusters, dataset.size(), K);
+  if (K != -1) {
+    // DM
+    calculateDM(clusters, dataset.size(), K);
 
-  // CAvg
-  calculateCAVG(clusters, dataset.size(), K);
+    // CAvg
+    calculateCAVG(clusters, dataset.size(), K);
+  }
 
   // GenILoss
   try {

@@ -1,8 +1,8 @@
 #include "kmember.h"
 
-map<int, vector<vector<string>>> generalize(map<int, vector<vector<string>>> data,
-                                            map<int, Tree> trees, vector<int> numQids,
-                                            vector<int> catQids, int clusters) {
+map<int, vector<vector<string>>>
+generalize(map<int, vector<vector<string>>> data, map<int, Tree> trees,
+           vector<int> numQids, vector<int> catQids, int clusters) {
   // Generalize values based on clusters (global recoding)
   for (int i = 0; i < clusters; i++) {
     vector<vector<string>> cluster = data[i];
@@ -224,9 +224,8 @@ int main(int argc, char **argv) {
 
   // Create matrix from clusters
   vector<vector<string>> result;
-  for (int i=0; i < count; i++)
+  for (int i = 0; i < count; i++)
     result.insert(result.begin(), res[i].begin(), res[i].end());
-
 
   writeAnonymizedTable(fs::path(directory), headers, result, K, L, -1);
 
@@ -252,10 +251,13 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  // DM
-  calculateDM(clusters, dataset.size(), K);
-  // CAvg
-  calculateCAVG(clusters, dataset.size(), K);
+  if (K != -1) {
+    // DM
+    calculateDM(clusters, dataset.size(), K);
+
+    // CAvg
+    calculateCAVG(clusters, dataset.size(), K);
+  }
 
   // GenILoss
   try {

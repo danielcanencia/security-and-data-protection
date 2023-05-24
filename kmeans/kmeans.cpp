@@ -277,10 +277,13 @@ int main(int argc, char **argv) {
   cout << "\t===> K Value: ";
   cout << KValue << endl;
 
-  // DM
-  calculateDM(clusters, records.size(), KValue);
-  // CAvg
-  calculateCAVG(clusters, records.size(), KValue);
+  if (K != -1) {
+    // DM
+    calculateDM(clusters, dataset.size(), K);
+
+    // CAvg
+    calculateCAVG(clusters, dataset.size(), K);
+  }
 
   // Mirar valor GenILoss
   // GenILoss
