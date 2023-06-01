@@ -1,7 +1,27 @@
+/*! \file kmeans.cpp
+    \brief Fichero principal del algoritmo K-Means
+
+    Anonimiza un conjunto de datos compuesto únicamente por atributos
+    numéricos dado un archivo con extensión csv y un parámetro K representando
+    el número de clusters a generar.
+
+    Ejemplo: ./kmeans.out datasets/3-attributes/k-means-100.csv 2
+*/
+
 #include "kmeans.h"
 
+//! Constructor de la clase KMeans
+/*!
+  \param K parámetro K del algoritmo (número de clusters a generar).
+*/
 Kmeans::Kmeans(int K) { this->K = K; }
 
+//! Genera un vector compuesto por clusters (groups), inicializando sus
+//! respectivos centroides.
+/*!
+  \param records conjunto de registros.
+  \return vector compuesto por clusters (clase Group)
+*/
 vector<Group> Kmeans::inicializeCentroids(vector<Record> &records) {
   vector<Group> groups;
   vector<int> aux;
@@ -25,6 +45,13 @@ vector<Group> Kmeans::inicializeCentroids(vector<Record> &records) {
   return groups;
 }
 
+//! Calcula los centroides / clusters a los que asignar cada uno de los
+//! registros, en función de la distancia euclideana entre registro y centroide.
+/*!
+  \param groups conjunto de clusters (contiene los centroides).
+  \param records conjunto de registros.
+  \return vector compuesto por índices de clusters.
+*/
 vector<double> Kmeans::centroidsDistances(const vector<Group> &groups,
                                           const vector<Record> &records) {
   vector<double> res;
@@ -54,6 +81,12 @@ vector<double> Kmeans::centroidsDistances(const vector<Group> &groups,
   return res;
 }
 
+//! Actualiza o recalcula los centroides de cada cluster o grupo.
+/*!
+  \param groups conjunto de clusters.
+  \param newGroups índices de los clusters a los que se asigna cada registro.
+  \return vector compuesto por índices de registros.
+*/
 bool Kmeans::updateGroups(vector<Group> &groups,
                           const vector<double> &newGroups,
                           vector<Record> &curRecords) {
@@ -75,6 +108,11 @@ bool Kmeans::updateGroups(vector<Group> &groups,
   return end;
 }
 
+//! Bucle principal del algoritmo KMeans.
+/*!
+  \param records conjunto de registros.
+  \return conjunto de clusters.
+*/
 vector<Group> Kmeans::computeAll(vector<Record> &records) {
 
   // 1. Inicialize centroids
@@ -101,6 +139,13 @@ vector<Group> Kmeans::computeAll(vector<Record> &records) {
   return groups;
 }
 
+//! Generaliza cada uno de los registros pertenecientes a cada cluster,
+//! utilizando global recoding.
+/*!
+  \param groups conjunto de cluster sin anonimizar.
+  \param qids conjunto de atributos cuasi-identificadores.
+  \return conjunto de clusters anonimizado.
+*/
 vector<vector<vector<string>>> generalize(vector<Group> groups,
                                           vector<int> qids) {
   vector<vector<vector<string>>> clusters;
@@ -113,6 +158,14 @@ vector<vector<vector<string>>> generalize(vector<Group> groups,
   return clusters;
 }
 
+//! Realiza la lectura del conjunto de datos
+/*!
+  \param file fichero en el que esta contenido el conjunto de datos.
+  \param headers nombres de todos los atributos
+  \param qidNames nombre de los atributos cuasi-identificadores.
+  \param qids índices de los atributos cuasi-identificadores.
+  \return conjunto de registros.
+*/
 vector<Record> preprocessing(string file, vector<string> &headers,
                              vector<string> qidNames, vector<int> &qids) {
   // Read CSV Input files
@@ -279,13 +332,11 @@ int main(int argc, char **argv) {
 
   if (K != -1) {
     // DM
-    calculateDM(clusters, dataset.size(), K);
-
+    calculateDM(clusters, records.size(), KValue);
     // CAvg
-    calculateCAVG(clusters, dataset.size(), K);
+    calculateCAVG(clusters, records.size(), KValue);
   }
 
-  // Mirar valor GenILoss
   // GenILoss
   try {
     calculateGenILoss(transpose(result), {}, qids, {}, qids, records.size());

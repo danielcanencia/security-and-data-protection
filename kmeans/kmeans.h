@@ -1,3 +1,7 @@
+/*! \file kmeans.h
+    \brief archivo de cabecera principal del algoritmo K-Means.
+*/
+
 #ifndef _KMEANS_H
 #define _KMEANS_H
 
@@ -23,8 +27,11 @@ namespace fs = std::filesystem;
 
 #define MAX_ITERATIONS 80
 
+/*! Clase principal que contiene las funciones necesarias
+    para ejecutar el algoritmo K-Means. */
 class Kmeans {
 private:
+  //! Número de clusters a generar.
   int K;
   vector<Group> inicializeCentroids(vector<Record> &records);
   vector<double> centroidsDistances(const vector<Group> &groups,

@@ -1,3 +1,7 @@
+/*! \file record.h
+    \brief Fichero de cabecera del archivo record.cpp.
+*/
+
 #ifndef _RECORD_H
 #define _RECORD_H
 
@@ -9,10 +13,14 @@
 
 using namespace std;
 
+/*! Clase Record. Su función es simular un registro, es decir,
+    un conjunto de cadenas de caracteres vinculadas a un individuo o
+    entidad.
+*/
 class Record {
 private:
-  int rindex;      // Determines records. Record's id
-  int gindex = -1; // Determines equivalence class/cluster
+  int rindex;      //! Índice del registro.
+  int gindex = -1; //! Índice del cluster al que pertenece el registro.
   vector<double> values;
 
 public:

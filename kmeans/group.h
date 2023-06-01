@@ -1,3 +1,7 @@
+/*! \file group.h
+    \brief Fichero de cabecera del archivo group.cpp.
+*/
+
 #ifndef _GROUP_H
 #define _GROUP_H
 
@@ -7,11 +11,14 @@
 
 using namespace std;
 
+/*! Clase Group. Su función es simular un cluster o grupo, es decir,
+    un conjunto de registros.
+*/
 class Group {
 private:
-  const int gindex;        // Determines equivalence class/cluster
-  vector<double> centroid; // Centroids are assign to a specific record (id)
-  vector<Record> records;
+  const int gindex;        //! Índice del grupo.
+  vector<double> centroid; //! Centroide (entendido como registro).
+  vector<Record> records;  //! Conjunto de registros.
 
 public:
   Group(int gidx, Record &_centroid);

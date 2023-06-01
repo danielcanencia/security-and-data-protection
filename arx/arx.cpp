@@ -1,4 +1,4 @@
-#include "datafly.h"
+#include "arx.h"
 
 int main(int argc, char **argv) {
 
@@ -26,15 +26,20 @@ int main(int argc, char **argv) {
 
   // Read data file and hierarchy folders
   vector<string> headers;
-  vector<int> qids, confAtts;
-  vector<vector<string>> qidsDataset, dataset;
+  vector<int> catQids, confAtts, numQids, allQids;
+  vector<int> isQidCat;
   map<int, vector<vector<string>>> hierarchiesMap;
+  vector<vector<string>> dataset;
 
   try {
     hierarchiesMap =
         readDirectory(fs::path(argv[1]), dataset, headers, qidNames,
-                      confAttNames, qids, confAtts, false);
-    if (qids.size() < qidNames.size()) {
+                      confAttNames, catQids, confAtts, false);
+    sort(catQids.begin(), catQids.end());
+
+    // Compare headers and qids
+    allQids = getQidsHeaders(headers, qidNames);
+    if (allQids.size() < qidNames.size()) {
       cout << endl << "******************" << endl;
       cout << "An error occured.\nCheck the qid "
               "names entered exists. They should be "
@@ -44,7 +49,6 @@ int main(int argc, char **argv) {
            << endl;
       return -1;
     }
-
     if (confAtts.size() < confAttNames.size()) {
       cout << endl << "******************" << endl;
       cout << "An error occured.\nCheck the confidential "
@@ -56,82 +60,78 @@ int main(int argc, char **argv) {
       return -1;
     }
 
-    sort(qids.begin(), qids.end());
+    sort(allQids.begin(), allQids.end());
+    set_difference(allQids.begin(), allQids.end(), catQids.begin(),
+                   catQids.end(), inserter(numQids, numQids.begin()));
+
+    // Build a vector containing qid types
+    for (const auto &qid : allQids) {
+      if (find(catQids.begin(), catQids.end(), qid) != catQids.end()) {
+        isQidCat.emplace_back(1);
+        continue;
+      }
+      isQidCat.emplace_back(0);
+    }
+
   } catch (const char *e) {
     cout << e << endl;
     return -1;
   }
 
   // Read Parameters
-  const int K = readParameter("k-anonymity", "K", dataset.size());
-  if (K == -1) {
-    cout << "Datafly needs parameter K" << endl;
-    return 1;
-  }
-  long double suppThreshold = readSuppThreshold();
-
+  int K, L;
+  long double T;
+  readParameters(dataset.size(), 1, K, L, T);
   // Read Weights
   vector<double> weights = readWeights(nqids, qidNames);
   // Ask for desired qid types to be used on metrics
   vector<int> numMetricsQids, catMetricsQids;
   tuple<vector<int>, vector<int>> metricsQids =
-      readMetricsQids({}, qids, headers);
+      readMetricsQids(numQids, catQids, headers);
   numMetricsQids = get<0>(metricsQids);
   catMetricsQids = get<1>(metricsQids);
 
-  // Measure Execution Time
-  auto start = chrono::high_resolution_clock::now();
-  // *********************************
-  // Main algorithm
-  auto resTuple =
-      datafly(dataset, hierarchiesMap, qids, confAtts, suppThreshold, K);
-  vector<vector<string>> result = get<0>(resTuple);
-  vector<vector<vector<string>>> clusters = get<1>(resTuple);
-  if (result.size() == 0 || clusters.size() == 0)
-    return 1;
-  // *********************************
-  auto stop = chrono::high_resolution_clock::now();
-  auto duration = chrono::duration_cast<chrono::seconds>(stop - start);
-  cout << endl << "===> Datafly Execution Time: ";
-  cout << duration.count() << " seconds" << endl;
 
-  cout << "===> Number of clusters: ";
-  cout << clusters.size() << endl;
+  vector<vector<vector<string>>> clusters = createClusters(dataset, allQids);
+  // Create matrix from clusters
+  vector<vector<string>> result;
+  for (const auto &partition : clusters) {
+    result.insert(result.begin(), partition.begin(), partition.end());
+  }
 
-  // Write anonymized table
-  // Changed headers for non alterated ones
-  writeAnonymizedTable(fs::path(argv[1]), headers, result, K, -1, -1);
+  cout << "Clusters: "; cout << clusters.size() << endl;
 
   // METRICS
   cout << "===> Analysis: " << endl;
   // Create a hierarchy tree for every qid
   map<int, Tree> trees;
-  for (const int &i : qids) {
+  for (const int &i : catQids) {
     trees[i] = Tree(hierarchiesMap[i]);
   }
 
   // GCP
   try {
-    // 1. Precalculate NCP for every qid value included in every cluster
+    // 	1. Precalculate NCP for every qid value included in every cluster
     vector<long double> cncps =
-        calculateNCPS(clusters, weights, qids, numMetricsQids, trees);
-
-    // 2. Calculate GCP
-    calculateGCP(clusters, dataset.size(), qids, cncps);
+        calculateNCPS(clusters, weights, allQids, numMetricsQids, trees);
+    // 	2. Calculate GCP
+    calculateGCP(clusters, dataset.size(), allQids, cncps);
   } catch (const char *e) {
     cout << e << endl;
     return -1;
   }
 
-  // DM
-  calculateDM(clusters, dataset.size(), K);
+  if (K != -1) {
+    // DM
+    calculateDM(clusters, dataset.size(), K);
 
-  // CAvg
-  calculateCAVG(clusters, dataset.size(), K);
+    // CAvg
+    calculateCAVG(clusters, dataset.size(), K);
+  }
 
   // GenILoss
   try {
-    calculateGenILoss(transpose(result), trees, qids, catMetricsQids,
+    calculateGenILoss(transpose(result), trees, allQids, catMetricsQids,
                       numMetricsQids, dataset.size());
   } catch (const char *e) {
     cout << e << endl;

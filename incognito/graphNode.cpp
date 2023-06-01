@@ -96,12 +96,13 @@ bool GraphNode::isAnonymityValid(
   for (const auto &entry : dataset) {
     string value;
     vector<string> record = entry;
+
     for (size_t i = 0; i < qids.size(); i++) {
       choosenGen = gensMap[qids[i]][entry[qids[i]]][this->data[i]];
       value.append(choosenGen);
       record[qids[i]] = choosenGen;
     }
-
+    
     try {
       splits[value].emplace_back(record);
     } catch (...) {
