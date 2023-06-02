@@ -164,7 +164,7 @@ int main(int argc, char **argv) {
   }
 
   // Confidential attribute
-  int confAtt;
+  int confAtt = -1;
   if (confAttNames.size() != 0)
     confAtt = confAtts[0];
 
@@ -175,6 +175,15 @@ int main(int argc, char **argv) {
     return 1;
   }
   const int L = readParameter("l-diversity", "L", dataset.size());
+  if (L != -1 && confAtt == -1) {
+    cout << endl;
+    cout << "An error occured.\nIf l-diversity or t-closeness "
+            "are used, there should exists, at least, one "
+            "confidential attribute."
+         << endl
+         << endl;
+    return -1;
+  }
 
   // Diversity Penalty, select metric used
   int diversityPenalty, diversity;

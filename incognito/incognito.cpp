@@ -79,7 +79,9 @@ int main(int argc, char **argv) {
   // Read Parameters
   int K, L;
   long double T;
-  readParameters(dataset.size(), confAttNames.size(), K, L, T);
+  if(!readParameters(dataset.size(), confAttNames.size(), K, L, T))
+    return -1;
+
   // Read Weights
   vector<double> weights = readWeights(nqids, qidNames);
   // Ask for desired qid types to be used on metrics

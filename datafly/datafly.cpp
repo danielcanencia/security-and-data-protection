@@ -65,8 +65,8 @@ int main(int argc, char **argv) {
   // Read Parameters
   const int K = readParameter("k-anonymity", "K", dataset.size());
   if (K == -1) {
-    cout << "Datafly needs parameter K" << endl;
-    return 1;
+    cout << "Error, Datafly needs parameter K." << endl;
+    return -1;
   }
   long double suppThreshold = readSuppThreshold();
 

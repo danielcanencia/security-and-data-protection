@@ -280,7 +280,7 @@ bool readParameters(const int datasetSize, const int confAtts, int &K, int &L,
             "confidential attribute."
          << endl
          << endl;
-    return 1;
+    return 0;
   }
 
   if (K == -1 && L == -1 && T == -1.0) {
@@ -288,5 +288,5 @@ bool readParameters(const int datasetSize, const int confAtts, int &K, int &L,
     readParameters(datasetSize, confAtts, K, L, T);
   }
 
-  return 0;
+  return 1;
 }
