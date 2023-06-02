@@ -1,0 +1,13 @@
+month
+jan;first-quarter;*
+feb;first-quarter;*
+mar;first-quarter;*
+apr;second-quarter;*
+may;second-quarter;*
+jun;second-quarter;*
+jul;third-quarter;*
+aug;third-quarter;*
+sep;third-quarter;*
+oct;fourth-quarter;*
+nov;fourth-quarter;*
+dec;fourth-quarter;*

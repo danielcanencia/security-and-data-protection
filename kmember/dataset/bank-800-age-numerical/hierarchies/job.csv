@@ -1,0 +1,13 @@
+job
+admin;paid;*
+blue-collar;paid;*
+entrepreneur;paid;*
+housemaid;non-paid;*
+management;paid;*
+retired;non-paid;*
+self-employed;paid;*
+services;paid;*
+student;non-paid;*
+technician;paid;*
+unemployed;non-paid;*
+unknown;other;*
