@@ -303,9 +303,9 @@ int main(int argc, char **argv) {
 
   // Obtener tiempo de ejecución
   auto stop = chrono::high_resolution_clock::now();
-  auto duration = chrono::duration_cast<chrono::seconds>(stop - start);
+  auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
   cout << endl << "===> K-Means Execution Time: ";
-  cout << duration.count() << " seconds" << endl;
+  cout << duration.count() << " microseconds" << endl;
   cout << "===> Number of clusters: ";
   cout << groups.size() << endl;
   cout << "* K-Means algorithm finished. A csv file will be generated...."
