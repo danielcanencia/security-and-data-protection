@@ -25,7 +25,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-#define MAX_ITERATIONS 80
+#define Epsilon 60
 
 /*! Clase principal que contiene las funciones necesarias
     para ejecutar el algoritmo K-Means. */
@@ -38,10 +38,11 @@ private:
                                     const vector<Record> &records);
   bool updateGroups(vector<Group> &groups, const vector<double> &newGroups,
                     vector<Record> &curRecords);
-
+  bool convergency(vector<vector<double>> centroids,
+                  vector<Group> updatedGroups, int epsilon);
 public:
   Kmeans(int K);
-  vector<Group> computeAll(vector<Record> &records);
+  vector<Group> computeAll(vector<Record> &records, int epsilon);
 };
 
 vector<vector<vector<string>>> generalize(vector<Group> groups,

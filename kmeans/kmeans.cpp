@@ -31,9 +31,9 @@ vector<Group> Kmeans::inicializeCentroids(vector<Record> &records) {
   for (int i = 0; i < K; i++) {
     while (1) {
       int random = rand() % records.size();
-      // Check if random value is repeated
+      // Comprobar si se repite algún valor
       if (find(aux.begin(), aux.end(), random) == aux.end()) {
-        // Inicialize centroids and assign them a cluster
+        // Inicialización de centroides y asignación de sus clusters
         aux.emplace_back(random);
         records.at(random).setGroup(i);
         Group group(i, records.at(random));
@@ -62,7 +62,8 @@ vector<double> Kmeans::centroidsDistances(const vector<Group> &groups,
     centroids.emplace_back(group.getCentroid());
   }
 
-  // Calculate euclidian distance between records and all centroids
+  // Calculo de la distancia euclidiana entre cada uno  de los centroides
+  // y todos los registros 
   for (const Record &record : records) {
     min = record.euclideanDistance(centroids[0]);
     gindex = 0;
@@ -74,7 +75,7 @@ vector<double> Kmeans::centroidsDistances(const vector<Group> &groups,
         gindex = i;
       }
     }
-    // Array Representing Records & its Clusters
+    // Lista de centroides pertenecientes a cada registro
     res.emplace_back(gindex);
   }
 
@@ -85,6 +86,7 @@ vector<double> Kmeans::centroidsDistances(const vector<Group> &groups,
 /*!
   \param groups conjunto de clusters.
   \param newGroups índices de los clusters a los que se asigna cada registro.
+  \param curRecords registros iniciales.
   \return vector compuesto por índices de registros.
 */
 bool Kmeans::updateGroups(vector<Group> &groups,
@@ -108,30 +110,54 @@ bool Kmeans::updateGroups(vector<Group> &groups,
   return end;
 }
 
+bool Kmeans::convergency(vector<vector<double>> centroids,
+                 vector<Group> updatedGroups, int epsilon) {
+  vector<double> c;
+
+  if (centroids.size() != updatedGroups.size()) {
+    return false;
+  }
+
+  for (int i = 0; i < (int)updatedGroups.size(); i++) {
+    c = updatedGroups[i].getCentroid();
+
+    // Distancia Euclidiana
+    int sum = 0;
+    for (int j = 0; j < (int)min(centroids[i].size(), c.size()); j++)
+      sum += pow((double)centroids[i][j] - c[j], 2);
+    
+    if (sqrt(sum) > Epsilon) 
+      return false;
+  }
+
+  return true;
+}
+
 //! Bucle principal del algoritmo KMeans.
 /*!
   \param records conjunto de registros.
   \return conjunto de clusters.
 */
-vector<Group> Kmeans::computeAll(vector<Record> &records) {
+vector<Group> Kmeans::computeAll(vector<Record> &records, int epsilon) {
 
-  // 1. Inicialize centroids
+  // 1. Inicializar los centroides
   vector<Group> groups = inicializeCentroids(records);
 
-  // Loop
-  int iterations = 0;
-  while (iterations != MAX_ITERATIONS) {
-    iterations++;
-
+  // Bucle inicial
+  vector<vector<double>> oldCentroids(1);
+  while (!convergency(oldCentroids, groups, epsilon)) {
     // 2. Euclidean Distance And Group Classification
     vector<double> newGroups = centroidsDistances(groups, records);
-    // 3. Update all record's group
+    // 3. Actualizar el grupo al que pertenece cada registro
     bool end = updateGroups(groups, newGroups, records);
     if (end)
       break;
 
-    // 4. Recalculate the centroid for each group/cluster
+    // 4. Recalcular el centroide de cada grupo
+    oldCentroids = {};
     for (Group &group : groups) {
+      // Guardar la situación de los centroides en el grupo
+      oldCentroids.emplace_back(group.getCentroid());
       group.recalculateCentroid();
     }
   }
@@ -168,13 +194,13 @@ vector<vector<vector<string>>> generalize(vector<Group> groups,
 */
 vector<Record> preprocessing(string file, vector<string> &headers,
                              vector<string> qidNames, vector<int> &qids) {
-  // Read CSV Input files
+  // Leer fichero CSV
   ifstream input{file};
   if (!input.is_open()) {
     throw "Error reading file";
   }
 
-  // Parse CSV Input file
+  // Parse fichero CSV
   vector<Record> values;
   int index = 0;
   string line, headersAux;
@@ -188,7 +214,7 @@ vector<Record> preprocessing(string file, vector<string> &headers,
     }
     headers.back().pop_back();
 
-    // Get qids indexes
+    // ïndices de los qids
     for (size_t i = 0; i < qidNames.size(); i++) {
       auto it = find(headers.begin(), headers.end(), qidNames[i]);
       if (it != headers.end())
@@ -197,7 +223,7 @@ vector<Record> preprocessing(string file, vector<string> &headers,
         qids.emplace_back(headers.size() - 1);
     }
 
-    // Records
+    // Registros
     for (; getline(input, line);) {
       Record record = Record(index);
       istringstream strm(move(line));
@@ -210,7 +236,6 @@ vector<Record> preprocessing(string file, vector<string> &headers,
     }
   } catch (const exception &e) {
     input.close();
-    // It throws an expetion because of stod(val) conversion to double
     return values;
   }
 
@@ -225,9 +250,8 @@ int main(int argc, char **argv) {
     cout << "Invalid arguments. Use ./kmeans [filename] [k]" << endl;
     return -1;
   }
-  // Input Filename
+  // Fichero de entrada
   string filename{argv[1]};
-  // Check File format
   if (filename.substr(filename.size() - 4, filename.size()) != ".csv") {
     cout << "Please, use a csv input file" << endl;
     return -1;
@@ -235,12 +259,13 @@ int main(int argc, char **argv) {
 
   // K
   int K = atoi(argv[2]);
-  // Read input
-  // Read qid names
+  // Lectura de parámetros
+  // Nombres de qids
   const int nqids = readNumberOfQids();
   vector<string> qidNames = readQidNames(nqids);
+  const int epsilon = readEpsilon();
 
-  // Data Preprocessing
+  // Preproceso de datos
   vector<Record> records;
   vector<int> qids;
   vector<string> headers;
@@ -263,30 +288,30 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  // Read Weights
+  // Leer Pesos
   vector<double> weights = readWeights(nqids, qidNames);
 
   cout << "* K-Means algorithm is being run..." << endl;
-  // Measure Execution Time
+  // Estimar tiempo de ejecución
   auto start = chrono::high_resolution_clock::now();
-  // Especify the number of clusters/groups to use
+  // Especificar el número de clases a generar
   Kmeans kmeans(K);
-  // Run the algorithm
-  vector<Group> groups = kmeans.computeAll(records);
-  // Generalize clusters
+  // Algoritmo principal
+  vector<Group> groups = kmeans.computeAll(records, epsilon);
+  // Generar clusters
   vector<vector<vector<string>>> clusters = generalize(groups, qids);
 
-  // Execution Time
+  // Obtener tiempo de ejecución
   auto stop = chrono::high_resolution_clock::now();
-  auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+  auto duration = chrono::duration_cast<chrono::seconds>(stop - start);
   cout << endl << "===> K-Means Execution Time: ";
-  cout << duration.count() << " microseconds" << endl;
+  cout << duration.count() << " seconds" << endl;
   cout << "===> Number of clusters: ";
   cout << groups.size() << endl;
   cout << "* K-Means algorithm finished. A csv file will be generated...."
        << endl;
 
-  // Write resulting clusters to file
+  // Escribir los datos anonimizados en un fichero
   string directory = filename;
   directory = directory.substr(directory.find('/') + 1, directory.size());
   directory = directory.substr(0, directory.find_last_of("."));
@@ -295,7 +320,7 @@ int main(int argc, char **argv) {
   fs::create_directories(directory);
   cout << "* Writing output to directory: " + directory << endl;
 
-  // Create matrix from clusters
+  // Crear matriz de resultados
   vector<vector<string>> result;
   for (size_t i = 0; i < clusters.size(); i++) {
     result.insert(result.begin(), clusters[i].begin(), clusters[i].end());
@@ -303,21 +328,21 @@ int main(int argc, char **argv) {
                          "cluster" + to_string(i + 1), false);
   }
 
-  // METRICS
+  // MÉTRICAS
   // GCP
   try {
-    // 	1. Precalculate NCP for every qid value included in every cluster
+    // 	1. Precalculamos NCP para cada clase de equivalencia
     vector<long double> cncps =
         calculateNCPS(clusters, weights, qids, qids, {});
-    // 	2. Calculate GCP
+    // 	2. Calculamos GCP
     calculateGCP(clusters, records.size(), qids, cncps);
   } catch (const char *e) {
     cout << e << endl;
     return -1;
   }
 
-  // For DM and CAvg metrics we should calculate K
-  // based on clusters minimum size
+  // DM y CAvg se calculan en función del tamaño mínimo
+  // de entre todas las clases de equivalencia
   cout << "\t===> Evaluating K value to be used on DM and CAvg metrics"
           " based on clusters sizes"
        << endl;

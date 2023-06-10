@@ -63,10 +63,7 @@ vector<vector<string>> Group::generalize(vector<int> qids) {
   for (const auto &record : records)
     values.emplace_back(record.getValues());
 
-  // Transpose matrix and generalized based on ranges
-  // vector<vector<string>> matrix = transpose(values);
-
-  // Transpose matrix
+  // Transposición de la matriz
   vector<vector<double>> matrix;
   for (size_t i = 0; i < values[0].size(); i++) {
     vector<double> aux;
@@ -75,7 +72,7 @@ vector<vector<string>> Group::generalize(vector<int> qids) {
     matrix.emplace_back(aux);
   }
 
-  // Generalize based on ranges
+  // Generalizar valores utilizando rangos
   vector<vector<string>> anonMatrix;
   for (size_t i = 0; i < values[0].size(); i++) {
     if (find(qids.begin(), qids.end(), i) != qids.end()) {
@@ -102,6 +99,7 @@ vector<vector<string>> Group::generalize(vector<int> qids) {
 
   return resMatrix;
 }
+
 //! Imprime todos los registros pertenecientes al grupo.
 void Group::printRecords() {
   for (const Record &record : records) {
