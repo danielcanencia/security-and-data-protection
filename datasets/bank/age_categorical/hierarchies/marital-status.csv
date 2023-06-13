@@ -1,8 +1,5 @@
 marital-status
-Married-civ-spouse;Couple;*
-Divorced;Single;*
-Never-married;Single;*
-Separated;Single;*
-Widowed;Single;*
-Married-spouse-absent;Single;*
-Married-AF-spouse;Couple;*
+married;Couple;*
+divorced;Single;*
+single;Single;*
+unknown;Other;*
