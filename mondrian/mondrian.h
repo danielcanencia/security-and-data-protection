@@ -1,3 +1,7 @@
+/*! \file mondrian.h
+    \brief Fichero de cabecera del archivo mondrian.cpp.
+*/
+
 #ifndef _MONDRIAN_H
 #define _MONDRIAN_H
 

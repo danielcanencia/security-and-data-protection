@@ -1,3 +1,7 @@
+/*! \file partition.h
+    \brief Fichero de cabecera del archivo partition.cpp.
+*/
+
 #ifndef _PARTITION_H
 #define _PARTITION_H
 
@@ -14,6 +18,10 @@ using namespace std;
 #include <string>
 #include <vector>
 
+/*! Clase Partition. Su función es contener todas las estructuras necesarias
+    para proporcionar los métodos que den lugar al procedimiento de particionado
+    de una tabla de datos.
+*/
 class Partition {
 private:
   vector<int> allowedCuts;

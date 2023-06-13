@@ -1,5 +1,22 @@
+/*! \file partition.cpp
+    \brief Fichero que proporciona las estructuras y métodos necesarios para realizar
+           el proceso de particionado de una tabla de datos.
+*/
+
 #include "partition.h"
 
+/*! Constructor de la clase Partition.
+  \param data conjunto de datos.
+  \param qids índices de los atributos qids.
+  \param generalization generalización a aplicar a cada qid.
+  \param isQidCat vector que contiene los tipos de cado uno de los atributos qids.
+  \param trees árboles de jerarquía de todos los atributos.
+  \param confAtts conjunto de atributos sensibles o SAs.
+  \param K parámetro del modelo de privacidad k-anonymity.
+  \param L parámetro del modelo de privacidad l-diversity.
+  \param T parámetro del modelo de privacidad t-closeness.
+  \return instancia de la partición creada.
+*/
 Partition::Partition(vector<vector<string>> data,
                      vector<string> generalizations, vector<int> qids,
                      vector<int> isQidCat, map<int, Tree> trees,
@@ -16,6 +33,9 @@ Partition::Partition(vector<vector<string>> data,
   this->allowedCuts = vector<int>(qids.size(), 1);
 }
 
+/*! Generaliza el conjunto de datos perteneciente a la partición.
+  \return conjunto de datos anonimizado en forma de matriz de dimensión 2.
+*/
 vector<vector<string>> Partition::getResult() const {
   vector<vector<string>> result = data;
 
@@ -53,7 +73,7 @@ int Partition::chooseDimension() {
 }
 
 int Partition::normWidth(int dimension) {
-  // Normalized range of values for dimension
+  // Rango normalizado de valores para la dimensión
   vector<string> elements;
   for (const vector<string> &entry : data) {
     elements.emplace_back(entry[qids[dimension]]);
@@ -78,20 +98,20 @@ string Partition::findMedian(int dimension) {
          return stoi(x.first) < stoi(y.first);
        });
 
-  // Sum frequency values
+  // Sumar todos los valores
   vector<int> values;
   transform(freqs.begin(), freqs.end(), std::back_inserter(values),
             [](const auto &tuple) { return tuple.second; });
   int nValues = accumulate(values.begin(), values.end(), 0);
 
-  // Find middle index 
+  // Encontrar valor medio
   double middle = nValues / 2.0;
-  // Cut is not allowed
+  // Comprobar si se puede realizar el corte
   if (freqs.size() < 2 || middle < K || middle < L || middle < T) {
     return "";
   }
 
-  // Find first split set of keys
+  // Calcular el valor final a partir de la lista de frecuencias
   string splitValue;
   int aux = 0;
   for (size_t i = 0; i < freqs.size(); i++) {
@@ -118,7 +138,23 @@ vector<int> Partition::getAttributeRanges(int dimension) {
 }
 
 bool Partition::isSplitKAnonymous(vector<vector<string>> split) {
-  return (int)split.size() >= K;
+	// Obtener registros conteniendo unicamente qids
+  vector<vector<string>> qidsDataset;
+	for (size_t i=0; i < split.size(); i++) {
+		vector<string> aux;
+		for (const int& idx : qids) {
+			aux.emplace_back(split[i][idx]);
+		}
+		qidsDataset.emplace_back(aux);
+	}
+
+  for (const int &freq : calculateFreqs(qidsDataset)) {
+    if (freq < K) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 bool Partition::isSplitLDiverse(vector<vector<string>> split) {
@@ -136,8 +172,8 @@ bool Partition::isSplitLDiverse(vector<vector<string>> split) {
     }
   }
 
-  // Every confidential attribute should have, at least,
-  // l well represented values
+  // Cada atributo confidencial debe tener, al menos,
+  // l valores "bien representados"
   for (const map<string, int> &attFreq : freqs) {
     if ((int)attFreq.size() < L)
       return false;
@@ -150,12 +186,11 @@ bool Partition::isSplitTClose(vector<vector<string>> split) {
   if (split.size() == 0)
     return false;
 
-  // Get transposed split and original table
+  // Obtener tablas transpuestas
   vector<vector<string>> tSplit = transpose(split);
   vector<vector<string>> tData = transpose(data);
 
-  // Generate a P frequency map for
-  // every confidential attribute
+  // Generar un mapa de frecuencias de P
   vector<map<string, int>> splitMaps;
   for (const auto &att : confAtts) {
     map<string, int> freqs;
@@ -169,8 +204,8 @@ bool Partition::isSplitTClose(vector<vector<string>> split) {
     splitMaps.emplace_back(freqs);
   }
 
-  // Generate a Q frequency map and
-  // a set of entries
+  // Generar un mapa de frecuencias de Q
+  // y una lista de entradas
   vector<map<string, int>> dataMaps;
   vector<set<string>> valueSets;
   for (const auto &att : confAtts) {
@@ -188,25 +223,24 @@ bool Partition::isSplitTClose(vector<vector<string>> split) {
     valueSets.emplace_back(entries);
   }
 
-  // P and Q size
   int pSize, qSize;
   pSize = split.size();
   qSize = data.size();
 
-  // Calculate EMD for every confidential attribute
-  // using ED
+  // Calcular EMD para cada atributo confidencial
+  // utilizando ED
   long double emd;
   for (size_t i = 0; i < confAtts.size(); i++) {
     emd = 0;
     for (const auto &entry : valueSets[i]) {
       if (splitMaps[i][entry]) {
-        // Entry present in P
+        // Entrada presente en P
         // ED(Pi, Qi) = abs(Pi/Pi probability in P -
         // 					 Qi/Qi probability in Q)
         emd += abs((long double)splitMaps[i][entry] / pSize -
                    (long double)dataMaps[i][entry] / qSize);
       } else {
-        // Not present in P
+        // Entrada no presente P
         // ED(Pi, Qi) = abs(0 - Qi/Qi probability in Q)
         emd += (long double)dataMaps[i][entry] / qSize;
       }
@@ -215,7 +249,7 @@ bool Partition::isSplitTClose(vector<vector<string>> split) {
     // ED(P, Q) =  sum(sum(pj - qj)) / 2
     emd /= 2;
 
-    // Check if partition is tclose
+    // Comprobar t-closeness
     if (emd > T)
       return false;
   }
@@ -244,7 +278,7 @@ bool Partition::isSplitValid(vector<vector<string>> split) {
 }
 
 vector<Partition> Partition::splitPartition(int dimension) {
-  // Cut is not allowed for this specific dimension
+  // Corte no permitido para esta dimension
   if (allowedCuts[dimension] == 0) {
     return {};
   }
@@ -255,32 +289,30 @@ vector<Partition> Partition::splitPartition(int dimension) {
 }
 
 vector<Partition> Partition::splitPartitionNumeric(int dimension) {
+  // Obtener el valor medio
   string splitValue = findMedian(dimension);
-  // Cut is not allowed
+  // Corte no permitido
   if (splitValue == "") {
     return {};
   }
 
-  // Check if splitValue is a range
   string split1, split2;
   split1 = splitValue;
   split2 = to_string(stoi(splitValue) + 1);
 
-  // Get lowest and highest value present in partition,
-  // Note that ranges are not a problem if not present
-  // initial data, as we don't modify these values, just
-  // this->generalizations value.
+  // Obtener valores extremos presentes en la partición,
   string lowest, highest;
   vector<int> range = getAttributeRanges(dimension);
   lowest = to_string(range[0]);
   highest = to_string(range[1]);
 
-  // Cut limit reached
+  // Límite de cortes
   if (highest == split1) {
     this->setAllowedCuts(0, dimension);
     return {};
   }
 
+  // Construir nuevas generalizaciones
   string gen1 = lowest == splitValue
                     ? splitValue
                     : (lowest == split1 ? lowest : lowest + "~" + split1);
@@ -288,7 +320,7 @@ vector<Partition> Partition::splitPartitionNumeric(int dimension) {
                     ? splitValue
                     : (highest == split2 ? highest : split2 + "~" + highest);
 
-  // New partitions data
+  // Nuevas particiones
   vector<vector<string>> d1, d2;
   for (const auto &record : this->data) {
     int number = stoi(record[qids[dimension]]);
@@ -298,13 +330,28 @@ vector<Partition> Partition::splitPartitionNumeric(int dimension) {
       d2.emplace_back(record);
   }
 
-  // If splits aren't k-anonymous, return original partition
-  if (!isSplitValid(d1) || !isSplitValid(d2)) {
+  // generalizar d1
+  vector<vector<string>> s1 = d1;
+  for (size_t i = 0; i < s1.size(); i++) {
+    for (size_t j = 0; j < generalizations.size(); j++)
+      s1[i][qids[j]] = generalizations[j];
+    s1[i][dimension] = gen1;
+  }
+  // generalizar d2
+  vector<vector<string>> s2 = d1;
+  for (size_t i = 0; i < s2.size(); i++) {
+    for (size_t j = 0; j < generalizations.size(); j++)
+      s2[i][qids[j]] = generalizations[j];
+    s2[i][dimension] = gen2;
+  }
+
+  // Comprobación modelos de privacidad
+  if (!isSplitValid(s1) || !isSplitValid(s2)) {
     this->setAllowedCuts(0, dimension);
     return {};
   }
 
-  // Updata generalizations array with new dimension values
+  // Actualizar array de generalizaciones
   vector<string> gens1, gens2;
   gens1 = gens2 = this->generalizations;
   gens1[dimension] = gen1;
@@ -343,14 +390,23 @@ vector<Partition> Partition::splitPartitionCategorical(int dimension) {
     }
   }
 
-  // If splits aren't k-anonymous, return original partition
-  for (const auto &split : splits) {
-    if (!isSplitValid(split)) {
+  // Generalizar split y comprobar modelos de privacidad
+  for (size_t idx = 0; idx < splits.size(); idx++) {
+    vector<vector<string>> aux = splits[idx];
+    for (size_t i = 0; i < aux.size(); i++) {
+      for (size_t j = 0; j < generalizations.size(); j++)
+        aux[i][qids[j]] = generalizations[j];
+      aux[i][dimension] = children[idx];
+    }
+  
+    if (!isSplitValid(aux)) {
+      this->setAllowedCuts(0, dimension);
       return pts;
     }
   }
 
-  // Update generalizations and create new partitions
+  // Actualizar array de generalizaciones y actualizar
+  // particiones
   for (size_t i = 0; i < splits.size(); i++) {
     if (splits[i].size() != 0) {
       vector<string> gens = generalizations;
