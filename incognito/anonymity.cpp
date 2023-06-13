@@ -1,7 +1,24 @@
 #include "anonymity.h"
 
-bool isSplitKAnonymous(vector<vector<string>> split, const int K) {
-  return (int)split.size() >= K;
+bool isSplitKAnonymous(vector<vector<string>> split, vector<int> qids,
+                       const int K) {
+  // Obtain a subset of dataset containing only qids
+  vector<vector<string>> qidsDataset;
+	for (size_t i=0; i < split.size(); i++) {
+		vector<string> aux;
+		for (const int& idx : qids) {
+			aux.emplace_back(split[i][idx]);
+		}
+		qidsDataset.emplace_back(aux);
+	}
+
+  for (const int &freq : calculateFreqs(qidsDataset)) {
+    if (freq < K) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 bool isSplitLDiverse(vector<vector<string>> split, vector<int> confAtts,
@@ -12,6 +29,7 @@ bool isSplitLDiverse(vector<vector<string>> split, vector<int> confAtts,
   for (const auto &entry : split) {
     for (size_t j = 0; j < confAtts.size(); j++) {
       key = entry[confAtts[j]];
+
       try {
         freqs[j][key] += 1;
       } catch (...) {
@@ -90,7 +108,8 @@ bool isSplitTClose(vector<vector<string>> split, vector<vector<string>> data,
 
 bool isSplitValid(vector<vector<vector<string>>> splits,
                   tuple<vector<map<string, int>>, vector<set<string>>> dataMap,
-                  vector<vector<string>> dataset, vector<int> confAtts,
+                  vector<vector<string>> dataset, vector<int> qids,
+                  vector<int> confAtts,
                   const int K, const int L, const long double T) {
   bool kanonymity, ldiversity, tcloseness;
   kanonymity = ldiversity = tcloseness = true;
@@ -100,7 +119,7 @@ bool isSplitValid(vector<vector<vector<string>>> splits,
 
   if (K > 0) {
     for (const auto &split : splits) {
-      if (!isSplitKAnonymous(split, K)) {
+      if (!isSplitKAnonymous(split, qids, K)) {
         kanonymity = false;
         break;
       }

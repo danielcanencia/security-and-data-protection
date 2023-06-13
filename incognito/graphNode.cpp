@@ -117,7 +117,7 @@ bool GraphNode::isAnonymityValid(
   for (const auto &[k, v] : splits)
     clusters.emplace_back(v);
 
-  return isSplitValid(clusters, dataMap, anonData, confAtts, K, L, P);
+  return isSplitValid(clusters, dataMap, anonData, qids, confAtts, K, L, P);
 }
 
 vector<int> GraphNode::evaluateFrequency(

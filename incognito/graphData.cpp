@@ -178,6 +178,7 @@ GraphNode GraphData::getFinalKAnon(map<int, map<string, vector<string>>> gens,
   GraphNode finalNode;
   for (const GraphNode &node : res) {
     vector<int> freqs = node.evaluateFrequency(gens, dataset, qids);
+
     if ((int)freqs.size() > max || max == -1) {
       max = freqs.size();
       finalNode = node;
