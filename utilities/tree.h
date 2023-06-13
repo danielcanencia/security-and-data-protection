@@ -1,3 +1,7 @@
+/*! \file tree.h
+    \brief Fichero de cabecera del archivo tree.cpp.
+*/
+
 #ifndef _TREE_H
 #define _TREE_H
 
@@ -9,6 +13,8 @@
 
 using namespace std;
 
+/*! Clase Nodo. Su función es simular el nodo de un árbol jerárquico.
+*/
 struct Node {
   bool isLeaf = false;
   int numSubTreeLeaves = 0;
@@ -18,6 +24,9 @@ struct Node {
   int depth;
 };
 
+/*! Clase Tree. Su función es simular un árbol jerárquico correspondiente
+    a un atributo específico.
+*/
 class Tree {
 private:
   map<string, Node> nodes;

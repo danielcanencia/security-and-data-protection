@@ -1,3 +1,7 @@
+/*! \file analysis.h
+    \brief Fichero de cabecera del archivo analysis.cpp.
+*/
+
 #ifndef _ANALYSIS_H
 #define _ANALYSIS_H
 

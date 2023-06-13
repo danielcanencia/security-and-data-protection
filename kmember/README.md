@@ -1,6 +1,10 @@
-# K-Member
+# Greedy K-Member
 
 Algoritmos de agrupación cuyo objetivo es dividir un conjunto de datos en clases de equivalencia o clusters, en el cada uno de llos contenga exactamente K registros o más.
+
+# Modelos de Privacidad
+
+K-Anonymity, L-Diversity (Métricas EDM y SDM).
 
 # Ejecución
 

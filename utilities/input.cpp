@@ -1,5 +1,14 @@
+/*! \file input.cpp
+    \brief Fichero que contiene las funciones relacionadas con la
+           lectura de parámetros.
+*/
+
 #include "input.h"
 
+/*! Lee el número de qids que se desea utilizar en la anonimización de los
+    datos.
+  \return número de qids.
+*/
 const int readNumberOfQids() {
   string question = "Number of qids: ";
   cout << question;
@@ -20,6 +29,11 @@ const int readNumberOfQids() {
   return nqids;
 }
 
+/*! Lee los nombres de los qids que se desean utilizar en la anonimización de los
+    datos.
+  \param nqids número de qids.
+  \return nombre de los qids.
+*/
 vector<string> readQidNames(const int nqids) {
   set<string> qid_set;
   for (int i = 0; i < nqids; i++) {
@@ -36,6 +50,10 @@ vector<string> readQidNames(const int nqids) {
   return vector<string>(qid_set.begin(), qid_set.end());
 }
 
+/*! Lee los nombres de los atributos sensibles o SAs que se desean utilizar
+    en la anonimización de los datos.
+  \return nombre de los SAs.
+*/
 vector<string> readConfidentialAttNames() {
   cout << "Confidential attributes: " << endl;
   // Read number of confidential attributes
@@ -70,6 +88,9 @@ vector<string> readConfidentialAttNames() {
   return vector<string>(att_set.begin(), att_set.end());
 }
 
+/*! Lee el parámetro loss o suppThreshold utilizado por Datafly.
+  \return valor del parámetro.
+*/
 long double readSuppThreshold() {
   string question = "Suppresion Threshold (percentage, recommended 0.3-2%): ";
   cout << question;
@@ -96,6 +117,35 @@ long double readSuppThreshold() {
   return threshold;
 }
 
+/*! Lee el parámetro epsilon utilizado por K-Means.
+  \return valor del parámetro.
+*/
+int readEpsilon() {
+  string question = "Epsilon (convergency threshold): ";
+  cout << question;
+  int epsilon;
+
+  while (1) {
+    cin >> epsilon;
+    if (cin.fail()) {
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Error, enter a valid number." << endl;
+      cout << question;
+      continue;
+    }
+
+    break;
+  }
+  
+  return epsilon;
+}
+
+/*! Lee los pesos que corresponden a cada uno de los qids.
+  \param nqids número de qids.
+  \param qidNames nombres de los qids.
+  \return pesos de los qids.
+*/
 vector<double> readWeights(const int nqids, vector<string> qidNames) {
   vector<double> weights;
   cout << "Do you want to use custom weights? "
@@ -142,6 +192,12 @@ vector<double> readWeights(const int nqids, vector<string> qidNames) {
   return weights;
 }
 
+/*! Determina si se quiere considerar algún atributo categórico como numérico.
+  \param numQids índice de los qids numéricos.
+  \param catQids índice de los qids categóricos.
+  \param headers cabecera del fichero. Define los nombres de los atributos presentes.
+  \return consideración del tipo de cada atributo que utilizar en el cálculo de las métricas.
+*/
 tuple<vector<int>, vector<int>> readMetricsQids(vector<int> numQids,
                                                 vector<int> catQids,
                                                 vector<string> headers) {
@@ -210,6 +266,12 @@ tuple<vector<int>, vector<int>> readMetricsQids(vector<int> numQids,
   return tuple;
 }
 
+/*! Lee un parámetro de un modelo de privacidad específico (K, L o T).
+  \param privacyDef nombre del modelo de privacidad.
+  \param parameter valor del parámetro relacionado con el modelo de privacidad.
+  \param datasetSize cardinalidad del conjunto de datos (número de registros).
+  \return valor del parámetro.
+*/
 long double readParameter(const string privacyDef, const string parameter,
                           const int datasetSize) {
   // Default value. Means privacy definition won't be checked
@@ -261,6 +323,14 @@ long double readParameter(const string privacyDef, const string parameter,
   return param;
 }
 
+/*! Lee los valores de los parámetros de todos los modelos de privacidad a utilizar.
+  \param datasetSize cardinalidad del conjunto de datos (número de registros).
+  \param confAtts índice de los atributos sensibles o SAs.
+  \param K parámetro del modelo de privacidad k-anonymity.
+  \param L parámetro del modelo de privacidad l-diversity.
+  \param T parámetro del modelo de privacidad t-closeness.
+  \return 0 si se ha producido algún error, 1 en otro caso.
+*/
 bool readParameters(const int datasetSize, const int confAtts, int &K, int &L,
                     long double &T) {
   // K (K-anonimity)

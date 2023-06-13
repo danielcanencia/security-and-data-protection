@@ -1,3 +1,7 @@
+/*! \file frequencies.h
+    \brief Fichero de cabecera del archivo frequencies.cpp.
+*/
+
 #ifndef _FREQUENCIES_H
 #define _FREQUENCIES_H
 
@@ -13,7 +17,7 @@ using namespace std;
 map<string, tuple<int, vector<int>>>
 evaluateFrequencyByIdx(vector<vector<string>> dataset, vector<int> qids);
 vector<int> calculateFreqs(vector<vector<string>> dataset);
-int findMostDistinctQid(const vector<vector<string>> dataset, vector<int> qids);
+int findMostDistinctQid(const vector<vector<string>> dataset);
 map<string, int> calculateQidFreqs(const vector<vector<string>> dataset,
                                    const int dim);
 vector<vector<vector<string>>> createClusters(vector<vector<string>> dataset,

@@ -1,8 +1,18 @@
+/*! \file metrics.cpp
+    \brief Fichero que contiene todas la implementación de las métricas
+           DM, CAvg y GenILoss.
+*/
+
 #include "metrics.h"
 
 #define GET_NAME(Var) (#Var)
 
-// Discernibility Metric
+/*! Calcula y muestra por pantalla el valor de la métrica Discernibility Metric
+    o DM.
+  \param clusters clases de equivalencia de las que se componen los datos
+                  anonimizados.
+  \param tableSize cardinalidad de la tabla original.
+*/
 void calculateDM(vector<vector<vector<string>>> clusters, const int tableSize,
                  const int K) {
   long double dm = 0;
@@ -17,7 +27,13 @@ void calculateDM(vector<vector<vector<string>>> clusters, const int tableSize,
   cout << fixed << setprecision(3) << dm << endl;
 }
 
-// Equivalent Class Size Metric
+/*! Calcula y muestra por pantalla el valor de la métrica Equivalent Class
+    Size Metric o CAvg.
+  \param clusters clases de equivalencia de las que se componen los datos
+                  anonimizados.
+  \param tableSize cardinalidad de la tabla original.
+  \param K parámetro de la k-anonimidad.
+*/
 void calculateCAVG(vector<vector<vector<string>>> clusters, const int tableSize,
                    const int K) {
   const long double denom = (long double)(clusters.size() * K);
@@ -28,7 +44,10 @@ void calculateCAVG(vector<vector<vector<string>>> clusters, const int tableSize,
   cout << cavg << endl;
 }
 
-// Generalized Information Loss
+/*! Calcula el valor máximo de entre una lista de valores numéricos dados.
+  \param entries lista de valores numéricos.
+  \return valor máximo.
+*/
 long double calculateMaxNumValue(vector<string> entries) {
   try {
     stold(entries[0]);
@@ -67,6 +86,10 @@ long double calculateMaxNumValue(vector<string> entries) {
       NULL);
 }
 
+/*! Calcula el valor mínimo de entre una lista de valores numéricos dados.
+  \param entries lista de valores numéricos.
+  \return valor mínimo.
+*/
 long double calculateMinNumValue(vector<string> entries) {
 
   // Max Value
@@ -96,6 +119,13 @@ long double calculateMinNumValue(vector<string> entries) {
   return strtold(globalMin.substr(0, globalMin.find("~")).c_str(), NULL);
 }
 
+/*! Calcula el valor de la métrica GenILoss para los valores numéricos.
+  \param entry valor sobre el que aplicar la métrica.
+  \param entries lista de valores numéricos.
+  \param globalMax valor numérico máximo.
+  \param globalMin valor numérico mínimo.
+  \return valor de la métrica.
+*/
 long double calculateNumGenILoss(const string entry, vector<string> entries,
                                  const long double globalMax,
                                  const long double globalMin) {
@@ -112,6 +142,12 @@ long double calculateNumGenILoss(const string entry, vector<string> entries,
   return (max - min) / (globalMax - globalMin);
 }
 
+/*! Calcula el valor de la métrica GenILoss para los valores categóricos.
+  \param entry valor del atributo sobre el que calcular el valor de la
+               métrica.
+  \param tree árbol jerárquico del atributo.
+  \return valor de la métrica.
+*/
 long double calculateCatGenILoss(const string entry, Tree tree) {
 
   const int directChildren = tree.getDirectChildren(entry).size();
@@ -124,6 +160,15 @@ long double calculateCatGenILoss(const string entry, Tree tree) {
   return denominator == 0 ? 0 : numerator / (long double)denominator;
 }
 
+/*! Calcula y muestra por pantalla el valor de la métrica Generalized Information Loss
+    o GenILoss.
+  \param transposedDataset conjunto de datos transpuesto.
+  \param trees árboles jerárquicos.
+  \param allQids índice de todos los qids.
+  \param catQids índice de los qids categóricos.
+  \param numQids índice de los qids numéricos.
+  \param tableSize cardinalidad de la tabla original.
+*/
 void calculateGenILoss(vector<vector<string>> transposedDataset,
                        map<int, Tree> trees, const vector<int> allQids,
                        const vector<int> catQids, const vector<int> numQids,

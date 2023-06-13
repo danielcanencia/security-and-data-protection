@@ -1,7 +1,18 @@
+/*! \file writeData.cpp
+    \brief Fichero que contiene todas las funciones relacionadas
+           con la escritura de datos en ficheros.
+*/
+
 #include "writeData.h"
 
 #define GET_NAME(Var) (#Var)
 
+/*! Escribe en el fichero apuntado por el stream fp,
+    el conjunto de datos dataset como cadenas de caracteres.
+  \param fp stream que referencia el fichero en el realizar la escritura.
+  \param dataset conjunto de datos.
+  \param delimiter delimitador a utilizar para separar los datos.
+*/
 void writeStrings(ofstream &fp, vector<vector<string>> dataset,
                   string delimiter) {
   // Write all records
@@ -13,9 +24,24 @@ void writeStrings(ofstream &fp, vector<vector<string>> dataset,
   }
 }
 
+/*! Escribe el conjunto de datos anonimizado en un fichero localizado
+    en un directorio concreto, delimitado por el valor de los parámetros
+    relacionados con los modelos de privacidad utilizados para anonimizar
+    los datos.
+  \param inputFname nombre inicial del fichero en el realizar la escritura.
+  \param headers cabecera del fichero. Define los nombres de los atributos presentes.
+  \param dataset conjunto de datos anonimizados.
+  \param K parámetro del modelo de privacidad k-anonymity.
+  \param L parámetro del modelo de privacidad l-diversity.
+  \param T parámetro del modelo de privacidad t-closeness.
+  \param exFileName nombre de fichero absoluto, sobre el que no se realizaran
+                modificaciones. (opcional).
+  \param verbose indica si se debe mostrar información por pantalla.
+
+*/
 void writeAnonymizedTable(const string inputFname, const vector<string> headers,
                           const vector<vector<string>> dataset, const int K,
-                          const int L, const long double T, const string prefix,
+                          const int L, const long double T, const string exFileName,
                           const bool verbose) {
   string kName = K == -1 ? "" : to_string(K) + GET_NAME(K);
   if (L != -1 && K != -1)
@@ -48,10 +74,10 @@ void writeAnonymizedTable(const string inputFname, const vector<string> headers,
   }
 
   string fname = dname;
-  if (prefix == "\0")
+  if (exFileName == "\0")
     fname += kName + lName + pName + ".csv";
   else
-    fname += prefix + ".csv";
+    fname += exFileName + ".csv";
 
   if (verbose) {
     cout << "===> Writing data to file: " << endl;

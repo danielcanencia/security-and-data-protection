@@ -1,3 +1,7 @@
+/*! \file writeData.h
+    \brief Fichero de cabecera del archivo writeData.cpp.
+*/
+
 #ifndef _WRITEDATA_H
 #define _WRITEDATA_H
 
@@ -15,6 +19,6 @@ void writeStrings(ofstream &fp, vector<vector<string>> dataset,
 void writeAnonymizedTable(const string inputFname, const vector<string> headers,
                           const vector<vector<string>> dataset, const int K,
                           const int L, const long double T,
-                          const string prefix = "", const bool verbose = true);
+                          const string exFileName = "", const bool verbose = true);
 
 #endif

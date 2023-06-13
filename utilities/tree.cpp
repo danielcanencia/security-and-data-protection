@@ -1,8 +1,17 @@
+/*! \file tree.cpp
+    \brief Fichero que contiene la clase Tree, responsable de la creación
+    y manejo de un árbol de jerarquía.
+*/
+
 #include "tree.h"
 #include <iostream>
 
+//! Constructor vacio
 Tree::Tree(){};
 
+/*! Constructor.
+  \param hierarchy jeraquía a mostrar en formato de árbol.
+*/
 Tree::Tree(vector<vector<string>> hierarchy) {
 
   for (const auto &entries : hierarchy) {
@@ -21,6 +30,11 @@ Tree::Tree(vector<vector<string>> hierarchy) {
   this->height = calculateHeight();
 }
 
+/*! Añade un nodo hoja al árbol.
+  \param value valor del nodo hoja.
+  \param parent valor del nodo padre.
+  \param depth profundidad en la que se encuentra la hoja.
+*/
 void Tree::addLeave(string value, string parent, int depth) {
   // Check if leave is already present
   if (this->nodes.count(value))
@@ -36,6 +50,11 @@ void Tree::addLeave(string value, string parent, int depth) {
   this->leaves.emplace_back(value);
 }
 
+/*! Añade un nodo al árbol.
+  \param value valor del nodo.
+  \param child valor del nodo hijo.
+  \param parent valor del nodo padre.
+*/
 string Tree::addNode(string value, string child, const char *parent) {
 
   // Node already present
@@ -63,6 +82,9 @@ string Tree::addNode(string value, string child, const char *parent) {
   return value;
 }
 
+/*! Calcula la altura del árbol.
+  \return altura del árbol.
+*/
 int Tree::calculateHeight() {
   set<int> depths;
 
@@ -72,18 +94,17 @@ int Tree::calculateHeight() {
   return *max_element(depths.begin(), depths.end()) + 1;
 }
 
+/*! Devuelve la altura del árbol.
+  \return altura del árbol.
+*/
 int Tree::getHeight() { return this->height; }
 
-int Tree::getHeight(string value) {
-  const Node node = this->nodes[value];
-  int maxDepth = node.depth;
-
-  for (const auto &child : node.children)
-    getHeight(child, maxDepth);
-
-  return maxDepth - node.depth + 1;
-}
-
+/*! Devuelve la altura del árbol dado un nodo y la profundidad máxima
+    conocida del mismo.
+  \param value valor del nodo.
+  \param depth profundidad máxima conocida.
+  \return altura del árbol.
+*/
 int Tree::getHeight(string value, int &depth) {
   const Node node = this->nodes[value];
   int aux;
@@ -99,12 +120,39 @@ int Tree::getHeight(string value, int &depth) {
   return depth;
 }
 
+/*! Devuelve la altura del subárbol del que el nodo dado es raiz.
+  \param value valor del nodo.
+  \return altura del subárbol.
+*/
+int Tree::getHeight(string value) {
+  const Node node = this->nodes[value];
+  int maxDepth = node.depth;
+
+  for (const auto &child : node.children)
+    getHeight(child, maxDepth);
+
+  return maxDepth - node.depth + 1;
+}
+
+/*! Devuelve el número de hojas descientes del nodo dado.
+  \param value valor del nodo.
+  \return número de hojas.
+*/
 int Tree::getNumSubTreeLeaves(string value) {
   return this->nodes[value].numSubTreeLeaves;
 }
 
+/*! Devuelve la profundidad del subárbol del que el nodo dado es raiz.
+  \param value valor del nodo.
+  \return profundidad del subárbol.
+*/
 int Tree::getDepth(string value) { return this->nodes[value].depth; }
 
+/*! Determina si un nodo es hijo de otro.
+  \param node valor del nodo padre.
+  \param target valor del posible nodo hijo.
+  \return 1 si target es hijo de node, y 0 si no es así.
+*/
 bool Tree::isChild(string node, string target) {
   set<string> children = this->nodes[node].children;
 
@@ -119,11 +167,19 @@ bool Tree::isChild(string node, string target) {
   return false;
 }
 
+/*! Devuelve los hijos directos del nodo dado.
+  \param value valor del nodo.
+  \return nodos hijos.
+*/
 vector<string> Tree::getDirectChildren(string value) {
   set<string> children = this->nodes[value].children;
   return vector<string>(children.begin(), children.end());
 }
 
+/*! Devuelve todos los hijos del nodo dado.
+  \param value valor del nodo.
+  \return nodos hijos.
+*/
 vector<string> Tree::getAllChildren(string value) {
   vector<string> children;
 
@@ -136,6 +192,11 @@ vector<string> Tree::getAllChildren(string value) {
   return children;
 }
 
+/*! Devuelve los nodos hijos del nodo dado que se encuentren
+    en el siguiente nivel de profundidad.
+  \param value valor del nodo.
+  \return hijos del nodo.
+*/
 vector<string> Tree::getChildrenInLevel(string value) {
   vector<string> children;
   const int level = this->nodes[value].depth + 1;
@@ -148,6 +209,10 @@ vector<string> Tree::getChildrenInLevel(string value) {
   return children;
 }
 
+/*! Devuelve la siguiente generalización del valor dado.
+  \param value valor del nodo.
+  \return valor generalizado.
+*/
 string Tree::getNextGen(string value) {
 
   // Node present
@@ -159,56 +224,43 @@ string Tree::getNextGen(string value) {
     return parent;
   }
 
+  cout << value << endl;
   // Not found
   throw "Error: Element not found in the tree";
 }
 
+/*! Devuelve el número de hojas de las que se compone el árbol.
+  \return número de hojas.
+*/
 int Tree::getNumLeaves() { return this->leaves.size(); }
 
+/*! Devuelve el ancestro común de dos nodos.
+  \param node nodo de menor profundidad.
+  \param target nodo de mayor profundidad.
+  \return nodo ancestro.
+*/
 Node Tree::getCommonAncestor(Node node, string target) {
   if (node.value == target)
     return this->nodes[node.value];
 
-  // It is a direct child
   if (find(node.children.begin(), node.children.end(), target) !=
       node.children.end())
     return node;
 
   Node n = this->nodes[node.parent];
-  // vector<string> children(node.children.begin(),
-  //			node.children.end());
   vector<string> children = getAllChildren(node.value);
-
-  /*cout << "node: ";
-  cout << node.value << endl;
-  cout << "Parent: ";
-  cout << n.value << endl;
-  cout << "Children: ";
-  for (const auto& a : children)
-          cout << a + ", ";
-  cout << endl;
-
-  cout << "Depths: ";
-  cout << getDepth(node.value);
-  cout << getDepth(target) << endl;*/
 
   if (find(children.begin(), children.end(), target) == children.end())
     return getCommonAncestor(n, target);
 
-  // if (getDepth(node.value) >= getDepth(target))
-  //	return getCommonAncestor(n, target);
-
-  /*while (find(children.begin(), children.end(), target)
-          == children.end()) {
-
-          n = this->nodes[n.parent];
-          children.insert(children.begin(),
-                  n.children.begin(), n.children.end());
-  }*/
-
   return n;
 }
 
+/*! Devuelve el ancestro común, posicionado a menor profundidad, de dos nodos.
+  \param r1 valor del primer nodo.
+  \param r2 valor del segundo nodo.
+  \return nodo ancestro.
+*/
 Node Tree::getLowestCommonAncestor(string r1, string r2) {
 
   Node n1 = this->nodes[r1];
@@ -231,6 +283,11 @@ Node Tree::getLowestCommonAncestor(string r1, string r2) {
   return getCommonAncestor(node, target);
 }
 
+/*! Devuelve el ancestro común, posicionado a menor profundidad,
+    de varios nodos.
+  \param values valores de todos los nodos.
+  \return nodo ancestro.
+*/
 Node Tree::getLowestCommonAncestor(vector<string> values) {
   Node node;
   string aux = values[0];
@@ -250,6 +307,10 @@ Node Tree::getLowestCommonAncestor(vector<string> values) {
   return node;
 }
 
+/*! Calcula el valor de la métrica NCP dado un conjunto de nodos.
+  \param values valores de los nodos.
+  \return valor de la métrica NCP.
+*/
 long double Tree::getNCP(vector<string> values) {
   // Get unique values only
   vector<string> aux = values;

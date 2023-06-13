@@ -1,5 +1,14 @@
+/*! \file hierarchy.cpp
+    \brief Fichero que contiene todas las funciones de lectura de ficheros.
+*/
+
 #include "hierarchy.h"
 
+/*! Devuelve el rango máximo (máxima generalización)
+    perteneciente a un atributo numérico.
+  \param dataset conjunto de datos.
+  \param qidIndex índice del atributo qid numérico.
+*/
 string getNumericRoot(const vector<vector<string>> dataset,
                       const int qidIndex) {
   long double dmin, dmax;
@@ -46,7 +55,11 @@ string getNumericRoot(const vector<vector<string>> dataset,
   return root;
 }
 
-// Get idx of qid in table input headers
+/*! Calcula el índice de un atributo dado su nombre.
+  \param qidName nombre del atributo.
+  \param headers cabecera del fichero. Define los nombres de los atributos presentes.
+  \return índice del atributo
+*/
 int getHierarchyIdx(const string qidName, vector<string> headers) {
   string tmp;
 
@@ -63,6 +76,11 @@ int getHierarchyIdx(const string qidName, vector<string> headers) {
   return -1;
 }
 
+/*! Identifica si un atributo se encuentra entre la lista de atributos dada.
+  \param qidName nombre del atributo.
+  \param qidNames lista de nombres de atributos.
+  \return 1 si se encuentra presente, 0 en otro caso.
+*/
 bool compareAttQid(string qidName, vector<string> qidNames) {
 
   string s1;
@@ -76,6 +94,11 @@ bool compareAttQid(string qidName, vector<string> qidNames) {
   return false;
 }
 
+/*! Transpone una matriz de dimensión 3, en nuestro caso, corresponde a
+    las jerarquías de todos los atributos.
+  \param hierarchies matriz que representa las jerárquias de todos los atributos qids.
+  \return matriz de jerarquía transpuesta.
+*/
 vector<vector<vector<string>>>
 transposeAndFormat(const vector<vector<vector<string>>> &hierarchies) {
   vector<vector<vector<string>>> res;
@@ -87,6 +110,17 @@ transposeAndFormat(const vector<vector<vector<string>>> &hierarchies) {
   return res;
 }
 
+/*! Lee el directorio general en el que se encuentran los ficheros de jerarquia
+    (en un directorio separado) y el conjunto de datos inicial.
+  \param directory directorio relativo.
+  \param dataset conjunto de datos.
+  \param headers cabecera del fichero. Define los nombres de los atributos presentes.
+  \param qids índices de atributos cuasi-identificadores o qids.
+  \param atts índices de atributos sensibles o SAs.
+  \param transpose indica si se desea devolver la matriz de jerarquías de forma
+                   transpuesta.
+  \return índice del atributo
+*/
 map<int, vector<vector<string>>>
 readDirectory(fs::path const &directory, vector<vector<string>> &dataset,
               vector<string> &headers, vector<string> attQids,
@@ -253,6 +287,10 @@ readDirectory(fs::path const &directory, vector<vector<string>> &dataset,
   return hMap;
 }
 
+/*! Transpone una matriz de dimensión 2.
+  \param matrix matriz de dimensión 2.
+  \return matriz transpuesta.
+*/
 vector<vector<string>> transpose(const vector<vector<string>> &matrix) {
 
   if (matrix.size() == 0)
@@ -272,20 +310,34 @@ vector<vector<string>> transpose(const vector<vector<string>> &matrix) {
   return arr;
 }
 
-vector<vector<int>> getPermutations(int r, const vector<int> data) {
+/*! Calcula las posibles permutaciones de un vector de datos.
+  \param len tamaño de la permutación.
+  \param data vector de datos inicial.
+  \return matriz con todas las permutaciones posibles.
+*/
+vector<vector<int>> getPermutations(int len, const vector<int> data) {
 
   vector<vector<int>> permutations;
   int auxArray[data.size()];
-  permute(data, permutations, data.size(), r, auxArray);
+  permute(data, permutations, data.size(), len, auxArray);
   return permutations;
 }
 
+/*! Calcula las posibles permutaciones de un vector de datos.
+  \param data vector ede datos inicial.
+  \param permutations matriz con todas las permutaciones posibles.
+  \param n tamaño del vector de datos inicial.
+  \param len tamano de la permutación.
+  \param aux array auxiliar.
+  \param rept maraca el número de llamadas recursivas a esta función.
+  \param idx índice del vector sobre el que trabaja la función.
+*/
 void permute(const vector<int> data, vector<vector<int>> &permutations, int n,
-             int r, int *aux, int rept, int idx) {
+             int len, int *aux, int rept, int idx) {
 
-  if (idx == r) {
+  if (idx == len) {
     vector<int> entry;
-    for (int i = 0; i < r; i++) {
+    for (int i = 0; i < len; i++) {
       entry.emplace_back(data[aux[i]]);
     }
     permutations.emplace_back(entry);
@@ -294,10 +346,15 @@ void permute(const vector<int> data, vector<vector<int>> &permutations, int n,
 
   for (int i = rept; (i < n) && (n - i + 1); i++) {
     aux[idx] = i;
-    permute(data, permutations, n, r, aux, i + 1, idx + 1);
+    permute(data, permutations, n, len, aux, i + 1, idx + 1);
   }
 }
 
+/*! Calcula el índice de cada qid en la cabecera del fichero de datos original.
+  \param headers cabecera del fichero. Define los nombres de los atributos presentes.
+  \param qids índices de atributos cuasi-identificadores o qids.
+  \return lista de índices de los qids.
+*/
 vector<int> getQidsHeaders(const vector<string> headers,
                            const vector<string> qids) {
   vector<int> res;

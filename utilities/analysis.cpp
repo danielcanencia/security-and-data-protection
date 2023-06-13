@@ -1,5 +1,16 @@
+/*! \file analysis.cpp
+    \brief Fichero que contiene las funciones relacionadas con las métricas
+           NCP y GCP.
+*/
+
 #include "analysis.h"
 
+/*! Calcula el valor parcial de la métrica NCP dada una lista de valores
+    categóricos de un atributo.
+  \param atts conjunto de valores del atributo.
+  \param tree árbol jerárquico del atributo.
+  \return valor parcial de la métrica NCP.
+*/
 long double calculateCatNCP(const vector<string> atts, Tree tree) {
   // Calculate NCP fot qid values
   long double card = tree.getNCP(atts);
@@ -13,6 +24,13 @@ long double calculateCatNCP(const vector<string> atts, Tree tree) {
   return (long double)card;
 }
 
+/*! Calcula el valor parcial de la métrica NCP dada una lista de valores
+    numéricos de un atributo.
+  \param atts conjunto de valores del atributo.
+  \param globalMax valor máximo del atributo númerico.
+  \param globalMin valor mínimo del atributo númerico.
+  \return valor parcial de la métrica NCP.
+*/
 long double calculateNumNCP(const vector<string> atts, long double globalMax,
                             long double globalMin) {
 
@@ -52,6 +70,12 @@ long double calculateNumNCP(const vector<string> atts, long double globalMax,
   return (max - min) / (globalMax - globalMin);
 }
 
+/*! Decide cual de los dos valores numéricos presenta el valor máximo,
+    teniendo en cuenta los posibles rangos.
+  \param a primer valor numérico.
+  \param b segundo valor numérico.
+  \return 1 si el primer valor contiene el máximo, 0 en otro caso.
+*/
 bool sortMaxSplit(string a, string b) {
   long double max1, max2;
   int i1 = a.find('~');
@@ -69,6 +93,12 @@ bool sortMaxSplit(string a, string b) {
   return max1 < max2;
 }
 
+/*! Decide cual de los dos valores numéricos presenta el valor mínimo,
+    teniendo en cuenta los posibles rangos.
+  \param a primer valor numérico.
+  \param b segundo valor numérico.
+  \return 1 si el primer valor contiene el mínimo, 0 en otro caso.
+*/
 bool sortMinSplit(string a, string b) {
   long double min1, min2;
   int i1 = a.find('~');
@@ -86,6 +116,15 @@ bool sortMinSplit(string a, string b) {
   return min1 > min2;
 }
 
+/*! Calcula los valores de la métrica NCP para cada uno de las clases
+    de equivalencia.
+  \param clusters conjunto de clases de equivalencia.
+  \param weights lista de pesos correspondientes a cada atributo qid.
+  \param allQids índices de los atributos qids.
+  \param numQids índices de los atributos qids de tipo numérico.
+  \param trees árboles de jerarquías de todos los atributos qids.
+  \return valores de la métrica NCP.
+*/
 vector<long double> calculateNCPS(vector<vector<vector<string>>> clusters,
                                   vector<double> weights, vector<int> allQids,
                                   vector<int> numQids, map<int, Tree> trees) {
@@ -164,6 +203,14 @@ vector<long double> calculateNCPS(vector<vector<vector<string>>> clusters,
   return cncps;
 }
 
+/*! Calcula el valor de la métrica GCP para un conjunto de clases de
+    equivalencia.
+  \param clusters conjunto de clases de equivalencia.
+  \param numRecords número de registros del conjunto de datos inicial.
+  \param qids índices de los atributos qids.
+  \param cncps valores de la métrica NCP.
+  \return valor de la métrica GCP.
+*/
 void calculateGCP(vector<vector<vector<string>>> clusters, int numRecords,
                   vector<int> qids, vector<long double> cncps) {
 

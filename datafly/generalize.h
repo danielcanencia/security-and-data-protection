@@ -1,3 +1,7 @@
+/*! \file generalize.h
+    \brief Fichero de cabecera del archivo generalize.cpp.
+*/
+
 #ifndef _GENERALIZE_H
 #define _GENERALIZE_H
 

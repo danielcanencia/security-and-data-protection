@@ -1,3 +1,7 @@
+/*! \file input.h
+    \brief Fichero de cabecera del archivo input.cpp.
+*/
+
 #ifndef _INPUT_H
 #define _INPUT_H
 
@@ -16,6 +20,7 @@ const int readNumberOfQids();
 vector<string> readQidNames(const int nqids);
 vector<string> readConfidentialAttNames();
 long double readSuppThreshold();
+int readEpsilon();
 vector<double> readWeights(const int nqids, vector<string> qidNames);
 tuple<vector<int>, vector<int>> readMetricsQids(vector<int> numQids,
                                                 vector<int> catQids,

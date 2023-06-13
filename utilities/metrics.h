@@ -1,3 +1,7 @@
+/*! \file metrics.h
+    \brief Fichero de cabecera del archivo metrics.cpp.
+*/
+
 #ifndef _METRICS_H
 #define _METRICS_H
 

@@ -1,3 +1,8 @@
+# Mondrian
+# Modelos de Privacidad
+
+K-Anonymity, L-Diversity, T-Closeness.
+
 # Ejecución
 
 Instrucción de ejecución:
