@@ -1,3 +1,7 @@
+/*! \file graph.h
+    \brief Fichero de cabecera del archivo graph.cpp.
+*/
+
 #ifndef _GRAPH_H
 #define _GRAPH_H
 
@@ -8,6 +12,7 @@
 
 using namespace std;
 
+/*! Clase Graph. Simula la estructura de un grafo. */
 class Graph {
 private:
   vector<vector<int>> nodes;

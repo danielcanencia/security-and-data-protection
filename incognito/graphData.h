@@ -1,3 +1,7 @@
+/*! \file graphData.h
+    \brief Fichero de cabecera del archivo graphData.cpp.
+*/
+
 #ifndef _GRAPHDATA_H
 #define _GRAPHDATA_H
 
@@ -10,6 +14,8 @@
 
 using namespace std;
 
+/*! Clase GraphData. Clase hija de Graph, contiene todos los datos, y
+    las funciones para manejarlos. */
 class GraphData {
 private:
   map<int, GraphNode> nodes;

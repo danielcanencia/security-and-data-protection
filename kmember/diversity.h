@@ -1,3 +1,7 @@
+/*! \file diversity.h
+    \brief Fichero de cabecera del archivo diversity.cpp.
+*/
+
 #ifndef _DIVERSITY_H
 #define _DIVERSITY_H
 

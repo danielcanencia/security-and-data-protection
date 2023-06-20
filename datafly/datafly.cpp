@@ -18,13 +18,13 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  // Read input
-  // Read qid names
+  // Leer parámetros
   const int nqids = readNumberOfQids();
+  // Leer nombres de qids
   vector<string> qidNames = readQidNames(nqids);
   vector<string> confAttNames;
 
-  // Read data file and hierarchy folders
+  // Leer el directorio que contiene el conjunto de datos y las jerarquias
   vector<string> headers;
   vector<int> qids, confAtts;
   vector<vector<string>> qidsDataset, dataset;
@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  // Read Parameters
+  // Leer parámetros vinculados a los modelos de privacidad
   const int K = readParameter("k-anonymity", "K", dataset.size());
   if (K == -1) {
     cout << "Error, Datafly needs parameter K." << endl;
@@ -70,19 +70,19 @@ int main(int argc, char **argv) {
   }
   long double suppThreshold = readSuppThreshold();
 
-  // Read Weights
+  // Leer pesos asignados a cada qid
   vector<double> weights = readWeights(nqids, qidNames);
-  // Ask for desired qid types to be used on metrics
+  // Leer tipos de qids (importante considerar los atributos numéricos como tales)
   vector<int> numMetricsQids, catMetricsQids;
   tuple<vector<int>, vector<int>> metricsQids =
       readMetricsQids({}, qids, headers);
   numMetricsQids = get<0>(metricsQids);
   catMetricsQids = get<1>(metricsQids);
 
-  // Measure Execution Time
+  // Calcular el tiempo de ejecución
   auto start = chrono::high_resolution_clock::now();
   // *********************************
-  // Main algorithm
+  // Algoritmo principal
   auto resTuple =
       datafly(dataset, hierarchiesMap, qids, confAtts, suppThreshold, K);
   vector<vector<string>> result = get<0>(resTuple);
@@ -98,13 +98,12 @@ int main(int argc, char **argv) {
   cout << "===> Number of clusters: ";
   cout << clusters.size() << endl;
 
-  // Write anonymized table
-  // Changed headers for non alterated ones
+  // Escribir conjunto de datos anonimizado
   writeAnonymizedTable(fs::path(argv[1]), headers, result, K, -1, -1);
 
-  // METRICS
+  // Métricas
   cout << "===> Analysis: " << endl;
-  // Create a hierarchy tree for every qid
+  // Convertir árboles jerárquicos en un mapa de datos
   map<int, Tree> trees;
   for (const int &i : qids) {
     trees[i] = Tree(hierarchiesMap[i]);
@@ -112,11 +111,11 @@ int main(int argc, char **argv) {
 
   // GCP
   try {
-    // 1. Precalculate NCP for every qid value included in every cluster
+    // 1. Precalcular NCP para cada atributo qid
     vector<long double> cncps =
         calculateNCPS(clusters, weights, qids, numMetricsQids, trees);
 
-    // 2. Calculate GCP
+    // 2. Calcular GCP
     calculateGCP(clusters, dataset.size(), qids, cncps);
   } catch (const char *e) {
     cout << e << endl;

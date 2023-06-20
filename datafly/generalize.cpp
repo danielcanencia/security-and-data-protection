@@ -44,11 +44,11 @@ void generalizeQid(vector<vector<string>> &dataset, const int qid, Tree tree) {
 */
 void supressRecords(vector<vector<string>> &dataset, vector<int> qids,
                     const int K) {
-  // Calculate frequencies and indexes
+  // Calcular mapa de frecuencias basado en índices
   map<string, tuple<int, vector<int>>> records =
       evaluateFrequencyByIdx(dataset, qids);
 
-  // Suppress records with freqs < K
+  // Suprimir registros cuya frecuencia de qids sea < K
   vector<int> deletions;
   for (const auto &[key, tuple] : records) {
     int freq = get<0>(tuple);

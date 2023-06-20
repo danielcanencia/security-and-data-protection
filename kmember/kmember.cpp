@@ -1,22 +1,35 @@
+/*! \file kmember.cpp
+    \brief Fichero que contiene las funciones principales sobre las
+           que actua el algoritmo k-member.
+*/
+
 #include "kmember.h"
 
+/*! Generaliza un conjunto de datos.
+  \param data conjunto de datos.
+  \param trees árbol jerárquicos de los atributos qids cateǵoricos
+  \param numQids lista de índices de atributos numéricos.
+  \param catQids lista de índices de atributos categóricos.
+  \param clusters clases de equivalencia.
+  \return valor del ancestro común.
+*/
 map<int, vector<vector<string>>>
 generalize(map<int, vector<vector<string>>> data, map<int, Tree> trees,
            vector<int> numQids, vector<int> catQids, int clusters) {
-  // Generalize values based on clusters (global recoding)
+  // Generalizar valores en función de las clases de equivalencia (global recoding)
   for (int i = 0; i < clusters; i++) {
     vector<vector<string>> cluster = data[i];
     vector<vector<string>> matrix = transpose(cluster);
 
-    // Generalize only quasi'identifier attributes
+    // Generalizar atributos qids categóricos
     for (const auto &qid : catQids) {
-      // Generalize values based on their common ancestor
+      // Generalizar valores utilizando su ancestro común
       string gen = trees[qid].getLowestCommonAncestor(matrix[qid]).value;
       for (size_t idx = 0; idx < cluster.size(); idx++)
         data[i][idx][qid] = gen;
     }
 
-    // Generalize numerical attributes by range
+    // Generalizar atributos qids numéricos por rangos
     for (const auto &qid : numQids) {
       double max = stod(
           *max_element(matrix[qid].begin(), matrix[qid].end(),
@@ -33,19 +46,33 @@ generalize(map<int, vector<vector<string>>> data, map<int, Tree> trees,
   return data;
 }
 
+/*! Rutina principal del algoritmo k-member.
+  \param dataset conjunto de datos.
+  \param hierarchies mapa de jerarquias.
+  \param numQids lista de índices de atributos numéricos.
+  \param catQids lista de índices de atributos categóricos.
+  \param confAtts lista de índices de atributos sensibles.
+  \param K parámetro del modelo de privacidad k-anonymity.
+  \param L parámetro del modelo de privacidad l-diversity.
+  \param sensitiveValues valores realmente sensibles.
+  \param diversityPenalty penalización de diversidad.
+  \param diversity tipo de métrica a utilizar para calcular l-diversity.
+  \param count número de iteraciones del bucle principal.
+  \return conjunto de datos anonimizado (en clases de equivalencia) en forma de mapa.
+*/
 map<int, vector<vector<string>>>
 evaluate(vector<vector<string>> dataset,
          map<int, vector<vector<string>>> hierarchies, vector<int> numQids,
          vector<int> catQids, const int confAtt, const int K, const int L,
          const vector<string> sensitiveValues, const int diversityPenalty,
          const int diversity, int &count) {
-  // Create a hierarchy tree for every qid
+  // Crea un árbol jerárquico para cada atributo qid
   map<int, Tree> trees;
   for (const int &i : catQids) {
     trees[i] = Tree(hierarchies[i]);
   }
 
-  // Main algorithm
+  // Algoritmo principal
   map<int, vector<vector<string>>> res;
   if (dataset.size() <= (size_t)K) {
     res[0] = dataset;
@@ -58,7 +85,7 @@ evaluate(vector<vector<string>> dataset,
   vector<vector<string>> c;
   vector<string> aux = S[r];
 
-  // 1st loop
+  // 1º bucle
   while ((int)S.size() >= K) {
     r = furthestRecord(aux, r, S, hierarchies, trees, numQids, catQids);
     vector<vector<string>> c(1, S[r]);
@@ -77,7 +104,7 @@ evaluate(vector<vector<string>> dataset,
     count += 1;
   }
 
-  // 2nd loop
+  // 2º bucle
   int idx;
   while (S.size() > 0) {
     r = randomRecord(S);
@@ -107,17 +134,17 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  // Read input
-  // Read qid names
+  // Leer parámetros
   const int nqids = readNumberOfQids();
+  // Leer los nombres de los qids
   vector<string> qidNames = readQidNames(nqids);
-  // Conf Att
+  // Leer atributos sensibles
   string attName = readConfidentialAttName();
   vector<string> confAttNames;
   if (attName.size() != 0)
     confAttNames.emplace_back(attName);
 
-  // Read data file and hierarchy folders
+  // Leer el directorio que contiene el conjunto de datos y las jerarquias
   vector<string> headers;
   vector<int> catQids, numQids, allQids;
   vector<int> confAtts;
@@ -151,7 +178,6 @@ int main(int argc, char **argv) {
     }
 
     sort(catQids.begin(), catQids.end());
-    // Compare headers and qids
     allQids = getQidsHeaders(headers, qidNames);
 
     sort(allQids.begin(), allQids.end());
@@ -163,12 +189,12 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  // Confidential attribute
+  // Leer el atributo sensible
   int confAtt = -1;
   if (confAttNames.size() != 0)
     confAtt = confAtts[0];
 
-  // Read Parameters
+  // Leer parámetros vinculados a los modelos de privacidad
   const int K = readParameter("k-anonymity", "K", dataset.size());
   if (K == -1) {
     cout << "Kmember needs parameter K" << endl;
@@ -185,33 +211,33 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  // Diversity Penalty, select metric used
+  // Leer la penalización de diversidad y la métrica utilizada
   int diversityPenalty, diversity;
   vector<string> sensitiveValues;
   if (L != -1) {
     diversityPenalty = readDiversityPenalty();
     diversity = readDiversity();
 
-    // Read sensitive values for sensitive diversity metric
+    // Leer valores sensibles para SDM
     if (diversity == 1) {
       vector<string> values = transpose(hierarchiesMap[confAtt])[0];
       sensitiveValues = readSensitiveValues(values);
     }
   }
 
-  // Read Weights
+  // Leer pesos asignados a cada qid
   vector<double> weights = readWeights(nqids, qidNames);
-  // Ask for desired qid types to be used on metrics
+  // Leer tipos de qids (importante considerar los atributos numéricos como tales)
   vector<int> numMetricsQids, catMetricsQids;
   tuple<vector<int>, vector<int>> metricsQids =
       readMetricsQids(numQids, catQids, headers);
   numMetricsQids = get<0>(metricsQids);
   catMetricsQids = get<1>(metricsQids);
 
-  // Measure Execution Time
+  // Calcular el tiempo de ejecución
   auto start = chrono::high_resolution_clock::now();
   // *********************************
-  // Main algorithm
+  // Algoritmo principal
   int count = 0;
   map<int, vector<vector<string>>> res =
       evaluate(dataset, hierarchiesMap, numQids, catQids, confAtt, K, L,
@@ -225,24 +251,24 @@ int main(int argc, char **argv) {
   cout << "===> Number of clusters: ";
   cout << count << endl;
 
-  // Write Anonymized Clusters
+  // Escribir conjunto de datos anonimizado
   cout << "===> Writing data" << endl;
   string directory = argv[1];
   if (directory.back() != '/')
     directory += "/";
 
-  // Create matrix from clusters
+  // Crear matriz de las clases de equivalencia
   vector<vector<string>> result;
   for (int i = 0; i < count; i++)
     result.insert(result.begin(), res[i].begin(), res[i].end());
 
   writeAnonymizedTable(fs::path(directory), headers, result, K, L, -1);
 
-  // METRICS
+  // Métricas
   vector<vector<vector<string>>> clusters;
   for (const auto &[k, cluster] : res)
     clusters.emplace_back(cluster);
-  // Create a hierarchy tree for every qid
+  // Convertir árboles jerárquicos en un mapa de datos
   map<int, Tree> trees;
   for (const int &i : catQids) {
     trees[i] = Tree(hierarchiesMap[i]);
@@ -250,10 +276,10 @@ int main(int argc, char **argv) {
 
   // GCP
   try {
-    // 	1. Precalculate NCP for every qid value included in every cluster
+    // 1. Precalcular NCP para cada atributo qid
     vector<long double> cncps =
         calculateNCPS(clusters, weights, allQids, numMetricsQids, trees);
-    // 	2. Calculate GCP
+    // 2. Calcular GCP
     calculateGCP(clusters, dataset.size(), allQids, cncps);
   } catch (const char *e) {
     cout << e << endl;

@@ -1,3 +1,7 @@
+/*! \file evaluate.h
+    \brief Fichero de cabecera del archivo evaluate.cpp.
+*/
+
 #ifndef _EVALUATE_H
 #define _EVALUATE_H
 

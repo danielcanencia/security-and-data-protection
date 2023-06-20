@@ -1,8 +1,19 @@
+/*! \file anonymity.cpp
+    \brief Fichero que proporciona las funciones que comprueban si una
+           partición cumple con los modelos de privacidad.
+*/
+
 #include "anonymity.h"
 
+/*! Comprueba si una partición es k-anonima.
+  \param split partición.
+  \param qids lista de cuasi-identificadores.
+  \param K parámetro de la k-anonimidad.
+  \return 1 si la partición es k-anonima, o 0 si no es así.
+*/
 bool isSplitKAnonymous(vector<vector<string>> split, vector<int> qids,
                        const int K) {
-  // Obtain a subset of dataset containing only qids
+  // Obtener registros conteniendo únicamente qids
   vector<vector<string>> qidsDataset;
 	for (size_t i=0; i < split.size(); i++) {
 		vector<string> aux;
@@ -21,6 +32,12 @@ bool isSplitKAnonymous(vector<vector<string>> split, vector<int> qids,
   return true;
 }
 
+/*! Comprueba si una partición es l-diversa.
+  \param split partición.
+  \param confAtts lista de índices de atributos sensibles.
+  \param L parámetro de la l-diversidad.
+  \return 1 si la partición es k-anonima, o 0 si no es así.
+*/
 bool isSplitLDiverse(vector<vector<string>> split, vector<int> confAtts,
                      const int L) {
   vector<map<string, int>> freqs(confAtts.size());
@@ -38,8 +55,8 @@ bool isSplitLDiverse(vector<vector<string>> split, vector<int> confAtts,
     }
   }
 
-  // Every confidential attribute should have, at least,
-  // l well represented values
+  // Cada atributo debe tener, al menos, l valores
+  // "bien representados"
   for (const map<string, int> &attFreq : freqs) {
     if ((int)attFreq.size() < L)
       return false;
@@ -48,6 +65,14 @@ bool isSplitLDiverse(vector<vector<string>> split, vector<int> confAtts,
   return true;
 }
 
+/*! Comprueba si una partición cumple el modelo de privacidad t-closeness.
+  \param split partición.
+  \param data matriz de datos anonimizados.
+  \param dataMap matriz de datos sin anonimizar.
+  \param confAtts lista de índices de atributos sensibles.
+  \param T parámetro de t-closeness.
+  \return 1 si la partición es k-anonima, o 0 si no es así.
+*/
 bool isSplitTClose(vector<vector<string>> split, vector<vector<string>> data,
                    tuple<vector<map<string, int>>, vector<set<string>>> dataMap,
                    vector<int> confAtts, const long double T) {
@@ -55,8 +80,8 @@ bool isSplitTClose(vector<vector<string>> split, vector<vector<string>> data,
   if (split.size() == 0)
     return false;
 
-  // Generate a P frequency map for
-  // every confidential attribute
+  // Generar un mapa de frecuencias P, para cada atributo
+  // confidencials
   string key;
   vector<map<string, int>> splitMaps(confAtts.size());
   for (const auto &entry : split) {
@@ -73,24 +98,23 @@ bool isSplitTClose(vector<vector<string>> split, vector<vector<string>> data,
   vector<map<string, int>> dataFreqs = get<0>(dataMap);
   vector<set<string>> valueSets = get<1>(dataMap);
 
-  // P and Q size
   int pSize, qSize;
   pSize = split.size();
   qSize = data.size();
 
-  // Calculate EMD for every confidential attribute
-  // using ED
+  // Calculat EMD para cada atributo confidencial
+  // utilizando ED
   for (size_t i = 0; i < confAtts.size(); i++) {
     long double emd = 0;
     for (const auto &entry : valueSets[i]) {
       if (splitMaps[i][entry]) {
-        // Entry present in P
+        // Entrada presente en P
         // ED(Pi, Qi) = abs(Pi/Pi probability in P -
         //					 Qi/Qi probability in Q)
         emd += abs((long double)splitMaps[i][entry] / pSize -
                    (long double)dataFreqs[i][entry] / qSize);
       } else {
-        // Not present in P
+        // Entrada no presente en P
         // ED(Pi, Qi) = abs(0 - Qi/Qi probability in Q)
         emd += (long double)dataFreqs[i][entry] / qSize;
       }
@@ -98,7 +122,7 @@ bool isSplitTClose(vector<vector<string>> split, vector<vector<string>> data,
     // ED(P, Q) =  sum(sum(pj - qj)) / 2
     emd /= 2;
 
-    // Check if partition is tclose
+    // Comprobar t-closeness
     if (emd > T)
       return false;
   }
@@ -106,6 +130,17 @@ bool isSplitTClose(vector<vector<string>> split, vector<vector<string>> data,
   return true;
 }
 
+/*! Comprueba si una partición cumple el modelo de privacidad t-closeness.
+  \param splits particiones.
+  \param dataMap matriz de datos sin anonimizar.
+  \param dataset conjunto de datos.
+  \param qids lista de atributos cuasi-identificadores.
+  \param confAtts lista de índices de atributos sensibles.
+  \param K parámetro de la k-anonimidad.
+  \param L parámetro de la l-diversidad.
+  \param T parámetro de t-closeness.
+  \return 1 si la partición es k-anonima, o 0 si no es así.
+*/
 bool isSplitValid(vector<vector<vector<string>>> splits,
                   tuple<vector<map<string, int>>, vector<set<string>>> dataMap,
                   vector<vector<string>> dataset, vector<int> qids,

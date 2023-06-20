@@ -1,3 +1,7 @@
+/*! \file incognito.h
+    \brief Fichero de cabecera del archivo incognito.cpp.
+*/
+
 #ifndef _INCOGNITO_H
 #define _INCOGNITO_H
 

@@ -18,14 +18,21 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  // Read input
-  // Read qid names
+  // Leer parámetros
   const int nqids = readNumberOfQids();
-  vector<string> qidNames = readQidNames(nqids);
-  // Conf Atts Names
-  vector<string> confAttNames = readConfidentialAttNames();
+  vector<string> qidNames;
+  vector<string> confAttNames;
+  try {
+    // Leer nombres de qids
+    qidNames = readQidNames(nqids);
+    // Leer atributos sensibles
+    confAttNames = readConfidentialAttNames();
+  } catch (const char *e) {
+    cout << e << endl;
+    return -1;
+  }
 
-  // Read data file and hierarchy folders
+  // Leer el directorio que contiene el conjunto de datos y las jerarquias
   vector<string> headers;
   vector<int> catQids, confAtts, numQids, allQids;
   vector<int> isQidCat;
@@ -38,7 +45,6 @@ int main(int argc, char **argv) {
                       confAttNames, catQids, confAtts, false);
     sort(catQids.begin(), catQids.end());
 
-    // Compare headers and qids
     allQids = getQidsHeaders(headers, qidNames);
     if (allQids.size() < qidNames.size()) {
       cout << endl << "******************" << endl;
@@ -65,7 +71,7 @@ int main(int argc, char **argv) {
     set_difference(allQids.begin(), allQids.end(), catQids.begin(),
                    catQids.end(), inserter(numQids, numQids.begin()));
 
-    // Build a vector containing qid types
+    // Generar un vector conteniendo los tipos de cada qid
     for (const auto &qid : allQids) {
       if (find(catQids.begin(), catQids.end(), qid) != catQids.end()) {
         isQidCat.emplace_back(1);
@@ -79,25 +85,25 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  // Read Parameters
+  // Leer parámetros vinculados a los modelos de privacidad
   int K, L;
   long double T;
   if (!readParameters(dataset.size(), confAttNames.size(), K, L, T))
     return -1;
 
-  // Read Weights
+  // Leer pesos asignados a cada qid
   vector<double> weights = readWeights(nqids, qidNames);
-  // Ask for desired qid types to be used on metrics
+  // Leer tipos de qids (importante considerar los atributos numéricos como tales)
   vector<int> numMetricsQids, catMetricsQids;
   tuple<vector<int>, vector<int>> metricsQids =
       readMetricsQids(numQids, catQids, headers);
   numMetricsQids = get<0>(metricsQids);
   catMetricsQids = get<1>(metricsQids);
 
-  // Measure Execution Time
+  // Calcular el tiempo de ejecución
   auto start = chrono::high_resolution_clock::now();
   // *********************************
-  // Main algorithm
+  // Algoritmo principal
   vector<vector<vector<string>>> clusters =
       mondrian(dataset, hierarchiesMap, allQids, isQidCat, confAtts, K, L, T);
   // *********************************
@@ -109,17 +115,17 @@ int main(int argc, char **argv) {
   cout << "===> Number of clusters: ";
   cout << clusters.size() << endl;
 
-  // Create matrix from clusters
+  // Crear matriz de las clases de equivalencia
   vector<vector<string>> result;
   for (const auto &partition : clusters) {
     result.insert(result.begin(), partition.begin(), partition.end());
   }
-  // Write anonymized table
+  // Escribir conjunto de datos anonimizado
   writeAnonymizedTable(fs::path(argv[1]), headers, result, K, L, T);
 
-  // METRICS
+  // Métricas
   cout << "===> Analysis: " << endl;
-  // Create a hierarchy tree for every qid
+  // Convertir árboles jerárquicos en un mapa de datos
   map<int, Tree> trees;
   for (const int &i : catQids) {
     trees[i] = Tree(hierarchiesMap[i]);
@@ -127,10 +133,10 @@ int main(int argc, char **argv) {
 
   // GCP
   try {
-    // 	1. Precalculate NCP for every qid value included in every cluster
+    // 1. Precalcular NCP para cada atributo qid
     vector<long double> cncps =
         calculateNCPS(clusters, weights, allQids, numMetricsQids, trees);
-    // 	2. Calculate GCP
+    // 2. Calcular GCP
     calculateGCP(clusters, dataset.size(), allQids, cncps);
   } catch (const char *e) {
     cout << e << endl;

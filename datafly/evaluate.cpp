@@ -25,7 +25,7 @@ bool readyForSuppression(vector<vector<string>> dataset, vector<int> qids,
       count += freq;
   }
 
-  // Percentage of tuple that can be suppress: (loss * dataset.size() / 100)
+  // Porcentaje de tuplas que pueden ser suprimidas: (loss * dataset.size() / 100)
   return (count <= (suppThreshold * tableSize) / 100);
 }
 
@@ -47,7 +47,7 @@ datafly(vector<vector<string>> dataset,
   vector<vector<string>> qidsDataset, result;
   vector<vector<vector<string>>> clusters;
 
-	// Obtain a subset of dataset containing only qids
+  // Obtener subconjunto de datos conteniendo únicamente qids
 	for (size_t i=0; i < dataset.size(); i++) {
 		vector<string> aux;
 		for (const int& idx : qids) {
@@ -56,27 +56,27 @@ datafly(vector<vector<string>> dataset,
 		qidsDataset.emplace_back(aux);
 	}
 
-  // 1. Create a hierarchy tree for every qid
+  // 1. Crear un árbol jerárquico para cada qid
   vector<Tree> trees;
   for (const int &val : qids) {
     trees.emplace_back(Tree(hierarchies[val]));
   }
 
   int idx;
-  // 2&3. Calculate frequencies & Check if KAnonimity is satisfied
+  // 2&3. Calcular frecuencias y comprobar si la k-anonimidad se cumple
 	while (!isKAnonSatisfied(qidsDataset, K)) {
-    // Check if table is ready for suppression
+    // Comprobar si la tabla esta lista para la fase de supresión
     if (readyForSuppression(qidsDataset, qids, dataset.size(), K,
                             suppThreshold)) {
-      // 4. Supress records which are not K-Anonymous (< K times)
+      // 4. Suprimir registros que no sean k-anonimos (< K veces)
       supressRecords(qidsDataset, qids, K);
       break;
     }
 
-    // 5. Find qid with the most distinct values
+    // 5. Encontrar el qid con el mayor número de valores únicos
     idx = findMostDistinctQid(qidsDataset);
 
-    // 6. Generalize all qid values in freq
+    // 6. Generalizar el atributo qid
     try {
       generalizeQid(qidsDataset, idx, trees[idx]);
     } catch (const char *e) {
@@ -85,8 +85,7 @@ datafly(vector<vector<string>> dataset,
     }
   }
 
-
-	// Update original dataset with generalized values
+  // Actualizar conjunto de datos original con los valores generalizados
   result = dataset;
 	for (size_t i=0; i < dataset.size(); i++) {
 		for (size_t j=0; j < qids.size(); j++) {
@@ -94,7 +93,7 @@ datafly(vector<vector<string>> dataset,
 		}
   }
   
-  // Create equivalence classes or clusters
+  // Crear clases de equivalencia
   clusters = createClusters(result, qids);
   return make_tuple(result, clusters);
 }

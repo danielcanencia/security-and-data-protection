@@ -33,7 +33,6 @@ private:
   long double T;
   vector<string> generalizations;
 
-  // Methods
   string findMedian(int dimension);
   int normWidth(int dimension);
   vector<int> getAttributeRanges(int dimension);
@@ -49,7 +48,6 @@ public:
   Partition(vector<vector<string>> data, vector<string> generalizations,
             vector<int> qids, vector<int> isQidCat, map<int, Tree> trees,
             vector<int> confAtts, int K, int L, long double T);
-  // Methods
   vector<vector<string>> getResult() const;
   int getNumAllowedCuts();
   void setAllowedCuts(int value, int dim);

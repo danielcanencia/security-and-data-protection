@@ -25,7 +25,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-#define Epsilon 60
+//#define Epsilon 60
 
 /*! Clase principal que contiene las funciones necesarias
     para ejecutar el algoritmo K-Means. */

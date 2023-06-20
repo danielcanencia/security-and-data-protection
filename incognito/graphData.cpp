@@ -1,7 +1,16 @@
+/*! \file graphData.cpp
+    \brief Fichero que proporciona las funciones que comprueban si una
+           partición cumple con los modelos de privacidad.
+*/
+
 #include "graphData.h"
 
+// Constructor vacio de la clase GraphData.
 GraphData::GraphData() {}
 
+/*! Añade un nodo a la clase.
+  \param data nodo a añadir.
+*/
 void GraphData::addData(vector<int> data) {
   int nodeId = this->contains(data);
   if (nodeId == -1) {
@@ -10,6 +19,9 @@ void GraphData::addData(vector<int> data) {
   }
 }
 
+/*! Comprueba si el nodo dado se encuentra en el grafo.
+  \param node datos del nodo.
+*/
 int GraphData::contains(const vector<int> &node) {
   for (const auto &[id, entry] : this->nodes) {
     if (entry.isEqual(node))
@@ -18,12 +30,15 @@ int GraphData::contains(const vector<int> &node) {
   return -1;
 }
 
+/*! Elimina los nodos dados del grafoS.
+  \param toPrune nodos a eliminars.
+*/
 void GraphData::pruneNodes(vector<vector<int>> toPrune) {
   while (!toPrune.empty()) {
     vector<int> node1 = toPrune[0];
     toPrune.erase(toPrune.begin());
 
-    // Find node
+    // Buscar nodo a podar
     bool flag;
     for (const auto &[id, node2] : this->nodes) {
       vector<int> data = node2.getData();
@@ -34,7 +49,7 @@ void GraphData::pruneNodes(vector<vector<int>> toPrune) {
           break;
         }
       }
-      // Prune node
+      // Podar nodo (eliminarlo)
       if (flag) {
         this->nodes.erase(node2.getId());
         break;
@@ -43,6 +58,7 @@ void GraphData::pruneNodes(vector<vector<int>> toPrune) {
   }
 }
 
+/*! Genera todos las aristas del grafo. */
 void GraphData::generateAllEdges() {
   for (const auto &[from, node1] : this->nodes) {
     GraphNode node = this->nodes[from];
@@ -59,6 +75,7 @@ void GraphData::generateAllEdges() {
   }
 }
 
+/*! Establece el nodo raíz del grafo. */
 void GraphData::setRoot() {
   bool flag;
 
@@ -81,14 +98,20 @@ void GraphData::setRoot() {
   this->root = GraphNode();
 }
 
+/*! Devuelve el nodo raíz del grafo.
+  \return nodo raíz.
+*/
 GraphNode GraphData::getRoot() { return this->root; }
 
+/*! Devuelve los nodos hojas del grafo.
+  \return lista de nodos hojas.
+*/
 set<GraphNode> GraphData::getLeaves() {
   set<GraphNode> roots;
   map<int, int> rootsIds;
   bool flag;
 
-  // Get root node's ids
+  // Obtener el índice del nodo raíz
   for (const auto &entry1 : this->edges) {
     int parentId = entry1.getParent();
     flag = true;
@@ -106,10 +129,21 @@ set<GraphNode> GraphData::getLeaves() {
   return roots;
 }
 
+/*! Comprueba si el nodo dado se encuentra marcado.
+  \param nodo datos del nodo a comprobar.
+  \return 1 si se encuentra marcado, 0 si no es así.
+*/
 bool GraphData::isNodeMarked(GraphNode node) {
   return this->nodes[node.getId()].marked();
 }
 
+/*! Añade las generalizaciones (nodos) que no se encuentran marcados, 
+    de un nodo.
+  \param node nodo inicial.
+  \param queue nodos generalizaciones del anterior.
+  \return -1 si el nodo dado es la raíz, 0 si la función se ejecuta
+          correctamente.
+*/
 int GraphData::addGeneralizations(const GraphNode &node,
                                   set<GraphNode> &queue) {
   vector<GraphNode> children = getChildren(node);
@@ -124,6 +158,9 @@ int GraphData::addGeneralizations(const GraphNode &node,
   return 0;
 }
 
+/*! Marca las generalizaciones del nodo dado.
+  \param node nodo.
+*/
 void GraphData::markGeneralizations(const GraphNode &node) {
   this->nodes[node.getId()].setKAnon();
   this->nodes[node.getId()].mark();
@@ -134,6 +171,10 @@ void GraphData::markGeneralizations(const GraphNode &node) {
   }
 }
 
+/*! Devuelve los nodos hijos (más generales) de un nodo dado.
+  \param node nodo.
+  \return lista de nodos hijos.
+*/
 vector<GraphNode> GraphData::getChildren(GraphNode node) {
   vector<GraphNode> children;
 
@@ -145,17 +186,32 @@ vector<GraphNode> GraphData::getChildren(GraphNode node) {
   return children;
 }
 
+/*! Calcula todos los nodos que cumplen con los modelos de privacidad
+    seleccionados.
+  \param node nodo inicial.
+  \param kList lista de nodos auxiliar que contiene todos los nodos
+               añadidos en la cadena de llamadas recursivas.
+  \param nodes lista de nodos kanon resultante.
+*/
 void GraphData::getAllKAnon(const GraphNode &node, vector<int> kList,
                             set<GraphNode> &nodes) {
-  for (const GraphNode &node : getChildren(node)) {
-    if (find(kList.begin(), kList.end(), node.getId()) != kList.end()) {
-      nodes.insert(node);
-      kList.emplace_back(node.getId());
-      getAllKAnon(node, kList, nodes);
+  for (const GraphNode &n : getChildren(node)) {
+    if (find(kList.begin(), kList.end(), n.getId()) != kList.end()) {
+      nodes.insert(n);
+      kList.emplace_back(n.getId());
+      getAllKAnon(n, kList, nodes);
     }
   }
 }
 
+/*! Calcula el nodo final sobre el que se generalizará el conjunto
+    de datos, de entre todos los nodos que cumplen los modelos de privacidad,
+    seleccionando uno en función de un criterio específico.
+  \param gens mapa de generalizaciones.
+  \param dataset conjunto de datos.
+  \param qids lista de atributos cuasi-identificadores.
+  \return nodo resultante.
+*/
 GraphNode GraphData::getFinalKAnon(map<int, map<string, vector<string>>> gens,
                                    vector<vector<string>> dataset,
                                    vector<int> qids) {
@@ -168,12 +224,12 @@ GraphNode GraphData::getFinalKAnon(map<int, map<string, vector<string>>> gens,
     }
   }
 
-  // If no node matches the criteria return root node
+  // Si ningún nodo cumple el criterio devolvemos el nodo raíz
   if (res.size() == 0)
     return getRoot();
 
-  // Get one node based on criteria. One that maximizes data
-  // utility metric (the one that presents the maximum number of clusters)
+  // Obtener un nodo en función de un criterio
+  // En este caso el que maximice el número de clases
   int max = -1;
   GraphNode finalNode;
   for (const GraphNode &node : res) {

@@ -1,3 +1,7 @@
+/*! \file kmember.h
+    \brief Fichero de cabecera del archivo kmember.cpp.
+*/
+
 #ifndef _KMEMBER_H
 #define _KMEMBER_H
 

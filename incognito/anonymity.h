@@ -1,3 +1,7 @@
+/*! \file anonymity.h
+    \brief Fichero de cabecera del archivo anonymity.cpp.
+*/
+
 #ifndef _ANONYMITY_H
 #define _ANONYMITY_H
 

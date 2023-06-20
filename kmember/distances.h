@@ -1,3 +1,7 @@
+/*! \file distances.h
+    \brief Fichero de cabecera del archivo distances.cpp.
+*/
+
 #ifndef _DISTANCES_H
 #define _DISTANCES_H
 

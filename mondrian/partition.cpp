@@ -48,12 +48,22 @@ vector<vector<string>> Partition::getResult() const {
   return result;
 }
 
+/*! Devuelve el número de cortes permitido por la partición.
+  \return número de cortes.
+*/
 int Partition::getNumAllowedCuts() {
   return accumulate(allowedCuts.begin(), allowedCuts.end(), 0);
 }
 
+/*! Establece el número de cortes permitido por la partición.
+  \param value número de cortes.
+  \param dim dimensión (índice de qid) sobre la que actuan los cortes.
+*/
 void Partition::setAllowedCuts(int value, int dim) { allowedCuts[dim] = value; }
 
+/*! Calcula una dimensión o qid según la anchura normalizada.
+  \return dimensión.
+*/
 int Partition::chooseDimension() {
   int dimension, width;
   dimension = width = -1;
@@ -72,6 +82,10 @@ int Partition::chooseDimension() {
   return dimension;
 }
 
+/*! Devuelve el número normalizado de elementos incluidos en la partición.
+  \param dimension dimensión.
+  \return valor normalizado.
+*/
 int Partition::normWidth(int dimension) {
   // Rango normalizado de valores para la dimensión
   vector<string> elements;
@@ -85,6 +99,10 @@ int Partition::normWidth(int dimension) {
   return elements.size();
 }
 
+/*! Calcula el valor medio de la partición. Utilizado para valores numéricos.
+  \param dimension dimensión.
+  \return valor normalizado.
+*/
 string Partition::findMedian(int dimension) {
   // Calculate qid frecuencies (qid values are sorted)
   map<string, int> map = calculateQidFreqs(this->data, qids[dimension]);
@@ -125,6 +143,10 @@ string Partition::findMedian(int dimension) {
   return splitValue;
 }
 
+/*! Devuelve el rango sobre el que se situan los valores de una dimensión dada.
+  \param dimension dimensión.
+  \return vector de longitud 2.
+*/
 vector<int> Partition::getAttributeRanges(int dimension) {
   vector<int> values;
   for (const auto &record : this->data) {
@@ -137,6 +159,10 @@ vector<int> Partition::getAttributeRanges(int dimension) {
   return {min, max};
 }
 
+/*! Comprueba si la partición es k-anonima.
+  \param split partición.
+  \return 1 si la partición es k-anonima, o 0 si no lo es.
+*/
 bool Partition::isSplitKAnonymous(vector<vector<string>> split) {
 	// Obtener registros conteniendo unicamente qids
   vector<vector<string>> qidsDataset;
@@ -157,6 +183,10 @@ bool Partition::isSplitKAnonymous(vector<vector<string>> split) {
   return true;
 }
 
+/*! Comprueba si la partición es l-diversa.
+  \param split partición.
+  \return 1 si la partición es l-diversa, o 0 si no lo es.
+*/
 bool Partition::isSplitLDiverse(vector<vector<string>> split) {
   vector<map<string, int>> freqs(confAtts.size());
   string key;
@@ -182,6 +212,10 @@ bool Partition::isSplitLDiverse(vector<vector<string>> split) {
   return true;
 }
 
+/*! Comprueba si la partición cumple el modelo de privacidad t-closeness.
+  \param split partición.
+  \return 1 si la partición sí lo cumple, o 0 si no es así.
+*/
 bool Partition::isSplitTClose(vector<vector<string>> split) {
   if (split.size() == 0)
     return false;
@@ -257,6 +291,10 @@ bool Partition::isSplitTClose(vector<vector<string>> split) {
   return true;
 }
 
+/*! Comprueba si la partición cumple los modelos de privacidad seleccionados.
+  \param split partición.
+  \return 1 si la partición los cumple, o 0 si no es así.
+*/
 bool Partition::isSplitValid(vector<vector<string>> split) {
   bool kanonymity, ldiversity, tcloseness;
   kanonymity = ldiversity = tcloseness = true;
@@ -277,6 +315,10 @@ bool Partition::isSplitValid(vector<vector<string>> split) {
   return kanonymity && ldiversity && tcloseness;
 }
 
+/*! Realiza un corte sobre una partición.
+  \param dimension dimensión.
+  \return vector de particiones.
+*/
 vector<Partition> Partition::splitPartition(int dimension) {
   // Corte no permitido para esta dimension
   if (allowedCuts[dimension] == 0) {
@@ -288,6 +330,10 @@ vector<Partition> Partition::splitPartition(int dimension) {
   return splitPartitionNumeric(dimension);
 }
 
+/*! Realiza un corte sobre una partición utilizando un atributo numérico.
+  \param dimension dimensión.
+  \return vector de particiones.
+*/
 vector<Partition> Partition::splitPartitionNumeric(int dimension) {
   // Obtener el valor medio
   string splitValue = findMedian(dimension);
@@ -362,6 +408,10 @@ vector<Partition> Partition::splitPartitionNumeric(int dimension) {
   return {p1, p2};
 }
 
+/*! Realiza un corte sobre una partición utilizando un atributo categórico.
+  \param dimension dimensión.
+  \return vector de particiones.
+*/
 vector<Partition> Partition::splitPartitionCategorical(int dimension) {
 
   vector<Partition> pts;

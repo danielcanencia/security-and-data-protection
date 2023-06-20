@@ -1,9 +1,16 @@
+/*! \file edge.h
+    \brief Fichero de cabecera del archivo edge.cpp.
+*/
+
 #ifndef _EDGE_H
 #define _EDGE_H
 
 #include <iostream>
 #include <string>
 
+/*! Clase Edge. Su función es simular el funcionamiento
+    de una arista de un grafo.
+*/
 class Edge {
 private:
   int from;

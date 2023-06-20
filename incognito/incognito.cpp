@@ -18,21 +18,21 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  // Read input
+  // Leer parámetros
   const int nqids = readNumberOfQids();
   vector<string> qidNames;
   vector<string> confAttNames;
   try {
-    // Read Qid Names
+    // Leer nombres de qids
     qidNames = readQidNames(nqids);
-    // Conf Atts Names
+    // Leer atributos sensibles
     confAttNames = readConfidentialAttNames();
   } catch (const char *e) {
     cout << e << endl;
     return -1;
   }
 
-  // Read csv data file
+  // Leer el directorio que contiene el conjunto de datos y las jerarquias
   vector<string> headers;
   vector<int> qids, confAtts;
   vector<vector<string>> dataset, transposedDataset;
@@ -76,25 +76,25 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  // Read Parameters
+  // Leer parámetros vinculados a los modelos de privacidad
   int K, L;
   long double T;
   if(!readParameters(dataset.size(), confAttNames.size(), K, L, T))
     return -1;
 
-  // Read Weights
+  // Leer pesos asignados a cada qid
   vector<double> weights = readWeights(nqids, qidNames);
-  // Ask for desired qid types to be used on metrics
+  // Leer tipos de qids (importante considerar los atributos numéricos como tales)
   vector<int> numMetricsQids, catMetricsQids;
   tuple<vector<int>, vector<int>> metricsQids =
       readMetricsQids({}, qids, headers);
   numMetricsQids = get<0>(metricsQids);
   catMetricsQids = get<1>(metricsQids);
 
-  // Measure Execution Time
+  // Calcular el tiempo de ejecución
   auto start = chrono::high_resolution_clock::now();
   // *********************************
-  // Main algorithm
+  // Algoritmo principal
   auto resTuple = incognito(dataset, hierarchiesMap, qids, confAtts, K, L, T);
   vector<vector<string>> result = get<0>(resTuple);
   vector<vector<vector<string>>> clusters = get<1>(resTuple);
@@ -107,18 +107,18 @@ int main(int argc, char **argv) {
   cout << "===> Number of clusters: ";
   cout << clusters.size() << endl;
 
-  // Write anonymized table
+  // Escribir conjunto de datos anonimizado
   writeAnonymizedTable(fs::path(argv[1]), headers, result, K, L, T);
 
-  // Create a hierarchy tree for every qid
+  // Crear un árbol jerárquico por cada qid categórico
   vector<Tree> trees;
   for (const int &val : qids) {
     trees.emplace_back(Tree(transposedHierarchyMap[val]));
   }
 
-  // METRICS
+  // Métricas
   cout << "===> Analysis: " << endl;
-  // Convert hierarchy tree map into a list
+  // Convertir árboles jerárquicos en un mapa de datos
   map<int, Tree> treeMap;
   for (size_t i = 0; i < qids.size(); i++) {
     treeMap[qids[i]] = trees[i];
@@ -126,11 +126,11 @@ int main(int argc, char **argv) {
 
   // GCP
   try {
-    // 1. Precalculate NCP for every qid value included in every cluster
+    // 1. Precalcular NCP para cada atributo qid
     vector<long double> cncps =
         calculateNCPS(clusters, weights, qids, numMetricsQids, treeMap);
 
-    // 2. Calculate GCP
+    // 2. Calcular GCP
     calculateGCP(clusters, dataset.size(), qids, cncps);
   } catch (const char *e) {
     cout << e << endl;

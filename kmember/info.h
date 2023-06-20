@@ -1,3 +1,7 @@
+/*! \file info.h
+    \brief Fichero de cabecera del archivo info.cpp.
+*/
+
 #ifndef _INFO_H
 #define _INFO_H
 
@@ -6,6 +10,10 @@
 #include <iostream>
 #include <vector>
 
+/*! Clase Info. Su función es contener todas las estructuras y funciones
+    necesarias para manipular el árbol jerárquico de la forma que necesita
+    k-member.
+*/
 class Info {
 private:
   vector<vector<string>> records;

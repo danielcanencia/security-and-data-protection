@@ -1,3 +1,7 @@
+/*! \file graphNode.h
+    \brief Fichero de cabecera del archivo graphNode.cpp.
+*/
+
 #ifndef _GRAPHNODE_H
 #define _GRAPHNODE_H
 
@@ -12,6 +16,9 @@
 
 using namespace std;
 
+
+/*! Clase GraphNode. Su función es simular el comportamiento de un nodo.
+*/
 class GraphNode {
 private:
   int id;

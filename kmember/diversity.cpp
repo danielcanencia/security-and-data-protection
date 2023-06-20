@@ -1,9 +1,20 @@
+/*! \file diversity.cpp
+    \brief Fichero que contiene todas las funciones relacionadas con los
+           modelos de privacidad k-anonimity y l-diversity.
+*/
+
 #include "diversity.h"
 
+/*! Comprueba si una clase de equivalencia es l-diversa.
+  \param cluster clase de equivalencia.
+  \param confAtt índice del atributo sensible.
+  \param L parámetro de la l-diversidad.
+  \return 1 si la clase es l-diversa, 0 si no lo es.
+*/
 bool isDiverse(vector<vector<string>> cluster, const int confAtt, const int L) {
   map<string, int> freqs;
 
-  // Confidential / sensitive attribute frequencies
+  // Frecuencias del atributo sensible
   for (const auto &entry : cluster) {
     try {
       freqs[entry[confAtt]] += 1;
@@ -12,18 +23,23 @@ bool isDiverse(vector<vector<string>> cluster, const int confAtt, const int L) {
     }
   }
 
-  // Every confidential attribute should have, at least,
-  // l well represented values
+  // Cada atributo confidencial debe presentar, al menor, L
+  // valores bien representados
   if ((int)freqs.size() < L)
     return false;
 
   return true;
 }
 
+/*! Obtiene el valor del atributo que más frecuencia presenta.
+  \param cluster clase de equivalencia.
+  \param confAtt índice del atributo sensible.
+  \return valor seleccionado.
+*/
 string majorityClass(vector<vector<string>> cluster, const int confAtt) {
   map<string, int> freqs;
 
-  // Confidential / sensitive attribute frequencies
+  // Frecuencias del atributo sensible
   for (const auto &entry : cluster) {
     try {
       freqs[entry[confAtt]] += 1;
@@ -32,17 +48,25 @@ string majorityClass(vector<vector<string>> cluster, const int confAtt) {
     }
   }
 
-  // Get value with maximum frequency
+  // Obtener el valor con la frecuencia máxima
   return (*max_element(
               freqs.begin(), freqs.end(),
               [](const auto &a, const auto &b) { return a.second < b.second; }))
       .first;
 }
 
+/*! Comprueba si la clase mayoritaria se encuentra en una lista de valores.
+  \param majorityClass clase mayoritaria (valor).
+  \param valor lista de valores.
+  \return 1 si la clase mayoritaria se encuentra en la lista, 0 si no es así.
+*/
 bool isSensitive(string majorityClass, vector<string> values) {
   return find(values.begin(), values.end(), majorityClass) != values.end();
 }
 
+/*! Leer el nombre del atributo sensible a utilizar por el algoritmo.
+  \return valor del atributo sensible.
+*/
 string readConfidentialAttName() {
   string attName;
   string question =
@@ -57,7 +81,6 @@ string readConfidentialAttName() {
     case 'Y':
     case 'y':
       cout << "Confidential attribute: " << endl;
-      // Read confidential attributes name
       cout << "\tEnter att name: ";
       cin >> attName;
       keep = false;
@@ -75,6 +98,9 @@ string readConfidentialAttName() {
   return attName;
 }
 
+/*! Leer el valor del parámetro de la penalización de diversidad.
+  \return penalización de diversidad.
+*/
 int readDiversityPenalty() {
   string question = "Diversity Penalty: ";
   cout << question;
@@ -95,6 +121,9 @@ int readDiversityPenalty() {
   return penalty;
 }
 
+/*! Lee la métrica a utilizar por el algoritmo (EDM o SDM).
+  \return índice de la métrica a utilizar.
+*/
 int readDiversity() {
   string question = "Diversity Metric:\n"
                     "\tEqual Diversity Metric (0), "
@@ -117,6 +146,9 @@ int readDiversity() {
   return diversity;
 }
 
+/*! Leer los valores realmente sensibles a utilizar por la métrica SDM.
+  \return lista de valores.
+*/
 vector<string> readSensitiveValues(vector<string> values) {
   vector<string> sensitiveValues;
   string aux;

@@ -1,5 +1,18 @@
+/*! \file evaluate.cpp
+    \brief Fichero que proporciona las funciones principales del algoritmo
+           incognito.
+*/
+
 #include "evaluate.h"
 
+/*! Genera una lista de grafos basados en calcular las posibles permutaciones
+    de una lista de cuasi-identificadores.
+  \param qids lista de cuasi-identificadores.
+  \param nodeMax define los valores máximos de generalización de cada qid.
+  \param numAttr número de atributos de los que se componen las permutaciones.
+  \param toPrune vector de nodos a tener en cuenta en la fase de poda del grafo.
+  \return lista de grafos.
+*/
 vector<Graph> graphGeneration(const vector<int> &qids, map<int, int> nodeMax,
                               int numAttr, set<vector<int>> toPrune) {
   vector<Graph> graphs;
@@ -7,7 +20,7 @@ vector<Graph> graphGeneration(const vector<int> &qids, map<int, int> nodeMax,
 
   C = getPermutations(numAttr, qids);
 
-  // Convert from set to vector
+  // Convert set a vector
   vector<vector<int>> pruneVector(toPrune.begin(), toPrune.end());
 
   // Generate trees for permutations of $perm qids
@@ -17,10 +30,10 @@ vector<Graph> graphGeneration(const vector<int> &qids, map<int, int> nodeMax,
       CMaxValue.emplace_back(nodeMax[entry]);
     }
 
-    // Generate Graph
+    // Generar grafo
     GraphData graphData;
-    // C[perm] => curr qid indexes
-    // CMaxValue => max qid indexes
+    // C[perm] => índice de qid actual
+    // CMaxValue => máximos índices de qids
     Graph graph(CMaxValue, C[perm], pruneVector, graphData);
     graphs.emplace_back(graph);
   }
@@ -28,6 +41,11 @@ vector<Graph> graphGeneration(const vector<int> &qids, map<int, int> nodeMax,
   return graphs;
 }
 
+/*! Genera un mapa de generalizaciones de cada atributo cuasi-identificador.
+  \param hierarchy matriz de jerarquía.
+  \param qids lista de cuasi-identificadores.
+  \return mapa de generalizaciones.
+*/
 map<string, vector<string>>
 generateGeneralizationMap(vector<vector<string>> hierarchy, vector<int> qids) {
 
@@ -40,6 +58,11 @@ generateGeneralizationMap(vector<vector<string>> hierarchy, vector<int> qids) {
   return genMap;
 }
 
+/*! Genera mapas de generalizaciones para cada atributo cuasi-identificador.
+  \param hierarchy mapa de matrices de jerarquías.
+  \param qids lista de cuasi-identificadores.
+  \return mapa de generalizaciones.
+*/
 map<int, map<string, vector<string>>>
 generateGeneralizationsMap(map<int, vector<vector<string>>> hierarchies,
                            vector<int> qids) {
@@ -51,14 +74,21 @@ generateGeneralizationsMap(map<int, vector<vector<string>>> hierarchies,
   return gensMap;
 }
 
+/*! Anonimiza un conjunto de datos.  
+  \param dataset conjunto de datos.
+  \param hierarchiesMap tablas de jerarquías.
+  \param gens mapa de generalizaciones.
+  \param graphs lista de grafos.
+  \param qids lista de cuasi-identificadores.
+  \return matriz de datos anonimizados.
+*/
 vector<vector<string>>
 generateAnonymizedDataset(vector<vector<string>> dataset,
                           map<int, vector<vector<string>>> hierarchiesMap,
                           map<int, map<string, vector<string>>> gens,
                           vector<Graph> graphs, vector<int> qids) {
-  // Select one solution among the ones that satisfy K
-  // Criteria: Generalization/Node that produces the maximum amount
-  // 			 of equivalence classes
+  // Seleccionar un nodo de entre todos los que satisfacen K.
+  // Criterio: nodo que produzca el máximo número de clases de equivalencia.
   const GraphNode node = graphs.back().getFinalKAnon(gens, dataset, qids);
   vector<int> data = node.getData();
 
@@ -90,28 +120,38 @@ generateAnonymizedDataset(vector<vector<string>> dataset,
   return result;
 }
 
+/*! Función principal sobre la que actua incognito.  
+  \param dataset conjunto de datos.
+  \param hierarchies tablas de jerarquías.
+  \param qids lista de cuasi-identificadores.
+  \param confAtts lista de índices de atributos sensibles.
+  \param K parámetro de la k-anonimidad.
+  \param L parámetro de la l-diversidad.
+  \param T parámetro de t-closeness.
+  \return tupla compuesta por la matriz de datos anonimizados y el conjunto de clases
+          de equivalencia que lo forman.
+*/
 tuple<vector<vector<string>>, vector<vector<vector<string>>>>
 incognito(vector<vector<string>> dataset,
           map<int, vector<vector<string>>> hierarchies, vector<int> qids,
           vector<int> confAtts, const int K, const int L, const long double T) {
 
-  // Generate auxiliar data used in t-closeness privacy method
+  // Generar datos auxiliares a utilizar para determinar t-closeness
   tuple<vector<map<string, int>>, vector<set<string>>> dataMap;
   if (T != -1)
     dataMap = createDataMap(dataset, confAtts);
 
-  // Levels per hierchary. Useful to construct node
-  // and edges tables
+  // Niveles de generalización máximos (jerarquias) de cada qid
   map<int, int> nodeMax;
   for (const int &qid : qids) {
     nodeMax[qid] = hierarchies[qid].size() - 1;
   }
-  // Transpose hierarchy maps
+  // Mapas de jerarquias transpuestos
   map<int, vector<vector<string>>> transposedHierarchies;
   for (const auto &qid : qids) {
     transposedHierarchies[qid] = transpose(hierarchies[qid]);
   }
-  // Transpose dataset
+  // Conjunto de datos transpuesto
   vector<vector<string>> transposedDataset;
   transposedDataset = transpose(dataset);
 
@@ -119,11 +159,11 @@ incognito(vector<vector<string>> dataset,
   map<int, map<string, vector<string>>> gensMap =
       generateGeneralizationsMap(transposedHierarchies, qids);
 
-  // Generate all posible graphs containing qids
-  // defined by qid variable
+  // generar todos los posibles grafos en función de los qids y
+  // los niveles de generalización máximos (nodeMax)
   vector<Graph> graphs = graphGeneration(qids, nodeMax, 1, {});
 
-  // Main Algorithm
+  // Procedimiento principal del algoritmo
   vector<Graph> rGraphs;
   set<vector<int>> pruningVector;
   for (size_t i = 1; i < qids.size() + 1; i++) {
@@ -132,18 +172,18 @@ incognito(vector<vector<string>> dataset,
       set<GraphNode> nodesQueue = g.getLeaves();
       vector<GraphNode> kanon;
 
-      // Main Loop
+      // Bucle principal
       while (!nodesQueue.empty()) {
         GraphNode node = *(nodesQueue.begin());
         nodesQueue.erase(nodesQueue.begin());
 
         if (!g.isNodeMarked(node)) {
-          // Not marked
+          // No marcado
           if (node.isAnonymityValid(hierarchies, dataset, gensMap, dataMap,
                                     g.getQids(), confAtts, K, L, T)) {
             g.markGeneralizations(node);
           } else {
-            // Add node to pruning vector
+            // Añadir nodo al vector de poda
             pruningVector.insert(node.getData());
             g.addGeneralizations(node, nodesQueue);
           }
@@ -153,15 +193,15 @@ incognito(vector<vector<string>> dataset,
       rGraphs.emplace_back(g);
     }
 
-    // Generate graphs
+    // Generar grafos
     if (i <= qids.size())
       graphs = graphGeneration(qids, nodeMax, i + 1, pruningVector);
   }
 
-  // Construct anonymized dataset
+  // Construir dataset anonimizado
   vector<vector<string>> result =
       generateAnonymizedDataset(dataset, hierarchies, gensMap, rGraphs, qids);
 
-  // Create equivalence classes or clusters
+  // Crear clases de equivalencia
   return make_tuple(result, createClusters(result, qids));
 }
