@@ -126,7 +126,7 @@ bool Kmeans::convergency(vector<vector<double>> centroids,
     for (int j = 0; j < (int)min(centroids[i].size(), c.size()); j++)
       sum += pow((double)centroids[i][j] - c[j], 2);
     
-    if (sqrt(sum) > Epsilon) 
+    if (sqrt(sum) > epsilon) 
       return false;
   }
 
